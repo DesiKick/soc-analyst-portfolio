@@ -26,6 +26,10 @@ The objective of this lab was to configure **Audit Process Creation** within the
 
 ## 3. Forensic Evidence & Artifact Analysis
 
+### Telemetry Overview: Filtered Security Event Stream
+![Windows Security Event Log Filter](../assets/images/lab01-event-overview.png)
+
+### Granular Process Details: Parent-Child Lineage
 ![Windows Event ID 4688 Process Creation](../assets/images/lab01-event-4688.png)
 
 ### Key Artifact Breakdown:
