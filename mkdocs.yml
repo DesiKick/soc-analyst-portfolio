@@ -1,4 +1,4 @@
-site_name: Talha | SOC Analyst Lab Portfolio
+site_name: Mian | SOC Analyst Lab Portfolio
 site_description: Hands-on Defensive Operations, Incident Response, and Detection Engineering
 site_author: Mian Talha Nayyar
 
@@ -22,3 +22,4 @@ nav:
   - SOC Labs:
       - "Overview": investigations/index.md
       - "Lab 01 - Windows Process Auditing": investigations/lab-01-event-viewer.md
+      - "Lab 02 - Network Traffic Analysis": investigations/lab-02-wireshark-triage.md
