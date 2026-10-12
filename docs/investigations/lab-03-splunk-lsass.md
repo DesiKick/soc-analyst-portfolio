@@ -29,13 +29,25 @@ An initial hunt query across the dedicated `botsv1` index isolated all events re
 
 ```spl
 index=botsv1 "lsass.exe"
+![Credential Dumping Artifacts Table](../assets/images/lab03-splunk-table.png)
 
-![Initial Telemetry Hunt](../assets/images/lab03-splunk-hunt.png)
+---
 
-### Phase 2: SPL Field Extraction & Aggregation
-Because the raw log payload contained nested XML attributes without native schema parsing, a targeted regular expression (`rex`) query was constructed to extract the requesting binary (`SourceImage`) and aggregate execution frequency:
+## 4. Forensic Findings & Malicious Artifacts Identified
 
-```spl
-index=botsv1 "lsass.exe" "<EventID>10</EventID>"
-| rex field=_raw "<Data Name="SourceImage">(?<SourceImage>[^<]+)</Data>"
-| stats count by SourceImage
+The analytical query exposed multiple adversary tools accessing LSASS:
+
+| Requesting Image (`SourceImage`) | Invocations | Threat Classification |
+| :--- | :--- | :--- |
+| `Outflank-Dumpert.exe` | 2 | Custom Red-Team LSASS Memory Dumper |
+| `procdump.exe` / `procdump64.exe` | 6 | Weaponized Sysinternals Dump Utility |
+| `notprocdump.exe` | 1 | Defense Evasion (Renamed Binary) |
+| `AppData\Local\Temp\*.exe` | 38 | Dropped Binary from Temp Directory |
+| `powershell.exe` | 1 | Scripted Credential Ingestion (`Invoke-Mimikatz`) |
+| `rundll32.exe` | 2 | LOLBin (`comsvcs.dll` MiniDump execution) |
+
+---
+
+## 5. SOC Detection Engineering Takeaways
+1. **Filename-Agnostic Rules:** Attackers frequently disguise binaries (evidenced by `notprocdump.exe`). Detections should alert on the **TargetImage** (`lsass.exe`) combined with abnormal **GrantedAccess** permissions (e.g., `0x1010`, `0x1F0FFF`), rather than relying solely on the process filename.
+2. **Untrusted Path Baselines:** Any process originating from `AppData\Local\Temp` or non-standard paths that accesses `lsass.exe` represents high-confidence malicious behavior and should generate immediate Priority-1 alerts in the SOC.
