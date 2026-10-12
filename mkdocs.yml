@@ -23,3 +23,4 @@ nav:
       - "Overview": investigations/index.md
       - "Lab 01 - Windows Process Auditing": investigations/lab-01-event-viewer.md
       - "Lab 02 - Network Traffic Analysis": investigations/lab-02-wireshark-triage.md
+      - "Lab 03 - Splunk SIEM Detection": investigations/lab-03-splunk-lsass.md
