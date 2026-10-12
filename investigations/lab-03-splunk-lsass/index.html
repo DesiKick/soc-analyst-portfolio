@@ -542,6 +542,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#phase-2-spl-field-extraction-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: SPL Field Extraction &amp; Aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -634,6 +645,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#phase-2-spl-field-extraction-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: SPL Field Extraction &amp; Aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -681,6 +703,13 @@
 <p>An initial hunt query across the dedicated <code>botsv1</code> index isolated all events referencing the LSASS credential vault:</p>
 <p>```spl
 index=botsv1 "lsass.exe"</p>
+<p><img alt="Initial Telemetry Hunt" src="../../assets/images/lab03-splunk-hunt.png" /></p>
+<h3 id="phase-2-spl-field-extraction-aggregation">Phase 2: SPL Field Extraction &amp; Aggregation</h3>
+<p>Because the raw log payload contained nested XML attributes without native schema parsing, a targeted regular expression (<code>rex</code>) query was constructed to extract the requesting binary (<code>SourceImage</code>) and aggregate execution frequency:</p>
+<p>```spl
+index=botsv1 "lsass.exe" "<EventID>10</EventID>"
+| rex field=_raw "<Data Name="SourceImage">(?<SourceImage>[^&lt;]+)</Data>"
+| stats count by SourceImage</p>
 
 
 
