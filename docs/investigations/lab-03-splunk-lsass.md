@@ -29,3 +29,13 @@ An initial hunt query across the dedicated `botsv1` index isolated all events re
 
 ```spl
 index=botsv1 "lsass.exe"
+
+![Initial Telemetry Hunt](../assets/images/lab03-splunk-hunt.png)
+
+### Phase 2: SPL Field Extraction & Aggregation
+Because the raw log payload contained nested XML attributes without native schema parsing, a targeted regular expression (`rex`) query was constructed to extract the requesting binary (`SourceImage`) and aggregate execution frequency:
+
+```spl
+index=botsv1 "lsass.exe" "<EventID>10</EventID>"
+| rex field=_raw "<Data Name="SourceImage">(?<SourceImage>[^<]+)</Data>"
+| stats count by SourceImage
