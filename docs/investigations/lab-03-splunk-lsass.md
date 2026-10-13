@@ -28,7 +28,7 @@ The objective of this investigation was to ingest high-fidelity endpoint securit
 An initial hunt query across the dedicated `botsv1` index isolated all events referencing the LSASS credential vault:
 ```spl
 index=botsv1 "lsass.exe"
-![Credential Dumping Artifacts Table](../assets/image/lab03-splunk-hunt.png)
+![Credential Dumping Artifacts Table](../assets/images/lab03-splunk-hunt.png)
 The search isolated 851 raw sysmon records detailing process access attempts against the local authority service
 
 ---
