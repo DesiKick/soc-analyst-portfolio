@@ -27,12 +27,19 @@ The objective of this investigation was to ingest high-fidelity endpoint securit
 ### Phase 1: Ingestion & Telemetry Exploration
 An initial hunt query across the dedicated `botsv1` index isolated all events referencing the LSASS credential vault:
 
-```spl
 index=botsv1 "lsass.exe"
-![Credential Dumping Artifacts Table](../assets/images/lab03-splunk-table.png)
+![Credential Dumping Artifacts Table](../assets/images/lab03-splunk-hunt.png)
+The search isolated 851 raw sysmon records detailing process access attempts against the local authority service
 
 ---
+### Phase 2: SPL Field Extraction & Aggregation
+Because the raw log payload contained nested XML attributes without native schema parsing, a targeted regular expression (rex) query was constructed to extract the requesting binary (SourceImage) and aggregate execution frequency:
 
+index=botsv1 "lsass.exe" "<EventID>10</EventID>"
+| rex field=_raw "<Data Name="SourceImage">(?<SourceImage>[^<]+)</Data>"
+| stats count by SourceImage
+
+! [Credential Dumping Artifacts Table](../assets/image/lab03-splunk-table.png)
 ## 4. Forensic Findings & Malicious Artifacts Identified
 
 The analytical query exposed multiple adversary tools accessing LSASS:
