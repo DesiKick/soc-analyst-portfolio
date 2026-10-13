@@ -778,7 +778,7 @@ The search isolated 851 raw sysmon records detailing process access attempts aga
 index=botsv1 "lsass.exe" "<EventID>10</EventID>"
 | rex field=_raw "<Data Name="SourceImage">(?<SourceImage>[^&lt;]+)</Data>"
 | stats count by SourceImage</p>
-<h2 id="_1"><img alt="Credential Dumping Artifacts Table" src="../assets/image/lab03-splunk-table.png" /></h2>
+<h2 id="_1"><img alt="Credential Dumping Artifacts Table" src="../../assets/images/lab03-splunk-table.png" /></h2>
 <h2 id="4-forensic-findings-malicious-artifacts-identified">4. Forensic Findings &amp; Malicious Artifacts Identified</h2>
 <p>The analytical query exposed multiple adversary tools accessing LSASS:</p>
 <table>
