@@ -542,6 +542,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#phase-2-spl-field-extraction-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: SPL Field Extraction &amp; Aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -656,6 +667,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#phase-2-spl-field-extraction-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: SPL Field Extraction &amp; Aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -723,10 +745,16 @@
 <h2 id="3-threat-hunting-spl-engineering">3. Threat Hunting &amp; SPL Engineering</h2>
 <h3 id="phase-1-ingestion-telemetry-exploration">Phase 1: Ingestion &amp; Telemetry Exploration</h3>
 <p>An initial hunt query across the dedicated <code>botsv1</code> index isolated all events referencing the LSASS credential vault:</p>
-<p>```spl
-index=botsv1 "lsass.exe"
-<img alt="Credential Dumping Artifacts Table" src="../../assets/images/lab03-splunk-table.png" /></p>
+<p>index=botsv1 "lsass.exe"
+<img alt="Credential Dumping Artifacts Table" src="../../assets/images/lab03-splunk-hunt.png" />
+The search isolated 851 raw sysmon records detailing process access attempts against the local authority service</p>
 <hr />
+<h3 id="phase-2-spl-field-extraction-aggregation">Phase 2: SPL Field Extraction &amp; Aggregation</h3>
+<p>Because the raw log payload contained nested XML attributes without native schema parsing, a targeted regular expression (rex) query was constructed to extract the requesting binary (SourceImage) and aggregate execution frequency:</p>
+<p>index=botsv1 "lsass.exe" "<EventID>10</EventID>"
+| rex field=_raw "<Data Name="SourceImage">(?<SourceImage>[^&lt;]+)</Data>"
+| stats count by SourceImage</p>
+<p>! <a href="../assets/image/lab03-splunk-table.png">Credential Dumping Artifacts Table</a></p>
 <h2 id="4-forensic-findings-malicious-artifacts-identified">4. Forensic Findings &amp; Malicious Artifacts Identified</h2>
 <p>The analytical query exposed multiple adversary tools accessing LSASS:</p>
 <table>
