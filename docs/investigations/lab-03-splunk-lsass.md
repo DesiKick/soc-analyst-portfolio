@@ -39,7 +39,7 @@ index=botsv1 "lsass.exe" "<EventID>10</EventID>"
 | rex field=_raw "<Data Name="SourceImage">(?<SourceImage>[^<]+)</Data>"
 | stats count by SourceImage
 
-![Credential Dumping Artifacts Table](../assets/image/lab03-splunk-table.png)
+![Credential Dumping Artifacts Table](../assets/images/lab03-splunk-table.png)
 ---
 ## 4. Forensic Findings & Malicious Artifacts Identified
 
