@@ -13,10 +13,6 @@
       
       
       
-        <link rel="prev" href="../lab-01-event-viewer/">
-      
-      
-        <link rel="next" href="../lab-03-splunk-lsass/">
       
       
         
@@ -27,7 +23,7 @@
     
     
       
-        <title>Lab 02 - Network Traffic Analysis - Mian | SOC Analyst Lab Portfolio</title>
+        <title>Lab 02: Network Traffic Analysis & Cleartext HTTP Stream Reconstruction - Mian | SOC Analyst Lab Portfolio</title>
       
     
     
@@ -112,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lab 02 - Network Traffic Analysis
+              Lab 02: Network Traffic Analysis &amp; Cleartext HTTP Stream Reconstruction
             
           </span>
         </div>
@@ -205,7 +201,7 @@
   
     
   
-  Home
+  Overview
 
       </a>
     </li>
@@ -216,17 +212,15 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../lab-01-windows-process.md" class="md-tabs__link">
           
   
   
-  SOC Labs
+  Investigations
 
         </a>
       </li>
@@ -281,88 +275,6 @@
   <span class="md-ellipsis">
     
   
-    Home
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SOC Labs
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    SOC Labs
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
     Overview
   
 
@@ -375,7 +287,56 @@
     </li>
   
 
-              
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Investigations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Investigations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -384,7 +345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-01-event-viewer/" class="md-nav__link">
+      <a href="../lab-01-windows-process.md" class="md-nav__link">
         
   
   
@@ -409,37 +370,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Lab 02 - Network Traffic Analysis
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../lab-02-network-traffic.md" class="md-nav__link">
         
   
   
@@ -455,120 +389,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-executive-summary-objective" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Executive Summary &amp; Objective
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-triage-methodology" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Triage Methodology
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-forensic-evidence-packet-inspection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Forensic Evidence &amp; Packet Inspection
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Forensic Evidence &amp; Packet Inspection">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#telemetry-overview-http-request-frame-isolation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Telemetry Overview: HTTP Request Frame Isolation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reconstructed-application-layer-stream-tcp-stream" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Reconstructed Application Layer Stream (TCP Stream)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#key-artifact-breakdown" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Artifact Breakdown:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#analytical-insight" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Analytical Insight:
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-defensive-takeaways-for-soc-triage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Defensive Takeaways for SOC Triage
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -589,6 +409,34 @@
     
   
     Lab 03 - Splunk SIEM Detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-04-phishing-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 04 - Phishing Email Analysis
   
 
     

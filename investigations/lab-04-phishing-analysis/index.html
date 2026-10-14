@@ -13,6 +13,8 @@
       
       
       
+        <link rel="prev" href="../lab-03-splunk-lsass/">
+      
       
       
         
@@ -23,7 +25,7 @@
     
     
       
-        <title>Lab 04: Inbound Phishing Analysis & Header Forensics - Mian | SOC Analyst Lab Portfolio</title>
+        <title>Lab 04 - Phishing Email Analysis - Mian | SOC Analyst Lab Portfolio</title>
       
     
     
@@ -108,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lab 04: Inbound Phishing Analysis &amp; Header Forensics
+              Lab 04 - Phishing Email Analysis
             
           </span>
         </div>
@@ -201,7 +203,7 @@
   
     
   
-  Home
+  Overview
 
       </a>
     </li>
@@ -212,15 +214,17 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lab-01-windows-process.md" class="md-tabs__link">
           
   
   
-  SOC Labs
+  Investigations
 
         </a>
       </li>
@@ -275,83 +279,6 @@
   <span class="md-ellipsis">
     
   
-    Home
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SOC Labs
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    SOC Labs
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
     Overview
   
 
@@ -364,7 +291,61 @@
     </li>
   
 
-              
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Investigations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Investigations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -373,7 +354,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-01-event-viewer/" class="md-nav__link">
+      <a href="../lab-01-windows-process.md" class="md-nav__link">
         
   
   
@@ -401,7 +382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-02-wireshark-triage/" class="md-nav__link">
+      <a href="../lab-02-network-traffic.md" class="md-nav__link">
         
   
   
@@ -445,6 +426,175 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 04 - Phishing Email Analysis
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 04 - Phishing Email Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-executive-summary-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Executive Summary &amp; Objective
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-attack-vectors-telemetry-analyzed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Attack Vectors &amp; Telemetry Analyzed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-investigation-forensic-walkthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Investigation &amp; Forensic Walkthrough
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Investigation &amp; Forensic Walkthrough">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-header-analysis-sender-authentication-discrepancies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 1: Header Analysis &amp; Sender Authentication Discrepancies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-link-obfuscation-tracking-pixels-redirection-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 2: Link Obfuscation, Tracking Pixels &amp; Redirection Chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-weaponized-attachments-payload-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phase 3: Weaponized Attachments &amp; Payload Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-forensic-findings-extracted-iocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Forensic Findings &amp; Extracted IOCs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-soc-analyst-detection-response-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. SOC Analyst Detection &amp; Response Engineering
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -624,7 +774,7 @@
 <li><strong>Impersonated Brand:</strong> <code>service@paypal.com</code> routed from envelope sender <code>sultanbogor.com</code>.</li>
 <li><strong>Typo-Squatted Impersonation:</strong> A simulated Netflix suspension notice used the display name <code>Netllx billing</code> (substituting the letters "fi" with "ll") while routing from the unauthenticated external domain <code>z99@musacombi.online</code>.</li>
 </ul>
-<p><img alt="Phishing Header and Triage Analysis" src="../assets/images/lab04-phishing-triage.png" /></p>
+<p><img alt="Phishing Header and Triage Analysis" src="../../assets/images/lab04-phishing-triage.png" /></p>
 <p>Attackers exploit the default UI behavior of modern mail clients, which prominently display user-configurable display names while concealing the underlying routing path.</p>
 <hr />
 <h3 id="phase-2-link-obfuscation-tracking-pixels-redirection-chains">Phase 2: Link Obfuscation, Tracking Pixels &amp; Redirection Chains</h3>
