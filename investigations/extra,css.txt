@@ -1,0 +1,101 @@
+/* Brand colors: dark SOC console teal */
+:root,
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #0f3d46;
+  --md-primary-fg-color--light: #1f6f78;
+  --md-primary-fg-color--dark: #0a2a31;
+  --md-accent-fg-color: #00b8d4;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #0b1f26;
+  --md-primary-fg-color--light: #12333d;
+  --md-primary-fg-color--dark: #06141a;
+  --md-default-bg-color: #0d1418;
+  --md-default-bg-color--light: #121c21;
+  --md-typeset-a-color: #4dd0e1;
+}
+
+/* Hero block on the home page */
+.hero {
+  padding: 1.6rem 0 0.4rem;
+}
+.hero h1 {
+  margin-bottom: 0.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.hero .tagline {
+  font-size: 1.05rem;
+  color: var(--md-accent-fg-color);
+  margin-top: 0;
+  font-weight: 600;
+}
+.hero .md-button {
+  margin: 0.3rem 0.4rem 0.3rem 0;
+}
+
+/* Stat strip */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.8rem;
+  margin: 1.4rem 0 0.6rem;
+}
+.stats div {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.4rem;
+  padding: 0.7rem 0.9rem;
+}
+.stats strong {
+  display: block;
+  font-size: 1.4rem;
+  color: var(--md-accent-fg-color);
+  line-height: 1.2;
+}
+.stats span {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
+
+/* Status pills */
+.pill {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.5rem;
+  border-radius: 1rem;
+  border: 1px solid currentColor;
+}
+.pill.done { color: #26a69a; }
+.pill.wip { color: #ffb300; }
+
+/* Lab metadata card */
+.lab-meta {
+  border-left: 3px solid var(--md-accent-fg-color);
+  padding: 0.2rem 0 0.2rem 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Readable buttons and headings in dark mode */
+[data-md-color-scheme="slate"] .md-typeset .md-button {
+  color: #4dd0e1;
+  border-color: #4dd0e1;
+}
+[data-md-color-scheme="slate"] .md-typeset .md-button--primary {
+  background-color: #00838f;
+  border-color: #00838f;
+  color: #ffffff;
+}
+[data-md-color-scheme="slate"] .md-typeset .md-button:hover {
+  background-color: #00b8d4;
+  border-color: #00b8d4;
+  color: #06141a;
+}
+[data-md-color-scheme="slate"] .hero h1 {
+  color: #e6f1f3;
+}
