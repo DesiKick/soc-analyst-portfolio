@@ -24,3 +24,14 @@ nav:
       - "Lab 02 - Network Traffic Analysis": investigations/lab-02-network-traffic.md
       - "Lab 03 - Splunk SIEM Detection": investigations/lab-03-splunk-lsass.md
       - "Lab 04 - Phishing Email Analysis": investigations/lab-04-phishing-analysis.md
+
+nav:
+  - Home: index.md
+  - Investigations:
+      - investigations/index.md
+      - "Lab 01 - Windows Process Auditing": investigations/lab-01-windows-process.md
+      - "Lab 02 - Network Traffic Analysis": investigations/lab-02-network-traffic.md
+      - "Lab 03 - LSASS Credential Dumping (Splunk)": investigations/lab-03-splunk-lsass.md
+      - "Lab 04 - Phishing Email Analysis": investigations/lab-04-phishing-analysis.md
+  - Detections: detections.md
+  - About & Contact: about.md
