@@ -13,6 +13,10 @@
       
       
       
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../lab-02-network-traffic/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>Lab 02: Network Traffic Analysis & Cleartext HTTP Stream Reconstruction - Mian | SOC Analyst Lab Portfolio</title>
+        <title>Lab 01 - Windows Process Auditing - Mian | SOC Analyst Lab Portfolio</title>
       
     
     
@@ -74,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab-02-network-traffic-analysis-cleartext-http-stream-reconstruction" class="md-skip">
+        <a href="#lab-01-windows-telemetry-process-creation-auditing-event-id-4688" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lab 02: Network Traffic Analysis &amp; Cleartext HTTP Stream Reconstruction
+              Lab 01 - Windows Process Auditing
             
           </span>
         </div>
@@ -212,11 +216,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../lab-01-windows-process.md" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -292,24 +298,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -327,7 +338,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -342,10 +353,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../lab-01-windows-process.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 01 - Windows Process Auditing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -361,6 +399,120 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-executive-summary-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Executive Summary &amp; Objective
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-methodology-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Methodology &amp; Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-forensic-evidence-artifact-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Forensic Evidence &amp; Artifact Analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Forensic Evidence &amp; Artifact Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#telemetry-overview-filtered-security-event-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Telemetry Overview: Filtered Security Event Stream
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#granular-process-details-parent-child-lineage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Granular Process Details: Parent-Child Lineage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-artifact-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Artifact Breakdown:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analytical-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analytical Insight:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-defensive-takeaways-for-soc-triage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Defensive Takeaways for SOC Triage
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -373,7 +525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-02-network-traffic.md" class="md-nav__link">
+      <a href="../lab-02-network-traffic/" class="md-nav__link">
         
   
   
@@ -495,10 +647,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-triage-methodology" class="md-nav__link">
+  <a href="#2-methodology-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Triage Methodology
+        2. Methodology &amp; Configuration
       
     </span>
   </a>
@@ -506,22 +658,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-forensic-evidence-packet-inspection" class="md-nav__link">
+  <a href="#3-forensic-evidence-artifact-analysis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Forensic Evidence &amp; Packet Inspection
+        3. Forensic Evidence &amp; Artifact Analysis
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Forensic Evidence &amp; Packet Inspection">
+    <nav class="md-nav" aria-label="3. Forensic Evidence &amp; Artifact Analysis">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#telemetry-overview-http-request-frame-isolation" class="md-nav__link">
+  <a href="#telemetry-overview-filtered-security-event-stream" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Telemetry Overview: HTTP Request Frame Isolation
+        Telemetry Overview: Filtered Security Event Stream
       
     </span>
   </a>
@@ -529,10 +681,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reconstructed-application-layer-stream-tcp-stream" class="md-nav__link">
+  <a href="#granular-process-details-parent-child-lineage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reconstructed Application Layer Stream (TCP Stream)
+        Granular Process Details: Parent-Child Lineage
       
     </span>
   </a>
@@ -594,57 +746,48 @@
 
 
 
-<h1 id="lab-02-network-traffic-analysis-cleartext-http-stream-reconstruction">Lab 02: Network Traffic Analysis &amp; Cleartext HTTP Stream Reconstruction</h1>
+<h1 id="lab-01-windows-telemetry-process-creation-auditing-event-id-4688">Lab 01: Windows Telemetry &amp; Process Creation Auditing (Event ID 4688)</h1>
 <ul>
 <li><strong>Date:</strong> October 2026</li>
-<li><strong>Category:</strong> Network Security &amp; Packet Forensics</li>
-<li><strong>Framework Mapping:</strong> MITRE ATT&amp;CK [T1071.001 - Web Protocols] / [TA0011 - Command and Control]</li>
-<li><strong>Tooling:</strong> Wireshark, Protocol Hierarchy, TCP Stream Analysis</li>
+<li><strong>Category:</strong> Endpoint Telemetry &amp; Incident Analysis</li>
+<li><strong>Framework Mapping:</strong> MITRE ATT&amp;CK [T1059 - Command and Scripting Interpreter] / [T1082 - System Information Discovery]</li>
+<li><strong>Target OS:</strong> Windows 10/11 Enterprise</li>
 </ul>
 <hr />
 <h2 id="1-executive-summary-objective">1. Executive Summary &amp; Objective</h2>
-<p>Network telemetry provides an objective source of truth during defensive triage, exposing external communications even if endpoint logs are absent or purged. </p>
-<p>The objective of this lab was to triage a packet capture (<code>.cap</code>), identify active layer-3 and layer-4 conversations across modern IPv6 infrastructure, isolate unencrypted application-layer requests, and reconstruct the full bidirectional TCP session to extract key forensic indicators.</p>
+<p>Adversaries routinely execute native binaries (Living off the Land) to enumerate accounts, query network configurations, and spawn malicious payloads. By default, Windows does not log granular process execution data. </p>
+<p>The objective of this lab was to configure <strong>Audit Process Creation</strong> within the Local Security Policy, generate process execution telemetry, and analyze the resulting <strong>Event ID 4688</strong> forensic artifacts to understand parent-child process relationships.</p>
 <hr />
-<h2 id="2-triage-methodology">2. Triage Methodology</h2>
+<h2 id="2-methodology-configuration">2. Methodology &amp; Configuration</h2>
 <ol>
-<li><strong>Endpoint &amp; Protocol Enumeration:</strong></li>
-<li>Evaluated the global protocol distribution using Wireshark <strong>Protocol Hierarchy</strong>.</li>
-<li>Identified active communication channels via the <strong>IPv6 Endpoints</strong> table.</li>
-<li><strong>Display Filter Application:</strong></li>
-<li>Applied the display filter <code>http.request</code> to isolate client-initiated web requests from transport-layer overhead.</li>
-<li><strong>Layer 7 Stream Reconstruction:</strong></li>
-<li>Reconstructed the complete conversational flow using <strong>Follow TCP Stream</strong> to inspect request headers and server responses.</li>
+<li><strong>Auditing Policy Configuration:</strong></li>
+<li>Navigated to <code>Advanced Audit Policy Configuration</code> &gt; <code>System Audit Policies</code> &gt; <code>Detailed Tracking</code>.</li>
+<li>Enabled <strong>Audit Process Creation</strong> for both <strong>Success</strong> and <strong>Failure</strong>.</li>
+<li><strong>Log Acquisition:</strong></li>
+<li>Monitored the <code>Security</code> event log via Windows Event Viewer (<code>eventvwr.msc</code>).</li>
+<li>Filtered telemetry using event filter <code>EventID == 4688</code>.</li>
 </ol>
 <hr />
-<h2 id="3-forensic-evidence-packet-inspection">3. Forensic Evidence &amp; Packet Inspection</h2>
-<h3 id="telemetry-overview-http-request-frame-isolation">Telemetry Overview: HTTP Request Frame Isolation</h3>
-<p><img alt="Wireshark HTTP Request Filter" src="../../assets/images/lab02-http-filter.png" /></p>
-<h3 id="reconstructed-application-layer-stream-tcp-stream">Reconstructed Application Layer Stream (TCP Stream)</h3>
-<p><img alt="Wireshark Follow TCP Stream" src="../../assets/images/lab02-tcp-stream.png" /></p>
+<h2 id="3-forensic-evidence-artifact-analysis">3. Forensic Evidence &amp; Artifact Analysis</h2>
+<h3 id="telemetry-overview-filtered-security-event-stream">Telemetry Overview: Filtered Security Event Stream</h3>
+<p><img alt="Windows Security Event Log Filter" src="../../assets/images/lab01-event-overview.png" /></p>
+<h3 id="granular-process-details-parent-child-lineage">Granular Process Details: Parent-Child Lineage</h3>
+<p><img alt="Windows Event ID 4688 Process Creation" src="../../assets/images/lab01-event-4688.png" /></p>
 <h3 id="key-artifact-breakdown">Key Artifact Breakdown:</h3>
 <ul>
-<li><strong>Frame ID:</strong> <code>49</code></li>
-<li><strong>Protocol:</strong> <code>HTTP/1.0</code></li>
-<li><strong>Source IP (Client):</strong> <code>2001:6f8:102d:0:2d0:9ff:fee3:e8de</code></li>
-<li><strong>Destination IP (Host):</strong> <code>2001:6f8:900:7c0::2</code></li>
-<li><strong>Destination Port:</strong> <code>80</code> (Standard HTTP)</li>
-<li><strong>Source Port:</strong> <code>59201</code> (Ephemeral Client Port)</li>
-<li><strong>Host Header:</strong> <code>cl-1985.ham-01.de.sixxs.net</code></li>
-<li><strong>User-Agent:</strong> <code>Lynx/2.8.6rel.2 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.8b</code></li>
-<li><strong>Response Code:</strong> <code>HTTP/1.1 200 OK</code> (Apache Web Server)</li>
+<li><strong>Event ID:</strong> <code>4688</code> (A new process has been created)</li>
+<li><strong>Account / Security ID:</strong> <code>SYSTEM</code> (Authority/System-level context)</li>
+<li><strong>New Process Name:</strong> <code>C:\Windows\System32\svchost.exe</code> (The spawned binary)</li>
+<li><strong>Creator (Parent) Process Name:</strong> <code>C:\Windows\System32\services.exe</code> (The launching binary)</li>
+<li><strong>Mandatory Label:</strong> <code>System Mandatory Level</code> (High integrity execution token)</li>
 </ul>
 <h3 id="analytical-insight">Analytical Insight:</h3>
-<ul>
-<li><strong>Cleartext Visibility:</strong> Because the transaction occurred over unencrypted HTTP (port 80), all request headers, user agents, and response payloads are exposed.</li>
-<li><strong>Client Fingerprinting:</strong> The User-Agent string identifies a terminal-based web browser (<code>Lynx</code>), rather than a standard GUI browser like Chrome or Edge. In an enterprise environment, non-standard user agents originating from end-user workstations warrant immediate investigation as potential script execution or automated tooling.</li>
-<li><strong>Content Inspection:</strong> The server returned an open directory listing exposing downloadable files (<code>.pdf</code>, <code>.htm</code>). In a real incident scenario, any retrieved binaries would be carved via <code>File &gt; Export Objects &gt; HTTP</code> and submitted for hash analysis.</li>
-</ul>
+<p>In a typical enterprise SOC environment, mapping the <strong>Parent Process</strong> (<code>Creator Process Name</code>) to the <strong>Child Process</strong> (<code>New Process Name</code>) establishes the process lineage. While <code>services.exe</code> spawning <code>svchost.exe</code> represents expected baseline activity, an anomalous parent (such as <code>winword.exe</code> spawning <code>cmd.exe</code> or <code>powershell.exe</code>) would represent a high-confidence indicator of compromise (IOC) indicative of macro exploitation.</p>
 <hr />
 <h2 id="4-defensive-takeaways-for-soc-triage">4. Defensive Takeaways for SOC Triage</h2>
 <ul>
-<li><strong>Network Baselines:</strong> Modern enterprise web communications are overwhelmingly encrypted via TLS (port 443). Outbound cleartext HTTP (port 80) should be monitored and flagged for inspection.</li>
-<li><strong>Full-Session Context:</strong> Individual packet inspection shows fragmented data; following the TCP stream reconstructs the entire conversational context needed for defensible incident reporting.</li>
+<li><strong>Baseline Profiling:</strong> Knowing what <em>should</em> launch a process is just as important as knowing what the binary does. Legitimate system binaries executing under abnormal parents must be flagged immediately.</li>
+<li><strong>Log Enrichment:</strong> Standard 4688 logging provides binary names, but enabling the sub-setting <em>"Include command line in process creation events"</em> adds the full CLI arguments, essential for identifying obfuscated scripts (e.g., base64-encoded PowerShell).</li>
 </ul>
 
 

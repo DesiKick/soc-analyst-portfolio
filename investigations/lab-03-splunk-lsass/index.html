@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../lab-02-network-traffic/">
       
       
         <link rel="next" href="../lab-04-phishing-analysis/">
@@ -222,7 +222,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../lab-01-windows-process.md" class="md-tabs__link">
+        <a href="../lab-01-windows-process/" class="md-tabs__link">
           
   
   
@@ -356,7 +356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-01-windows-process.md" class="md-nav__link">
+      <a href="../lab-01-windows-process/" class="md-nav__link">
         
   
   
@@ -384,7 +384,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-02-network-traffic.md" class="md-nav__link">
+      <a href="../lab-02-network-traffic/" class="md-nav__link">
         
   
   
@@ -516,52 +516,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#phase-2-spl-field-extraction-aggregation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 2: SPL Field Extraction &amp; Aggregation
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-forensic-findings-malicious-artifacts-identified" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Forensic Findings &amp; Malicious Artifacts Identified
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-soc-detection-engineering-takeaways" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. SOC Detection Engineering Takeaways
-      
-    </span>
-  </a>
   
 </li>
       
@@ -680,52 +636,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#phase-2-spl-field-extraction-aggregation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Phase 2: SPL Field Extraction &amp; Aggregation
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-forensic-findings-malicious-artifacts-identified" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Forensic Findings &amp; Malicious Artifacts Identified
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-soc-detection-engineering-takeaways" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. SOC Detection Engineering Takeaways
-      
-    </span>
-  </a>
   
 </li>
       
@@ -768,68 +680,62 @@
 <hr />
 <h2 id="3-threat-hunting-spl-engineering">3. Threat Hunting &amp; SPL Engineering</h2>
 <h3 id="phase-1-ingestion-telemetry-exploration">Phase 1: Ingestion &amp; Telemetry Exploration</h3>
-<p>An initial hunt query across the dedicated <code>botsv1</code> index isolated all events referencing the LSASS credential vault:
+<p>An initial hunt query across the dedicated <code>botsv1</code> index isolated all events referencing the LSASS credential vault:</p>
+<pre><code class="language-spl">index=botsv1 &quot;lsass.exe&quot;
+![Credential Dumping Artifacts Table](../assets/images/lab03-splunk-hunt.png)
+The search isolated 851 raw sysmon records detailing process access attempts against the local authority service
+
+---
+### Phase 2: SPL Field Extraction &amp; Aggregation
+Because the raw log payload contained nested XML attributes without native schema parsing, a targeted regular expression (rex) query was constructed to extract the requesting binary (SourceImage) and aggregate execution frequency:
 ```spl
-index=botsv1 "lsass.exe"
-<img alt="Credential Dumping Artifacts Table" src="../../assets/images/lab03-splunk-hunt.png" />
-The search isolated 851 raw sysmon records detailing process access attempts against the local authority service</p>
-<hr />
-<h3 id="phase-2-spl-field-extraction-aggregation">Phase 2: SPL Field Extraction &amp; Aggregation</h3>
-<p>Because the raw log payload contained nested XML attributes without native schema parsing, a targeted regular expression (rex) query was constructed to extract the requesting binary (SourceImage) and aggregate execution frequency:
+index=botsv1 &quot;lsass.exe&quot; &quot;&lt;EventID&gt;10&lt;/EventID&gt;&quot;
+| rex field=_raw &quot;&lt;Data Name=&quot;SourceImage&quot;&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;&quot;
+| stats count by SourceImage
+
+![Credential Dumping Artifacts Table](../assets/images/lab03-splunk-table.png)
+---
+## 4. Forensic Findings &amp; Malicious Artifacts Identified
+
+The analytical query exposed multiple adversary tools accessing LSASS:
+
+| Requesting Image (`SourceImage`) | Invocations | Threat Classification |
+| :--- | :--- | :--- |
+| `Outflank-Dumpert.exe` | 2 | Custom Red-Team LSASS Memory Dumper |
+| `procdump.exe` / `procdump64.exe` | 6 | Weaponized Sysinternals Dump Utility |
+| `notprocdump.exe` | 1 | Defense Evasion (Renamed Binary) |
+| `AppData\Local\Temp\*.exe` | 38 | Dropped Binary from Temp Directory |
+| `powershell.exe` | 1 | Scripted Credential Ingestion (`Invoke-Mimikatz`) |
+| `rundll32.exe` | 2 | LOLBin (`comsvcs.dll` MiniDump execution) |
+
+---
+
+## 5. SOC Detection Engineering Takeaways
+1. **Filename-Agnostic Rules:** Attackers frequently disguise binaries (evidenced by `notprocdump.exe`). Detections should alert on the **TargetImage** (`lsass.exe`) combined with abnormal **GrantedAccess** permissions (e.g., `0x1010`, `0x1F0FFF`), rather than relying solely on the process filename.
+2. **Untrusted Path Baselines:** Any process originating from `AppData\Local\Temp` or non-standard paths that accesses `lsass.exe` represents high-confidence malicious behavior and should generate immediate Priority-1 alerts in the SOC.
+
+### Production Detection Rule (Splunk Enterprise / Cloud)
+
 ```spl
-index=botsv1 "lsass.exe" "<EventID>10</EventID>"
-| rex field=_raw "<Data Name="SourceImage">(?<SourceImage>[^&lt;]+)</Data>"
-| stats count by SourceImage</p>
-<h2 id="_1"><img alt="Credential Dumping Artifacts Table" src="../../assets/images/lab03-splunk-table.png" /></h2>
-<h2 id="4-forensic-findings-malicious-artifacts-identified">4. Forensic Findings &amp; Malicious Artifacts Identified</h2>
-<p>The analytical query exposed multiple adversary tools accessing LSASS:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Requesting Image (<code>SourceImage</code>)</th>
-<th style="text-align: left;">Invocations</th>
-<th style="text-align: left;">Threat Classification</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>Outflank-Dumpert.exe</code></td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">Custom Red-Team LSASS Memory Dumper</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>procdump.exe</code> / <code>procdump64.exe</code></td>
-<td style="text-align: left;">6</td>
-<td style="text-align: left;">Weaponized Sysinternals Dump Utility</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>notprocdump.exe</code></td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">Defense Evasion (Renamed Binary)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>AppData\Local\Temp\*.exe</code></td>
-<td style="text-align: left;">38</td>
-<td style="text-align: left;">Dropped Binary from Temp Directory</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>powershell.exe</code></td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">Scripted Credential Ingestion (<code>Invoke-Mimikatz</code>)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rundll32.exe</code></td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">LOLBin (<code>comsvcs.dll</code> MiniDump execution)</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="5-soc-detection-engineering-takeaways">5. SOC Detection Engineering Takeaways</h2>
-<ol>
-<li><strong>Filename-Agnostic Rules:</strong> Attackers frequently disguise binaries (evidenced by <code>notprocdump.exe</code>). Detections should alert on the <strong>TargetImage</strong> (<code>lsass.exe</code>) combined with abnormal <strong>GrantedAccess</strong> permissions (e.g., <code>0x1010</code>, <code>0x1F0FFF</code>), rather than relying solely on the process filename.</li>
-<li><strong>Untrusted Path Baselines:</strong> Any process originating from <code>AppData\Local\Temp</code> or non-standard paths that accesses <code>lsass.exe</code> represents high-confidence malicious behavior and should generate immediate Priority-1 alerts in the SOC.</li>
-</ol>
+index=botsv1 sourcetype=&quot;XmlWinEventLog:Microsoft-Windows-Sysmon/Operational&quot; EventCode=10
+| rex field=_raw &quot;&lt;Data Name TargetImage&quot;&quot;&gt;(?&lt;TargetImage&gt;[^&lt;]+)&lt;/Data&gt;&quot;
+| rex field=_raw &quot;&lt;Data Name SourceImage&quot;&quot;&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;&quot;
+| rex field=_raw &quot;&lt;Data GrantedAccess&quot;&quot; Name&gt;(?&lt;GrantedAccess&gt;[^&lt;]+)&lt;/Data&gt;&quot;
+| search TargetImage=&quot;*\\lsass.exe&quot; GrantedAccess IN (&quot;0x1010&quot;, &quot;0x1410&quot;, &quot;0x1F0FFF&quot;, &quot;0x1438&quot;, &quot;0x143a&quot;)
+| search NOT SourceImage IN (
+    &quot;*\\Program Files\\Windows Defender\\*&quot;, 
+    &quot;*\\Program Files\\Microsoft Security Client\\*&quot;,
+    &quot;*\\System32\\svchost.exe&quot;, 
+    &quot;*\\System32\\csrss.exe&quot;, 
+    &quot;*\\System32\\services.exe&quot;
+  )
+| stats count earliest(_time) as first_seen latest(_time) as last_seen by SourceImage, TargetImage, GrantedAccess
+| convert ctime(first_seen) ctime(last_seen)
+</code></pre>
+<p><strong>Rule Logic &amp; Triage Notes:</strong>
+- <strong>Target Filter:</strong> Isolates calls requesting handles to <code>lsass.exe</code>.
+- <strong>Access Rights Filter:</strong> Filters on dangerous masks (<code>0x1010</code> = <code>PROCESS_QUERY_LIMITED_INFORMATION</code> + <code>PROCESS_VM_READ</code>, and <code>0x1F0FFF</code> = <code>PROCESS_ALL_ACCESS</code>).
+- <strong>Baseline Exclusions:</strong> Suppresses routine antivirus and core operating system processes to minimize false positives.</p>
 
 
 

@@ -23,7 +23,7 @@
     
     
       
-        <title>Defensive Security & SOC Labs - Mian | SOC Analyst Lab Portfolio</title>
+        <title>Security Operations & Threat Hunting Investigations - Mian | SOC Analyst Lab Portfolio</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#defensive-security-soc-labs" class="md-skip">
+        <a href="#security-operations-threat-hunting-investigations" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Defensive Security &amp; SOC Labs
+              Security Operations &amp; Threat Hunting Investigations
             
           </span>
         </div>
@@ -216,7 +216,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="lab-01-windows-process.md" class="md-tabs__link">
+        <a href="lab-01-windows-process/" class="md-tabs__link">
           
   
   
@@ -345,7 +345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab-01-windows-process.md" class="md-nav__link">
+      <a href="lab-01-windows-process/" class="md-nav__link">
         
   
   
@@ -373,7 +373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lab-02-network-traffic.md" class="md-nav__link">
+      <a href="lab-02-network-traffic/" class="md-nav__link">
         
   
   
@@ -477,25 +477,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#current-modules" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Current Modules:
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -511,14 +492,48 @@
 
 
 
-<h1 id="defensive-security-soc-labs">Defensive Security &amp; SOC Labs</h1>
-<p>Welcome to my hands-on incident investigation logs. Every lab here documents an alert from initial detection to root-cause analysis and remediation.</p>
-<h3 id="current-modules">Current Modules:</h3>
-<ul>
-<li><strong>Lab 01:</strong> Windows Event Viewer &amp; Process Auditing <em>(In Progress)</em></li>
-<li><strong>Lab 02:</strong> Wireshark Packet Analysis &amp; C2 Beacons <em>(Upcoming)</em></li>
-<li><strong>Lab 03:</strong> Splunk SPL &amp; Brute-Force Rule Engineering <em>(Upcoming)</em></li>
-</ul>
+<h1 id="security-operations-threat-hunting-investigations">Security Operations &amp; Threat Hunting Investigations</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Investigation</th>
+<th style="text-align: left;">Focus Area / Techniques</th>
+<th style="text-align: left;">Telemetry &amp; Tooling</th>
+<th style="text-align: left;">MITRE ATT&amp;CK Mapping</th>
+<th style="text-align: left;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><a href="lab-01-windows-process/">Lab 01: Windows Process Auditing</a></strong></td>
+<td style="text-align: left;">Process creation, parent-child tracking, CLI analysis</td>
+<td style="text-align: left;">Windows Event ID 4688, CLI Logging</td>
+<td style="text-align: left;">T1059 (Command &amp; Scripting Interpreter)</td>
+<td style="text-align: left;"><strong>Complete</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="lab-02-network-traffic/">Lab 02: Network Traffic Analysis</a></strong></td>
+<td style="text-align: left;">PCAP packet analysis, C2 payload extraction, hash triage</td>
+<td style="text-align: left;">Wireshark, TCP Stream Carving, SHA-256</td>
+<td style="text-align: left;">T1071 (Application Layer Protocol)</td>
+<td style="text-align: left;"><strong>Complete</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="lab-03-splunk-lsass/">Lab 03: Splunk SIEM Detection</a></strong></td>
+<td style="text-align: left;">LSASS memory dump detection, regex field extraction</td>
+<td style="text-align: left;">Splunk SIEM, Sysmon Event ID 10, SPL</td>
+<td style="text-align: left;">T1003.001 (LSASS Memory)</td>
+<td style="text-align: left;"><strong>Complete</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="lab-04-phishing-analysis/">Lab 04: Inbound Phishing Analysis</a></strong></td>
+<td style="text-align: left;">Header forensics, URL defanging, macro document triage</td>
+<td style="text-align: left;">RFC 822 Headers, Web Beacons, Defanging</td>
+<td style="text-align: left;">T1566 (Phishing)</td>
+<td style="text-align: left;"><strong>Complete</strong></td>
+</tr>
+</tbody>
+</table>
 
 
 
