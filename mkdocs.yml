@@ -1,29 +1,78 @@
-site_name: Mian | SOC Analyst Lab Portfolio
-site_description: Hands-on Defensive Operations, Incident Response, and Detection Engineering
+site_name: Mian Talha Nayyar | SOC Analyst Portfolio
+site_url: https://desikick.github.io/soc-analyst-portfolio/
+site_description: Hands-on SOC investigations, threat hunting, and detection engineering by Mian Talha Nayyar.
 site_author: Mian Talha Nayyar
+repo_url: https://github.com/DesiKick/soc-analyst-portfolio
+repo_name: DesiKick/soc-analyst-portfolio
+edit_uri: ""
+copyright: Copyright &copy; 2026 Mian Talha Nayyar
 
 theme:
   name: material
+  icon:
+    logo: material/shield-search
+    repo: fontawesome/brands/github
   palette:
     - scheme: slate
-      primary: blue grey
+      primary: custom
       accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: default
+      primary: custom
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  font:
+    text: Inter
+    code: JetBrains Mono
   features:
     - navigation.tabs
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - toc.follow
     - search.suggest
     - search.highlight
     - content.code.copy
 
+extra_css:
+  - assets/stylesheets/extra.css
+
 plugins:
   - search
 
-nav:
-  - Overview: index.md
-  - Investigations:
-      - "Lab 01 - Windows Process Auditing": investigations/lab-01-windows-process.md
-      - "Lab 02 - Network Traffic Analysis": investigations/lab-02-network-traffic.md
-      - "Lab 03 - Splunk SIEM Detection": investigations/lab-03-splunk-lsass.md
-      - "Lab 04 - Phishing Email Analysis": investigations/lab-04-phishing-analysis.md
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/mian-nayyar
+      name: LinkedIn
+    - icon: fontawesome/brands/github
+      link: https://github.com/DesiKick
+      name: GitHub
+    - icon: fontawesome/solid/envelope
+      link: mailto:talha397@gmail.com
+      name: Email
 
 nav:
   - Home: index.md
