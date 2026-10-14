@@ -18,9 +18,9 @@ plugins:
   - search
 
 nav:
-  - Home: index.md
-  - SOC Labs:
-      - "Overview": investigations/index.md
-      - "Lab 01 - Windows Process Auditing": investigations/lab-01-event-viewer.md
-      - "Lab 02 - Network Traffic Analysis": investigations/lab-02-wireshark-triage.md
+  - Overview: index.md
+  - Investigations:
+      - "Lab 01 - Windows Process Auditing": investigations/lab-01-windows-process.md
+      - "Lab 02 - Network Traffic Analysis": investigations/lab-02-network-traffic.md
       - "Lab 03 - Splunk SIEM Detection": investigations/lab-03-splunk-lsass.md
+      - "Lab 04 - Phishing Email Analysis": investigations/lab-04-phishing-analysis.md
