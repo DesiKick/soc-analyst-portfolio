@@ -59,3 +59,27 @@ The analytical query exposed multiple adversary tools accessing LSASS:
 ## 5. SOC Detection Engineering Takeaways
 1. **Filename-Agnostic Rules:** Attackers frequently disguise binaries (evidenced by `notprocdump.exe`). Detections should alert on the **TargetImage** (`lsass.exe`) combined with abnormal **GrantedAccess** permissions (e.g., `0x1010`, `0x1F0FFF`), rather than relying solely on the process filename.
 2. **Untrusted Path Baselines:** Any process originating from `AppData\Local\Temp` or non-standard paths that accesses `lsass.exe` represents high-confidence malicious behavior and should generate immediate Priority-1 alerts in the SOC.
+
+### Production Detection Rule (Splunk Enterprise / Cloud)
+
+```spl
+index=botsv1 sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=10
+| rex field=_raw "<Data Name TargetImage"">(?<TargetImage>[^<]+)</Data>"
+| rex field=_raw "<Data Name SourceImage"">(?<SourceImage>[^<]+)</Data>"
+| rex field=_raw "<Data GrantedAccess"" Name>(?<GrantedAccess>[^<]+)</Data>"
+| search TargetImage="*\\lsass.exe" GrantedAccess IN ("0x1010", "0x1410", "0x1F0FFF", "0x1438", "0x143a")
+| search NOT SourceImage IN (
+    "*\\Program Files\\Windows Defender\\*", 
+    "*\\Program Files\\Microsoft Security Client\\*",
+    "*\\System32\\svchost.exe", 
+    "*\\System32\\csrss.exe", 
+    "*\\System32\\services.exe"
+  )
+| stats count earliest(_time) as first_seen latest(_time) as last_seen by SourceImage, TargetImage, GrantedAccess
+| convert ctime(first_seen) ctime(last_seen)
+```
+
+**Rule Logic & Triage Notes:**
+- **Target Filter:** Isolates calls requesting handles to `lsass.exe`.
+- **Access Rights Filter:** Filters on dangerous masks (`0x1010` = `PROCESS_QUERY_LIMITED_INFORMATION` + `PROCESS_VM_READ`, and `0x1F0FFF` = `PROCESS_ALL_ACCESS`).
+- **Baseline Exclusions:** Suppresses routine antivirus and core operating system processes to minimize false positives.
