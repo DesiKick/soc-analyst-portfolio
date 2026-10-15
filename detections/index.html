@@ -783,40 +783,42 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>| eval severity=if(match(SourceImage, "(?i)\\\\(AppData|Temp|Users\\\\Public)\\\\"), "critical", "high")
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>| stats count min(_time) as first_seen max(_time) as last_seen values(GrantedAccess) as access by host_name SourceImage severity
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>| sort - count
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>```yaml
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>title: Suspicious Process Access to LSASS Memory
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>status: experimental
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>author: Mian Talha Nayyar
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>tags:
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>  - attack.credential_access
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>  - attack.t1003.001
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>logsource:
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  product: windows
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>  category: process_access
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>detection:
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>  selection:
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    TargetImage|endswith: '\lsass.exe'
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    GrantedAccess:
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>      - '0x1fffff'
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>      - '0x1010'
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>      - '0x1410'
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>      - '0x1438'
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>      - '0x143a'
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>      - '0x1f3fff'
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>  filter_system:
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    SourceImage:
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>      - 'C:\Windows\System32\svchost.exe'
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>      - 'C:\Windows\System32\wininit.exe'
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>      - 'C:\Windows\System32\csrss.exe'
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>      - 'C:\Windows\System32\services.exe'
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>      - 'C:\Windows\System32\lsm.exe'
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>  condition: selection and not filter_system
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>falsepositives:
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>  - EDR and antivirus agents (add their paths after baselining)
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>  - Administrators creating a dump from Task Manager
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>level: high
 </code></pre></div>
+<details class="example">
+<summary>View Sigma Rule Version</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Suspicious Process Access to LSASS Memory</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">experimental</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Mian Talha Nayyar</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nt">tags</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attack.credential_access</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attack.t1003.001</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">logsource</span><span class="p">:</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="nt">product</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">windows</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">process_access</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nt">detection</span><span class="p">:</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="nt">selection</span><span class="p">:</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nt">TargetImage|endswith</span><span class="p">:</span><span class="w"> </span><span class="s">'\lsass.exe'</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nt">GrantedAccess</span><span class="p">:</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'0x1fffff'</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'0x1010'</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'0x1410'</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'0x1438'</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'0x143a'</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'0x1f3fff'</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">  </span><span class="nt">filter_system</span><span class="p">:</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="nt">SourceImage</span><span class="p">:</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'C:\Windows\System32\svchost.exe'</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'C:\Windows\System32\wininit.exe'</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'C:\Windows\System32\csrss.exe'</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'C:\Windows\System32\services.exe'</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'C:\Windows\System32\lsm.exe'</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">  </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">selection and not filter_system</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="nt">falsepositives</span><span class="p">:</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EDR and antivirus agents (add their paths after baselining)</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Administrators creating a dump from Task Manager</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">high</span>
+</code></pre></div>
+</details>
 
 
 
