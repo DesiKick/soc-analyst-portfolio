@@ -1,5 +1,5 @@
 ---
-title: Home
+title: SOC Analyst Portfolio & Detection Engineering
 hide:
   - navigation
   - toc
@@ -9,105 +9,91 @@ hide:
 
 # Mian Talha Nayyar
 
-<p class="tagline">SOC Analyst | Incident Response | Detection Engineering</p>
+<p class="tagline">Tier-2 SOC Analyst &bull; Threat Hunter &bull; Detection Engineer</p>
 
-I investigate alerts the way a SOC runs them: pull the telemetry, rebuild what happened, make a call, and turn the finding into a detection. 4+ years in security operations across financial services and managed IT. SC-200 certified.
+<p class="lead">
+Production incident investigations grounded in forensic telemetry. Every lab reconstructs the full kill chain from raw packets and memory access down to validated Splunk SPL and Sigma detections.
+</p>
 
-[:material-folder-search: View Investigations](investigations/index.md){ .md-button .md-button--primary }
-[:material-file-account: Resume](assets/files/Mian_Nayyar_SOC_Analyst_Resume.pdf){ .md-button }
-[:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/mian-nayyar){ .md-button }
-[:material-email: Email Me](mailto:talha397@gmail.com){ .md-button }
+[:material-folder-search: Browse Investigations](investigations/index.md){ .md-button .md-button--primary }
+[:material-file-account: Resume (PDF)](assets/files/Mian_Nayyar_SOC_Analyst_Resume.pdf){ .md-button }
+[:fontawesome-brands-linkedin: LinkedIn Profile](https://www.linkedin.com/in/mian-nayyar){ .md-button }
+[:material-email: Contact Analyst](mailto:talha397@gmail.com){ .md-button }
 
 </div>
 
 <div class="stats">
-  <div><strong>4</strong><span>Investigations</span></div>
-  <div><strong>163</strong><span>LSASS events triaged</span></div>
-  <div><strong>0 / 108</strong><span>Benign events alerted</span></div>
-  <div><strong>SC-200</strong><span>Microsoft certified</span></div>
+  <div><strong>4</strong><span>Active Case Studies</span></div>
+  <div><strong>163</strong><span>LSASS Access Events Triaged</span></div>
+  <div><strong>0 / 108</strong><span>False Positive Rate</span></div>
+  <div><strong>SC-200</strong><span>Microsoft Certified</span></div>
 </div>
 
 ---
 
-## Featured Investigations
+## 🎯 Featured SOC Investigations
 
 <div class="grid cards" markdown>
 
--   :material-key-chain:{ .lg .middle } **Lab 03: LSASS Credential Dumping**
+-   :material-key-chain:{ .lg .middle } **Lab 03: LSASS Credential Dumping (Splunk)**
 
     ---
 
-    Hunted 851 Sysmon events in Splunk, rebuilt a 6-method credential dumping attack, and shipped a detection that flagged every tool that read LSASS without alerting on a single benign system process.
+    Hunted 851 endpoint Sysmon events in Splunk SIEM, dissected a multi-stage adversary memory dump, and engineered a behavioral detection rule excluding benign OS processes with zero false positives.
 
-    `Splunk` `SPL` `Sysmon` `T1003.001`
+    `Splunk` `Sysmon Event ID 10` `T1003.001` `SPL`
 
-    [:octicons-arrow-right-24: Read the investigation](investigations/lab-03-splunk-lsass.md)
+    [:octicons-arrow-right-24: Read Incident Report](investigations/lab-03-splunk-lsass.md)
 
--   :material-email-alert:{ .lg .middle } **Lab 04: Phishing Email Analysis**
-
-    ---
-
-    Triaged spoofed PayPal, Netflix, Apple, and DHL lures. Traced redirect chains, tracking pixels, and weaponized attachments to a defanged IOC set.
-
-    `Header Forensics` `CyberChef` `T1566`
-
-    [:octicons-arrow-right-24: Read the investigation](investigations/lab-04-phishing-analysis.md)
-
--   :material-lan:{ .lg .middle } **Lab 02: Network Traffic Analysis**
+-   :material-email-alert:{ .lg .middle } **Lab 04: Inbound Phishing & Header Forensics**
 
     ---
 
-    Reconstructed a cleartext HTTP session over IPv6, fingerprinted a non-standard client, and documented what to carve and hash in a live case.
+    Triaged weaponized email lures mimicking financial institutions and delivery vendors. Deconstructed raw RFC 822 headers, tracked multi-hop redirect chains, and isolated tracking web beacons.
 
-    `Wireshark` `PCAP` `T1071.001`
+    `RFC 822 Headers` `CyberChef` `T1566` `Defanging`
 
-    [:octicons-arrow-right-24: Read the investigation](investigations/lab-02-network-traffic.md)
+    [:octicons-arrow-right-24: Read Incident Report](investigations/lab-04-phishing-analysis.md)
 
--   :material-microsoft-windows:{ .lg .middle } **Lab 01: Windows Process Auditing**
+-   :material-lan:{ .lg .middle } **Lab 02: Network Traffic & C2 Stream Reconstruction**
 
     ---
 
-    Enabled process creation auditing, analyzed Event ID 4688 lineage, and wrote a parent-child detection for Office macro abuse.
+    Triaged packet capture (PCAP) streams in Wireshark over IPv6. Filtered application-layer HTTP requests, fingerprinted terminal User-Agents, and carved unencrypted payload streams.
 
-    `Event Viewer` `4688` `T1059`
+    `Wireshark` `PCAP` `TCP Stream Carving` `T1071.001`
 
-    [:octicons-arrow-right-24: Read the investigation](investigations/lab-01-windows-process.md)
+    [:octicons-arrow-right-24: Read Incident Report](investigations/lab-02-network-traffic.md)
+
+-   :material-microsoft-windows:{ .lg .middle } **Lab 01: Windows Process Auditing & Execution**
+
+    ---
+
+    Configured advanced Windows security audit policies for Event ID 4688. Analyzed parent-child process relationships to detect Living-off-the-Land abuse and malicious macro execution.
+
+    `Event Viewer` `Event ID 4688` `Process Trees` `T1059`
+
+    [:octicons-arrow-right-24: Read Incident Report](investigations/lab-01-windows-process.md)
 
 </div>
 
 ---
 
-## How Each Lab Is Built
+## 🛡️ Defensive Engineering Standards
 
-Every investigation follows the same structure a SOC ticket would:
+Every investigation in this repository follows formal SOC triage standards:
 
-1. **Alert or objective.** What fired, or what I set out to find.
-2. **Evidence.** Raw logs, packets, or headers, with the queries used to pull them.
-3. **Timeline and findings.** What happened, in order, backed by artifacts.
-4. **Verdict.** True positive or false positive, severity, and escalation call.
-5. **Detection.** A rule that catches it next time, tested against the same data.
-
-Raw evidence and detection rules live in the [GitHub repo](https://github.com/DesiKick/soc-analyst-portfolio) so every result can be reproduced.
+1. **Initial Trigger & Scope:** Documenting the alert provenance, affected host, and user context.
+2. **Forensic Telemetry:** Direct examination of raw `.evtx`, PCAPs, or mail headers (stored in the repository's `evidence/` directory).
+3. **Timeline & Pivoting:** Reconstructing chronological attacker execution steps.
+4. **Actionable Detection:** Validated detection queries (SPL and Sigma) tested directly against attack datasets.
 
 ---
 
-## Tools Used in These Labs
+## 🚀 Active Roadmap
 
-| Area | Tools |
-|---|---|
-| SIEM and Logs | Splunk (SPL), Sysmon, Windows Security Event Log |
-| Network | Wireshark |
-| Email and Triage | Header analysis, CyberChef, URL defanging |
-| Frameworks | MITRE ATT&CK, Sigma |
-
-Professional stack (Voya Financial, RTCS): Splunk, CrowdStrike Falcon, Splunk SOAR, Python. See [About](about.md).
-
----
-
-## In Progress
-
-<span class="pill wip">Building</span> **Lab 05: Brute Force Detection in Microsoft Sentinel (KQL).** Event ID 4625 spikes followed by a 4624 success.
-
-<span class="pill wip">Building</span> **Lab 06: Python IOC Enrichment.** Script that enriches IPs and domains through the VirusTotal API.
-
-<span class="pill wip">Building</span> **Lab 07: C2 Beacon Hunting.** Spotting periodic callbacks in a PCAP.
+| Target Module | Investigation Focus | Tooling / Telemetry | Status |
+| :--- | :--- | :--- | :--- |
+| **Lab 05** | Windows Authentication & Brute Force Analysis | Event ID 4625 / 4624, Microsoft Sentinel (KQL) | <span class="pill wip">Building</span> |
+| **Lab 06** | Automated Threat Intelligence IOC Enrichment | Python 3, VirusTotal API, AbuseIPDB | <span class="pill wip">Building</span> |
+| **Lab 07** | Periodic Command & Control (C2) Beacon Hunting | RITA, Zeek Logs, Network Jitter Analysis | <span class="pill wip">Building</span> |

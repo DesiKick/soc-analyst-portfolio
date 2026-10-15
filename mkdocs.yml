@@ -1,4 +1,4 @@
-site_name: Mian Talha Nayyar | SOC Analyst Portfolio
+site_name: Mian Talha Nayyar | SOC Portfolio
 site_url: https://desikick.github.io/soc-analyst-portfolio/
 site_description: Hands-on SOC investigations, threat hunting, and detection engineering by Mian Talha Nayyar.
 site_author: Mian Talha Nayyar
@@ -12,6 +12,7 @@ theme:
   icon:
     logo: material/shield-search
     repo: fontawesome/brands/github
+  favicon: assets/images/favicon.svg
   palette:
     - scheme: slate
       primary: custom
@@ -33,6 +34,7 @@ theme:
     - navigation.top
     - navigation.footer
     - navigation.indexes
+    - navigation.tracking
     - toc.follow
     - search.suggest
     - search.highlight
@@ -55,6 +57,8 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.superfences
   - pymdownx.emoji:
