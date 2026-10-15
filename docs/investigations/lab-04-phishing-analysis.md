@@ -1,75 +1,110 @@
-# Lab 04: Inbound Phishing Analysis & Header Forensics
+---
+title: "Lab 04: Phishing Email Analysis"
+---
 
-- **Date:** October 2026
-- **Category:** Phishing Triage & Threat Vector Analysis
-- **Framework Mapping:** MITRE ATT&CK [T1566.001 - Spearphishing Attachment] / [T1566.002 - Spearphishing Link] / [TA0001 - Initial Access]
-- **Tooling:** RFC 822 Header Parsers, URL Defanging, CyberChef, Static Document Analysis
+# Lab 04: Inbound Phishing Analysis and Header Forensics
+
+<div class="lab-meta" markdown>
+**Category:** Phishing Triage<br>
+**ATT&CK:** [T1566.001 Spearphishing Attachment](https://attack.mitre.org/techniques/T1566/001/) | [T1566.002 Spearphishing Link](https://attack.mitre.org/techniques/T1566/002/) | TA0001 Initial Access<br>
+**Tools:** Raw header analysis (RFC 5322), CyberChef, URL defanging, static document review<br>
+**Samples:** TryHackMe Phishing Analysis module (training samples, analysis and write-up are my own)
+</div>
+
+!!! danger "Verdict: All samples malicious | Block, purge, and hunt for clicks"
+    Every sample impersonated a known brand and either harvested credentials or delivered a payload. None should reach a user inbox.
 
 ---
 
-## 1. Executive Summary & Objective
-Phishing remains the primary initial access vector exploited by threat actors to harvest enterprise credentials, establish command-and-control footholds, and drop secondary payloads. Modern phishing campaigns leverage brand impersonation, visual typosquatting, and multi-stage delivery chains to bypass automated boundary email gateways.
+## 1. Objective
 
-The objective of this investigation was to triage suspicious inbound emails, dissect RFC 822 header metadata for sender-address discrepancies, trace multi-hop URL redirections, analyze tracking web beacons, and evaluate weaponized document attachments across multiple real-world phishing scenarios.
+Phishing is still the most common way attackers get in. Modern lures use brand impersonation, lookalike names, and multi-stage redirects to get past email gateways.
 
----
-
-## 2. Attack Vectors & Telemetry Analyzed
-- **Target Mailbox Environment:** Standard Enterprise Gateway / Yahoo / Outlook
-- **Key Protocols:** SMTP, RFC 822, MIME
-- **Primary Attack Surfaces:**
-  - Display Name Spoofing & Visual Impersonation (`Netllx billing`)
-  - Tracking Pixels & Read Receipt Telemetry (`tracking.png`)
-  - URL Shorteners & Multi-Stage Redirection Portals
-  - Malicious Attachments (`.pdf`, `.dot`, `.xlsx`)
+The goal: triage reported emails the way a SOC queue would, check headers for sender spoofing, trace links and redirects, review attachments, and produce a clean IOC set for blocking.
 
 ---
 
-## 3. Investigation & Forensic Walkthrough
+## 2. Triage Summary
 
-### Phase 1: Header Analysis & Sender Authentication Discrepancies
-Triage of suspicious transaction receipts and account suspension warnings revealed deliberate discrepancies between the asserted display names and the authentic originating addresses:
-
-- **Impersonated Brand:** `service@paypal.com` routed from envelope sender `sultanbogor.com`.
-- **Typo-Squatted Impersonation:** A simulated Netflix suspension notice used the display name `Netllx billing` (substituting the letters "fi" with "ll") while routing from the unauthenticated external domain `z99@musacombi.online`.
-
-![Phishing Header and Triage Analysis](../assets/images/lab04-phishing-triage.png)
-
-Attackers exploit the default UI behavior of modern mail clients, which prominently display user-configurable display names while concealing the underlying routing path.
+| Sample | Lure | Technique | Verdict | Action |
+|---|---|---|---|---|
+| PayPal receipt | Fake transaction | Display name spoofing, foreign envelope sender | Malicious | Block sender domain, purge |
+| Netflix suspension | Account on hold | Typosquatted display name, PDF with a payment link to a non-Netflix domain | Malicious | Block sender, purge, check for clicks |
+| Shared-file lure | Document waiting | URL shortener, tracking pixel, multi-hop redirect to fake Outlook login | Malicious | Block domains, reset any user who clicked |
+| Apple billing | Blank body, attachment only | `.dot` template that pulls remote macros | Malicious | Block attachment type, hash hunt |
+| DHL delivery | "Enable content" spreadsheet | `.xlsx` lure designed to launch `regasm.exe` | Malicious | Block, hunt for `regasm.exe` from Office |
 
 ---
 
-### Phase 2: Link Obfuscation, Tracking Pixels & Redirection Chains
-Inspection of raw HTML bodies exposed multiple obfuscation techniques engineered to evade automated boundary scanning:
+## 3. Investigation
 
-1. **Shortened Redirection URLs:** Phishing lures utilized URL shorteners (`https://is.gd/6oCJ4m`) to mask destination landing pages during transit.
-2. **Web Beacon Telemetry:** An embedded 1x1 image (`tracking.png` hosted on `devret[.]xyz`) served as an active tracking pixel, silently notifying the adversary that the target mailbox was active.
-3. **Multi-Stage Redirection Portals:** Clickable lures routed targets through simulated cloud-sharing hops (Citrix $\rightarrow$ OneDrive $\rightarrow$ Adobe) before terminating at an external credential harvesting interface mimicking an enterprise Microsoft Outlook portal.
+### Phase 1: Headers and sender identity
+
+The display name and the real sending address did not match in either brand-impersonation sample:
+
+- **PayPal:** Displayed `service@paypal.com`, but the envelope sender came from `sultanbogor[.]com`, a domain with no relationship to PayPal.
+- **Netflix:** Display name `Netllx billing`, with "fi" swapped for "ll" so it reads as Netflix at a glance. Sent from `z99@musacombi[.]online`. The body pushed an attached PDF whose "Update Payment Account" link pointed to a non-Netflix domain, padded with a real Netflix help link and an odd-format phone number to look legitimate.
+
+![Phishing header and triage analysis](../assets/images/lab04-phishing-triage.png)
+
+Mail clients show the display name prominently and hide the routing path. That gap is what these lures depend on.
+
+**What I check in every header:**
+
+| Header | Why it matters |
+|---|---|
+| `From` vs `Return-Path` | A mismatch is the fastest spoofing signal |
+| `Authentication-Results` | SPF, DKIM, and DMARC pass or fail for the claimed domain |
+| `Received` chain (read bottom up) | The true origin server and any odd relays |
+| `Reply-To` | Often points to an attacker inbox even when `From` looks clean |
+
+### Phase 2: Links, tracking pixels, and redirects
+
+1. **URL shortener.** Links went through `hxxps://is[.]gd/6oCJ4m` to hide the real landing page from scanners.
+2. **Tracking pixel.** A 1x1 image (`tracking.png` on `devret[.]xyz`) told the attacker the mailbox was live and the email was opened.
+3. **Redirect chain.** Links bounced through lookalike file-sharing pages (Citrix → OneDrive → Adobe) before landing on a fake Microsoft Outlook login page built to harvest credentials.
+
+### Phase 3: Attachments
+
+When links get blocked, attackers switch to attachments:
+
+- **Apple `.dot` template.** Blank email body, just the attachment. Word templates can fetch macros from a remote server when opened, so the file looks clean until it runs.
+- **DHL `.xlsx`.** The spreadsheet told the user to click "Enable Content", the step that lets embedded code run and launch `regasm.exe`, a signed Windows binary attackers abuse to run payloads.
 
 ---
 
-### Phase 3: Weaponized Attachments & Payload Analysis
-When direct external links are blocked by strict email gateway filters, adversaries pivot to weaponized attachments:
+## 4. IOCs (defanged)
 
-* **Remote Template Ingestion (`.dot`):** A fake Apple billing notification arrived with a blank email body, delivering a `.dot` Microsoft Word Template configured to pull remote malicious macros upon opening.
-* **Macro Execution via Spreadsheet (`.xlsx`):** A fake DHL courier notice delivered a spreadsheet instructing the victim to enable content, initiating execution of the native Windows binary `regasm.exe`.
-
----
-
-## 4. Forensic Findings & Extracted IOCs
-
-| Artifact Type | Raw Indicator | Defanged / Normalized IOC | Context / Threat Intent |
-| :--- | :--- | :--- | :--- |
-| **Sender Domain** | `sultanbogor.com` | `sultanbogor[.]com` | Unauthorized SMTP relay for PayPal brand spoofing |
-| **Sender Address** | `z99@musacombi.online` | `z99@musacombi[.]online` | Impersonation of Netflix billing operations |
-| **Tracking Domain** | `http://devret.xyz` | `hxxp://devret[.]xyz` | Tracking pixel delivery & mailbox enumeration |
-| **Shortened Link** | `https://is.gd/6oCJ4m` | `hxxps://is[.]gd/6oCJ4m` | URL obfuscation hiding credential landing page |
-| **Attachment** | `Apple_Receipt.dot` | `Apple_Receipt.dot` | Template injection / macro download vector |
-| **Child Executable** | `regasm.exe` | `regasm.exe` | Living-off-the-land utility targeted for execution |
+| Type | Indicator | Context |
+|---|---|---|
+| Sender domain | `sultanbogor[.]com` | PayPal impersonation |
+| Sender address | `z99@musacombi[.]online` | Netflix impersonation |
+| Tracking domain | `hxxp://devret[.]xyz` | Tracking pixel host |
+| Short link | `hxxps://is[.]gd/6oCJ4m` | Hides credential harvesting page |
+| Attachment | `Apple_Receipt.dot` | Remote template macro loader |
+| Process | `regasm.exe` launched by Excel | Living-off-the-land execution |
 
 ---
 
-## 5. SOC Analyst Detection & Response Engineering
-1. **Enforce Strict Domain Alignment (DMARC/SPF/DKIM):** Configure mail gateway policies to reject or quarantine inbound messages where the RFC 5322 `From` domain fails SPF alignment or lacks valid DKIM cryptographical signing from the asserted organization.
-2. **Block Inbound External Templates & Dangerous Extensions:** Restrict inbound mail containing macro-enabled templates (`.dot`, `.dotm`, `.xltm`) at the secure email gateway (SEG), as legitimate external business correspondence rarely requires foreign template definitions.
-3. **Automated URL Defanging & Sandbox Detonation:** Ensure security orchestration platforms (SOAR) automatically parse reported `.eml` files, defang all embedded links, expand shorteners in isolated sandboxes, and query domains against live threat intelligence feeds.
+## 5. Response and Detection
+
+**Immediate response**
+
+- Purge every sample from all mailboxes, not just the reporter's.
+- Block the sender domains, tracking domain, and short link at the gateway and proxy.
+- Search proxy logs for anyone who reached the short link or the fake Outlook page. Any hit means a password reset and session revoke for that user.
+
+**Hardening**
+
+1. **Enforce DMARC alignment.** Quarantine or reject mail where the `From` domain fails SPF alignment or has no valid DKIM signature.
+2. **Block risky attachment types** from external senders: `.dot`, `.dotm`, `.xltm`, and macro-enabled Office files.
+3. **Automate triage.** Have SOAR parse reported `.eml` files, defang links, expand shorteners in a sandbox, and check every domain against threat intel.
+
+**Endpoint detection for the DHL sample**
+
+```spl
+index=sysmon EventCode=1
+| where match(ParentImage, "(?i)\\\\(excel|winword)\.exe$")
+    AND match(Image, "(?i)\\\\regasm\.exe$")
+| table _time host User ParentImage Image CommandLine
+```

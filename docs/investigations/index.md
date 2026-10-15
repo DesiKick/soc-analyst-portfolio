@@ -1,8 +1,17 @@
-# Security Operations & Threat Hunting Investigations
+# Investigations
+
+Each lab documents one case from raw telemetry to a verdict and a detection. Raw evidence is in the repo's [`evidence/`](https://github.com/DesiKick/soc-analyst-portfolio/tree/main/evidence) folder.
+
 
 | Investigation | Focus Area / Techniques | Telemetry & Tooling | MITRE ATT&CK Mapping | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **[Lab 01: Windows Process Auditing](lab-01-windows-process.md)** | Process creation, parent-child tracking, CLI analysis | Windows Event ID 4688, CLI Logging | T1059 (Command & Scripting Interpreter) | **Complete** |
-| **[Lab 02: Network Traffic Analysis](lab-02-network-traffic.md)** | PCAP packet analysis, C2 payload extraction, hash triage | Wireshark, TCP Stream Carving, SHA-256 | T1071 (Application Layer Protocol) | **Complete** |
-| **[Lab 03: Splunk SIEM Detection](lab-03-splunk-lsass.md)** | LSASS memory dump detection, regex field extraction | Splunk SIEM, Sysmon Event ID 10, SPL | T1003.001 (LSASS Memory) | **Complete** |
-| **[Lab 04: Inbound Phishing Analysis](lab-04-phishing-analysis.md)** | Header forensics, URL defanging, macro document triage | RFC 822 Headers, Web Beacons, Defanging | T1566 (Phishing) | **Complete** |
+| **[Lab 01: Windows Process Auditing](lab-01-windows-process.md)** | Process creation, parent-child lineage, command line logging | Windows Event ID 4688, CLI Logging | T1059 (Command & Scripting Interpreter) | <span class="pill done">Complete</span> |
+| **[Lab 02: Network Traffic Analysis](lab-02-network-traffic.md)** | PCAP triage, HTTP stream reconstruction, client fingerprinting | Wireshark, Follow TCP Stream | T1071 (Application Layer Protocol) | <span class="pill done">Complete</span> |
+| **[Lab 03: LSASS Credential Dumping](lab-03-splunk-lsass.md)** | Threat hunt, attack timeline, validated detection | Splunk SIEM, Sysmon Event ID 10, SPL | T1003.001 (LSASS Memory) | <span class="pill done">Complete</span> |
+| **[Lab 04: Inbound Phishing Analysis](lab-04-phishing-analysis.md)** | Header forensics, redirect chains, attachment triage | Header analysis, CyberChef, defanging | T1566 (Phishing) | <span class="pill done">Complete</span> |
+| **Lab 05: Brute Force Detection** | Failed logon spikes followed by a success | Microsoft Sentinel (KQL), 4625 / 4624 | T1110 (Brute Force) | <span class="pill wip">Building</span> |
+| **Lab 06: IOC Enrichment Script** | Automated IP and domain enrichment | Python, VirusTotal API | N/A | <span class="pill wip">Building</span> |
+| **Lab 07: C2 Beacon Hunting** | Periodic callback detection | Zeek, RITA | T1071 | <span class="pill wip">Building</span> |
+
+!!! tip "Start here"
+    [Lab 03](lab-03-splunk-lsass.md) is the most complete case: a full attack timeline, a verdict, and a detection tested against the same data.

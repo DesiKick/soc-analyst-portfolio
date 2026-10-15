@@ -1,0 +1,9 @@
+# Normalize line endings so Windows checkouts do not show every file as modified
+* text=auto
+
+# Binary and raw evidence files: never convert
+*.png binary
+*.jpg binary
+*.pdf binary
+*.cap binary
+*.pcap binary

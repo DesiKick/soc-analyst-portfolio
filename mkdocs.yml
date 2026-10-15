@@ -14,18 +14,9 @@ theme:
     repo: fontawesome/brands/github
   favicon: assets/images/favicon.svg
   palette:
-    - scheme: slate
-      primary: custom
-      accent: cyan
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
-    - scheme: default
-      primary: custom
-      accent: cyan
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
+    scheme: slate
+    primary: custom
+    accent: cyan
   font:
     text: Inter
     code: JetBrains Mono

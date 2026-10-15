@@ -4,19 +4,19 @@ title: Detections
 
 # Detection Engineering Library
 
-Production detection rules engineered and validated against forensic lab telemetry, mapped to the MITRE ATT&CK framework.
+Detection rules built during the investigations and mapped to MITRE ATT&CK. Source files are in the repo's [`detections/`](https://github.com/DesiKick/soc-analyst-portfolio/tree/main/detections) folder.
 
 | Rule | Detection Platform | MITRE ATT&CK | Validation Dataset | Source Investigation |
 | :--- | :--- | :--- | :--- | :--- |
-| **Suspicious LSASS Memory Access** | Splunk SPL, Sigma | T1003.001 | 163 LSASS access events (55 alerts, 0/108 benign false positives) | [Lab 03: Splunk SIEM](investigations/lab-03-splunk-lsass.md) |
-| **Office Binary Spawning Shell** | Splunk SPL, Sigma | T1059, T1204.002 | Parent-child execution lineage (`winword.exe` / `excel.exe`) | [Lab 01: Process Auditing](investigations/lab-01-windows-process.md) |
-| **Outbound Cleartext HTTP Workstation** | Splunk SPL, Wireshark | T1071.001 | Ephemeral outbound port 80 traffic with non-standard User-Agent | [Lab 02: Network Traffic](investigations/lab-02-network-traffic.md) |
+| **Suspicious LSASS Memory Access** | Splunk SPL, Sigma | T1003.001 | 163 LSASS access events (55 alerts: 54 confirmed, 1 needs context; 0 of 108 benign events alerted) | [Lab 03: Splunk SIEM](investigations/lab-03-splunk-lsass.md) |
+| **Office Binary Spawning Shell** | Splunk SPL | T1059, T1204.002 | Logic only, not yet tested on attack data | [Lab 01: Process Auditing](investigations/lab-01-windows-process.md) |
+| **Outbound Cleartext HTTP Workstation** | Splunk SPL, Wireshark | T1071.001 | Logic only, not yet tested on attack data | [Lab 02: Network Traffic](investigations/lab-02-network-traffic.md) |
 
 ---
 
 ## Suspicious LSASS Memory Access (Splunk SPL)
 
-Filters on Sysmon Event ID 10 where the target is `lsass.exe` and the access mask includes memory read permissions (`0x1010`, `0x1F0FFF`), excluding core system processes.
+Filters on Sysmon Event ID 10 where the target is `lsass.exe` and the access mask includes memory read permissions (`0x1fffff`, `0x1010`, `0x1410`), excluding core system processes.
 
 ```spl
 index=botsv1 "<EventID>10</EventID>"
@@ -30,7 +30,7 @@ index=botsv1 "<EventID>10</EventID>"
 | eval severity=if(match(SourceImage, "(?i)\\\\(AppData|Temp|Users\\\\Public)\\\\"), "critical", "high")
 | stats count min(_time) as first_seen max(_time) as last_seen values(GrantedAccess) as access by host_name SourceImage severity
 | sort - count
- ```
+```
 
 ??? example "View Sigma Rule Definition"
 

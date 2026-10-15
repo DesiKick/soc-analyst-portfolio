@@ -1,49 +1,93 @@
-# Lab 01: Windows Telemetry & Process Creation Auditing (Event ID 4688)
+---
+title: "Lab 01: Windows Process Auditing"
+---
 
-- **Date:** October 2026
-- **Category:** Endpoint Telemetry & Incident Analysis
-- **Framework Mapping:** MITRE ATT&CK [T1059 - Command and Scripting Interpreter] / [T1082 - System Information Discovery]
-- **Target OS:** Windows 10/11 Enterprise
+# Lab 01: Windows Process Creation Auditing (Event ID 4688)
+
+<div class="lab-meta" markdown>
+**Category:** Endpoint Telemetry and Baselining<br>
+**ATT&CK:** [T1059 Command and Scripting Interpreter](https://attack.mitre.org/techniques/T1059/) | [T1204.002 User Execution: Malicious File](https://attack.mitre.org/techniques/T1204/002/)<br>
+**Tools:** Local Security Policy, Windows Event Viewer<br>
+**Host:** Windows 10/11 lab workstation (`DESKTOP-2UVTUII`)
+</div>
+
+!!! success "Verdict: Benign | Baseline established"
+    The process captured (`services.exe` launching `svchost.exe` as SYSTEM) is normal Windows service startup. The value of this lab is the baseline and the detection logic it produced.
 
 ---
 
-## 1. Executive Summary & Objective
-Adversaries routinely execute native binaries (Living off the Land) to enumerate accounts, query network configurations, and spawn malicious payloads. By default, Windows does not log granular process execution data. 
+## 1. Objective
 
-The objective of this lab was to configure **Audit Process Creation** within the Local Security Policy, generate process execution telemetry, and analyze the resulting **Event ID 4688** forensic artifacts to understand parent-child process relationships.
+Attackers lean on built-in Windows binaries to run commands, enumerate the host, and launch payloads. Windows does not log process creation by default, so without it a SOC is blind to most of that activity.
 
----
-
-## 2. Methodology & Configuration
-1. **Auditing Policy Configuration:**
-   - Navigated to `Advanced Audit Policy Configuration` > `System Audit Policies` > `Detailed Tracking`.
-   - Enabled **Audit Process Creation** for both **Success** and **Failure**.
-2. **Log Acquisition:**
-   - Monitored the `Security` event log via Windows Event Viewer (`eventvwr.msc`).
-   - Filtered telemetry using event filter `EventID == 4688`.
+The goal: turn on process creation auditing, generate telemetry, and learn to read **Event ID 4688** for parent-child process lineage.
 
 ---
 
-## 3. Forensic Evidence & Artifact Analysis
+## 2. Configuration
 
-### Telemetry Overview: Filtered Security Event Stream
-![Windows Security Event Log Filter](../assets/images/lab01-event-overview.png)
+1. Opened `secpol.msc` and went to **Advanced Audit Policy Configuration > System Audit Policies > Detailed Tracking**.
+2. Enabled **Audit Process Creation** for Success and Failure.
+3. Filtered the Security log in Event Viewer to Event ID `4688`.
 
-### Granular Process Details: Parent-Child Lineage
-![Windows Event ID 4688 Process Creation](../assets/images/lab01-event-4688.png)
-
-### Key Artifact Breakdown:
-- **Event ID:** `4688` (A new process has been created)
-- **Account / Security ID:** `SYSTEM` (Authority/System-level context)
-- **New Process Name:** `C:\Windows\System32\svchost.exe` (The spawned binary)
-- **Creator (Parent) Process Name:** `C:\Windows\System32\services.exe` (The launching binary)
-- **Mandatory Label:** `System Mandatory Level` (High integrity execution token)
-
-### Analytical Insight:
-In a typical enterprise SOC environment, mapping the **Parent Process** (`Creator Process Name`) to the **Child Process** (`New Process Name`) establishes the process lineage. While `services.exe` spawning `svchost.exe` represents expected baseline activity, an anomalous parent (such as `winword.exe` spawning `cmd.exe` or `powershell.exe`) would represent a high-confidence indicator of compromise (IOC) indicative of macro exploitation.
+!!! warning "Gap found: command lines are off by default"
+    4688 only records the binary name unless you also enable **Administrative Templates > System > Audit Process Creation > Include command line in process creation events**. Without it you can see `powershell.exe` ran, but not the encoded payload it ran. This is the first setting I'd check in any new environment.
 
 ---
 
-## 4. Defensive Takeaways for SOC Triage
-- **Baseline Profiling:** Knowing what *should* launch a process is just as important as knowing what the binary does. Legitimate system binaries executing under abnormal parents must be flagged immediately.
-- **Log Enrichment:** Standard 4688 logging provides binary names, but enabling the sub-setting *"Include command line in process creation events"* adds the full CLI arguments, essential for identifying obfuscated scripts (e.g., base64-encoded PowerShell).
+## 3. Evidence
+
+### Filtered Security log
+
+![Windows Security log filtered to Event ID 4688](../assets/images/lab01-event-overview.png)
+
+### A single 4688 event
+
+![Event ID 4688 details showing a new process created by SYSTEM](../assets/images/lab01-event-4688.png)
+
+| Field | Value | Meaning |
+|---|---|---|
+| Event ID | `4688` | A new process was created |
+| Creator account | `SYSTEM` (`DESKTOP-2UVTUII$`) | Launched by the OS itself |
+| New process | `C:\Windows\System32\svchost.exe` | The child |
+| Creator process | `C:\Windows\System32\services.exe` | The parent |
+| Mandatory label | System Mandatory Level | Highest integrity |
+
+---
+
+## 4. Analysis
+
+Process lineage is the core of endpoint triage. The question is never just "what ran" but "what launched it".
+
+| Parent | Child | Read |
+|---|---|---|
+| `services.exe` | `svchost.exe` | Normal. This is how Windows starts services |
+| `explorer.exe` | `chrome.exe` | Normal. User opened a browser |
+| `winword.exe` | `powershell.exe` | **Malicious until proven otherwise.** Classic macro execution |
+| `excel.exe` | `cmd.exe` | **Malicious until proven otherwise.** Same pattern |
+| `wmiprvse.exe` | `powershell.exe` | **Suspicious.** Common in remote WMI execution |
+
+---
+
+## 5. Detection Logic
+
+Office applications should almost never start a shell. This SPL flags it from Windows Security logs:
+
+```spl
+index=wineventlog EventCode=4688
+| eval parent=lower(Creator_Process_Name), child=lower(New_Process_Name)
+| where match(parent, "\\\\(winword|excel|powerpnt|outlook|onenote)\.exe$")
+    AND match(child, "\\\\(cmd|powershell|pwsh|wscript|cscript|mshta|rundll32|regsvr32)\.exe$")
+| table _time host Account_Name parent child Process_Command_Line
+```
+
+!!! info "Status"
+    Logic only. Next step is to trigger it with an Atomic Red Team macro test and record the results here.
+
+---
+
+## 6. Takeaways
+
+- **Know the baseline first.** `svchost.exe` is normal. `svchost.exe` launched by anything other than `services.exe` is not.
+- **Enable command line logging.** Process names without arguments leave the most important evidence out.
+- **Sysmon Event ID 1 is the upgrade.** It adds hashes, parent command lines, and process GUIDs, which is what [Lab 03](lab-03-splunk-lsass.md) relies on.

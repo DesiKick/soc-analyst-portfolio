@@ -9,23 +9,23 @@ hide:
 
 # Mian Talha Nayyar
 
-<p class="tagline">Tier-2 SOC Analyst &bull; Threat Hunter &bull; Detection Engineer</p>
+<p class="tagline">SOC Analyst &bull; Incident Response &bull; Detection Engineering</p>
 
 <p class="lead">
-Production incident investigations grounded in forensic telemetry. Every lab reconstructs the full kill chain from raw packets and memory access down to validated Splunk SPL and Sigma detections.
+Hands-on lab investigations built from raw telemetry. Each one goes from logs, packets, or headers to a verdict and a detection. 4+ years in security operations across financial services and managed IT.
 </p>
 
 [:material-folder-search: Browse Investigations](investigations/index.md){ .md-button .md-button--primary }
 [:material-file-account: Resume (PDF)](assets/files/Mian_Nayyar_SOC_Analyst_Resume.pdf){ .md-button }
 [:fontawesome-brands-linkedin: LinkedIn Profile](https://www.linkedin.com/in/mian-nayyar){ .md-button }
-[:material-email: Contact Analyst](mailto:talha397@gmail.com){ .md-button }
+[:material-email: Email Me](mailto:talha397@gmail.com){ .md-button }
 
 </div>
 
 <div class="stats">
-  <div><strong>4</strong><span>Active Case Studies</span></div>
+  <div><strong>4</strong><span>Lab Investigations</span></div>
   <div><strong>163</strong><span>LSASS Access Events Triaged</span></div>
-  <div><strong>0 / 108</strong><span>False Positive Rate</span></div>
+  <div><strong>0 / 108</strong><span>Benign Events Alerted</span></div>
   <div><strong>SC-200</strong><span>Microsoft Certified</span></div>
 </div>
 
@@ -39,11 +39,11 @@ Production incident investigations grounded in forensic telemetry. Every lab rec
 
     ---
 
-    Hunted 851 endpoint Sysmon events in Splunk SIEM, dissected a multi-stage adversary memory dump, and engineered a behavioral detection rule excluding benign OS processes with zero false positives.
+    Hunted 851 endpoint Sysmon events in Splunk SIEM, rebuilt a 6-method credential dumping attack, and wrote a behavior-based detection that flagged every dumping tool without alerting on a single benign system process.
 
     `Splunk` `Sysmon Event ID 10` `T1003.001` `SPL`
 
-    [:octicons-arrow-right-24: Read Incident Report](investigations/lab-03-splunk-lsass.md)
+    [:octicons-arrow-right-24: Read Investigation](investigations/lab-03-splunk-lsass.md)
 
 -   :material-email-alert:{ .lg .middle } **Lab 04: Inbound Phishing & Header Forensics**
 
@@ -53,17 +53,17 @@ Production incident investigations grounded in forensic telemetry. Every lab rec
 
     `RFC 822 Headers` `CyberChef` `T1566` `Defanging`
 
-    [:octicons-arrow-right-24: Read Incident Report](investigations/lab-04-phishing-analysis.md)
+    [:octicons-arrow-right-24: Read Investigation](investigations/lab-04-phishing-analysis.md)
 
--   :material-lan:{ .lg .middle } **Lab 02: Network Traffic & C2 Stream Reconstruction**
+-   :material-lan:{ .lg .middle } **Lab 02: Network Traffic & HTTP Stream Reconstruction**
 
     ---
 
-    Triaged packet capture (PCAP) streams in Wireshark over IPv6. Filtered application-layer HTTP requests, fingerprinted terminal User-Agents, and carved unencrypted payload streams.
+    Triaged packet capture (PCAP) streams in Wireshark over IPv6. Filtered application-layer HTTP requests, reconstructed the full TCP session, and fingerprinted a non-browser client.
 
-    `Wireshark` `PCAP` `TCP Stream Carving` `T1071.001`
+    `Wireshark` `PCAP` `Follow TCP Stream` `T1071.001`
 
-    [:octicons-arrow-right-24: Read Incident Report](investigations/lab-02-network-traffic.md)
+    [:octicons-arrow-right-24: Read Investigation](investigations/lab-02-network-traffic.md)
 
 -   :material-microsoft-windows:{ .lg .middle } **Lab 01: Windows Process Auditing & Execution**
 
@@ -73,7 +73,7 @@ Production incident investigations grounded in forensic telemetry. Every lab rec
 
     `Event Viewer` `Event ID 4688` `Process Trees` `T1059`
 
-    [:octicons-arrow-right-24: Read Incident Report](investigations/lab-01-windows-process.md)
+    [:octicons-arrow-right-24: Read Investigation](investigations/lab-01-windows-process.md)
 
 </div>
 
@@ -81,12 +81,13 @@ Production incident investigations grounded in forensic telemetry. Every lab rec
 
 ## 🛡️ Defensive Engineering Standards
 
-Every investigation in this repository follows formal SOC triage standards:
+Every investigation follows the same structure as a SOC ticket:
 
 1. **Initial Trigger & Scope:** Documenting the alert provenance, affected host, and user context.
-2. **Forensic Telemetry:** Direct examination of raw `.evtx`, PCAPs, or mail headers (stored in the repository's `evidence/` directory).
+2. **Forensic Telemetry:** Raw Sysmon logs, PCAPs, or mail headers, with the queries used to pull them. Raw files live in the repo's `evidence/` folder.
 3. **Timeline & Pivoting:** Reconstructing chronological attacker execution steps.
-4. **Actionable Detection:** Validated detection queries (SPL and Sigma) tested directly against attack datasets.
+4. **Verdict:** True or false positive, severity, and escalation call.
+5. **Detection:** A rule that catches it next time, tested against the lab data where possible.
 
 ---
 

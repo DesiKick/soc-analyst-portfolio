@@ -1,0 +1,17 @@
+``` Detection: Suspicious LSASS Memory Access (Sysmon Event ID 10)
+    MITRE ATT&CK: T1003.001 OS Credential Dumping: LSASS Memory
+    Data source: Sysmon XML (raw), parsed with rex
+    Validated against: evidence/lab-03/windows-sysmon.log
+      163 LSASS access events -> 55 alerts (54 confirmed dumping, 1 needs context), 0 of 108 benign system accesses alerted ```
+
+index=botsv1 "<EventID>10</EventID>"
+| rex field=_raw "<Data Name='SourceImage'>(?<SourceImage>[^<]+)</Data>"
+| rex field=_raw "<Data Name='TargetImage'>(?<TargetImage>[^<]+)</Data>"
+| rex field=_raw "<Data Name='GrantedAccess'>(?<GrantedAccess>[^<]+)</Data>"
+| rex field=_raw "<Computer>(?<host_name>[^<]+)</Computer>"
+| where match(TargetImage, "(?i)\\\\lsass\.exe$")
+| where match(GrantedAccess, "(?i)^0x(1fffff|1010|1410|1438|143a|1f3fff)$")
+| where NOT match(SourceImage, "(?i)^C:\\\\Windows\\\\System32\\\\(svchost|wininit|csrss|services|lsm)\.exe$")
+| eval severity=if(match(SourceImage, "(?i)\\\\(AppData|Temp|Users\\\\Public)\\\\"), "critical", "high")
+| stats count min(_time) as first_seen max(_time) as last_seen values(GrantedAccess) as access by host_name SourceImage severity
+| sort - count

@@ -1,0 +1,41 @@
+title: Suspicious Process Access to LSASS Memory
+id: 6f0b0c7e-1d3a-4b8e-9b1e-3c5a2f7d9e41
+status: experimental
+description: >
+  Detects a non-system process opening lsass.exe with access rights that allow
+  reading its memory. Built and validated in Lab 03 against Atomic Red Team
+  T1003.001 telemetry (procdump, Outflank Dumpert, comsvcs.dll MiniDump,
+  renamed procdump, Task Manager dump).
+author: Mian Talha Nayyar
+date: 2026/10/14
+references:
+  - https://attack.mitre.org/techniques/T1003/001/
+  - https://desikick.github.io/soc-analyst-portfolio/investigations/lab-03-splunk-lsass/
+tags:
+  - attack.credential_access
+  - attack.t1003.001
+logsource:
+  product: windows
+  category: process_access
+detection:
+  selection:
+    TargetImage|endswith: '\lsass.exe'
+    GrantedAccess:
+      - '0x1fffff'
+      - '0x1010'
+      - '0x1410'
+      - '0x1438'
+      - '0x143a'
+      - '0x1f3fff'
+  filter_system:
+    SourceImage:
+      - 'C:\Windows\System32\svchost.exe'
+      - 'C:\Windows\System32\wininit.exe'
+      - 'C:\Windows\System32\csrss.exe'
+      - 'C:\Windows\System32\services.exe'
+      - 'C:\Windows\System32\lsm.exe'
+  condition: selection and not filter_system
+falsepositives:
+  - EDR and antivirus agents (add their paths to the filter after baselining)
+  - Administrators creating a dump from Task Manager (still worth reviewing)
+level: high

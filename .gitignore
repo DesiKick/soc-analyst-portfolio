@@ -1,0 +1,13 @@
+# MkDocs build output (GitHub Actions builds and deploys this)
+site/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
