@@ -24,12 +24,12 @@
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Detections - Mian Talha Nayyar | SOC Analyst Portfolio</title>
+        <title>Detections - Mian Talha Nayyar | SOC Portfolio</title>
       
     
     
@@ -96,7 +96,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Mian Talha Nayyar | SOC Analyst Portfolio" class="md-header__button md-logo" aria-label="Mian Talha Nayyar | SOC Analyst Portfolio" data-md-component="logo">
+    <a href=".." title="Mian Talha Nayyar | SOC Portfolio" class="md-header__button md-logo" aria-label="Mian Talha Nayyar | SOC Portfolio" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.86 10.31C16.23 21.22 14.28 22.45 12 23c-2.56-.61-4.7-2.07-6.42-4.37C3.86 16.34 3 13.8 3 11V5l9-4 9 4v6c0 2.39-.64 4.61-1.92 6.67l-2.91-2.91c.52-.79.83-1.76.83-2.76a5 5 0 0 0-5-5 5 5 0 0 0-5 5 5 5 0 0 0 5 5c1 0 1.97-.31 2.76-.83z"/></svg>
@@ -110,7 +110,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Mian Talha Nayyar | SOC Analyst Portfolio
+            Mian Talha Nayyar | SOC Portfolio
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -326,13 +326,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Mian Talha Nayyar | SOC Analyst Portfolio" class="md-nav__button md-logo" aria-label="Mian Talha Nayyar | SOC Analyst Portfolio" data-md-component="logo">
+    <a href=".." title="Mian Talha Nayyar | SOC Portfolio" class="md-nav__button md-logo" aria-label="Mian Talha Nayyar | SOC Portfolio" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.86 10.31C16.23 21.22 14.28 22.45 12 23c-2.56-.61-4.7-2.07-6.42-4.37C3.86 16.34 3 13.8 3 11V5l9-4 9 4v6c0 2.39-.64 4.61-1.92 6.67l-2.91-2.91c.52-.79.83-1.76.83-2.76a5 5 0 0 0-5-5 5 5 0 0 0-5 5 5 5 0 0 0 5 5c1 0 1.97-.31 2.76-.83z"/></svg>
 
     </a>
-    Mian Talha Nayyar | SOC Analyst Portfolio
+    Mian Talha Nayyar | SOC Portfolio
   </label>
   
     <div class="md-nav__source">
@@ -795,75 +795,75 @@
 <hr />
 <h2 id="suspicious-lsass-memory-access-splunk-spl">Suspicious LSASS Memory Access (Splunk SPL)<a class="headerlink" href="#suspicious-lsass-memory-access-splunk-spl" title="Permanent link">&para;</a></h2>
 <p>Filters on Sysmon Event ID 10 where the target is <code>lsass.exe</code> and the access mask includes memory read permissions (<code>0x1010</code>, <code>0x1F0FFF</code>), excluding core system processes.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>index=botsv1 "&lt;EventID&gt;10&lt;/EventID&gt;"
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>| rex field=_raw "&lt;Data Name="SourceImage"&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;"
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>| rex field=_raw "&lt;Data Name="TargetImage"&gt;(?&lt;TargetImage&gt;[^&lt;]+)&lt;/Data&gt;"
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>| rex field=_raw "&lt;Data Name="GrantedAccess"&gt;(?&lt;GrantedAccess&gt;[^&lt;]+)&lt;/Data&gt;"
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>| rex field=_raw "&lt;Computer&gt;(?&lt;host_name&gt;[^&lt;]+)&lt;/Computer&gt;"
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>| where match(TargetImage, "(?i)\\\\lsass\.exe$")
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>| where match(GrantedAccess, "(?i)^0x(1fffff|1010|1410|1438|143a|1f3fff)$")
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>| where NOT match(SourceImage, "(?i)^C:\\\\Windows\\\\System32\\\\(svchost|wininit|csrss|services|lsm)\.exe$")
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>| eval severity=if(match(SourceImage, "(?i)\\\\(AppData|Temp|Users\\\\Public)\\\\"), "critical", "high")
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>| stats count min(_time) as first_seen max(_time) as last_seen values(GrantedAccess) as access by host_name SourceImage severity
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>| sort - count
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>??? example "View Sigma Rule Definition"
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    ```yaml
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    title: Suspicious Process Access to LSASS Memory
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    status: experimental
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    author: Mian Talha Nayyar
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    tags:
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>      - attack.credential_access
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>      - attack.t1003.001
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    logsource:
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>      product: windows
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>      category: process_access
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    detection:
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>      selection:
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        TargetImage|endswith: '\lsass.exe'
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        GrantedAccess:
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>          - '0x1fffff'
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>          - '0x1010'
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>          - '0x1410'
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>          - '0x1438'
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>          - '0x143a'
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>          - '0x1f3fff'
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>      filter_system:
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        SourceImage:
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>          - 'C:\Windows\System32\svchost.exe'
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>          - 'C:\Windows\System32\wininit.exe'
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>          - 'C:\Windows\System32\csrss.exe'
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>          - 'C:\Windows\System32\services.exe'
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>          - 'C:\Windows\System32\lsm.exe'
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>      condition: selection and not filter_system
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    falsepositives:
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>      - EDR and antivirus monitoring agents
-<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>      - Legitimate administrator memory dumps via Task Manager
-<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    level: high
-<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    ```
-<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>
-<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>---
-<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>
-<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>## Office Application Spawning Command Shell (Splunk SPL)
-<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>
-<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>Detects living-off-the-land techniques where Microsoft Office applications spawn command interpreters (`cmd.exe`, `powershell.exe`) indicative of macro exploitation.
-<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>
-<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>```spl
-<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>index=wineventlog EventCode=4688
-<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>| eval parent=lower(Creator_Process_Name), child=lower(New_Process_Name)
-<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>| where match(parent, "\\\\(winword|excel|powerpnt|outlook|onenote)\.exe$")
-<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>    AND match(child, "\\\\(cmd|powershell|pwsh|wscript|cscript|mshta|rundll32|regsvr32)\.exe$")
-<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>| table _time host Account_Name parent child Process_Command_Line
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>index=botsv1 "&lt;EventID&gt;10&lt;/EventID&gt;"
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>| rex field=_raw "&lt;Data Name="SourceImage"&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>| rex field=_raw "&lt;Data Name="TargetImage"&gt;(?&lt;TargetImage&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>| rex field=_raw "&lt;Data Name="GrantedAccess"&gt;(?&lt;GrantedAccess&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>| rex field=_raw "&lt;Computer&gt;(?&lt;host_name&gt;[^&lt;]+)&lt;/Computer&gt;"
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>| where match(TargetImage, "(?i)\\\\lsass\.exe$")
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>| where match(GrantedAccess, "(?i)^0x(1fffff|1010|1410|1438|143a|1f3fff)$")
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>| where NOT match(SourceImage, "(?i)^C:\\\\Windows\\\\System32\\\\(svchost|wininit|csrss|services|lsm)\.exe$")
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>| eval severity=if(match(SourceImage, "(?i)\\\\(AppData|Temp|Users\\\\Public)\\\\"), "critical", "high")
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>| stats count min(_time) as first_seen max(_time) as last_seen values(GrantedAccess) as access by host_name SourceImage severity
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>| sort - count
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>??? example "View Sigma Rule Definition"
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    ```yaml
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    title: Suspicious Process Access to LSASS Memory
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    status: experimental
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    author: Mian Talha Nayyar
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    tags:
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>      - attack.credential_access
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>      - attack.t1003.001
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    logsource:
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>      product: windows
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>      category: process_access
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    detection:
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>      selection:
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        TargetImage|endswith: '\lsass.exe'
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        GrantedAccess:
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>          - '0x1fffff'
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>          - '0x1010'
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>          - '0x1410'
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>          - '0x1438'
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>          - '0x143a'
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>          - '0x1f3fff'
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>      filter_system:
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        SourceImage:
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>          - 'C:\Windows\System32\svchost.exe'
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>          - 'C:\Windows\System32\wininit.exe'
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>          - 'C:\Windows\System32\csrss.exe'
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>          - 'C:\Windows\System32\services.exe'
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>          - 'C:\Windows\System32\lsm.exe'
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>      condition: selection and not filter_system
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    falsepositives:
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>      - EDR and antivirus monitoring agents
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>      - Legitimate administrator memory dumps via Task Manager
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    level: high
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    ```
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>---
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>## Office Application Spawning Command Shell (Splunk SPL)
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>Detects living-off-the-land techniques where Microsoft Office applications spawn command interpreters (`cmd.exe`, `powershell.exe`) indicative of macro exploitation.
+</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>
+</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>```spl
+</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>index=wineventlog EventCode=4688
+</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>| eval parent=lower(Creator_Process_Name), child=lower(New_Process_Name)
+</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>| where match(parent, "\\\\(winword|excel|powerpnt|outlook|onenote)\.exe$")
+</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>    AND match(child, "\\\\(cmd|powershell|pwsh|wscript|cscript|mshta|rundll32|regsvr32)\.exe$")
+</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>| table _time host Account_Name parent child Process_Command_Line
+</span></code></pre></div>
 <hr />
 <h2 id="outbound-cleartext-http-from-internal-workstation-splunk-spl">Outbound Cleartext HTTP from Internal Workstation (Splunk SPL)<a class="headerlink" href="#outbound-cleartext-http-from-internal-workstation-splunk-spl" title="Permanent link">&para;</a></h2>
 <p>Isolates direct outbound cleartext HTTP (port 80) connections originating from endpoints using non-standard or scripted user agents.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>index=proxy dest_port=80
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>| where NOT match(http_user_agent, "(?i)(mozilla|windows-update|microsoft)")
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>| stats count values(url) as urls dc(dest) as destinations by src http_user_agent
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>| where count &gt; 5
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>index=proxy dest_port=80
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>| where NOT match(http_user_agent, "(?i)(mozilla|windows-update|microsoft)")
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>| stats count values(url) as urls dc(dest) as destinations by src http_user_agent
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>| where count &gt; 5
+</span></code></pre></div>
 
 
 
@@ -990,7 +990,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.top", "navigation.footer", "navigation.indexes", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
