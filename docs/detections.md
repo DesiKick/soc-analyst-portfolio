@@ -20,9 +20,9 @@ Filters on Sysmon Event ID 10 where the target is `lsass.exe` and the access mas
 
 ```spl
 index=botsv1 "<EventID>10</EventID>"
-| rex field=_raw "<Data Name="SourceImage">(?<SourceImage>[^<]+)</Data>"
-| rex field=_raw "<Data Name="TargetImage">(?<TargetImage>[^<]+)</Data>"
-| rex field=_raw "<Data Name="GrantedAccess">(?<GrantedAccess>[^<]+)</Data>"
+| rex field=_raw "<Data Name='SourceImage'>(?<SourceImage>[^<]+)</Data>"
+| rex field=_raw "<Data Name='TargetImage'>(?<TargetImage>[^<]+)</Data>"
+| rex field=_raw "<Data Name='GrantedAccess'>(?<GrantedAccess>[^<]+)</Data>"
 | rex field=_raw "<Computer>(?<host_name>[^<]+)</Computer>"
 | where match(TargetImage, "(?i)\\\\lsass\.exe$")
 | where match(GrantedAccess, "(?i)^0x(1fffff|1010|1410|1438|143a|1f3fff)$")
