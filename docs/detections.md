@@ -28,37 +28,40 @@ index=botsv1 "<EventID>10</EventID>"
 | eval severity=if(match(SourceImage, "(?i)\\\\(AppData|Temp|Users\\\\Public)\\\\"), "critical", "high")
 | stats count min(_time) as first_seen max(_time) as last_seen values(GrantedAccess) as access by host_name SourceImage severity
 | sort - count
-
-```yaml
-title: Suspicious Process Access to LSASS Memory
-status: experimental
-author: Mian Talha Nayyar
-tags:
-  - attack.credential_access
-  - attack.t1003.001
-logsource:
-  product: windows
-  category: process_access
-detection:
-  selection:
-    TargetImage|endswith: '\lsass.exe'
-    GrantedAccess:
-      - '0x1fffff'
-      - '0x1010'
-      - '0x1410'
-      - '0x1438'
-      - '0x143a'
-      - '0x1f3fff'
-  filter_system:
-    SourceImage:
-      - 'C:\Windows\System32\svchost.exe'
-      - 'C:\Windows\System32\wininit.exe'
-      - 'C:\Windows\System32\csrss.exe'
-      - 'C:\Windows\System32\services.exe'
-      - 'C:\Windows\System32\lsm.exe'
-  condition: selection and not filter_system
-falsepositives:
-  - EDR and antivirus agents (add their paths after baselining)
-  - Administrators creating a dump from Task Manager
-level: high
 ```
+
+??? example "View Sigma Rule Version"
+
+    ```yaml
+    title: Suspicious Process Access to LSASS Memory
+    status: experimental
+    author: Mian Talha Nayyar
+    tags:
+      - attack.credential_access
+      - attack.t1003.001
+    logsource:
+      product: windows
+      category: process_access
+    detection:
+      selection:
+        TargetImage|endswith: '\lsass.exe'
+        GrantedAccess:
+          - '0x1fffff'
+          - '0x1010'
+          - '0x1410'
+          - '0x1438'
+          - '0x143a'
+          - '0x1f3fff'
+      filter_system:
+        SourceImage:
+          - 'C:\Windows\System32\svchost.exe'
+          - 'C:\Windows\System32\wininit.exe'
+          - 'C:\Windows\System32\csrss.exe'
+          - 'C:\Windows\System32\services.exe'
+          - 'C:\Windows\System32\lsm.exe'
+      condition: selection and not filter_system
+    falsepositives:
+      - EDR and antivirus agents (add their paths after baselining)
+      - Administrators creating a dump from Task Manager
+    level: high
+    ```
