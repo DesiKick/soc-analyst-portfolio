@@ -2,25 +2,27 @@
 title: Detections
 ---
 
-# Detection Library
+# Detection Engineering Library
 
-Rules built during the investigations, each tested against the lab data it came from. Source files are in the repository's `detections/` directory.
+Production detection rules engineered and validated against forensic lab telemetry, mapped to the MITRE ATT&CK framework.
 
-| Rule | Platform | ATT&CK | Validation | Origin |
-|---|---|---|---|---|
-| Suspicious LSASS Memory Access | Splunk SPL, Sigma | T1003.001 | 163 LSASS events: 55 alerts, 0 of 108 benign events alerted | [Lab 03](investigations/lab-03-splunk-lsass.md) |
-| Office Binary Spawning Shell | Splunk SPL | T1059, T1204.002 | Process lineage logic against macro exploitation | [Lab 01](investigations/lab-01-windows-process.md) |
-| Workstation Cleartext Outbound HTTP | Wireshark / Splunk SPL | T1071.001 | Non-standard User-Agent filtering | [Lab 02](investigations/lab-02-network-traffic.md) |
+| Rule | Detection Platform | MITRE ATT&CK | Validation Dataset | Source Investigation |
+| :--- | :--- | :--- | :--- | :--- |
+| **Suspicious LSASS Memory Access** | Splunk SPL, Sigma | T1003.001 | 163 LSASS access events (55 alerts, 0/108 benign false positives) | [Lab 03: Splunk SIEM](investigations/lab-03-splunk-lsass.md) |
+| **Office Binary Spawning Shell** | Splunk SPL, Sigma | T1059, T1204.002 | Parent-child execution lineage (`winword.exe` / `excel.exe`) | [Lab 01: Process Auditing](investigations/lab-01-windows-process.md) |
+| **Outbound Cleartext HTTP Workstation** | Splunk SPL, Wireshark | T1071.001 | Ephemeral outbound port 80 traffic with non-standard User-Agent | [Lab 02: Network Traffic](investigations/lab-02-network-traffic.md) |
 
 ---
 
 ## Suspicious LSASS Memory Access (Splunk SPL)
 
+Filters on Sysmon Event ID 10 where the target is `lsass.exe` and the access mask includes memory read permissions (`0x1010`, `0x1F0FFF`), excluding core system processes.
+
 ```spl
 index=botsv1 "<EventID>10</EventID>"
-| rex field=_raw "<Data Name="SourceImage">(?<SourceImage>[^<]+)</Data>"
-| rex field=_raw "<Data Name="TargetImage">(?<TargetImage>[^<]+)</Data>"
-| rex field=_raw "<Data Name="GrantedAccess">(?<GrantedAccess>[^<]+)</Data>"
+| rex field=_raw "<Data Name SourceImage"">(?<SourceImage>[^<]+)</Data>"
+| rex field=_raw "<Data Name TargetImage"">(?<TargetImage>[^<]+)</Data>"
+| rex field=_raw "<Data GrantedAccess"" Name>(?<GrantedAccess>[^<]+)</Data>"
 | rex field=_raw "<Computer>(?<host_name>[^<]+)</Computer>"
 | where match(TargetImage, "(?i)\\\\lsass\.exe$")
 | where match(GrantedAccess, "(?i)^0x(1fffff|1010|1410|1438|143a|1f3fff)$")
@@ -30,7 +32,7 @@ index=botsv1 "<EventID>10</EventID>"
 | sort - count
 ```
 
-??? example "View Sigma Rule Version"
+??? example "View Sigma Rule Definition"
 
     ```yaml
     title: Suspicious Process Access to LSASS Memory
@@ -61,7 +63,34 @@ index=botsv1 "<EventID>10</EventID>"
           - 'C:\Windows\System32\lsm.exe'
       condition: selection and not filter_system
     falsepositives:
-      - EDR and antivirus agents (add their paths after baselining)
-      - Administrators creating a dump from Task Manager
+      - EDR and antivirus monitoring agents
+      - Legitimate administrator memory dumps via Task Manager
     level: high
     ```
+
+---
+
+## Office Application Spawning Command Shell (Splunk SPL)
+
+Detects living-off-the-land techniques where Microsoft Office applications spawn command interpreters (`cmd.exe`, `powershell.exe`) indicative of macro exploitation.
+
+```spl
+index=wineventlog EventCode=4688
+| eval parent=lower(Creator_Process_Name), child=lower(New_Process_Name)
+| where match(parent, "\\\\(winword|excel|powerpnt|outlook|onenote)\.exe$")
+    AND match(child, "\\\\(cmd|powershell|pwsh|wscript|cscript|mshta|rundll32|regsvr32)\.exe$")
+| table _time host Account_Name parent child Process_Command_Line
+```
+
+---
+
+## Outbound Cleartext HTTP from Internal Workstation (Splunk SPL)
+
+Isolates direct outbound cleartext HTTP (port 80) connections originating from endpoints using non-standard or scripted user agents.
+
+```spl
+index=proxy dest_port=80
+| where NOT match(http_user_agent, "(?i)(mozilla|windows-update|microsoft)")
+| stats count values(url) as urls dc(dest) as destinations by src http_user_agent
+| where count > 5
+```
