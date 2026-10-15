@@ -30,6 +30,7 @@ index=botsv1 "<EventID>10</EventID>"
 | eval severity=if(match(SourceImage, "(?i)\\\\(AppData|Temp|Users\\\\Public)\\\\"), "critical", "high")
 | stats count min(_time) as first_seen max(_time) as last_seen values(GrantedAccess) as access by host_name SourceImage severity
 | sort - count
+ ```
 
 ??? example "View Sigma Rule Definition"
 
