@@ -4,13 +4,13 @@ title: Detections
 
 # Detection Library
 
-Rules built during the investigations, each tested against the lab data it came from.
+Rules built during the investigations, each tested against the lab data it came from. Source files are in the repository's `detections/` directory.
 
-| Rule | Platform | ATT&CK | Validation | From |
+| Rule | Platform | ATT&CK | Validation | Origin |
 |---|---|---|---|---|
 | Suspicious LSASS Memory Access | Splunk SPL, Sigma | T1003.001 | 163 LSASS events: 55 alerts, 0 of 108 benign events alerted | [Lab 03](investigations/lab-03-splunk-lsass.md) |
-| Office App Spawning a Shell | Splunk SPL | T1059, T1204.002 | Process lineage logic against macro exploitation | [Lab 01](investigations/lab-01-windows-process.md) |
-| Outbound Cleartext HTTP from Workstations | Wireshark / Splunk SPL | T1071.001 | Non-standard User-Agent filtering | [Lab 02](investigations/lab-02-network-traffic.md) |
+| Office Binary Spawning Shell | Splunk SPL | T1059, T1204.002 | Process lineage logic against macro exploitation | [Lab 01](investigations/lab-01-windows-process.md) |
+| Workstation Cleartext Outbound HTTP | Wireshark / Splunk SPL | T1071.001 | Non-standard User-Agent filtering | [Lab 02](investigations/lab-02-network-traffic.md) |
 
 ---
 
@@ -28,6 +28,7 @@ index=botsv1 "<EventID>10</EventID>"
 | eval severity=if(match(SourceImage, "(?i)\\\\(AppData|Temp|Users\\\\Public)\\\\"), "critical", "high")
 | stats count min(_time) as first_seen max(_time) as last_seen values(GrantedAccess) as access by host_name SourceImage severity
 | sort - count
+
 ```yaml
 title: Suspicious Process Access to LSASS Memory
 status: experimental
