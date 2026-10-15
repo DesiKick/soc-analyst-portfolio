@@ -796,9 +796,9 @@
 <h2 id="suspicious-lsass-memory-access-splunk-spl">Suspicious LSASS Memory Access (Splunk SPL)<a class="headerlink" href="#suspicious-lsass-memory-access-splunk-spl" title="Permanent link">&para;</a></h2>
 <p>Filters on Sysmon Event ID 10 where the target is <code>lsass.exe</code> and the access mask includes memory read permissions (<code>0x1010</code>, <code>0x1F0FFF</code>), excluding core system processes.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>index=botsv1 "&lt;EventID&gt;10&lt;/EventID&gt;"
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>| rex field=_raw "&lt;Data Name="SourceImage"&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;"
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>| rex field=_raw "&lt;Data Name="TargetImage"&gt;(?&lt;TargetImage&gt;[^&lt;]+)&lt;/Data&gt;"
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>| rex field=_raw "&lt;Data Name="GrantedAccess"&gt;(?&lt;GrantedAccess&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>| rex field=_raw "&lt;Data Name='SourceImage'&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>| rex field=_raw "&lt;Data Name='TargetImage'&gt;(?&lt;TargetImage&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>| rex field=_raw "&lt;Data Name='GrantedAccess'&gt;(?&lt;GrantedAccess&gt;[^&lt;]+)&lt;/Data&gt;"
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>| rex field=_raw "&lt;Computer&gt;(?&lt;host_name&gt;[^&lt;]+)&lt;/Computer&gt;"
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>| where match(TargetImage, "(?i)\\\\lsass\.exe$")
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>| where match(GrantedAccess, "(?i)^0x(1fffff|1010|1410|1438|143a|1f3fff)$")
