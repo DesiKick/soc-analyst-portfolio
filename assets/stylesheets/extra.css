@@ -203,3 +203,22 @@ code {
 .md-typeset table:not([class]) td {
   border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
+
+/* Lab metadata block at the top of each investigation */
+.lab-meta {
+  border-left: 3px solid #00e5ff;
+  background: rgba(0, 229, 255, 0.04);
+  border-radius: 0 6px 6px 0;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.4rem;
+}
+
+/* Code blocks: solid panel, no inline pill styling */
+.md-typeset pre > code {
+  border: 1px solid rgba(0, 229, 255, 0.12);
+  border-radius: 6px;
+  background-color: #101721 !important;
+  color: #e0f7fa !important;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.8em;
+}

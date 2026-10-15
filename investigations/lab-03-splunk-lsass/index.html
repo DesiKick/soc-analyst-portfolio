@@ -29,7 +29,7 @@
     
     
       
-        <title>Lab 03 - LSASS Credential Dumping (Splunk) - Mian Talha Nayyar | SOC Portfolio</title>
+        <title>Lab 03: LSASS Credential Dumping - Mian Talha Nayyar | SOC Portfolio</title>
       
     
     
@@ -68,8 +68,6 @@
   
     
     
-      
-    
     
     
     
@@ -82,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab-03-siem-threat-hunting-lsass-credential-dumping-detection" class="md-skip">
+        <a href="#lab-03-threat-hunting-lsass-credential-dumping-in-splunk" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lab 03 - LSASS Credential Dumping (Splunk)
+              Lab 03: LSASS Credential Dumping
             
           </span>
         </div>
@@ -124,33 +122,7 @@
     </div>
     
       
-        <form class="md-header__option" data-md-component="palette">
-  
     
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
@@ -577,10 +549,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-executive-summary-objective" class="md-nav__link">
+  <a href="#1-objective" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Executive Summary &amp; Objective
+        1. Objective
       
     </span>
   </a>
@@ -588,10 +560,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-telemetry-attack-surface" class="md-nav__link">
+  <a href="#2-data-source" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Telemetry &amp; Attack Surface
+        2. Data Source
       
     </span>
   </a>
@@ -599,22 +571,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-threat-hunting-spl-engineering" class="md-nav__link">
+  <a href="#3-hunt-methodology" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Threat Hunting &amp; SPL Engineering
+        3. Hunt Methodology
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Threat Hunting &amp; SPL Engineering">
+    <nav class="md-nav" aria-label="3. Hunt Methodology">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#phase-1-ingestion-telemetry-exploration" class="md-nav__link">
+  <a href="#step-1-broad-sweep" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 1: Ingestion &amp; Telemetry Exploration
+        Step 1: Broad sweep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-extract-fields-from-raw-xml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Extract fields from raw XML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-isolate-who-opened-lsass-and-with-what-rights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Isolate who opened LSASS, and with what rights
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-pivot-to-process-creation-and-file-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Pivot to process creation and file events
       
     </span>
   </a>
@@ -623,6 +628,117 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Findings
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Findings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#processes-that-read-lsass-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processes that read LSASS memory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dump-files-written-to-disk-event-id-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dump files written to disk (Event ID 11)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-timeline-win-dc-807-2020-11-03-utc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attack timeline: win-dc-807, 2020-11-03 (UTC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indicators
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-detection-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Detection Rule
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Detection Rule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-against-the-lab-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation against the lab data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-response-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Response Actions
+      
+    </span>
+  </a>
   
 </li>
       
@@ -751,10 +867,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-executive-summary-objective" class="md-nav__link">
+  <a href="#1-objective" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Executive Summary &amp; Objective
+        1. Objective
       
     </span>
   </a>
@@ -762,10 +878,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-telemetry-attack-surface" class="md-nav__link">
+  <a href="#2-data-source" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Telemetry &amp; Attack Surface
+        2. Data Source
       
     </span>
   </a>
@@ -773,22 +889,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-threat-hunting-spl-engineering" class="md-nav__link">
+  <a href="#3-hunt-methodology" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Threat Hunting &amp; SPL Engineering
+        3. Hunt Methodology
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Threat Hunting &amp; SPL Engineering">
+    <nav class="md-nav" aria-label="3. Hunt Methodology">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#phase-1-ingestion-telemetry-exploration" class="md-nav__link">
+  <a href="#step-1-broad-sweep" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 1: Ingestion &amp; Telemetry Exploration
+        Step 1: Broad sweep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-extract-fields-from-raw-xml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Extract fields from raw XML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-isolate-who-opened-lsass-and-with-what-rights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Isolate who opened LSASS, and with what rights
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-pivot-to-process-creation-and-file-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Pivot to process creation and file events
       
     </span>
   </a>
@@ -797,6 +946,117 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Findings
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Findings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#processes-that-read-lsass-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processes that read LSASS memory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dump-files-written-to-disk-event-id-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dump files written to disk (Event ID 11)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-timeline-win-dc-807-2020-11-03-utc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attack timeline: win-dc-807, 2020-11-03 (UTC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indicators
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-detection-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Detection Rule
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Detection Rule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-against-the-lab-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation against the lab data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-response-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Response Actions
+      
+    </span>
+  </a>
   
 </li>
       
@@ -817,90 +1077,390 @@
 
 
 
-<h1 id="lab-03-siem-threat-hunting-lsass-credential-dumping-detection">Lab 03: SIEM Threat Hunting &amp; LSASS Credential Dumping Detection<a class="headerlink" href="#lab-03-siem-threat-hunting-lsass-credential-dumping-detection" title="Permanent link">&para;</a></h1>
-<ul>
-<li><strong>Date:</strong> October 2026</li>
-<li><strong>Category:</strong> SIEM Detection Engineering &amp; Threat Hunting</li>
-<li><strong>Framework Mapping:</strong> MITRE ATT&amp;CK [T1003.001 - OS Credential Dumping: LSASS Memory] / [TA0006 - Credential Access]</li>
-<li><strong>Tooling:</strong> Splunk Enterprise, Search Processing Language (SPL), Sysmon (Event ID 10)</li>
-</ul>
+<h1 id="lab-03-threat-hunting-lsass-credential-dumping-in-splunk">Lab 03: Threat Hunting LSASS Credential Dumping in Splunk<a class="headerlink" href="#lab-03-threat-hunting-lsass-credential-dumping-in-splunk" title="Permanent link">&para;</a></h1>
+<div class="lab-meta">
+<p><strong>Category:</strong> SIEM Threat Hunting and Detection Engineering<br>
+<strong>ATT&amp;CK:</strong> <a href="https://attack.mitre.org/techniques/T1003/001/">T1003.001 OS Credential Dumping: LSASS Memory</a> | TA0006 Credential Access<br>
+<strong>Tools:</strong> Splunk Enterprise, SPL, Sysmon (Event IDs 1, 10, 11)<br>
+<strong>Evidence:</strong> <a href="https://github.com/DesiKick/soc-analyst-portfolio/blob/main/evidence/lab-03/windows-sysmon.log"><code>windows-sysmon.log</code></a> (7,974 events) | <strong>Detection:</strong> <a href="https://github.com/DesiKick/soc-analyst-portfolio/tree/main/detections"><code>detections/</code></a></p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Verdict: True Positive | Critical | Escalate to IR</p>
+<p>Two domain controllers had LSASS memory dumped with six different methods, including a renamed binary built to evade name-based detection. Domain credentials should be treated as compromised.</p>
+</div>
 <hr />
-<h2 id="1-executive-summary-objective">1. Executive Summary &amp; Objective<a class="headerlink" href="#1-executive-summary-objective" title="Permanent link">&para;</a></h2>
-<p>Local Security Authority Subsystem Service (<code>lsass.exe</code>) enforces security policy and stores active authentication credentials, Kerberos tickets, and NTLM hashes in process memory. Adversaries routinely target LSASS to harvest credentials for domain-wide lateral movement.</p>
-<p>The objective of this investigation was to ingest high-fidelity endpoint security telemetry into Splunk, build regular expression field extractions against raw Sysmon XML, and engineer a robust detection query (SPL) that exposes unauthorized attempts to access and dump LSASS memory.</p>
+<h2 id="1-objective">1. Objective<a class="headerlink" href="#1-objective" title="Permanent link">&para;</a></h2>
+<p><code>lsass.exe</code> holds credentials, Kerberos tickets, and NTLM hashes in memory. Dumping it is how attackers move from one compromised host to the whole domain.</p>
+<p>The goal: ingest raw Sysmon telemetry into Splunk, separate attack activity from normal system noise, rebuild the attack timeline, and ship a detection that does not depend on tool names.</p>
 <hr />
-<h2 id="2-telemetry-attack-surface">2. Telemetry &amp; Attack Surface<a class="headerlink" href="#2-telemetry-attack-surface" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Data Source:</strong> Sysmon Operational Logs (<code>Microsoft-Windows-Sysmon</code>)</li>
-<li><strong>Event ID:</strong> <code>10</code> (ProcessAccess)</li>
-<li><strong>Target Process:</strong> <code>C:\Windows\System32\lsass.exe</code></li>
-<li><strong>Simulated Adversary:</strong> Atomic Red Team (<code>T1003.001</code>)</li>
-</ul>
+<h2 id="2-data-source">2. Data Source<a class="headerlink" href="#2-data-source" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Telemetry</td>
+<td>Sysmon Operational log, raw XML</td>
+</tr>
+<tr>
+<td>Key events</td>
+<td>10 ProcessAccess, 1 ProcessCreate, 11 FileCreate</td>
+</tr>
+<tr>
+<td>Hosts</td>
+<td><code>win-dc-807.attackrange.local</code>, <code>win-dc-262.attackrange.local</code></td>
+</tr>
+<tr>
+<td>Event time range</td>
+<td>2020-11-03 to 2021-02-03 (UTC)</td>
+</tr>
+<tr>
+<td>Adversary simulation</td>
+<td>Atomic Red Team T1003.001, run in Splunk Attack Range</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Index name</p>
+<p>I loaded the log into a local Splunk index named <code>botsv1</code>. The data itself is Attack Range telemetry, not the BOTS v1 dataset.</p>
+</div>
 <hr />
-<h2 id="3-threat-hunting-spl-engineering">3. Threat Hunting &amp; SPL Engineering<a class="headerlink" href="#3-threat-hunting-spl-engineering" title="Permanent link">&para;</a></h2>
-<h3 id="phase-1-ingestion-telemetry-exploration">Phase 1: Ingestion &amp; Telemetry Exploration<a class="headerlink" href="#phase-1-ingestion-telemetry-exploration" title="Permanent link">&para;</a></h3>
-<p>An initial hunt query across the dedicated <code>botsv1</code> index isolated all events referencing the LSASS credential vault:
+<h2 id="3-hunt-methodology">3. Hunt Methodology<a class="headerlink" href="#3-hunt-methodology" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-broad-sweep">Step 1: Broad sweep<a class="headerlink" href="#step-1-broad-sweep" title="Permanent link">&para;</a></h3>
+<p>Every event mentioning LSASS, as source or target:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>index=botsv1 "lsass.exe"
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>![Credential Dumping Artifacts Table](../assets/images/lab03-splunk-hunt.png)
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>The search isolated 851 raw sysmon records detailing process access attempts against the local authority service
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>---
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>### Phase 2: SPL Field Extraction &amp; Aggregation
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Because the raw log payload contained nested XML attributes without native schema parsing, a targeted regular expression (rex) query was constructed to extract the requesting binary (SourceImage) and aggregate execution frequency:
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>```spl
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>index=botsv1 "lsass.exe" "&lt;EventID&gt;10&lt;/EventID&gt;"
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>| rex field=_raw "&lt;Data Name="SourceImage"&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;"
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>| stats count by SourceImage
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>![Credential Dumping Artifacts Table](../assets/images/lab03-splunk-table.png)
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>---
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>## 4. Forensic Findings &amp; Malicious Artifacts Identified
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>The analytical query exposed multiple adversary tools accessing LSASS:
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>| Requesting Image (`SourceImage`) | Invocations | Threat Classification |
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>| :--- | :--- | :--- |
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>| `Outflank-Dumpert.exe` | 2 | Custom Red-Team LSASS Memory Dumper |
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>| `procdump.exe` / `procdump64.exe` | 6 | Weaponized Sysinternals Dump Utility |
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>| `notprocdump.exe` | 1 | Defense Evasion (Renamed Binary) |
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>| `AppData\Local\Temp\*.exe` | 38 | Dropped Binary from Temp Directory |
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>| `powershell.exe` | 1 | Scripted Credential Ingestion (`Invoke-Mimikatz`) |
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>| `rundll32.exe` | 2 | LOLBin (`comsvcs.dll` MiniDump execution) |
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>---
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>## 5. SOC Detection Engineering Takeaways
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>1. **Filename-Agnostic Rules:** Attackers frequently disguise binaries (evidenced by `notprocdump.exe`). Detections should alert on the **TargetImage** (`lsass.exe`) combined with abnormal **GrantedAccess** permissions (e.g., `0x1010`, `0x1F0FFF`), rather than relying solely on the process filename.
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>2. **Untrusted Path Baselines:** Any process originating from `AppData\Local\Temp` or non-standard paths that accesses `lsass.exe` represents high-confidence malicious behavior and should generate immediate Priority-1 alerts in the SOC.
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>### Production Detection Rule (Splunk Enterprise / Cloud)
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>```spl
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>index=botsv1 sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=10
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>| rex field=_raw "&lt;Data Name TargetImage""&gt;(?&lt;TargetImage&gt;[^&lt;]+)&lt;/Data&gt;"
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>| rex field=_raw "&lt;Data Name SourceImage""&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;"
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>| rex field=_raw "&lt;Data GrantedAccess"" Name&gt;(?&lt;GrantedAccess&gt;[^&lt;]+)&lt;/Data&gt;"
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>| search TargetImage="*\\lsass.exe" GrantedAccess IN ("0x1010", "0x1410", "0x1F0FFF", "0x1438", "0x143a")
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>| search NOT SourceImage IN (
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    "*\\Program Files\\Windows Defender\\*", 
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    "*\\Program Files\\Microsoft Security Client\\*",
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    "*\\System32\\svchost.exe", 
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    "*\\System32\\csrss.exe", 
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    "*\\System32\\services.exe"
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>  )
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>| stats count earliest(_time) as first_seen latest(_time) as last_seen by SourceImage, TargetImage, GrantedAccess
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>| convert ctime(first_seen) ctime(last_seen)
-</span></code></pre></div></p>
-<p><strong>Rule Logic &amp; Triage Notes:</strong>
-- <strong>Target Filter:</strong> Isolates calls requesting handles to <code>lsass.exe</code>.
-- <strong>Access Rights Filter:</strong> Filters on dangerous masks (<code>0x1010</code> = <code>PROCESS_QUERY_LIMITED_INFORMATION</code> + <code>PROCESS_VM_READ</code>, and <code>0x1F0FFF</code> = <code>PROCESS_ALL_ACCESS</code>).
-- <strong>Baseline Exclusions:</strong> Suppresses routine antivirus and core operating system processes to minimize false positives.</p>
+</span></code></pre></div>
+<p><img alt="Splunk broad search for lsass.exe returning 851 events" src="../../assets/images/lab03-splunk-hunt.png" /></p>
+<p><strong>Result:</strong> 851 events. Too broad to triage, since LSASS also appears as the <em>source</em> of normal activity.</p>
+<h3 id="step-2-extract-fields-from-raw-xml">Step 2: Extract fields from raw XML<a class="headerlink" href="#step-2-extract-fields-from-raw-xml" title="Permanent link">&para;</a></h3>
+<p>The log was ingested as raw XML with no field parsing, so I extracted <code>SourceImage</code> with <code>rex</code> and narrowed to Event ID 10:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>index=botsv1 "lsass.exe" "&lt;EventID&gt;10&lt;/EventID&gt;"
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>| rex field=_raw "&lt;Data Name='SourceImage'&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>| stats count by SourceImage
+</span></code></pre></div>
+<p><img alt="Splunk stats count by SourceImage showing 14 processes" src="../../assets/images/lab03-splunk-stats.png" /></p>
+<p><strong>Result:</strong> 750 events from 14 source processes. Atomic Red Team binaries stand out immediately, but this view still mixes in normal Windows processes.</p>
+<h3 id="step-3-isolate-who-opened-lsass-and-with-what-rights">Step 3: Isolate who opened LSASS, and with what rights<a class="headerlink" href="#step-3-isolate-who-opened-lsass-and-with-what-rights" title="Permanent link">&para;</a></h3>
+<p>Event ID 10 records the access mask (<code>GrantedAccess</code>). Reading LSASS memory requires <code>PROCESS_VM_READ</code> (0x0010), so masks like <code>0x1fffff</code> (full access) and <code>0x1410</code> are what dumping looks like. Routine system access is usually <code>0x1400</code> or <code>0x1000</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>index=botsv1 "&lt;EventID&gt;10&lt;/EventID&gt;"
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>| rex field=_raw "&lt;Data Name='SourceImage'&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>| rex field=_raw "&lt;Data Name='TargetImage'&gt;(?&lt;TargetImage&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>| rex field=_raw "&lt;Data Name='GrantedAccess'&gt;(?&lt;GrantedAccess&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>| where match(TargetImage, "(?i)\\\\lsass\.exe$")
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>| stats count by SourceImage GrantedAccess
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>| sort - count
+</span></code></pre></div>
+<p><strong>Result:</strong> 163 processes opened LSASS directly. 108 were normal Windows processes with low access masks. 55 were not.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Events</th>
+<th>What changed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Keyword sweep</td>
+<td>851</td>
+<td>Any event mentioning <code>lsass.exe</code></td>
+</tr>
+<tr>
+<td>Event ID 10 only</td>
+<td>750</td>
+<td>Process access events, LSASS as source or target</td>
+</tr>
+<tr>
+<td>LSASS as target</td>
+<td>163</td>
+<td>Something opened LSASS</td>
+</tr>
+<tr>
+<td>Benign baseline</td>
+<td>108</td>
+<td><code>svchost</code>, <code>wininit</code>, <code>csrss</code>, <code>services</code> with low access masks</td>
+</tr>
+<tr>
+<td><strong>Alerts</strong></td>
+<td><strong>55</strong></td>
+<td>Non-system processes with memory-read access</td>
+</tr>
+</tbody>
+</table>
+<h3 id="step-4-pivot-to-process-creation-and-file-events">Step 4: Pivot to process creation and file events<a class="headerlink" href="#step-4-pivot-to-process-creation-and-file-events" title="Permanent link">&para;</a></h3>
+<p>Event ID 10 shows <em>who</em> touched LSASS but not the command line. To confirm intent I pivoted to Event ID 1 (process creation) and Event ID 11 (file creation), looking for the command lines and the dump files they wrote.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>index=botsv1 ("&lt;EventID&gt;1&lt;/EventID&gt;" OR "&lt;EventID&gt;11&lt;/EventID&gt;")
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  ("lsass" OR "comsvcs" OR "mimikatz" OR ".dmp")
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>| rex field=_raw "&lt;Data Name='CommandLine'&gt;(?&lt;CommandLine&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>| rex field=_raw "&lt;Data Name='TargetFilename'&gt;(?&lt;TargetFilename&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>| table _raw CommandLine TargetFilename
+</span></code></pre></div>
+<hr />
+<h2 id="4-findings">4. Findings<a class="headerlink" href="#4-findings" title="Permanent link">&para;</a></h2>
+<h3 id="processes-that-read-lsass-memory">Processes that read LSASS memory<a class="headerlink" href="#processes-that-read-lsass-memory" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Source Process</th>
+<th>Access</th>
+<th>Count</th>
+<th>Host</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AppData\Local\Temp\644c305e-...d1d.exe</code></td>
+<td><code>0x1fffff</code></td>
+<td>38</td>
+<td>dc-807</td>
+<td><strong>Malicious.</strong> Dropped by <code>wce.exe</code> (Windows Credentials Editor) and run as a SYSTEM service by <code>services.exe</code></td>
+</tr>
+<tr>
+<td><code>procdump.exe</code> / <code>procdump64.exe</code></td>
+<td><code>0x1fffff</code></td>
+<td>6</td>
+<td>both</td>
+<td><strong>Malicious.</strong> <code>procdump -ma lsass.exe</code> wrote <code>lsass_dump.dmp</code></td>
+</tr>
+<tr>
+<td><code>notprocdump.exe</code> / <code>notprocdump64.exe</code></td>
+<td><code>0x1fffff</code></td>
+<td>3</td>
+<td>dc-262</td>
+<td><strong>Malicious.</strong> Renamed ProcDump to evade name-based rules</td>
+</tr>
+<tr>
+<td><code>Outflank-Dumpert.exe</code></td>
+<td><code>0x1fffff</code></td>
+<td>2</td>
+<td>dc-807</td>
+<td><strong>Malicious.</strong> Direct syscall dumper, wrote <code>dumpert.dmp</code></td>
+</tr>
+<tr>
+<td><code>rundll32.exe</code></td>
+<td><code>0x1fffff</code>, <code>0x1410</code></td>
+<td>2</td>
+<td>dc-807</td>
+<td><strong>Malicious.</strong> <code>comsvcs.dll MiniDump</code>, a living-off-the-land dump</td>
+</tr>
+<tr>
+<td><code>taskmgr.exe</code></td>
+<td><code>0x1fffff</code>, <code>0x1410</code></td>
+<td>3</td>
+<td>dc-262</td>
+<td><strong>Suspicious.</strong> Interactive admin session created <code>lsass (2).DMP</code> from Task Manager</td>
+</tr>
+<tr>
+<td><code>powershell.exe</code></td>
+<td><code>0x1410</code></td>
+<td>1</td>
+<td>dc-807</td>
+<td><strong>Needs context.</strong> Occurred 1 second after LSASS started at boot, before the attack chain</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dump-files-written-to-disk-event-id-11">Dump files written to disk (Event ID 11)<a class="headerlink" href="#dump-files-written-to-disk-event-id-11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Time (UTC)</th>
+<th>Host</th>
+<th>Writer</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2020-11-03 15:52:59</td>
+<td>dc-807</td>
+<td><code>procdump64.exe</code></td>
+<td><code>C:\Windows\Temp\lsass_dump.dmp</code></td>
+</tr>
+<tr>
+<td>2020-11-03 15:53:03</td>
+<td>dc-807</td>
+<td><code>rundll32.exe</code></td>
+<td><code>...\AppData\Local\Temp\lsass-comsvcs.dmp</code></td>
+</tr>
+<tr>
+<td>2020-11-03 15:53:03</td>
+<td>dc-807</td>
+<td><code>Outflank-Dumpert.exe</code></td>
+<td><code>C:\Windows\Temp\dumpert.dmp</code></td>
+</tr>
+<tr>
+<td>2021-02-03 16:51:01</td>
+<td>dc-262</td>
+<td><code>procdump64.exe</code></td>
+<td><code>C:\Windows\Temp\lsass_dump.dmp</code></td>
+</tr>
+<tr>
+<td>2021-02-03 16:51:14</td>
+<td>dc-262</td>
+<td><code>notprocdump64.exe</code></td>
+<td><code>C:\Windows\Temp\lsass_dump.dmp</code></td>
+</tr>
+<tr>
+<td>2021-02-03 21:34:57</td>
+<td>dc-262</td>
+<td><code>taskmgr.exe</code></td>
+<td><code>...\AppData\Local\Temp\2\lsass (2).DMP</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="attack-timeline-win-dc-807-2020-11-03-utc">Attack timeline: win-dc-807, 2020-11-03 (UTC)<a class="headerlink" href="#attack-timeline-win-dc-807-2020-11-03-utc" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>15:52:48</td>
+<td>PowerShell checks that dumping tools exist on disk (<code>Test-Path ...\procdump.exe</code>, <code>mimikatz.exe</code>)</td>
+</tr>
+<tr>
+<td>15:52:58</td>
+<td><code>wce.exe</code> drops a GUID-named binary to Temp, which runs as a SYSTEM service and opens LSASS 38 times</td>
+</tr>
+<tr>
+<td>15:52:59</td>
+<td><code>procdump -accepteula -ma lsass.exe</code> writes a full memory dump</td>
+</tr>
+<tr>
+<td>15:53:03</td>
+<td><code>rundll32 comsvcs.dll MiniDump</code> and <code>Outflank-Dumpert.exe</code> each write a dump</td>
+</tr>
+<tr>
+<td>15:53:03</td>
+<td><code>mimikatz.exe "sekurlsa::minidump %tmp%\lsass.DMP" "sekurlsa::logonpasswords full"</code> parses a dump offline</td>
+</tr>
+<tr>
+<td>15:53:06</td>
+<td>Cleanup: <code>del lsass_dump.dmp</code>, <code>del dumpert.dmp</code>, <code>Remove-Item lsass-comsvcs.dmp</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key observation:</strong> Mimikatz never touched live LSASS. It parsed a dump file offline, so it does not appear in Event ID 10 at all. Only process creation logging (Event ID 1) caught it. A detection built only on Event ID 10 would miss this step.</p>
+<h3 id="indicators">Indicators<a class="headerlink" href="#indicators" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SHA256</td>
+<td><code>7234C8F98B87593641BBDB594E34C94B9436986C4FB70E7DA5BCECFF147D14C3</code> (Temp service binary)</td>
+</tr>
+<tr>
+<td>MD5</td>
+<td><code>605560CA0624AABF9F53675257B9BE21</code></td>
+</tr>
+<tr>
+<td>File path</td>
+<td><code>C:\Users\ADMINI~1\AppData\Local\Temp\644c305e-30f4-470b-b616-d924c3206d1d.exe</code></td>
+</tr>
+<tr>
+<td>Tool directory</td>
+<td><code>C:\AtomicRedTeam\atomics\T1003.001\bin\</code></td>
+</tr>
+<tr>
+<td>Dump files</td>
+<td><code>lsass_dump.dmp</code>, <code>lsass-comsvcs.dmp</code>, <code>dumpert.dmp</code>, <code>lsass (2).DMP</code></td>
+</tr>
+<tr>
+<td>Account</td>
+<td><code>ATTACKRANGE\Administrator</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-detection-rule">5. Detection Rule<a class="headerlink" href="#5-detection-rule" title="Permanent link">&para;</a></h2>
+<p>Built to catch the behavior, not the tool name: any non-system process opening LSASS with memory-read rights.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>index=botsv1 "&lt;EventID&gt;10&lt;/EventID&gt;"
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>| rex field=_raw "&lt;Data Name='SourceImage'&gt;(?&lt;SourceImage&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>| rex field=_raw "&lt;Data Name='TargetImage'&gt;(?&lt;TargetImage&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>| rex field=_raw "&lt;Data Name='GrantedAccess'&gt;(?&lt;GrantedAccess&gt;[^&lt;]+)&lt;/Data&gt;"
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>| rex field=_raw "&lt;Computer&gt;(?&lt;host_name&gt;[^&lt;]+)&lt;/Computer&gt;"
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>| where match(TargetImage, "(?i)\\\\lsass\.exe$")
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>| where match(GrantedAccess, "(?i)^0x(1fffff|1010|1410|1438|143a|1f3fff)$")
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>| where NOT match(SourceImage, "(?i)^C:\\\\Windows\\\\System32\\\\(svchost|wininit|csrss|services|lsm)\.exe$")
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>| eval severity=if(match(SourceImage, "(?i)\\\\(AppData|Temp|Users\\\\Public)\\\\"), "critical", "high")
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>| stats count min(_time) as first_seen max(_time) as last_seen values(GrantedAccess) as access by host_name SourceImage severity
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>| sort - count
+</span></code></pre></div>
+<h3 id="validation-against-the-lab-data">Validation against the lab data<a class="headerlink" href="#validation-against-the-lab-data" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LSASS access events evaluated</td>
+<td>163</td>
+</tr>
+<tr>
+<td>Alerts fired</td>
+<td>55</td>
+</tr>
+<tr>
+<td>Alerts tied to confirmed dumping</td>
+<td>54</td>
+</tr>
+<tr>
+<td>Alerts needing analyst context</td>
+<td>1 (PowerShell at boot)</td>
+</tr>
+<tr>
+<td>Benign system accesses alerted</td>
+<td>0 of 108</td>
+</tr>
+<tr>
+<td>Renamed <code>notprocdump.exe</code> caught</td>
+<td>Yes, matched on behavior, not name</td>
+</tr>
+</tbody>
+</table>
+<p>A <a href="../../detections/">Sigma version</a> is in the detection library for porting to other SIEMs.</p>
+<hr />
+<h2 id="6-takeaways">6. Takeaways<a class="headerlink" href="#6-takeaways" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Detect the access mask, not the filename.</strong> <code>notprocdump.exe</code> would slip past a rule looking for "procdump". It cannot hide its <code>0x1fffff</code> request to LSASS.</li>
+<li><strong>Event ID 10 alone is not enough.</strong> Offline parsing with Mimikatz only shows up in process creation logs. Pair access monitoring with command line monitoring for <code>sekurlsa</code>, <code>MiniDump</code>, and <code>-ma lsass</code>.</li>
+<li><strong>Watch for dump files.</strong> An Event ID 11 rule for <code>*.dmp</code> files containing "lsass" is a cheap second layer that caught every dump here, including the Task Manager one.</li>
+<li><strong>Check your timestamps.</strong> Splunk set <code>_time</code> to my ingest time because the raw XML was not timestamp-parsed. The real event times came from the <code>SystemTime</code> field. In production, configure <code>TIME_PREFIX</code> in <code>props.conf</code> so timelines are correct.</li>
+</ol>
+<hr />
+<h2 id="7-response-actions">7. Response Actions<a class="headerlink" href="#7-response-actions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Isolate <code>win-dc-807</code> and <code>win-dc-262</code> from the network.</li>
+<li>Reset passwords for every account with an active session on both hosts, starting with <code>ATTACKRANGE\Administrator</code>.</li>
+<li>Reset the <code>krbtgt</code> account twice to invalidate forged Kerberos tickets.</li>
+<li>Hunt for the SHA256 above and for <code>*.dmp</code> files across all endpoints.</li>
+<li>Enable LSA Protection (<code>RunAsPPL</code>) and Credential Guard on domain controllers.</li>
+</ul>
 
 
 
 
 
 
+
+  
+  
 
 
 

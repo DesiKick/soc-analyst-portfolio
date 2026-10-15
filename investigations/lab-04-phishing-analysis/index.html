@@ -29,7 +29,7 @@
     
     
       
-        <title>Lab 04 - Phishing Email Analysis - Mian Talha Nayyar | SOC Portfolio</title>
+        <title>Lab 04: Phishing Email Analysis - Mian Talha Nayyar | SOC Portfolio</title>
       
     
     
@@ -68,8 +68,6 @@
   
     
     
-      
-    
     
     
     
@@ -82,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab-04-inbound-phishing-analysis-header-forensics" class="md-skip">
+        <a href="#lab-04-inbound-phishing-analysis-and-header-forensics" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lab 04 - Phishing Email Analysis
+              Lab 04: Phishing Email Analysis
             
           </span>
         </div>
@@ -124,33 +122,7 @@
     </div>
     
       
-        <form class="md-header__option" data-md-component="palette">
-  
     
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
@@ -605,10 +577,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-executive-summary-objective" class="md-nav__link">
+  <a href="#1-objective" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Executive Summary &amp; Objective
+        1. Objective
       
     </span>
   </a>
@@ -616,10 +588,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-attack-vectors-telemetry-analyzed" class="md-nav__link">
+  <a href="#2-triage-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Attack Vectors &amp; Telemetry Analyzed
+        2. Triage Summary
       
     </span>
   </a>
@@ -627,22 +599,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-investigation-forensic-walkthrough" class="md-nav__link">
+  <a href="#3-investigation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Investigation &amp; Forensic Walkthrough
+        3. Investigation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Investigation &amp; Forensic Walkthrough">
+    <nav class="md-nav" aria-label="3. Investigation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#phase-1-header-analysis-sender-authentication-discrepancies" class="md-nav__link">
+  <a href="#phase-1-headers-and-sender-identity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 1: Header Analysis &amp; Sender Authentication Discrepancies
+        Phase 1: Headers and sender identity
       
     </span>
   </a>
@@ -650,10 +622,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#phase-2-link-obfuscation-tracking-pixels-redirection-chains" class="md-nav__link">
+  <a href="#phase-2-links-tracking-pixels-and-redirects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 2: Link Obfuscation, Tracking Pixels &amp; Redirection Chains
+        Phase 2: Links, tracking pixels, and redirects
       
     </span>
   </a>
@@ -661,10 +633,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#phase-3-weaponized-attachments-payload-analysis" class="md-nav__link">
+  <a href="#phase-3-attachments" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 3: Weaponized Attachments &amp; Payload Analysis
+        Phase 3: Attachments
       
     </span>
   </a>
@@ -677,10 +649,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-forensic-findings-extracted-iocs" class="md-nav__link">
+  <a href="#4-iocs-defanged" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Forensic Findings &amp; Extracted IOCs
+        4. IOCs (defanged)
       
     </span>
   </a>
@@ -688,10 +660,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-soc-analyst-detection-response-engineering" class="md-nav__link">
+  <a href="#5-response-and-detection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. SOC Analyst Detection &amp; Response Engineering
+        5. Response and Detection
       
     </span>
   </a>
@@ -795,10 +767,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-executive-summary-objective" class="md-nav__link">
+  <a href="#1-objective" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Executive Summary &amp; Objective
+        1. Objective
       
     </span>
   </a>
@@ -806,10 +778,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-attack-vectors-telemetry-analyzed" class="md-nav__link">
+  <a href="#2-triage-summary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Attack Vectors &amp; Telemetry Analyzed
+        2. Triage Summary
       
     </span>
   </a>
@@ -817,22 +789,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-investigation-forensic-walkthrough" class="md-nav__link">
+  <a href="#3-investigation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Investigation &amp; Forensic Walkthrough
+        3. Investigation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Investigation &amp; Forensic Walkthrough">
+    <nav class="md-nav" aria-label="3. Investigation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#phase-1-header-analysis-sender-authentication-discrepancies" class="md-nav__link">
+  <a href="#phase-1-headers-and-sender-identity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 1: Header Analysis &amp; Sender Authentication Discrepancies
+        Phase 1: Headers and sender identity
       
     </span>
   </a>
@@ -840,10 +812,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#phase-2-link-obfuscation-tracking-pixels-redirection-chains" class="md-nav__link">
+  <a href="#phase-2-links-tracking-pixels-and-redirects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 2: Link Obfuscation, Tracking Pixels &amp; Redirection Chains
+        Phase 2: Links, tracking pixels, and redirects
       
     </span>
   </a>
@@ -851,10 +823,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#phase-3-weaponized-attachments-payload-analysis" class="md-nav__link">
+  <a href="#phase-3-attachments" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 3: Weaponized Attachments &amp; Payload Analysis
+        Phase 3: Attachments
       
     </span>
   </a>
@@ -867,10 +839,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-forensic-findings-extracted-iocs" class="md-nav__link">
+  <a href="#4-iocs-defanged" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Forensic Findings &amp; Extracted IOCs
+        4. IOCs (defanged)
       
     </span>
   </a>
@@ -878,10 +850,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-soc-analyst-detection-response-engineering" class="md-nav__link">
+  <a href="#5-response-and-detection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. SOC Analyst Detection &amp; Response Engineering
+        5. Response and Detection
       
     </span>
   </a>
@@ -905,116 +877,192 @@
 
 
 
-<h1 id="lab-04-inbound-phishing-analysis-header-forensics">Lab 04: Inbound Phishing Analysis &amp; Header Forensics<a class="headerlink" href="#lab-04-inbound-phishing-analysis-header-forensics" title="Permanent link">&para;</a></h1>
-<ul>
-<li><strong>Date:</strong> October 2026</li>
-<li><strong>Category:</strong> Phishing Triage &amp; Threat Vector Analysis</li>
-<li><strong>Framework Mapping:</strong> MITRE ATT&amp;CK [T1566.001 - Spearphishing Attachment] / [T1566.002 - Spearphishing Link] / [TA0001 - Initial Access]</li>
-<li><strong>Tooling:</strong> RFC 822 Header Parsers, URL Defanging, CyberChef, Static Document Analysis</li>
-</ul>
+<h1 id="lab-04-inbound-phishing-analysis-and-header-forensics">Lab 04: Inbound Phishing Analysis and Header Forensics<a class="headerlink" href="#lab-04-inbound-phishing-analysis-and-header-forensics" title="Permanent link">&para;</a></h1>
+<div class="lab-meta">
+<p><strong>Category:</strong> Phishing Triage<br>
+<strong>ATT&amp;CK:</strong> <a href="https://attack.mitre.org/techniques/T1566/001/">T1566.001 Spearphishing Attachment</a> | <a href="https://attack.mitre.org/techniques/T1566/002/">T1566.002 Spearphishing Link</a> | TA0001 Initial Access<br>
+<strong>Tools:</strong> Raw header analysis (RFC 5322), CyberChef, URL defanging, static document review<br>
+<strong>Samples:</strong> TryHackMe Phishing Analysis module (training samples, analysis and write-up are my own)</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Verdict: All samples malicious | Block, purge, and hunt for clicks</p>
+<p>Every sample impersonated a known brand and either harvested credentials or delivered a payload. None should reach a user inbox.</p>
+</div>
 <hr />
-<h2 id="1-executive-summary-objective">1. Executive Summary &amp; Objective<a class="headerlink" href="#1-executive-summary-objective" title="Permanent link">&para;</a></h2>
-<p>Phishing remains the primary initial access vector exploited by threat actors to harvest enterprise credentials, establish command-and-control footholds, and drop secondary payloads. Modern phishing campaigns leverage brand impersonation, visual typosquatting, and multi-stage delivery chains to bypass automated boundary email gateways.</p>
-<p>The objective of this investigation was to triage suspicious inbound emails, dissect RFC 822 header metadata for sender-address discrepancies, trace multi-hop URL redirections, analyze tracking web beacons, and evaluate weaponized document attachments across multiple real-world phishing scenarios.</p>
+<h2 id="1-objective">1. Objective<a class="headerlink" href="#1-objective" title="Permanent link">&para;</a></h2>
+<p>Phishing is still the most common way attackers get in. Modern lures use brand impersonation, lookalike names, and multi-stage redirects to get past email gateways.</p>
+<p>The goal: triage reported emails the way a SOC queue would, check headers for sender spoofing, trace links and redirects, review attachments, and produce a clean IOC set for blocking.</p>
 <hr />
-<h2 id="2-attack-vectors-telemetry-analyzed">2. Attack Vectors &amp; Telemetry Analyzed<a class="headerlink" href="#2-attack-vectors-telemetry-analyzed" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Target Mailbox Environment:</strong> Standard Enterprise Gateway / Yahoo / Outlook</li>
-<li><strong>Key Protocols:</strong> SMTP, RFC 822, MIME</li>
-<li><strong>Primary Attack Surfaces:</strong></li>
-<li>Display Name Spoofing &amp; Visual Impersonation (<code>Netllx billing</code>)</li>
-<li>Tracking Pixels &amp; Read Receipt Telemetry (<code>tracking.png</code>)</li>
-<li>URL Shorteners &amp; Multi-Stage Redirection Portals</li>
-<li>Malicious Attachments (<code>.pdf</code>, <code>.dot</code>, <code>.xlsx</code>)</li>
-</ul>
-<hr />
-<h2 id="3-investigation-forensic-walkthrough">3. Investigation &amp; Forensic Walkthrough<a class="headerlink" href="#3-investigation-forensic-walkthrough" title="Permanent link">&para;</a></h2>
-<h3 id="phase-1-header-analysis-sender-authentication-discrepancies">Phase 1: Header Analysis &amp; Sender Authentication Discrepancies<a class="headerlink" href="#phase-1-header-analysis-sender-authentication-discrepancies" title="Permanent link">&para;</a></h3>
-<p>Triage of suspicious transaction receipts and account suspension warnings revealed deliberate discrepancies between the asserted display names and the authentic originating addresses:</p>
-<ul>
-<li><strong>Impersonated Brand:</strong> <code>service@paypal.com</code> routed from envelope sender <code>sultanbogor.com</code>.</li>
-<li><strong>Typo-Squatted Impersonation:</strong> A simulated Netflix suspension notice used the display name <code>Netllx billing</code> (substituting the letters "fi" with "ll") while routing from the unauthenticated external domain <code>z99@musacombi.online</code>.</li>
-</ul>
-<p><img alt="Phishing Header and Triage Analysis" src="../../assets/images/lab04-phishing-triage.png" /></p>
-<p>Attackers exploit the default UI behavior of modern mail clients, which prominently display user-configurable display names while concealing the underlying routing path.</p>
-<hr />
-<h3 id="phase-2-link-obfuscation-tracking-pixels-redirection-chains">Phase 2: Link Obfuscation, Tracking Pixels &amp; Redirection Chains<a class="headerlink" href="#phase-2-link-obfuscation-tracking-pixels-redirection-chains" title="Permanent link">&para;</a></h3>
-<p>Inspection of raw HTML bodies exposed multiple obfuscation techniques engineered to evade automated boundary scanning:</p>
-<ol>
-<li><strong>Shortened Redirection URLs:</strong> Phishing lures utilized URL shorteners (<code>https://is.gd/6oCJ4m</code>) to mask destination landing pages during transit.</li>
-<li><strong>Web Beacon Telemetry:</strong> An embedded 1x1 image (<code>tracking.png</code> hosted on <code>devret[.]xyz</code>) served as an active tracking pixel, silently notifying the adversary that the target mailbox was active.</li>
-<li><strong>Multi-Stage Redirection Portals:</strong> Clickable lures routed targets through simulated cloud-sharing hops (Citrix $\rightarrow$ OneDrive $\rightarrow$ Adobe) before terminating at an external credential harvesting interface mimicking an enterprise Microsoft Outlook portal.</li>
-</ol>
-<hr />
-<h3 id="phase-3-weaponized-attachments-payload-analysis">Phase 3: Weaponized Attachments &amp; Payload Analysis<a class="headerlink" href="#phase-3-weaponized-attachments-payload-analysis" title="Permanent link">&para;</a></h3>
-<p>When direct external links are blocked by strict email gateway filters, adversaries pivot to weaponized attachments:</p>
-<ul>
-<li><strong>Remote Template Ingestion (<code>.dot</code>):</strong> A fake Apple billing notification arrived with a blank email body, delivering a <code>.dot</code> Microsoft Word Template configured to pull remote malicious macros upon opening.</li>
-<li><strong>Macro Execution via Spreadsheet (<code>.xlsx</code>):</strong> A fake DHL courier notice delivered a spreadsheet instructing the victim to enable content, initiating execution of the native Windows binary <code>regasm.exe</code>.</li>
-</ul>
-<hr />
-<h2 id="4-forensic-findings-extracted-iocs">4. Forensic Findings &amp; Extracted IOCs<a class="headerlink" href="#4-forensic-findings-extracted-iocs" title="Permanent link">&para;</a></h2>
+<h2 id="2-triage-summary">2. Triage Summary<a class="headerlink" href="#2-triage-summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Artifact Type</th>
-<th style="text-align: left;">Raw Indicator</th>
-<th style="text-align: left;">Defanged / Normalized IOC</th>
-<th style="text-align: left;">Context / Threat Intent</th>
+<th>Sample</th>
+<th>Lure</th>
+<th>Technique</th>
+<th>Verdict</th>
+<th>Action</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>Sender Domain</strong></td>
-<td style="text-align: left;"><code>sultanbogor.com</code></td>
-<td style="text-align: left;"><code>sultanbogor[.]com</code></td>
-<td style="text-align: left;">Unauthorized SMTP relay for PayPal brand spoofing</td>
+<td>PayPal receipt</td>
+<td>Fake transaction</td>
+<td>Display name spoofing, foreign envelope sender</td>
+<td>Malicious</td>
+<td>Block sender domain, purge</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Sender Address</strong></td>
-<td style="text-align: left;"><code>z99@musacombi.online</code></td>
-<td style="text-align: left;"><code>z99@musacombi[.]online</code></td>
-<td style="text-align: left;">Impersonation of Netflix billing operations</td>
+<td>Netflix suspension</td>
+<td>Account on hold</td>
+<td>Typosquatted display name, PDF with a payment link to a non-Netflix domain</td>
+<td>Malicious</td>
+<td>Block sender, purge, check for clicks</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Tracking Domain</strong></td>
-<td style="text-align: left;"><code>http://devret.xyz</code></td>
-<td style="text-align: left;"><code>hxxp://devret[.]xyz</code></td>
-<td style="text-align: left;">Tracking pixel delivery &amp; mailbox enumeration</td>
+<td>Shared-file lure</td>
+<td>Document waiting</td>
+<td>URL shortener, tracking pixel, multi-hop redirect to fake Outlook login</td>
+<td>Malicious</td>
+<td>Block domains, reset any user who clicked</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Shortened Link</strong></td>
-<td style="text-align: left;"><code>https://is.gd/6oCJ4m</code></td>
-<td style="text-align: left;"><code>hxxps://is[.]gd/6oCJ4m</code></td>
-<td style="text-align: left;">URL obfuscation hiding credential landing page</td>
+<td>Apple billing</td>
+<td>Blank body, attachment only</td>
+<td><code>.dot</code> template that pulls remote macros</td>
+<td>Malicious</td>
+<td>Block attachment type, hash hunt</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Attachment</strong></td>
-<td style="text-align: left;"><code>Apple_Receipt.dot</code></td>
-<td style="text-align: left;"><code>Apple_Receipt.dot</code></td>
-<td style="text-align: left;">Template injection / macro download vector</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Child Executable</strong></td>
-<td style="text-align: left;"><code>regasm.exe</code></td>
-<td style="text-align: left;"><code>regasm.exe</code></td>
-<td style="text-align: left;">Living-off-the-land utility targeted for execution</td>
+<td>DHL delivery</td>
+<td>"Enable content" spreadsheet</td>
+<td><code>.xlsx</code> lure designed to launch <code>regasm.exe</code></td>
+<td>Malicious</td>
+<td>Block, hunt for <code>regasm.exe</code> from Office</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="5-soc-analyst-detection-response-engineering">5. SOC Analyst Detection &amp; Response Engineering<a class="headerlink" href="#5-soc-analyst-detection-response-engineering" title="Permanent link">&para;</a></h2>
+<h2 id="3-investigation">3. Investigation<a class="headerlink" href="#3-investigation" title="Permanent link">&para;</a></h2>
+<h3 id="phase-1-headers-and-sender-identity">Phase 1: Headers and sender identity<a class="headerlink" href="#phase-1-headers-and-sender-identity" title="Permanent link">&para;</a></h3>
+<p>The display name and the real sending address did not match in either brand-impersonation sample:</p>
+<ul>
+<li><strong>PayPal:</strong> Displayed <code>service@paypal.com</code>, but the envelope sender came from <code>sultanbogor[.]com</code>, a domain with no relationship to PayPal.</li>
+<li><strong>Netflix:</strong> Display name <code>Netllx billing</code>, with "fi" swapped for "ll" so it reads as Netflix at a glance. Sent from <code>z99@musacombi[.]online</code>. The body pushed an attached PDF whose "Update Payment Account" link pointed to a non-Netflix domain, padded with a real Netflix help link and an odd-format phone number to look legitimate.</li>
+</ul>
+<p><img alt="Phishing header and triage analysis" src="../../assets/images/lab04-phishing-triage.png" /></p>
+<p>Mail clients show the display name prominently and hide the routing path. That gap is what these lures depend on.</p>
+<p><strong>What I check in every header:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>From</code> vs <code>Return-Path</code></td>
+<td>A mismatch is the fastest spoofing signal</td>
+</tr>
+<tr>
+<td><code>Authentication-Results</code></td>
+<td>SPF, DKIM, and DMARC pass or fail for the claimed domain</td>
+</tr>
+<tr>
+<td><code>Received</code> chain (read bottom up)</td>
+<td>The true origin server and any odd relays</td>
+</tr>
+<tr>
+<td><code>Reply-To</code></td>
+<td>Often points to an attacker inbox even when <code>From</code> looks clean</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-2-links-tracking-pixels-and-redirects">Phase 2: Links, tracking pixels, and redirects<a class="headerlink" href="#phase-2-links-tracking-pixels-and-redirects" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Enforce Strict Domain Alignment (DMARC/SPF/DKIM):</strong> Configure mail gateway policies to reject or quarantine inbound messages where the RFC 5322 <code>From</code> domain fails SPF alignment or lacks valid DKIM cryptographical signing from the asserted organization.</li>
-<li><strong>Block Inbound External Templates &amp; Dangerous Extensions:</strong> Restrict inbound mail containing macro-enabled templates (<code>.dot</code>, <code>.dotm</code>, <code>.xltm</code>) at the secure email gateway (SEG), as legitimate external business correspondence rarely requires foreign template definitions.</li>
-<li><strong>Automated URL Defanging &amp; Sandbox Detonation:</strong> Ensure security orchestration platforms (SOAR) automatically parse reported <code>.eml</code> files, defang all embedded links, expand shorteners in isolated sandboxes, and query domains against live threat intelligence feeds.</li>
+<li><strong>URL shortener.</strong> Links went through <code>hxxps://is[.]gd/6oCJ4m</code> to hide the real landing page from scanners.</li>
+<li><strong>Tracking pixel.</strong> A 1x1 image (<code>tracking.png</code> on <code>devret[.]xyz</code>) told the attacker the mailbox was live and the email was opened.</li>
+<li><strong>Redirect chain.</strong> Links bounced through lookalike file-sharing pages (Citrix → OneDrive → Adobe) before landing on a fake Microsoft Outlook login page built to harvest credentials.</li>
 </ol>
+<h3 id="phase-3-attachments">Phase 3: Attachments<a class="headerlink" href="#phase-3-attachments" title="Permanent link">&para;</a></h3>
+<p>When links get blocked, attackers switch to attachments:</p>
+<ul>
+<li><strong>Apple <code>.dot</code> template.</strong> Blank email body, just the attachment. Word templates can fetch macros from a remote server when opened, so the file looks clean until it runs.</li>
+<li><strong>DHL <code>.xlsx</code>.</strong> The spreadsheet told the user to click "Enable Content", the step that lets embedded code run and launch <code>regasm.exe</code>, a signed Windows binary attackers abuse to run payloads.</li>
+</ul>
+<hr />
+<h2 id="4-iocs-defanged">4. IOCs (defanged)<a class="headerlink" href="#4-iocs-defanged" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Indicator</th>
+<th>Context</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sender domain</td>
+<td><code>sultanbogor[.]com</code></td>
+<td>PayPal impersonation</td>
+</tr>
+<tr>
+<td>Sender address</td>
+<td><code>z99@musacombi[.]online</code></td>
+<td>Netflix impersonation</td>
+</tr>
+<tr>
+<td>Tracking domain</td>
+<td><code>hxxp://devret[.]xyz</code></td>
+<td>Tracking pixel host</td>
+</tr>
+<tr>
+<td>Short link</td>
+<td><code>hxxps://is[.]gd/6oCJ4m</code></td>
+<td>Hides credential harvesting page</td>
+</tr>
+<tr>
+<td>Attachment</td>
+<td><code>Apple_Receipt.dot</code></td>
+<td>Remote template macro loader</td>
+</tr>
+<tr>
+<td>Process</td>
+<td><code>regasm.exe</code> launched by Excel</td>
+<td>Living-off-the-land execution</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-response-and-detection">5. Response and Detection<a class="headerlink" href="#5-response-and-detection" title="Permanent link">&para;</a></h2>
+<p><strong>Immediate response</strong></p>
+<ul>
+<li>Purge every sample from all mailboxes, not just the reporter's.</li>
+<li>Block the sender domains, tracking domain, and short link at the gateway and proxy.</li>
+<li>Search proxy logs for anyone who reached the short link or the fake Outlook page. Any hit means a password reset and session revoke for that user.</li>
+</ul>
+<p><strong>Hardening</strong></p>
+<ol>
+<li><strong>Enforce DMARC alignment.</strong> Quarantine or reject mail where the <code>From</code> domain fails SPF alignment or has no valid DKIM signature.</li>
+<li><strong>Block risky attachment types</strong> from external senders: <code>.dot</code>, <code>.dotm</code>, <code>.xltm</code>, and macro-enabled Office files.</li>
+<li><strong>Automate triage.</strong> Have SOAR parse reported <code>.eml</code> files, defang links, expand shorteners in a sandbox, and check every domain against threat intel.</li>
+</ol>
+<p><strong>Endpoint detection for the DHL sample</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>index=sysmon EventCode=1
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>| where match(ParentImage, "(?i)\\\\(excel|winword)\.exe$")
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    AND match(Image, "(?i)\\\\regasm\.exe$")
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>| table _time host User ParentImage Image CommandLine
+</span></code></pre></div>
 
 
 
 
 
 
+
+  
+  
 
 
 

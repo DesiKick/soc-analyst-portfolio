@@ -29,7 +29,7 @@
     
     
       
-        <title>Lab 01 - Windows Process Auditing - Mian Talha Nayyar | SOC Portfolio</title>
+        <title>Lab 01: Windows Process Auditing - Mian Talha Nayyar | SOC Portfolio</title>
       
     
     
@@ -68,8 +68,6 @@
   
     
     
-      
-    
     
     
     
@@ -82,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab-01-windows-telemetry-process-creation-auditing-event-id-4688" class="md-skip">
+        <a href="#lab-01-windows-process-creation-auditing-event-id-4688" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lab 01 - Windows Process Auditing
+              Lab 01: Windows Process Auditing
             
           </span>
         </div>
@@ -124,33 +122,7 @@
     </div>
     
       
-        <form class="md-header__option" data-md-component="palette">
-  
     
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
-    
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
-      </label>
-    
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
-    
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
-      </label>
-    
-  
-</form>
-      
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
@@ -521,10 +493,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-executive-summary-objective" class="md-nav__link">
+  <a href="#1-objective" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Executive Summary &amp; Objective
+        1. Objective
       
     </span>
   </a>
@@ -532,10 +504,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-methodology-configuration" class="md-nav__link">
+  <a href="#2-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Methodology &amp; Configuration
+        2. Configuration
       
     </span>
   </a>
@@ -543,22 +515,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-forensic-evidence-artifact-analysis" class="md-nav__link">
+  <a href="#3-evidence" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Forensic Evidence &amp; Artifact Analysis
+        3. Evidence
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Forensic Evidence &amp; Artifact Analysis">
+    <nav class="md-nav" aria-label="3. Evidence">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#telemetry-overview-filtered-security-event-stream" class="md-nav__link">
+  <a href="#filtered-security-log" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Telemetry Overview: Filtered Security Event Stream
+        Filtered Security log
       
     </span>
   </a>
@@ -566,32 +538,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#granular-process-details-parent-child-lineage" class="md-nav__link">
+  <a href="#a-single-4688-event" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Granular Process Details: Parent-Child Lineage
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#key-artifact-breakdown" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Artifact Breakdown:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#analytical-insight" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Analytical Insight:
+        A single 4688 event
       
     </span>
   </a>
@@ -604,10 +554,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-defensive-takeaways-for-soc-triage" class="md-nav__link">
+  <a href="#4-analysis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Defensive Takeaways for SOC Triage
+        4. Analysis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-detection-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Detection Logic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Takeaways
       
     </span>
   </a>
@@ -795,10 +767,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-executive-summary-objective" class="md-nav__link">
+  <a href="#1-objective" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Executive Summary &amp; Objective
+        1. Objective
       
     </span>
   </a>
@@ -806,10 +778,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-methodology-configuration" class="md-nav__link">
+  <a href="#2-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Methodology &amp; Configuration
+        2. Configuration
       
     </span>
   </a>
@@ -817,22 +789,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-forensic-evidence-artifact-analysis" class="md-nav__link">
+  <a href="#3-evidence" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Forensic Evidence &amp; Artifact Analysis
+        3. Evidence
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Forensic Evidence &amp; Artifact Analysis">
+    <nav class="md-nav" aria-label="3. Evidence">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#telemetry-overview-filtered-security-event-stream" class="md-nav__link">
+  <a href="#filtered-security-log" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Telemetry Overview: Filtered Security Event Stream
+        Filtered Security log
       
     </span>
   </a>
@@ -840,32 +812,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#granular-process-details-parent-child-lineage" class="md-nav__link">
+  <a href="#a-single-4688-event" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Granular Process Details: Parent-Child Lineage
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#key-artifact-breakdown" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Artifact Breakdown:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#analytical-insight" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Analytical Insight:
+        A single 4688 event
       
     </span>
   </a>
@@ -878,10 +828,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-defensive-takeaways-for-soc-triage" class="md-nav__link">
+  <a href="#4-analysis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Defensive Takeaways for SOC Triage
+        4. Analysis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-detection-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Detection Logic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Takeaways
       
     </span>
   </a>
@@ -905,48 +877,132 @@
 
 
 
-<h1 id="lab-01-windows-telemetry-process-creation-auditing-event-id-4688">Lab 01: Windows Telemetry &amp; Process Creation Auditing (Event ID 4688)<a class="headerlink" href="#lab-01-windows-telemetry-process-creation-auditing-event-id-4688" title="Permanent link">&para;</a></h1>
-<ul>
-<li><strong>Date:</strong> October 2026</li>
-<li><strong>Category:</strong> Endpoint Telemetry &amp; Incident Analysis</li>
-<li><strong>Framework Mapping:</strong> MITRE ATT&amp;CK [T1059 - Command and Scripting Interpreter] / [T1082 - System Information Discovery]</li>
-<li><strong>Target OS:</strong> Windows 10/11 Enterprise</li>
-</ul>
+<h1 id="lab-01-windows-process-creation-auditing-event-id-4688">Lab 01: Windows Process Creation Auditing (Event ID 4688)<a class="headerlink" href="#lab-01-windows-process-creation-auditing-event-id-4688" title="Permanent link">&para;</a></h1>
+<div class="lab-meta">
+<p><strong>Category:</strong> Endpoint Telemetry and Baselining<br>
+<strong>ATT&amp;CK:</strong> <a href="https://attack.mitre.org/techniques/T1059/">T1059 Command and Scripting Interpreter</a> | <a href="https://attack.mitre.org/techniques/T1204/002/">T1204.002 User Execution: Malicious File</a><br>
+<strong>Tools:</strong> Local Security Policy, Windows Event Viewer<br>
+<strong>Host:</strong> Windows 10/11 lab workstation (<code>DESKTOP-2UVTUII</code>)</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Verdict: Benign | Baseline established</p>
+<p>The process captured (<code>services.exe</code> launching <code>svchost.exe</code> as SYSTEM) is normal Windows service startup. The value of this lab is the baseline and the detection logic it produced.</p>
+</div>
 <hr />
-<h2 id="1-executive-summary-objective">1. Executive Summary &amp; Objective<a class="headerlink" href="#1-executive-summary-objective" title="Permanent link">&para;</a></h2>
-<p>Adversaries routinely execute native binaries (Living off the Land) to enumerate accounts, query network configurations, and spawn malicious payloads. By default, Windows does not log granular process execution data. </p>
-<p>The objective of this lab was to configure <strong>Audit Process Creation</strong> within the Local Security Policy, generate process execution telemetry, and analyze the resulting <strong>Event ID 4688</strong> forensic artifacts to understand parent-child process relationships.</p>
+<h2 id="1-objective">1. Objective<a class="headerlink" href="#1-objective" title="Permanent link">&para;</a></h2>
+<p>Attackers lean on built-in Windows binaries to run commands, enumerate the host, and launch payloads. Windows does not log process creation by default, so without it a SOC is blind to most of that activity.</p>
+<p>The goal: turn on process creation auditing, generate telemetry, and learn to read <strong>Event ID 4688</strong> for parent-child process lineage.</p>
 <hr />
-<h2 id="2-methodology-configuration">2. Methodology &amp; Configuration<a class="headerlink" href="#2-methodology-configuration" title="Permanent link">&para;</a></h2>
+<h2 id="2-configuration">2. Configuration<a class="headerlink" href="#2-configuration" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>Auditing Policy Configuration:</strong></li>
-<li>Navigated to <code>Advanced Audit Policy Configuration</code> &gt; <code>System Audit Policies</code> &gt; <code>Detailed Tracking</code>.</li>
-<li>Enabled <strong>Audit Process Creation</strong> for both <strong>Success</strong> and <strong>Failure</strong>.</li>
-<li><strong>Log Acquisition:</strong></li>
-<li>Monitored the <code>Security</code> event log via Windows Event Viewer (<code>eventvwr.msc</code>).</li>
-<li>Filtered telemetry using event filter <code>EventID == 4688</code>.</li>
+<li>Opened <code>secpol.msc</code> and went to <strong>Advanced Audit Policy Configuration &gt; System Audit Policies &gt; Detailed Tracking</strong>.</li>
+<li>Enabled <strong>Audit Process Creation</strong> for Success and Failure.</li>
+<li>Filtered the Security log in Event Viewer to Event ID <code>4688</code>.</li>
 </ol>
+<div class="admonition warning">
+<p class="admonition-title">Gap found: command lines are off by default</p>
+<p>4688 only records the binary name unless you also enable <strong>Administrative Templates &gt; System &gt; Audit Process Creation &gt; Include command line in process creation events</strong>. Without it you can see <code>powershell.exe</code> ran, but not the encoded payload it ran. This is the first setting I'd check in any new environment.</p>
+</div>
 <hr />
-<h2 id="3-forensic-evidence-artifact-analysis">3. Forensic Evidence &amp; Artifact Analysis<a class="headerlink" href="#3-forensic-evidence-artifact-analysis" title="Permanent link">&para;</a></h2>
-<h3 id="telemetry-overview-filtered-security-event-stream">Telemetry Overview: Filtered Security Event Stream<a class="headerlink" href="#telemetry-overview-filtered-security-event-stream" title="Permanent link">&para;</a></h3>
-<p><img alt="Windows Security Event Log Filter" src="../../assets/images/lab01-event-overview.png" /></p>
-<h3 id="granular-process-details-parent-child-lineage">Granular Process Details: Parent-Child Lineage<a class="headerlink" href="#granular-process-details-parent-child-lineage" title="Permanent link">&para;</a></h3>
-<p><img alt="Windows Event ID 4688 Process Creation" src="../../assets/images/lab01-event-4688.png" /></p>
-<h3 id="key-artifact-breakdown">Key Artifact Breakdown:<a class="headerlink" href="#key-artifact-breakdown" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Event ID:</strong> <code>4688</code> (A new process has been created)</li>
-<li><strong>Account / Security ID:</strong> <code>SYSTEM</code> (Authority/System-level context)</li>
-<li><strong>New Process Name:</strong> <code>C:\Windows\System32\svchost.exe</code> (The spawned binary)</li>
-<li><strong>Creator (Parent) Process Name:</strong> <code>C:\Windows\System32\services.exe</code> (The launching binary)</li>
-<li><strong>Mandatory Label:</strong> <code>System Mandatory Level</code> (High integrity execution token)</li>
-</ul>
-<h3 id="analytical-insight">Analytical Insight:<a class="headerlink" href="#analytical-insight" title="Permanent link">&para;</a></h3>
-<p>In a typical enterprise SOC environment, mapping the <strong>Parent Process</strong> (<code>Creator Process Name</code>) to the <strong>Child Process</strong> (<code>New Process Name</code>) establishes the process lineage. While <code>services.exe</code> spawning <code>svchost.exe</code> represents expected baseline activity, an anomalous parent (such as <code>winword.exe</code> spawning <code>cmd.exe</code> or <code>powershell.exe</code>) would represent a high-confidence indicator of compromise (IOC) indicative of macro exploitation.</p>
+<h2 id="3-evidence">3. Evidence<a class="headerlink" href="#3-evidence" title="Permanent link">&para;</a></h2>
+<h3 id="filtered-security-log">Filtered Security log<a class="headerlink" href="#filtered-security-log" title="Permanent link">&para;</a></h3>
+<p><img alt="Windows Security log filtered to Event ID 4688" src="../../assets/images/lab01-event-overview.png" /></p>
+<h3 id="a-single-4688-event">A single 4688 event<a class="headerlink" href="#a-single-4688-event" title="Permanent link">&para;</a></h3>
+<p><img alt="Event ID 4688 details showing a new process created by SYSTEM" src="../../assets/images/lab01-event-4688.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event ID</td>
+<td><code>4688</code></td>
+<td>A new process was created</td>
+</tr>
+<tr>
+<td>Creator account</td>
+<td><code>SYSTEM</code> (<code>DESKTOP-2UVTUII$</code>)</td>
+<td>Launched by the OS itself</td>
+</tr>
+<tr>
+<td>New process</td>
+<td><code>C:\Windows\System32\svchost.exe</code></td>
+<td>The child</td>
+</tr>
+<tr>
+<td>Creator process</td>
+<td><code>C:\Windows\System32\services.exe</code></td>
+<td>The parent</td>
+</tr>
+<tr>
+<td>Mandatory label</td>
+<td>System Mandatory Level</td>
+<td>Highest integrity</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="4-defensive-takeaways-for-soc-triage">4. Defensive Takeaways for SOC Triage<a class="headerlink" href="#4-defensive-takeaways-for-soc-triage" title="Permanent link">&para;</a></h2>
+<h2 id="4-analysis">4. Analysis<a class="headerlink" href="#4-analysis" title="Permanent link">&para;</a></h2>
+<p>Process lineage is the core of endpoint triage. The question is never just "what ran" but "what launched it".</p>
+<table>
+<thead>
+<tr>
+<th>Parent</th>
+<th>Child</th>
+<th>Read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>services.exe</code></td>
+<td><code>svchost.exe</code></td>
+<td>Normal. This is how Windows starts services</td>
+</tr>
+<tr>
+<td><code>explorer.exe</code></td>
+<td><code>chrome.exe</code></td>
+<td>Normal. User opened a browser</td>
+</tr>
+<tr>
+<td><code>winword.exe</code></td>
+<td><code>powershell.exe</code></td>
+<td><strong>Malicious until proven otherwise.</strong> Classic macro execution</td>
+</tr>
+<tr>
+<td><code>excel.exe</code></td>
+<td><code>cmd.exe</code></td>
+<td><strong>Malicious until proven otherwise.</strong> Same pattern</td>
+</tr>
+<tr>
+<td><code>wmiprvse.exe</code></td>
+<td><code>powershell.exe</code></td>
+<td><strong>Suspicious.</strong> Common in remote WMI execution</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-detection-logic">5. Detection Logic<a class="headerlink" href="#5-detection-logic" title="Permanent link">&para;</a></h2>
+<p>Office applications should almost never start a shell. This SPL flags it from Windows Security logs:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>index=wineventlog EventCode=4688
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>| eval parent=lower(Creator_Process_Name), child=lower(New_Process_Name)
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>| where match(parent, "\\\\(winword|excel|powerpnt|outlook|onenote)\.exe$")
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    AND match(child, "\\\\(cmd|powershell|pwsh|wscript|cscript|mshta|rundll32|regsvr32)\.exe$")
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>| table _time host Account_Name parent child Process_Command_Line
+</span></code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Status</p>
+<p>Logic only. Next step is to trigger it with an Atomic Red Team macro test and record the results here.</p>
+</div>
+<hr />
+<h2 id="6-takeaways">6. Takeaways<a class="headerlink" href="#6-takeaways" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Baseline Profiling:</strong> Knowing what <em>should</em> launch a process is just as important as knowing what the binary does. Legitimate system binaries executing under abnormal parents must be flagged immediately.</li>
-<li><strong>Log Enrichment:</strong> Standard 4688 logging provides binary names, but enabling the sub-setting <em>"Include command line in process creation events"</em> adds the full CLI arguments, essential for identifying obfuscated scripts (e.g., base64-encoded PowerShell).</li>
+<li><strong>Know the baseline first.</strong> <code>svchost.exe</code> is normal. <code>svchost.exe</code> launched by anything other than <code>services.exe</code> is not.</li>
+<li><strong>Enable command line logging.</strong> Process names without arguments leave the most important evidence out.</li>
+<li><strong>Sysmon Event ID 1 is the upgrade.</strong> It adds hashes, parent command lines, and process GUIDs, which is what <a href="../lab-03-splunk-lsass/">Lab 03</a> relies on.</li>
 </ul>
 
 
@@ -954,6 +1010,9 @@
 
 
 
+
+  
+  
 
 
 
@@ -983,7 +1042,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Security Operations &amp;amp; Threat Hunting Investigations">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Investigations">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -993,7 +1052,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Security Operations &amp; Threat Hunting Investigations
+                Investigations
               </div>
             </div>
           </a>
