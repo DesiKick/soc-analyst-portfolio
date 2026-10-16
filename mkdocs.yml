@@ -77,5 +77,6 @@ nav:
       - "Lab 02 - Network Traffic Analysis": investigations/lab-02-network-traffic.md
       - "Lab 03 - LSASS Credential Dumping (Splunk)": investigations/lab-03-splunk-lsass.md
       - "Lab 04 - Phishing Email Analysis": investigations/lab-04-phishing-analysis.md
+      - "Lab 05 - Brute Force Detection (Sentinel)": investigations/lab-05-sentinel-bruteforce.md
   - Detections: detections.md
   - About & Contact: about.md
