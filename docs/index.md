@@ -95,6 +95,6 @@ Every investigation in this repository follows formal SOC triage standards:
 
 | Target Module | Investigation Focus | Tooling / Telemetry | Status |
 | :--- | :--- | :--- | :--- |
-| **Lab 05** | Windows Authentication & Brute Force Analysis | Event ID 4625 / 4624, Microsoft Sentinel (KQL) | <span class="pill wip">In Progress</span> |
+| **Lab 05** | Windows Authentication & Brute Force Analysis | Event ID 4625 / 4624, Microsoft Sentinel (KQL) | <span class="pill done">Complete</span> |
 | **Lab 06** | Automated Threat Intelligence IOC Enrichment | Python 3, VirusTotal API, AbuseIPDB | <span class="pill wip">Planned</span> |
 | **Lab 07** | Periodic Command & Control (C2) Beacon Hunting | RITA, Zeek Logs, Network Jitter Analysis | <span class="pill wip">Planned</span> |
