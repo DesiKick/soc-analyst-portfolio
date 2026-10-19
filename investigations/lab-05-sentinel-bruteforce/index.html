@@ -29,7 +29,7 @@
     
     
       
-        <title>Lab 05: Brute Force Detection in Microsoft Sentinel - Mian Talha Nayyar | SOC Portfolio</title>
+        <title>Lab 05: Microsoft Sentinel Brute Force Detection (KQL) - Mian Talha Nayyar | SOC Portfolio</title>
       
     
     
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lab 05: Brute Force Detection in Microsoft Sentinel
+              Lab 05: Microsoft Sentinel Brute Force Detection (KQL)
             
           </span>
         </div>
@@ -607,33 +607,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-investigation-scope-objectives" class="md-nav__link">
+  <a href="#1-executive-summary-forensic-artifacts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Investigation Scope &amp; Objectives
+        1. Executive Summary &amp; Forensic Artifacts
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-windows-authentication-telemetry" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Windows Authentication Telemetry
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Windows Authentication Telemetry">
+    <nav class="md-nav" aria-label="1. Executive Summary &amp; Forensic Artifacts">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#diagnostic-failure-sub-status-codes" class="md-nav__link">
+  <a href="#forensic-telemetry-breakdown" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Diagnostic Failure Sub-Status Codes
+        Forensic Telemetry Breakdown
       
     </span>
   </a>
@@ -646,21 +635,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-incident-timeline" class="md-nav__link">
+  <a href="#2-windows-authentication-mechanics-telemetry-deep-dive" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Incident Timeline
+        2. Windows Authentication Mechanics &amp; Telemetry Deep-Dive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Windows Authentication Mechanics &amp; Telemetry Deep-Dive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relevant-windows-event-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relevant Windows Event IDs
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#4-detection-engineering-microsoft-sentinel-analytics-rule-kql" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#diagnostic-ntstatus-hex-codes-event-id-4625" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Detection Engineering: Microsoft Sentinel Analytics Rule (KQL)
+        Diagnostic NTSTATUS Hex Codes (Event ID 4625)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-incident-timeline-attack-reconstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Incident Timeline &amp; Attack Reconstruction
       
     </span>
   </a>
@@ -764,33 +781,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-investigation-scope-objectives" class="md-nav__link">
+  <a href="#1-executive-summary-forensic-artifacts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Investigation Scope &amp; Objectives
+        1. Executive Summary &amp; Forensic Artifacts
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-windows-authentication-telemetry" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Windows Authentication Telemetry
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Windows Authentication Telemetry">
+    <nav class="md-nav" aria-label="1. Executive Summary &amp; Forensic Artifacts">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#diagnostic-failure-sub-status-codes" class="md-nav__link">
+  <a href="#forensic-telemetry-breakdown" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Diagnostic Failure Sub-Status Codes
+        Forensic Telemetry Breakdown
       
     </span>
   </a>
@@ -803,21 +809,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-incident-timeline" class="md-nav__link">
+  <a href="#2-windows-authentication-mechanics-telemetry-deep-dive" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Incident Timeline
+        2. Windows Authentication Mechanics &amp; Telemetry Deep-Dive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Windows Authentication Mechanics &amp; Telemetry Deep-Dive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relevant-windows-event-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relevant Windows Event IDs
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#4-detection-engineering-microsoft-sentinel-analytics-rule-kql" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#diagnostic-ntstatus-hex-codes-event-id-4625" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Detection Engineering: Microsoft Sentinel Analytics Rule (KQL)
+        Diagnostic NTSTATUS Hex Codes (Event ID 4625)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-incident-timeline-attack-reconstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Incident Timeline &amp; Attack Reconstruction
       
     </span>
   </a>
@@ -844,106 +878,149 @@
 <h1 id="lab-05-windows-authentication-brute-force-detection-in-microsoft-sentinel-kql">Lab 05: Windows Authentication &amp; Brute Force Detection in Microsoft Sentinel (KQL)<a class="headerlink" href="#lab-05-windows-authentication-brute-force-detection-in-microsoft-sentinel-kql" title="Permanent link">&para;</a></h1>
 <div class="lab-meta">
 <p><strong>Category:</strong> Cloud SIEM &amp; Identity Detection Engineering<br>
-<strong>ATT&amp;CK:</strong> <a href="https://attack.mitre.org/techniques/T1110/001/">T1110.001 Password Guessing</a> | <a href="https://attack.mitre.org/techniques/T1110/003/">T1110.003 Password Spraying</a> | TA0006 Credential Access<br>
+<strong>MITRE ATT&amp;CK:</strong> <a href="https://attack.mitre.org/techniques/T1110/001/">T1110.001 Password Guessing</a> &bull; <a href="https://attack.mitre.org/techniques/T1110/003/">T1110.003 Password Spraying</a> &bull; <a href="https://attack.mitre.org/techniques/T1059/003/">T1059.003 Command &amp; Scripting Interpreter</a><br>
 <strong>Platform:</strong> Microsoft Sentinel / Azure Log Analytics Workspace<br>
-<strong>Telemetry:</strong> Windows Security Event Log (Event IDs 4625, 4624 via Azure Monitor Agent)<br>
-<strong>Rule Format:</strong> Kusto Query Language (KQL)</p>
+<strong>Telemetry Agent:</strong> Azure Monitor Agent (AMA) / Windows Security Event Log<br>
+<strong>Rule Format:</strong> Kusto Query Language (KQL) Analytic Rule</p>
 </div>
 <div class="admonition danger">
-<p class="admonition-title">Verdict: True Positive — High Severity — Account Compromised</p>
-<p>Target host <code>FIN-WKSTN-04</code> registered 142 failed network authentication attempts (Event ID 4625, SubStatus <code>0xC000006A</code>) across a 12-minute window from source endpoint <code>192.168.10.45</code>, followed immediately by a successful logon (Event ID 4624) under domain account <code>CORP\jdoe</code>. Immediate containment executed.</p>
+<p class="admonition-title">Incident Verdict: True Positive — High Severity — Identity Compromised</p>
+<p>Target workstation <code>FIN-WKSTN-04</code> sustained <strong>142 consecutive network authentication failures</strong> (Event ID 4625, SubStatus <code>0xC000006A</code>) within a 12-minute window originating from internal IP <code>192.168.10.45</code>. The attack culminated in a single successful logon (Event ID 4624) under domain account <code>CORP\jdoe</code>, followed immediately by suspicious discovery command execution (<code>whoami /all</code>). Immediate host containment, session termination, and credential revocation were executed.</p>
 </div>
 <hr />
-<h2 id="1-investigation-scope-objectives">1. Investigation Scope &amp; Objectives<a class="headerlink" href="#1-investigation-scope-objectives" title="Permanent link">&para;</a></h2>
-<p>Adversaries systematically deploy automated dictionary attacks and password spraying against network authentication interfaces to acquire valid enterprise credentials.</p>
-<p>This investigation focused on:
-1. Ingesting Windows Security event telemetry into an Azure Log Analytics Workspace via Azure Monitor Agent (AMA).
-2. Analyzing diagnostic status codes within Event ID 4625 to differentiate account lockouts from invalid credentials.
-3. Constructing an analytics rule in KQL that correlates anomalous bursts of failed logons followed by a successful logon event within a short timeframe.</p>
-<hr />
-<h2 id="2-windows-authentication-telemetry">2. Windows Authentication Telemetry<a class="headerlink" href="#2-windows-authentication-telemetry" title="Permanent link">&para;</a></h2>
+<h2 id="1-executive-summary-forensic-artifacts">1. Executive Summary &amp; Forensic Artifacts<a class="headerlink" href="#1-executive-summary-forensic-artifacts" title="Permanent link">&para;</a></h2>
+<p>During continuous security monitoring in Microsoft Sentinel, analytics detected an anomalous spike in SMB network authentications targeting a high-value finance workstation. Investigation confirmed an adversary executed an automated dictionary brute-force attack against local Active Directory credentials.</p>
+<h3 id="forensic-telemetry-breakdown">Forensic Telemetry Breakdown<a class="headerlink" href="#forensic-telemetry-breakdown" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Event ID</th>
-<th>Description</th>
-<th>Critical Correlation Fields</th>
+<th style="text-align: left;">Observable Property</th>
+<th style="text-align: left;">Forensic Artifact Value</th>
+<th style="text-align: left;">Operational Significance</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>4625</strong></td>
-<td>An account failed to log on</td>
-<td><code>TargetUserName</code>, <code>LogonType</code>, <code>SubStatus</code>, <code>IpAddress</code>, <code>WorkstationName</code></td>
+<td style="text-align: left;"><strong>Target Hostname</strong></td>
+<td style="text-align: left;"><code>FIN-WKSTN-04.corp.local</code></td>
+<td style="text-align: left;">Finance Department Workstation (Tier-2 Asset)</td>
 </tr>
 <tr>
-<td><strong>4624</strong></td>
-<td>An account successfully logged on</td>
-<td><code>TargetUserName</code>, <code>LogonType</code>, <code>TargetLogonId</code>, <code>IpAddress</code>, <code>Computer</code></td>
+<td style="text-align: left;"><strong>Compromised Identity</strong></td>
+<td style="text-align: left;"><code>CORP\jdoe</code></td>
+<td style="text-align: left;">Domain User Account</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Adversary Source IP</strong></td>
+<td style="text-align: left;"><code>192.168.10.45</code></td>
+<td style="text-align: left;">Ephemeral Workstation on Subnet <code>192.168.10.0/24</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Authentication Protocol</strong></td>
+<td style="text-align: left;"><code>NTLMSSP</code> (Logon Type 3 - Network)</td>
+<td style="text-align: left;">SMB session negotiation over TCP port 445</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Failure Volume</strong></td>
+<td style="text-align: left;">142 Events (<code>SubStatus: 0xC000006A</code>)</td>
+<td style="text-align: left;">Dictionary attack using valid username and password list</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Compromise Timestamp</strong></td>
+<td style="text-align: left;"><code>2026-10-14 14:14:28 UTC</code></td>
+<td style="text-align: left;">Successful authentication (Event ID 4624)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Post-Exploit Spawn</strong></td>
+<td style="text-align: left;"><code>whoami /all</code> (PID 4912)</td>
+<td style="text-align: left;">Security context and group membership reconnaissance</td>
 </tr>
 </tbody>
 </table>
-<h3 id="diagnostic-failure-sub-status-codes">Diagnostic Failure Sub-Status Codes<a class="headerlink" href="#diagnostic-failure-sub-status-codes" title="Permanent link">&para;</a></h3>
+<hr />
+<h2 id="2-windows-authentication-mechanics-telemetry-deep-dive">2. Windows Authentication Mechanics &amp; Telemetry Deep-Dive<a class="headerlink" href="#2-windows-authentication-mechanics-telemetry-deep-dive" title="Permanent link">&para;</a></h2>
+<p>Windows audit logging generates distinct Event IDs for authentication attempts. Differentiating benign user error from brute force requires parsing the raw XML event data.</p>
+<h3 id="relevant-windows-event-ids">Relevant Windows Event IDs<a class="headerlink" href="#relevant-windows-event-ids" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>0xC000006A</code>: <code>STATUS_WRONG_PASSWORD</code> (Username exists; credential guess was incorrect).</li>
-<li><code>0xC000006D</code>: <code>STATUS_LOGON_FAILURE</code> (General failure or invalid username).</li>
-<li><code>0xC0000072</code>: <code>STATUS_ACCOUNT_DISABLED</code> (Account is administratively disabled).</li>
-<li><code>0xC0000234</code>: <code>STATUS_ACCOUNT_LOCKED_OUT</code> (Consecutive failures exceeded threshold).</li>
+<li><strong>Event ID 4625 (An account failed to log on):</strong> Generated on the system where the logon attempt occurred. Provides source IP, target account, and the exact NTSTATUS failure code.</li>
+<li><strong>Event ID 4624 (An account successfully logged on):</strong> Generated upon successful authentication. Critical for identifying whether an adversary guessed the password.</li>
+<li><strong>Event ID 4688 (A new process has been created):</strong> Captures post-compromise activity if command-line process auditing is active.</li>
 </ul>
-<hr />
-<h2 id="3-incident-timeline">3. Incident Timeline<a class="headerlink" href="#3-incident-timeline" title="Permanent link">&para;</a></h2>
+<h3 id="diagnostic-ntstatus-hex-codes-event-id-4625">Diagnostic NTSTATUS Hex Codes (Event ID 4625)<a class="headerlink" href="#diagnostic-ntstatus-hex-codes-event-id-4625" title="Permanent link">&para;</a></h3>
+<p>The <code>SubStatus</code> field is the primary indicator of adversary intent:</p>
 <table>
 <thead>
 <tr>
-<th>Timestamp (UTC)</th>
-<th>Event ID</th>
-<th>User</th>
-<th>Source IP</th>
-<th>Logon Type</th>
-<th>Diagnostic Code</th>
-<th>Finding</th>
+<th style="text-align: left;">SubStatus Code</th>
+<th style="text-align: left;">NTSTATUS Macro</th>
+<th style="text-align: left;">Root Cause Analysis</th>
+<th style="text-align: left;">Analyst Interpretation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>14:02:11</code> - <code>14:14:05</code></td>
-<td>4625 (x142)</td>
-<td><code>CORP\jdoe</code></td>
-<td><code>192.168.10.45</code></td>
-<td>3 (Network)</td>
-<td><code>0xC000006A</code></td>
-<td>High-frequency password guessing.</td>
+<td style="text-align: left;"><code>0xC000006A</code></td>
+<td style="text-align: left;"><code>STATUS_WRONG_PASSWORD</code></td>
+<td style="text-align: left;">Account exists; password incorrect.</td>
+<td style="text-align: left;"><strong>Primary indicator of brute force / password guessing.</strong></td>
 </tr>
 <tr>
-<td><code>14:14:28</code></td>
-<td><strong>4624</strong></td>
-<td><code>CORP\jdoe</code></td>
-<td><code>192.168.10.45</code></td>
-<td>3 (Network)</td>
-<td>N/A</td>
-<td><strong>Successful authentication.</strong></td>
+<td style="text-align: left;"><code>0xC000006D</code></td>
+<td style="text-align: left;"><code>STATUS_LOGON_FAILURE</code></td>
+<td style="text-align: left;">General authentication error.</td>
+<td style="text-align: left;">Typically accompanies bad credentials or mismatched domains.</td>
 </tr>
 <tr>
-<td><code>14:15:10</code></td>
-<td>4688</td>
-<td><code>CORP\jdoe</code></td>
-<td>Local Host</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>Discovery: <code>whoami /all</code> executed.</td>
+<td style="text-align: left;"><code>0xC0000064</code></td>
+<td style="text-align: left;"><code>STATUS_NO_SUCH_USER</code></td>
+<td style="text-align: left;">The specified user does not exist.</td>
+<td style="text-align: left;">Indicator of user enumeration or spraying unverified lists.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>0xC0000072</code></td>
+<td style="text-align: left;"><code>STATUS_ACCOUNT_DISABLED</code></td>
+<td style="text-align: left;">Account is administratively disabled.</td>
+<td style="text-align: left;">Adversary attempting to access dormant accounts.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>0xC0000234</code></td>
+<td style="text-align: left;"><code>STATUS_ACCOUNT_LOCKED_OUT</code></td>
+<td style="text-align: left;">Account locked out due to threshold policy.</td>
+<td style="text-align: left;">Brute force triggered Active Directory account lockout.</td>
 </tr>
 </tbody>
 </table>
+<figure>
+<p><img alt="Windows Event ID 4625 Audit Telemetry" src="../assets/images/lab05-event-4625-failure.png" />
+  </p>
+<figcaption>Figure 5.1: Windows Security Audit log exhibiting Event ID 4625 with SubStatus 0xC000006A (STATUS_WRONG_PASSWORD) targeting user jdoe over Logon Type 3 (Network SMB).</figcaption>
+</figure>
 <hr />
-<h2 id="4-detection-engineering-microsoft-sentinel-analytics-rule-kql">4. Detection Engineering: Microsoft Sentinel Analytics Rule (KQL)<a class="headerlink" href="#4-detection-engineering-microsoft-sentinel-analytics-rule-kql" title="Permanent link">&para;</a></h2>
-<p>```kql
+<h2 id="3-incident-timeline-attack-reconstruction">3. Incident Timeline &amp; Attack Reconstruction<a class="headerlink" href="#3-incident-timeline-attack-reconstruction" title="Permanent link">&para;</a></h2>
+<p>By correlating event sequences across Azure Log Analytics, the attack was reconstructed chronologically:</p>
+<p>```text
+[192.168.10.45] 
+       |
+       |  14:02:11 - 14:14:05 UTC (142x Event 4625 | SubStatus 0xC000006A)
+       +--------------------------------------------------------------------&gt; [FIN-WKSTN-04] (SMB TCP 445)
+       |                                                                        Automated Dictionary Attack
+       |
+       |  14:14:28 UTC (1x Event 4624 | Logon Type 3)
+       +--------------------------------------------------------------------&gt; Password Guessed Successfully
+       |
+       |  14:15:10 UTC (Event 4688: cmd.exe -&gt; whoami /all)
+       +--------------------------------------------------------------------&gt; Reconnaissance Execution</p>
+<p>// Microsoft Sentinel Scheduled Analytics Rule
+// Rule Name: Multiple Failed Logons Followed by Successful Logon (Potential Brute Force Compromise)
+// Severity: High | Tactics: Credential Access (TA0006) | Techniques: T1110.001
 let timeRange = 1h;
 let failureThreshold = 10;
+let successWindow = 10m;
 let failedLogons = SecurityEvent
     | where TimeGenerated &gt;= ago(timeRange)
     | where EventID == 4625
-    | where SubStatus == "0xc000006a"
-    | where isnotempty(IpAddress) and IpAddress != "-" and IpAddress != "127.0.0.1"
+    | where SubStatus == "0xc000006a" // Valid username, wrong password
+    | where isnotempty(IpAddress) and IpAddress !in ("-", "127.0.0.1", "::1")
     | summarize 
         FailureCount = count(),
         FirstFailure = min(TimeGenerated),
@@ -952,7 +1029,7 @@ let failedLogons = SecurityEvent
 let successfulLogons = SecurityEvent
     | where TimeGenerated &gt;= ago(timeRange)
     | where EventID == 4624
-    | where isnotempty(IpAddress) and IpAddress != "-" and IpAddress != "127.0.0.1"
+    | where isnotempty(IpAddress) and IpAddress !in ("-", "127.0.0.1", "::1")
     | project 
         SuccessTime = TimeGenerated,
         TargetAccount,
@@ -962,17 +1039,40 @@ let successfulLogons = SecurityEvent
 failedLogons
 | where FailureCount &gt;= failureThreshold
 | join kind=inner (successfulLogons) on TargetAccount, IpAddress, Computer
-| where SuccessTime between (LastFailure .. (LastFailure + 10m))
+| where SuccessTime between (LastFailure .. (LastFailure + successWindow))
+| extend TimeDeltaSeconds = datetime_diff('second', SuccessTime, LastFailure)
 | project 
     FirstFailure,
     LastFailure,
     SuccessTime,
+    TimeDeltaSeconds,
     TargetAccount,
-    Computer,
-    SourceIpAddress = IpAddress,
+    VictimHost = Computer,
+    AttackerIP = IpAddress,
     FailureCount,
     LogonType
 | order by SuccessTime desc</p>
+<p>[ Sentinel High Severity Alert ]
+              |
+              v
++----------------------------+
+| 1. Immediate Host Isolation| ---&gt; Revoke 802.1X network access via Defender for Endpoint
++----------------------------+
+              |
+              v
++----------------------------+
+| 2. Identity Containment    | ---&gt; Revoke Azure AD / Kerberos TGT tokens for CORP\jdoe
++----------------------------+
+              |
+              v
++----------------------------+
+| 3. Source IP Triaged       | ---&gt; Quarantine 192.168.10.45; capture memory dump
++----------------------------+
+              |
+              v
++----------------------------+
+| 4. Lateral Movement Audit  | ---&gt; Query Event ID 4624 across all domain controllers
++----------------------------+</p>
 
 
 
