@@ -684,6 +684,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-detection-engineering-microsoft-sentinel-kql-analytic-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Detection Engineering: Microsoft Sentinel KQL Analytic Rule
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -858,6 +869,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-detection-engineering-microsoft-sentinel-kql-analytic-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Detection Engineering: Microsoft Sentinel KQL Analytic Rule
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -885,7 +907,7 @@
 </div>
 <div class="admonition danger">
 <p class="admonition-title">Incident Verdict: True Positive — High Severity — Identity Compromised</p>
-<p>Target workstation <code>FIN-WKSTN-04</code> sustained <strong>142 consecutive network authentication failures</strong> (Event ID 4625, SubStatus <code>0xC000006A</code>) within a 12-minute window originating from internal IP <code>192.168.10.45</code>. The attack culminated in a single successful logon (Event ID 4624) under domain account <code>CORP\jdoe</code>, followed immediately by suspicious discovery command execution (<code>whoami /all</code>). Immediate host containment, session termination, and credential revocation were executed.</p>
+<p>Target workstation <code>FIN-WKSTN-04</code> sustained <strong>142 consecutive network authentication failures</strong> (Event ID 4625, SubStatus <code>0xC000006A</code>) within a 12-minute window originating from internal IP <code>192.168.10.45</code>. The attack culminated in a successful logon (Event ID 4624) under domain account <code>CORP\jdoe</code>, followed immediately by suspicious discovery command execution (<code>whoami /all</code>). Immediate host containment, session termination, and credential revocation were executed.</p>
 </div>
 <hr />
 <h2 id="1-executive-summary-forensic-artifacts">1. Executive Summary &amp; Forensic Artifacts<a class="headerlink" href="#1-executive-summary-forensic-artifacts" title="Permanent link">&para;</a></h2>
@@ -917,7 +939,7 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Authentication Protocol</strong></td>
-<td style="text-align: left;"><code>NTLMSSP</code> (Logon Type 3 - Network)</td>
+<td style="text-align: left;"><code>NTLMSSP</code> (Logon Type 3 – Network)</td>
 <td style="text-align: left;">SMB session negotiation over TCP port 445</td>
 </tr>
 <tr>
@@ -985,7 +1007,7 @@
 <tr>
 <td style="text-align: left;"><code>0xC0000234</code></td>
 <td style="text-align: left;"><code>STATUS_ACCOUNT_LOCKED_OUT</code></td>
-<td style="text-align: left;">Account locked out due to threshold policy.</td>
+<td style="text-align: left;">Account locked out due to policy.</td>
 <td style="text-align: left;">Brute force triggered Active Directory account lockout.</td>
 </tr>
 </tbody>
@@ -998,28 +1020,77 @@
 <hr />
 <h2 id="3-incident-timeline-attack-reconstruction">3. Incident Timeline &amp; Attack Reconstruction<a class="headerlink" href="#3-incident-timeline-attack-reconstruction" title="Permanent link">&para;</a></h2>
 <p>By correlating event sequences across Azure Log Analytics, the attack was reconstructed chronologically:</p>
-<p>```text
-[192.168.10.45] 
-       |
-       |  14:02:11 - 14:14:05 UTC (142x Event 4625 | SubStatus 0xC000006A)
-       +--------------------------------------------------------------------&gt; [FIN-WKSTN-04] (SMB TCP 445)
-       |                                                                        Automated Dictionary Attack
-       |
-       |  14:14:28 UTC (1x Event 4624 | Logon Type 3)
-       +--------------------------------------------------------------------&gt; Password Guessed Successfully
-       |
-       |  14:15:10 UTC (Event 4688: cmd.exe -&gt; whoami /all)
-       +--------------------------------------------------------------------&gt; Reconnaissance Execution</p>
-<p>// Microsoft Sentinel Scheduled Analytics Rule
-// Rule Name: Multiple Failed Logons Followed by Successful Logon (Potential Brute Force Compromise)
-// Severity: High | Tactics: Credential Access (TA0006) | Techniques: T1110.001
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Timestamp (UTC)</th>
+<th style="text-align: left;">Event ID</th>
+<th style="text-align: left;">Account</th>
+<th style="text-align: left;">Source IP</th>
+<th style="text-align: left;">Logon Type</th>
+<th style="text-align: left;">Diagnostic Field</th>
+<th style="text-align: left;">Analyst Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>14:02:11</code></td>
+<td style="text-align: left;">4625</td>
+<td style="text-align: left;"><code>CORP\jdoe</code></td>
+<td style="text-align: left;"><code>192.168.10.45</code></td>
+<td style="text-align: left;">3 (Network)</td>
+<td style="text-align: left;"><code>0xC000006A</code></td>
+<td style="text-align: left;">Attack initialization: automated script begins password attempts.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>14:08:34</code></td>
+<td style="text-align: left;">4625</td>
+<td style="text-align: left;"><code>CORP\jdoe</code></td>
+<td style="text-align: left;"><code>192.168.10.45</code></td>
+<td style="text-align: left;">3 (Network)</td>
+<td style="text-align: left;"><code>0xC000006A</code></td>
+<td style="text-align: left;">75th failure reached; high frequency confirms automated tool.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>14:14:05</code></td>
+<td style="text-align: left;">4625</td>
+<td style="text-align: left;"><code>CORP\jdoe</code></td>
+<td style="text-align: left;"><code>192.168.10.45</code></td>
+<td style="text-align: left;">3 (Network)</td>
+<td style="text-align: left;"><code>0xC000006A</code></td>
+<td style="text-align: left;">Final failure recorded (142 total failures).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>14:14:28</code></td>
+<td style="text-align: left;"><strong>4624</strong></td>
+<td style="text-align: left;"><code>CORP\jdoe</code></td>
+<td style="text-align: left;"><code>192.168.10.45</code></td>
+<td style="text-align: left;">3 (Network)</td>
+<td style="text-align: left;"><code>TargetLogonId: 0x3E7</code></td>
+<td style="text-align: left;"><strong>Successful logon.</strong> Credential guessed.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>14:15:10</code></td>
+<td style="text-align: left;">4688</td>
+<td style="text-align: left;"><code>CORP\jdoe</code></td>
+<td style="text-align: left;"><code>FIN-WKSTN-04</code></td>
+<td style="text-align: left;">Local</td>
+<td style="text-align: left;"><code>whoami /all</code></td>
+<td style="text-align: left;">Adversary establishes CLI session and checks privilege tokens.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-detection-engineering-microsoft-sentinel-kql-analytic-rule">4. Detection Engineering: Microsoft Sentinel KQL Analytic Rule<a class="headerlink" href="#4-detection-engineering-microsoft-sentinel-kql-analytic-rule" title="Permanent link">&para;</a></h2>
+<p>Alerting on Event ID 4625 alone produces unacceptable false positive rates from mistyped passwords. This production KQL rule correlates 10+ failed logons with a successful authentication matching the same identity, source IP, and computer within 10 minutes:</p>
+<p>```kql
 let timeRange = 1h;
 let failureThreshold = 10;
 let successWindow = 10m;
 let failedLogons = SecurityEvent
     | where TimeGenerated &gt;= ago(timeRange)
     | where EventID == 4625
-    | where SubStatus == "0xc000006a" // Valid username, wrong password
+    | where SubStatus == "0xc000006a"
     | where isnotempty(IpAddress) and IpAddress !in ("-", "127.0.0.1", "::1")
     | summarize 
         FailureCount = count(),
@@ -1052,27 +1123,6 @@ failedLogons
     FailureCount,
     LogonType
 | order by SuccessTime desc</p>
-<p>[ Sentinel High Severity Alert ]
-              |
-              v
-+----------------------------+
-| 1. Immediate Host Isolation| ---&gt; Revoke 802.1X network access via Defender for Endpoint
-+----------------------------+
-              |
-              v
-+----------------------------+
-| 2. Identity Containment    | ---&gt; Revoke Azure AD / Kerberos TGT tokens for CORP\jdoe
-+----------------------------+
-              |
-              v
-+----------------------------+
-| 3. Source IP Triaged       | ---&gt; Quarantine 192.168.10.45; capture memory dump
-+----------------------------+
-              |
-              v
-+----------------------------+
-| 4. Lateral Movement Audit  | ---&gt; Query Event ID 4624 across all domain controllers
-+----------------------------+</p>
 
 
 
