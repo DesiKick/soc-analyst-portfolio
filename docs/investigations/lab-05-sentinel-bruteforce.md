@@ -13,7 +13,7 @@ title: 'Lab 05: Microsoft Sentinel Brute Force Detection (KQL)'
 </div>
 
 !!! danger "Incident Verdict: True Positive — High Severity — Identity Compromised"
-    Target workstation `FIN-WKSTN-04` sustained **142 consecutive network authentication failures** (Event ID 4625, SubStatus `0xC000006A`) within a 12-minute window originating from internal IP `192.168.10.45`. The attack culminated in a single successful logon (Event ID 4624) under domain account `CORP\jdoe`, followed immediately by suspicious discovery command execution (`whoami /all`). Immediate host containment, session termination, and credential revocation were executed.
+    Target workstation `FIN-WKSTN-04` sustained **142 consecutive network authentication failures** (Event ID 4625, SubStatus `0xC000006A`) within a 12-minute window originating from internal IP `192.168.10.45`. The attack culminated in a successful logon (Event ID 4624) under domain account `CORP\jdoe`, followed immediately by suspicious discovery command execution (`whoami /all`). Immediate host containment, session termination, and credential revocation were executed.
 
 ---
 
@@ -28,7 +28,7 @@ During continuous security monitoring in Microsoft Sentinel, analytics detected 
 | **Target Hostname** | `FIN-WKSTN-04.corp.local` | Finance Department Workstation (Tier-2 Asset) |
 | **Compromised Identity** | `CORP\jdoe` | Domain User Account |
 | **Adversary Source IP** | `192.168.10.45` | Ephemeral Workstation on Subnet `192.168.10.0/24` |
-| **Authentication Protocol** | `NTLMSSP` (Logon Type 3 - Network) | SMB session negotiation over TCP port 445 |
+| **Authentication Protocol** | `NTLMSSP` (Logon Type 3 – Network) | SMB session negotiation over TCP port 445 |
 | **Failure Volume** | 142 Events (`SubStatus: 0xC000006A`) | Dictionary attack using valid username and password list |
 | **Compromise Timestamp** | `2026-10-14 14:14:28 UTC` | Successful authentication (Event ID 4624) |
 | **Post-Exploit Spawn** | `whoami /all` (PID 4912) | Security context and group membership reconnaissance |
@@ -55,7 +55,7 @@ The `SubStatus` field is the primary indicator of adversary intent:
 | `0xC000006D` | `STATUS_LOGON_FAILURE` | General authentication error. | Typically accompanies bad credentials or mismatched domains. |
 | `0xC0000064` | `STATUS_NO_SUCH_USER` | The specified user does not exist. | Indicator of user enumeration or spraying unverified lists. |
 | `0xC0000072` | `STATUS_ACCOUNT_DISABLED` | Account is administratively disabled. | Adversary attempting to access dormant accounts. |
-| `0xC0000234` | `STATUS_ACCOUNT_LOCKED_OUT` | Account locked out due to threshold policy. | Brute force triggered Active Directory account lockout. |
+| `0xC0000234` | `STATUS_ACCOUNT_LOCKED_OUT` | Account locked out due to policy. | Brute force triggered Active Directory account lockout. |
 
 <figure markdown>
   ![Windows Event ID 4625 Audit Telemetry](../assets/images/lab05-event-4625-failure.png)
@@ -68,29 +68,28 @@ The `SubStatus` field is the primary indicator of adversary intent:
 
 By correlating event sequences across Azure Log Analytics, the attack was reconstructed chronologically:
 
-```text
-[192.168.10.45] 
-       |
-       |  14:02:11 - 14:14:05 UTC (142x Event 4625 | SubStatus 0xC000006A)
-       +--------------------------------------------------------------------> [FIN-WKSTN-04] (SMB TCP 445)
-       |                                                                        Automated Dictionary Attack
-       |
-       |  14:14:28 UTC (1x Event 4624 | Logon Type 3)
-       +--------------------------------------------------------------------> Password Guessed Successfully
-       |
-       |  14:15:10 UTC (Event 4688: cmd.exe -> whoami /all)
-       +--------------------------------------------------------------------> Reconnaissance Execution
+| Timestamp (UTC) | Event ID | Account | Source IP | Logon Type | Diagnostic Field | Analyst Assessment |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `14:02:11` | 4625 | `CORP\jdoe` | `192.168.10.45` | 3 (Network) | `0xC000006A` | Attack initialization: automated script begins password attempts. |
+| `14:08:34` | 4625 | `CORP\jdoe` | `192.168.10.45` | 3 (Network) | `0xC000006A` | 75th failure reached; high frequency confirms automated tool. |
+| `14:14:05` | 4625 | `CORP\jdoe` | `192.168.10.45` | 3 (Network) | `0xC000006A` | Final failure recorded (142 total failures). |
+| `14:14:28` | **4624** | `CORP\jdoe` | `192.168.10.45` | 3 (Network) | `TargetLogonId: 0x3E7` | **Successful logon.** Credential guessed. |
+| `14:15:10` | 4688 | `CORP\jdoe` | `FIN-WKSTN-04` | Local | `whoami /all` | Adversary establishes CLI session and checks privilege tokens. |
 
-// Microsoft Sentinel Scheduled Analytics Rule
-// Rule Name: Multiple Failed Logons Followed by Successful Logon (Potential Brute Force Compromise)
-// Severity: High | Tactics: Credential Access (TA0006) | Techniques: T1110.001
+---
+
+## 4. Detection Engineering: Microsoft Sentinel KQL Analytic Rule
+
+Alerting on Event ID 4625 alone produces unacceptable false positive rates from mistyped passwords. This production KQL rule correlates 10+ failed logons with a successful authentication matching the same identity, source IP, and computer within 10 minutes:
+
+```kql
 let timeRange = 1h;
 let failureThreshold = 10;
 let successWindow = 10m;
 let failedLogons = SecurityEvent
     | where TimeGenerated >= ago(timeRange)
     | where EventID == 4625
-    | where SubStatus == "0xc000006a" // Valid username, wrong password
+    | where SubStatus == "0xc000006a"
     | where isnotempty(IpAddress) and IpAddress !in ("-", "127.0.0.1", "::1")
     | summarize 
         FailureCount = count(),
@@ -123,25 +122,3 @@ failedLogons
     FailureCount,
     LogonType
 | order by SuccessTime desc
-
-[ Sentinel High Severity Alert ]
-              |
-              v
-+----------------------------+
-| 1. Immediate Host Isolation| ---> Revoke 802.1X network access via Defender for Endpoint
-+----------------------------+
-              |
-              v
-+----------------------------+
-| 2. Identity Containment    | ---> Revoke Azure AD / Kerberos TGT tokens for CORP\jdoe
-+----------------------------+
-              |
-              v
-+----------------------------+
-| 3. Source IP Triaged       | ---> Quarantine 192.168.10.45; capture memory dump
-+----------------------------+
-              |
-              v
-+----------------------------+
-| 4. Lateral Movement Audit  | ---> Query Event ID 4624 across all domain controllers
-+----------------------------+
