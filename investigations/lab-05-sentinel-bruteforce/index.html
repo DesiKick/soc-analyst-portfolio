@@ -695,6 +695,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5-containment-incident-response-playbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Containment &amp; Incident Response Playbook
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -880,6 +891,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5-containment-incident-response-playbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Containment &amp; Incident Response Playbook
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -898,17 +920,15 @@
 
 
 <h1 id="lab-05-windows-authentication-brute-force-detection-in-microsoft-sentinel-kql">Lab 05: Windows Authentication &amp; Brute Force Detection in Microsoft Sentinel (KQL)<a class="headerlink" href="#lab-05-windows-authentication-brute-force-detection-in-microsoft-sentinel-kql" title="Permanent link">&para;</a></h1>
-<div class="lab-meta">
+<div class="\&quot;lab-meta\&quot;">
 <p><strong>Category:</strong> Cloud SIEM &amp; Identity Detection Engineering<br>
 <strong>MITRE ATT&amp;CK:</strong> <a href="https://attack.mitre.org/techniques/T1110/001/">T1110.001 Password Guessing</a> &bull; <a href="https://attack.mitre.org/techniques/T1110/003/">T1110.003 Password Spraying</a> &bull; <a href="https://attack.mitre.org/techniques/T1059/003/">T1059.003 Command &amp; Scripting Interpreter</a><br>
 <strong>Platform:</strong> Microsoft Sentinel / Azure Log Analytics Workspace<br>
 <strong>Telemetry Agent:</strong> Azure Monitor Agent (AMA) / Windows Security Event Log<br>
 <strong>Rule Format:</strong> Kusto Query Language (KQL) Analytic Rule</p>
 </div>
-<div class="admonition danger">
-<p class="admonition-title">Incident Verdict: True Positive — High Severity — Identity Compromised</p>
-<p>Target workstation <code>FIN-WKSTN-04</code> sustained <strong>142 consecutive network authentication failures</strong> (Event ID 4625, SubStatus <code>0xC000006A</code>) within a 12-minute window originating from internal IP <code>192.168.10.45</code>. The attack culminated in a successful logon (Event ID 4624) under domain account <code>CORP\jdoe</code>, followed immediately by suspicious discovery command execution (<code>whoami /all</code>). Immediate host containment, session termination, and credential revocation were executed.</p>
-</div>
+<p>!!! danger \"Incident Verdict: True Positive — High Severity — Identity Compromised\"
+    Target workstation `FIN-WKSTN-04` sustained <strong>142 consecutive network authentication failures</strong> (Event ID 4625, SubStatus `0xC000006A`) within a 12-minute window originating from internal IP `192.168.10.45`. The attack culminated in a successful logon (Event ID 4624) under domain account `CORP\\jdoe`, followed immediately by suspicious discovery command execution (`whoami /all`). Immediate host containment, session termination, and credential revocation were executed.</p>
 <hr />
 <h2 id="1-executive-summary-forensic-artifacts">1. Executive Summary &amp; Forensic Artifacts<a class="headerlink" href="#1-executive-summary-forensic-artifacts" title="Permanent link">&para;</a></h2>
 <p>During continuous security monitoring in Microsoft Sentinel, analytics detected an anomalous spike in SMB network authentications targeting a high-value finance workstation. Investigation confirmed an adversary executed an automated dictionary brute-force attack against local Active Directory credentials.</p>
@@ -924,37 +944,37 @@
 <tbody>
 <tr>
 <td style="text-align: left;"><strong>Target Hostname</strong></td>
-<td style="text-align: left;"><code>FIN-WKSTN-04.corp.local</code></td>
+<td style="text-align: left;">`FIN-WKSTN-04.corp.local`</td>
 <td style="text-align: left;">Finance Department Workstation (Tier-2 Asset)</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Compromised Identity</strong></td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
+<td style="text-align: left;">`CORP\\jdoe`</td>
 <td style="text-align: left;">Domain User Account</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Adversary Source IP</strong></td>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
-<td style="text-align: left;">Ephemeral Workstation on Subnet <code>192.168.10.0/24</code></td>
+<td style="text-align: left;">`192.168.10.45`</td>
+<td style="text-align: left;">Ephemeral Workstation on Subnet `192.168.10.0/24`</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Authentication Protocol</strong></td>
-<td style="text-align: left;"><code>NTLMSSP</code> (Logon Type 3 – Network)</td>
+<td style="text-align: left;">`NTLMSSP` (Logon Type 3 – Network)</td>
 <td style="text-align: left;">SMB session negotiation over TCP port 445</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Failure Volume</strong></td>
-<td style="text-align: left;">142 Events (<code>SubStatus: 0xC000006A</code>)</td>
+<td style="text-align: left;">142 Events (`SubStatus: 0xC000006A`)</td>
 <td style="text-align: left;">Dictionary attack using valid username and password list</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Compromise Timestamp</strong></td>
-<td style="text-align: left;"><code>2026-10-14 14:14:28 UTC</code></td>
+<td style="text-align: left;">`2026-10-14 14:14:28 UTC`</td>
 <td style="text-align: left;">Successful authentication (Event ID 4624)</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Post-Exploit Spawn</strong></td>
-<td style="text-align: left;"><code>whoami /all</code> (PID 4912)</td>
+<td style="text-align: left;">`whoami /all` (PID 4912)</td>
 <td style="text-align: left;">Security context and group membership reconnaissance</td>
 </tr>
 </tbody>
@@ -969,7 +989,7 @@
 <li><strong>Event ID 4688 (A new process has been created):</strong> Captures post-compromise activity if command-line process auditing is active.</li>
 </ul>
 <h3 id="diagnostic-ntstatus-hex-codes-event-id-4625">Diagnostic NTSTATUS Hex Codes (Event ID 4625)<a class="headerlink" href="#diagnostic-ntstatus-hex-codes-event-id-4625" title="Permanent link">&para;</a></h3>
-<p>The <code>SubStatus</code> field is the primary indicator of adversary intent:</p>
+<p>The `SubStatus` field is the primary indicator of adversary intent:</p>
 <table>
 <thead>
 <tr>
@@ -981,39 +1001,39 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>0xC000006A</code></td>
-<td style="text-align: left;"><code>STATUS_WRONG_PASSWORD</code></td>
+<td style="text-align: left;">`0xC000006A`</td>
+<td style="text-align: left;">`STATUS_WRONG_PASSWORD`</td>
 <td style="text-align: left;">Account exists; password incorrect.</td>
 <td style="text-align: left;"><strong>Primary indicator of brute force / password guessing.</strong></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>0xC000006D</code></td>
-<td style="text-align: left;"><code>STATUS_LOGON_FAILURE</code></td>
+<td style="text-align: left;">`0xC000006D`</td>
+<td style="text-align: left;">`STATUS_LOGON_FAILURE`</td>
 <td style="text-align: left;">General authentication error.</td>
 <td style="text-align: left;">Typically accompanies bad credentials or mismatched domains.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>0xC0000064</code></td>
-<td style="text-align: left;"><code>STATUS_NO_SUCH_USER</code></td>
+<td style="text-align: left;">`0xC0000064`</td>
+<td style="text-align: left;">`STATUS_NO_SUCH_USER`</td>
 <td style="text-align: left;">The specified user does not exist.</td>
 <td style="text-align: left;">Indicator of user enumeration or spraying unverified lists.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>0xC0000072</code></td>
-<td style="text-align: left;"><code>STATUS_ACCOUNT_DISABLED</code></td>
+<td style="text-align: left;">`0xC0000072`</td>
+<td style="text-align: left;">`STATUS_ACCOUNT_DISABLED`</td>
 <td style="text-align: left;">Account is administratively disabled.</td>
 <td style="text-align: left;">Adversary attempting to access dormant accounts.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>0xC0000234</code></td>
-<td style="text-align: left;"><code>STATUS_ACCOUNT_LOCKED_OUT</code></td>
+<td style="text-align: left;">`0xC0000234`</td>
+<td style="text-align: left;">`STATUS_ACCOUNT_LOCKED_OUT`</td>
 <td style="text-align: left;">Account locked out due to policy.</td>
 <td style="text-align: left;">Brute force triggered Active Directory account lockout.</td>
 </tr>
 </tbody>
 </table>
 <figure>
-<p><img alt="Windows Event ID 4625 Audit Telemetry" src="../assets/images/lab05-event-4625-failure.png" />
+<p><img alt="Windows Event ID 4625 Audit Telemetry" src="../../assets/images/lab05-event-4625-failure.png" />
   </p>
 <figcaption>Figure 5.1: Windows Security Audit log exhibiting Event ID 4625 with SubStatus 0xC000006A (STATUS_WRONG_PASSWORD) targeting user jdoe over Logon Type 3 (Network SMB).</figcaption>
 </figure>
@@ -1034,48 +1054,48 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>14:02:11</code></td>
+<td style="text-align: left;">`14:02:11`</td>
 <td style="text-align: left;">4625</td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
+<td style="text-align: left;">`CORP\\jdoe`</td>
+<td style="text-align: left;">`192.168.10.45`</td>
 <td style="text-align: left;">3 (Network)</td>
-<td style="text-align: left;"><code>0xC000006A</code></td>
+<td style="text-align: left;">`0xC000006A`</td>
 <td style="text-align: left;">Attack initialization: automated script begins password attempts.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>14:08:34</code></td>
+<td style="text-align: left;">`14:08:34`</td>
 <td style="text-align: left;">4625</td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
+<td style="text-align: left;">`CORP\\jdoe`</td>
+<td style="text-align: left;">`192.168.10.45`</td>
 <td style="text-align: left;">3 (Network)</td>
-<td style="text-align: left;"><code>0xC000006A</code></td>
+<td style="text-align: left;">`0xC000006A`</td>
 <td style="text-align: left;">75th failure reached; high frequency confirms automated tool.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>14:14:05</code></td>
+<td style="text-align: left;">`14:14:05`</td>
 <td style="text-align: left;">4625</td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
+<td style="text-align: left;">`CORP\\jdoe`</td>
+<td style="text-align: left;">`192.168.10.45`</td>
 <td style="text-align: left;">3 (Network)</td>
-<td style="text-align: left;"><code>0xC000006A</code></td>
+<td style="text-align: left;">`0xC000006A`</td>
 <td style="text-align: left;">Final failure recorded (142 total failures).</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>14:14:28</code></td>
+<td style="text-align: left;">`14:14:28`</td>
 <td style="text-align: left;"><strong>4624</strong></td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
+<td style="text-align: left;">`CORP\\jdoe`</td>
+<td style="text-align: left;">`192.168.10.45`</td>
 <td style="text-align: left;">3 (Network)</td>
-<td style="text-align: left;"><code>TargetLogonId: 0x3E7</code></td>
+<td style="text-align: left;">`TargetLogonId: 0x3E7`</td>
 <td style="text-align: left;"><strong>Successful logon.</strong> Credential guessed.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>14:15:10</code></td>
+<td style="text-align: left;">`14:15:10`</td>
 <td style="text-align: left;">4688</td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;"><code>FIN-WKSTN-04</code></td>
+<td style="text-align: left;">`CORP\\jdoe`</td>
+<td style="text-align: left;">`FIN-WKSTN-04`</td>
 <td style="text-align: left;">Local</td>
-<td style="text-align: left;"><code>whoami /all</code></td>
+<td style="text-align: left;">`whoami /all`</td>
 <td style="text-align: left;">Adversary establishes CLI session and checks privilege tokens.</td>
 </tr>
 </tbody>
@@ -1090,8 +1110,8 @@ let successWindow = 10m;
 let failedLogons = SecurityEvent
     | where TimeGenerated &gt;= ago(timeRange)
     | where EventID == 4625
-    | where SubStatus == "0xc000006a"
-    | where isnotempty(IpAddress) and IpAddress !in ("-", "127.0.0.1", "::1")
+    | where SubStatus == \"0xc000006a\"
+    | where isnotempty(IpAddress) and IpAddress !in (\"-\", \"127.0.0.1\", \"::1\")
     | summarize 
         FailureCount = count(),
         FirstFailure = min(TimeGenerated),
@@ -1100,7 +1120,7 @@ let failedLogons = SecurityEvent
 let successfulLogons = SecurityEvent
     | where TimeGenerated &gt;= ago(timeRange)
     | where EventID == 4624
-    | where isnotempty(IpAddress) and IpAddress !in ("-", "127.0.0.1", "::1")
+    | where isnotempty(IpAddress) and IpAddress !in (\"-\", \"127.0.0.1\", \"::1\")
     | project 
         SuccessTime = TimeGenerated,
         TargetAccount,
@@ -1122,7 +1142,27 @@ failedLogons
     AttackerIP = IpAddress,
     FailureCount,
     LogonType
-| order by SuccessTime desc</p>
+| order by SuccessTime desc
+```</p>
+<figure>
+<p><img alt="Microsoft Sentinel KQL Analytics Rule Execution" src="../assets/images/lab05-sentinel-kql-query.png" />
+  </p>
+<figcaption>Figure 5.2: Microsoft Sentinel execution displaying the correlated True Positive incident: 142 failed password attempts followed by successful compromise within 23 seconds.</figcaption>
+</figure>
+<hr />
+<h2 id="5-containment-incident-response-playbook">5. Containment &amp; Incident Response Playbook<a class="headerlink" href="#5-containment-incident-response-playbook" title="Permanent link">&para;</a></h2>
+<p>Once the analytic rule triggered, the following response procedure was initiated:</p>
+<ol>
+<li><strong>Immediate Host Isolation:</strong> Workstation `FIN-WKSTN-04` was isolated from the network via Defender for Endpoint to prevent lateral movement.</li>
+<li><strong>Identity Revocation:</strong> Terminated active Kerberos Ticket-Granting Tokens (TGT) and initiated a forced password reset on domain user `CORP\\jdoe`.</li>
+<li><strong>Source Quarantine:</strong> Network port for attacker host `192.168.10.45` was shut down on the core switch pending physical forensics.</li>
+<li><strong>Domain-Wide Audit:</strong> Executed fleet-wide KQL queries across all domain controllers for subsequent `EventID == 4624` occurrences originating from `192.168.10.45`.
+'''</li>
+</ol>
+<p>with open('docs/investigations/lab-05-sentinel-bruteforce.md', 'w', encoding='utf-8') as f:
+    f.write(content.strip() + '\n')
+print('Successfully wrote formatted Markdown with proper code fence newlines!')
+"</p>
 
 
 
