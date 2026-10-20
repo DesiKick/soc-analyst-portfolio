@@ -14,6 +14,26 @@ title: "Lab 04: Phishing Email Analysis"
 !!! danger "Verdict: All samples malicious | Block, purge, and hunt for clicks"
     Every sample impersonated a known brand and either harvested credentials or delivered a payload. None should reach a user inbox.
 
+
+!!! abstract "In plain English"
+    **What this is:** Phishing emails pretend to come from trusted brands to trick people into giving up passwords or opening malware. I analyzed real phishing samples from a training set.
+
+    **Why it matters:** Most breaches start with an email. Catching a phishing campaign early, and finding everyone who clicked, is one of the most common things a SOC does.
+
+    **What I did:** Compared who each email claimed to be from with where it really came from, followed the links through their redirects, examined the attachments, and built a list of indicators to block.
+
+    **Result:** Every sample was malicious. The response plan: remove them from every inbox, block the senders and links, and check whether anyone clicked.
+
+**Skills this lab shows:** `Email header analysis` `SPF / DKIM / DMARC` `URL and redirect analysis` `IOC extraction` `Response planning`
+
+??? info "Key terms in this lab"
+    - **Spoofing:** faking the sender of an email
+    - **Email header:** the hidden routing details that show where an email really came from
+    - **IOC:** a clue such as a bad domain or file name, used for blocking
+    - **Defanging:** rewriting a link so it cannot be clicked by accident
+
+    Every term is explained in the [Glossary](../foundations/glossary.md).
+
 ---
 
 ## 1. Objective

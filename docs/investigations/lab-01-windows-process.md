@@ -14,6 +14,26 @@ title: "Lab 01: Windows Process Auditing"
 !!! success "Verdict: Benign | Baseline established"
     The process captured (`services.exe` launching `svchost.exe` as SYSTEM) is normal Windows service startup. The value of this lab is the baseline and the detection logic it produced.
 
+
+!!! abstract "In plain English"
+    **What this is:** Windows can keep a diary of every program that starts on a computer, but it is switched off by default. I switched it on and learned to read it.
+
+    **Why it matters:** Almost every attack involves running a program. If a Word document secretly opens a command window, this diary is how an analyst sees it. Without it, the SOC is blind on that computer.
+
+    **What I did:** Turned on process logging, generated activity, traced which program started which (the "parent" and "child"), and wrote a rule that flags Office apps launching command shells, a classic sign of a malicious document.
+
+    **Result:** The activity I captured was normal Windows startup, which gave me a baseline of what normal looks like. The detection rule is written and ready to test against a real attack.
+
+**Skills this lab shows:** `Windows audit policy` `Event ID 4688` `Process lineage` `Baselining` `Splunk SPL`
+
+??? info "Key terms in this lab"
+    - **Process:** a running program
+    - **Parent / child process:** the program that started another, and the one it started
+    - **Event ID 4688:** the Windows log entry for "a new program started"
+    - **Baseline:** what normal looks like, so abnormal stands out
+
+    Every term is explained in the [Glossary](../foundations/glossary.md).
+
 ---
 
 ## 1. Objective

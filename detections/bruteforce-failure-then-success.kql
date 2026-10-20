@@ -1,0 +1,29 @@
+// Failed logons followed by success (T1110.001)
+// Status: join logic tested on simulated data in Azure Data Explorer; not yet run on live Sentinel
+let lookback = 1h;
+let failureThreshold = 10;
+let successWindow = 10m;
+let failures = SecurityEvent
+    | where TimeGenerated > ago(lookback)
+    | where EventID == 4625
+    | where LogonType in (3, 10)
+    | where SubStatus in~ ("0xc000006a", "0xc0000064")
+    | where isnotempty(IpAddress) and IpAddress !in ("-", "127.0.0.1", "::1")
+    | summarize
+        FailureCount = count(),
+        FirstFailure = min(TimeGenerated),
+        LastFailure = max(TimeGenerated),
+        AccountsTried = make_set(TargetUserName, 50)
+        by IpAddress, Computer
+    | where FailureCount >= failureThreshold;
+let successes = SecurityEvent
+    | where TimeGenerated > ago(lookback)
+    | where EventID == 4624
+    | where LogonType in (3, 10)
+    | project SuccessTime = TimeGenerated, IpAddress, Computer, SuccessAccount = TargetUserName;
+failures
+| join kind=inner successes on IpAddress, Computer
+| where SuccessTime between (FirstFailure .. (LastFailure + successWindow))
+| project FirstFailure, LastFailure, SuccessTime, AttackerIP = IpAddress, VictimHost = Computer,
+    SuccessAccount, FailureCount, AccountsTried
+| order by SuccessTime desc

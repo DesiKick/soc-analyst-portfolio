@@ -12,12 +12,13 @@ Hands-on SOC investigations, threat hunting, and detection engineering. Every la
 | 02 | [Network Traffic Analysis](https://desikick.github.io/soc-analyst-portfolio/investigations/lab-02-network-traffic/) | Cleartext HTTP, stream reconstruction | Wireshark | T1071.001 |
 | 03 | [LSASS Credential Dumping](https://desikick.github.io/soc-analyst-portfolio/investigations/lab-03-splunk-lsass/) | Threat hunt plus validated detection | Splunk, SPL, Sysmon | T1003.001 |
 | 04 | [Phishing Email Analysis](https://desikick.github.io/soc-analyst-portfolio/investigations/lab-04-phishing-analysis/) | Header forensics, IOC extraction | CyberChef, header analysis | T1566 |
+| 05 | [Brute Force Detection Logic](https://desikick.github.io/soc-analyst-portfolio/investigations/lab-05-sentinel-bruteforce/) | Failure-then-success correlation, spraying (simulated data) | KQL, Azure Data Explorer | T1110 |
 
 ## Repo layout
 
 ```
 docs/          Site content (MkDocs Material)
-detections/    Detection rules as SPL and Sigma
+detections/    Detection rules as SPL, Sigma, and KQL
 evidence/      Raw lab data (Sysmon logs, PCAPs) so results can be reproduced
 .github/       GitHub Actions workflow that builds and deploys the site
 ```

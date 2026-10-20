@@ -71,12 +71,19 @@ extra:
 
 nav:
   - Home: index.md
+  - Foundations:
+      - "What a SOC Analyst Does": foundations/what-a-soc-does.md
+      - "Lab Environment": foundations/lab-environment.md
+      - "How I Triage an Alert": foundations/triage-method.md
+      - "Event ID Reference": foundations/event-reference.md
+      - "ATT&CK Coverage Map": foundations/attack-coverage.md
+      - "Glossary": foundations/glossary.md
   - Investigations:
       - investigations/index.md
       - "Lab 01 - Windows Process Auditing": investigations/lab-01-windows-process.md
       - "Lab 02 - Network Traffic Analysis": investigations/lab-02-network-traffic.md
       - "Lab 03 - LSASS Credential Dumping (Splunk)": investigations/lab-03-splunk-lsass.md
       - "Lab 04 - Phishing Email Analysis": investigations/lab-04-phishing-analysis.md
-      - "Lab 05 - Brute Force Detection (Sentinel)": investigations/lab-05-sentinel-bruteforce.md
+      - "Lab 05 - Brute Force Detection Logic (KQL)": investigations/lab-05-sentinel-bruteforce.md
   - Detections: detections.md
   - About & Contact: about.md

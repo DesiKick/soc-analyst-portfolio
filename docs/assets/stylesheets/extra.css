@@ -222,3 +222,32 @@ code {
   padding: 0.9rem 1.1rem;
   font-size: 0.8em;
 }
+
+/* Step flow (What a SOC Analyst Does) */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+  gap: 0.5rem;
+  margin: 1.2rem 0 1.4rem;
+}
+.flow div {
+  background: #101721;
+  border: 1px solid rgba(0, 229, 255, 0.18);
+  border-top: 3px solid #00e5ff;
+  border-radius: 8px;
+  padding: 0.7rem 0.7rem;
+}
+.flow strong {
+  display: block;
+  font-family: var(--md-code-font);
+  color: #00e5ff;
+  font-size: 0.66rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.flow span {
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: #b0bec5;
+}

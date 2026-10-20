@@ -14,6 +14,26 @@ title: "Lab 03: LSASS Credential Dumping"
 !!! danger "Verdict: True Positive | Critical | Escalate to IR"
     Two domain controllers had LSASS memory dumped with six different methods, including a renamed binary built to evade name-based detection. Domain credentials should be treated as compromised.
 
+
+!!! abstract "In plain English"
+    **What this is:** After breaking into one computer, attackers try to steal passwords from its memory so they can spread to others. I searched through nearly 8,000 security log entries from two attacked servers to find out exactly how they did it.
+
+    **Why it matters:** These were domain controllers, the servers that control every login in a company. Stolen passwords there are effectively the keys to the whole building.
+
+    **What I did:** Narrowed 851 events down to 55 suspicious ones, separated normal Windows activity from six different attack methods, rebuilt the attack minute by minute, and wrote a detection rule that catches the behavior even when the attacker renames their tools.
+
+    **Result:** The rule flagged every tool that read the password store, and raised zero false alarms on the 108 normal events. That makes it a strong starting point for a production rule, pending tuning on a real environment's baseline.
+
+**Skills this lab shows:** `Splunk SPL` `Regex field extraction` `Sysmon` `Threat hunting` `Timeline reconstruction` `Detection engineering` `Sigma`
+
+??? info "Key terms in this lab"
+    - **LSASS:** the Windows process that holds logged-in users' passwords in memory
+    - **Credential dumping:** copying those stored passwords out of memory
+    - **Domain controller:** the server that manages every account in a company
+    - **False positive:** an alarm on something harmless
+
+    Every term is explained in the [Glossary](../foundations/glossary.md).
+
 ---
 
 ## 1. Objective

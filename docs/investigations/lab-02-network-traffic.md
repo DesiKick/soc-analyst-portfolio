@@ -14,6 +14,26 @@ title: "Lab 02: Network Traffic Analysis"
 !!! warning "Verdict: Benign in this capture | Pattern worth alerting on"
     The session is a terminal browser pulling a public directory listing. Nothing malicious was downloaded, but cleartext HTTP from a non-standard client is exactly what C2 and scripted downloads look like on the wire.
 
+
+!!! abstract "In plain English"
+    **What this is:** A network recording (a PCAP) is like a transcript of every conversation computers had over the network. I replayed one conversation between a computer and a web server.
+
+    **Why it matters:** When a hacked computer contacts its attacker, the network recording often shows it, even if the attacker wiped the logs on the computer itself.
+
+    **What I did:** Filtered the recording down to just the web requests, rebuilt the full back-and-forth conversation, and identified the unusual program that made the request.
+
+    **Result:** This traffic was harmless: a text-only web browser downloading a public file list. I documented the pattern worth alerting on, which is unencrypted web traffic from programs that are not normal browsers.
+
+**Skills this lab shows:** `Wireshark` `Packet analysis` `HTTP` `IPv6` `Client fingerprinting`
+
+??? info "Key terms in this lab"
+    - **PCAP:** a recording of network traffic
+    - **HTTP vs HTTPS:** unencrypted vs encrypted web traffic
+    - **User-Agent:** the label a program uses to identify itself to a website
+    - **C2:** the channel an attacker uses to control a hacked computer
+
+    Every term is explained in the [Glossary](../foundations/glossary.md).
+
 ---
 
 ## 1. Objective
