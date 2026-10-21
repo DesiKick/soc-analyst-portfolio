@@ -190,11 +190,16 @@ Every investigation follows the same structure as a SOC ticket:
 
 ---
 
-## 🚀 Active Roadmap
+## Roadmap
 
-| Target Module | Investigation Focus | Tooling / Telemetry | Status |
+| Module | Focus | Tooling / Telemetry | Status |
 | :--- | :--- | :--- | :--- |
-| **Lab 06** | Automated Threat Intelligence IOC Enrichment Tool | Python 3, AbuseIPDB API, VirusTotal v3 API | <span class="pill wip">In Progress</span> |
+| **Lab 01** | Windows Process Auditing & Execution | Event Viewer, Event ID 4688, Process Trees | <span class="pill done">Complete</span> |
+| **Lab 02** | Network Traffic & C2 Stream Reconstruction | Wireshark, PCAP, TCP Stream Carving | <span class="pill done">Complete</span> |
+| **Lab 03** | LSASS Credential Dumping | Splunk SIEM, Sysmon Event ID 10, SPL | <span class="pill done">Complete</span> |
+| **Lab 04** | Inbound Phishing & Header Forensics | RFC 822 Headers, CyberChef, Defanging | <span class="pill done">Complete</span> |
+| **Lab 05** | Windows Authentication & Brute Force Logic | KQL, Azure Data Explorer, Event ID 4625/4624 | <span class="pill done">Complete</span> |
+| **Lab 06** | Automated Threat Intelligence IOC Enrichment Tool | Python 3, VirusTotal API, AbuseIPDB | <span class="pill wip">In Progress</span> |
 | **Lab 07** | Active Directory Lab: Password Spraying in Sentinel | VirtualBox, Windows Server DC, Kali, Sentinel KQL | <span class="pill wip">Planned</span> |
 | **Lab 08** | Kerberoasting Attack & Detection Engineering | Impacket `GetUserSPNs`, Event ID 4769 (RC4 0x17), SPL/KQL | <span class="pill wip">Planned</span> |
 | **Lab 09** | Endpoint Persistence Hunting with Sysmon & Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | <span class="pill wip">Planned</span> |
