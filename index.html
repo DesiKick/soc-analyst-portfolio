@@ -258,6 +258,44 @@
   
 
       
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="detections/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Detections
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About & Contact
+
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -416,10 +454,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#active-roadmap" class="md-nav__link">
+  <a href="#roadmap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Active Roadmap
+        Roadmap
       
     </span>
   </a>
@@ -876,7 +914,7 @@
   <span class="md-ellipsis">
     
   
-    Lab 05 - Brute Force Detection (Sentinel)
+    Lab 05 - Brute Force Detection Logic (KQL)
   
 
     
@@ -921,6 +959,60 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="detections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Detections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About & Contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -998,10 +1090,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#active-roadmap" class="md-nav__link">
+  <a href="#roadmap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Active Roadmap
+        Roadmap
       
     </span>
   </a>
@@ -1166,21 +1258,51 @@ Hands-on lab investigations built from raw telemetry. Each one goes from logs, p
 <li><strong>Detection:</strong> a rule that catches it next time, tested against real lab data where I had it, and labeled clearly where I did not.</li>
 </ol>
 <hr />
-<h2 id="active-roadmap">🚀 Active Roadmap<a class="headerlink" href="#active-roadmap" title="Permanent link">&para;</a></h2>
+<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Target Module</th>
-<th style="text-align: left;">Investigation Focus</th>
+<th style="text-align: left;">Module</th>
+<th style="text-align: left;">Focus</th>
 <th style="text-align: left;">Tooling / Telemetry</th>
 <th style="text-align: left;">Status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td style="text-align: left;"><strong>Lab 01</strong></td>
+<td style="text-align: left;">Windows Process Auditing &amp; Execution</td>
+<td style="text-align: left;">Event Viewer, Event ID 4688, Process Trees</td>
+<td style="text-align: left;"><span class="pill done">Complete</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lab 02</strong></td>
+<td style="text-align: left;">Network Traffic &amp; C2 Stream Reconstruction</td>
+<td style="text-align: left;">Wireshark, PCAP, TCP Stream Carving</td>
+<td style="text-align: left;"><span class="pill done">Complete</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lab 03</strong></td>
+<td style="text-align: left;">LSASS Credential Dumping</td>
+<td style="text-align: left;">Splunk SIEM, Sysmon Event ID 10, SPL</td>
+<td style="text-align: left;"><span class="pill done">Complete</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lab 04</strong></td>
+<td style="text-align: left;">Inbound Phishing &amp; Header Forensics</td>
+<td style="text-align: left;">RFC 822 Headers, CyberChef, Defanging</td>
+<td style="text-align: left;"><span class="pill done">Complete</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lab 05</strong></td>
+<td style="text-align: left;">Windows Authentication &amp; Brute Force Logic</td>
+<td style="text-align: left;">KQL, Azure Data Explorer, Event ID 4625/4624</td>
+<td style="text-align: left;"><span class="pill done">Complete</span></td>
+</tr>
+<tr>
 <td style="text-align: left;"><strong>Lab 06</strong></td>
 <td style="text-align: left;">Automated Threat Intelligence IOC Enrichment Tool</td>
-<td style="text-align: left;">Python 3, AbuseIPDB API, VirusTotal v3 API</td>
+<td style="text-align: left;">Python 3, VirusTotal API, AbuseIPDB</td>
 <td style="text-align: left;"><span class="pill wip">In Progress</span></td>
 </tr>
 <tr>
