@@ -258,44 +258,6 @@
   
 
       
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="detections/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  Detections
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="about/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  About & Contact
-
-      </a>
-    </li>
-  
-
-      
     </ul>
   </div>
 </nav>
@@ -454,10 +416,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#roadmap" class="md-nav__link">
+  <a href="#active-roadmap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Roadmap
+        🚀 Active Roadmap
       
     </span>
   </a>
@@ -734,6 +696,8 @@
       
         
       
+        
+      
     
     
     
@@ -912,7 +876,35 @@
   <span class="md-ellipsis">
     
   
-    Lab 05 - Brute Force Detection Logic (KQL)
+    Lab 05 - Brute Force Detection (Sentinel)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="investigations/lab-06-python-enrichment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 06 - Python IOC Enrichment Tool
   
 
     
@@ -929,60 +921,6 @@
           </ul>
         </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="detections/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Detections
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="about/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    About & Contact
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1060,10 +998,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#roadmap" class="md-nav__link">
+  <a href="#active-roadmap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Roadmap
+        🚀 Active Roadmap
       
     </span>
   </a>
@@ -1228,33 +1166,45 @@ Hands-on lab investigations built from raw telemetry. Each one goes from logs, p
 <li><strong>Detection:</strong> a rule that catches it next time, tested against real lab data where I had it, and labeled clearly where I did not.</li>
 </ol>
 <hr />
-<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">&para;</a></h2>
+<h2 id="active-roadmap">🚀 Active Roadmap<a class="headerlink" href="#active-roadmap" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Module</th>
-<th style="text-align: left;">Focus</th>
-<th style="text-align: left;">Tooling</th>
+<th style="text-align: left;">Target Module</th>
+<th style="text-align: left;">Investigation Focus</th>
+<th style="text-align: left;">Tooling / Telemetry</th>
 <th style="text-align: left;">Status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>Lab 05 v2</strong></td>
-<td style="text-align: left;">Rerun brute force detection on real telemetry</td>
-<td style="text-align: left;">Windows VM, Microsoft Sentinel, AMA</td>
-<td style="text-align: left;"><span class="pill wip">Planned</span></td>
-</tr>
-<tr>
 <td style="text-align: left;"><strong>Lab 06</strong></td>
-<td style="text-align: left;">IOC enrichment script with code in the repo</td>
-<td style="text-align: left;">Python 3, VirusTotal API, AbuseIPDB</td>
-<td style="text-align: left;"><span class="pill wip">Planned</span></td>
+<td style="text-align: left;">Automated Threat Intelligence IOC Enrichment Tool</td>
+<td style="text-align: left;">Python 3, AbuseIPDB API, VirusTotal v3 API</td>
+<td style="text-align: left;"><span class="pill wip">In Progress</span></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Lab 07</strong></td>
-<td style="text-align: left;">C2 beacon hunting</td>
-<td style="text-align: left;">Zeek, RITA</td>
+<td style="text-align: left;">Active Directory Lab: Password Spraying in Sentinel</td>
+<td style="text-align: left;">VirtualBox, Windows Server DC, Kali, Sentinel KQL</td>
+<td style="text-align: left;"><span class="pill wip">Planned</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lab 08</strong></td>
+<td style="text-align: left;">Kerberoasting Attack &amp; Detection Engineering</td>
+<td style="text-align: left;">Impacket <code>GetUserSPNs</code>, Event ID 4769 (RC4 0x17), SPL/KQL</td>
+<td style="text-align: left;"><span class="pill wip">Planned</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lab 09</strong></td>
+<td style="text-align: left;">Endpoint Persistence Hunting with Sysmon &amp; Atomic Red Team</td>
+<td style="text-align: left;">Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard</td>
+<td style="text-align: left;"><span class="pill wip">Planned</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lab 10</strong></td>
+<td style="text-align: left;">C2 Beacon Hunting with Zeek &amp; RITA</td>
+<td style="text-align: left;">Zeek Network Logs, RITA Jitter Scoring, Wireshark</td>
 <td style="text-align: left;"><span class="pill wip">Planned</span></td>
 </tr>
 </tbody>
