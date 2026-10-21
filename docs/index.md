@@ -190,10 +190,12 @@ Every investigation follows the same structure as a SOC ticket:
 
 ---
 
-## Roadmap
+## 🚀 Active Roadmap
 
-| Module | Focus | Tooling | Status |
+| Target Module | Investigation Focus | Tooling / Telemetry | Status |
 | :--- | :--- | :--- | :--- |
-| **Lab 05 v2** | Rerun brute force detection on real telemetry | Windows VM, Microsoft Sentinel, AMA | <span class="pill wip">Planned</span> |
-| **Lab 06** | IOC enrichment script with code in the repo | Python 3, VirusTotal API, AbuseIPDB | <span class="pill wip">Planned</span> |
-| **Lab 07** | C2 beacon hunting | Zeek, RITA | <span class="pill wip">Planned</span> |
+| **Lab 06** | Automated Threat Intelligence IOC Enrichment Tool | Python 3, AbuseIPDB API, VirusTotal v3 API | <span class="pill wip">In Progress</span> |
+| **Lab 07** | Active Directory Lab: Password Spraying in Sentinel | VirtualBox, Windows Server DC, Kali, Sentinel KQL | <span class="pill wip">Planned</span> |
+| **Lab 08** | Kerberoasting Attack & Detection Engineering | Impacket `GetUserSPNs`, Event ID 4769 (RC4 0x17), SPL/KQL | <span class="pill wip">Planned</span> |
+| **Lab 09** | Endpoint Persistence Hunting with Sysmon & Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | <span class="pill wip">Planned</span> |
+| **Lab 10** | C2 Beacon Hunting with Zeek & RITA | Zeek Network Logs, RITA Jitter Scoring, Wireshark | <span class="pill wip">Planned</span> |
