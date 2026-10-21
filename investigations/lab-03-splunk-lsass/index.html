@@ -218,6 +218,28 @@
   
   
   
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../foundations/what-a-soc-does/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Foundations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -352,6 +374,245 @@
       
   
   
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/what-a-soc-does/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What a SOC Analyst Does
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/lab-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/triage-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How I Triage an Alert
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/event-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event ID Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/attack-coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ATT&CK Coverage Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -387,7 +648,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -409,14 +670,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -795,7 +1056,7 @@
   <span class="md-ellipsis">
     
   
-    Lab 05 - Brute Force Detection (Sentinel)
+    Lab 05 - Brute Force Detection Logic (KQL)
   
 
     
@@ -1118,6 +1379,24 @@
 <p class="admonition-title">Verdict: True Positive | Critical | Escalate to IR</p>
 <p>Two domain controllers had LSASS memory dumped with six different methods, including a renamed binary built to evade name-based detection. Domain credentials should be treated as compromised.</p>
 </div>
+<div class="admonition abstract">
+<p class="admonition-title">In plain English</p>
+<p><strong>What this is:</strong> After breaking into one computer, attackers try to steal passwords from its memory so they can spread to others. I searched through nearly 8,000 security log entries from two attacked servers to find out exactly how they did it.</p>
+<p><strong>Why it matters:</strong> These were domain controllers, the servers that control every login in a company. Stolen passwords there are effectively the keys to the whole building.</p>
+<p><strong>What I did:</strong> Narrowed 851 events down to 55 suspicious ones, separated normal Windows activity from six different attack methods, rebuilt the attack minute by minute, and wrote a detection rule that catches the behavior even when the attacker renames their tools.</p>
+<p><strong>Result:</strong> The rule flagged every tool that read the password store, and raised zero false alarms on the 108 normal events. That makes it a strong starting point for a production rule, pending tuning on a real environment's baseline.</p>
+</div>
+<p><strong>Skills this lab shows:</strong> <code>Splunk SPL</code> <code>Regex field extraction</code> <code>Sysmon</code> <code>Threat hunting</code> <code>Timeline reconstruction</code> <code>Detection engineering</code> <code>Sigma</code></p>
+<details class="info">
+<summary>Key terms in this lab</summary>
+<ul>
+<li><strong>LSASS:</strong> the Windows process that holds logged-in users' passwords in memory</li>
+<li><strong>Credential dumping:</strong> copying those stored passwords out of memory</li>
+<li><strong>Domain controller:</strong> the server that manages every account in a company</li>
+<li><strong>False positive:</strong> an alarm on something harmless</li>
+</ul>
+<p>Every term is explained in the <a href="../../foundations/glossary/">Glossary</a>.</p>
+</details>
 <hr />
 <h2 id="1-objective">1. Objective<a class="headerlink" href="#1-objective" title="Permanent link">&para;</a></h2>
 <p><code>lsass.exe</code> holds credentials, Kerberos tickets, and NTLM hashes in memory. Dumping it is how attackers move from one compromised host to the whole domain.</p>

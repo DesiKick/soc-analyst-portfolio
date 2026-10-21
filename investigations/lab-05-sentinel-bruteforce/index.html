@@ -29,7 +29,7 @@
     
     
       
-        <title>Lab 05: Microsoft Sentinel Brute Force Detection (KQL) - Mian Talha Nayyar | SOC Portfolio</title>
+        <title>Lab 05: Brute Force Detection Logic (KQL) - Mian Talha Nayyar | SOC Portfolio</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab-05-windows-authentication-brute-force-detection-in-microsoft-sentinel-kql" class="md-skip">
+        <a href="#lab-05-brute-force-detection-logic-in-kql" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lab 05: Microsoft Sentinel Brute Force Detection (KQL)
+              Lab 05: Brute Force Detection Logic (KQL)
             
           </span>
         </div>
@@ -211,6 +211,28 @@
 
       </a>
     </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../foundations/what-a-soc-does/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Foundations
+
+        </a>
+      </li>
+    
   
 
       
@@ -352,6 +374,245 @@
       
   
   
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/what-a-soc-does/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What a SOC Analyst Does
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/lab-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/triage-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How I Triage an Alert
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/event-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event ID Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/attack-coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ATT&CK Coverage Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -387,7 +648,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -409,14 +670,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -563,7 +824,7 @@
   <span class="md-ellipsis">
     
   
-    Lab 05 - Brute Force Detection (Sentinel)
+    Lab 05 - Brute Force Detection Logic (KQL)
   
 
     
@@ -581,7 +842,7 @@
   <span class="md-ellipsis">
     
   
-    Lab 05 - Brute Force Detection (Sentinel)
+    Lab 05 - Brute Force Detection Logic (KQL)
   
 
     
@@ -607,22 +868,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-executive-summary-forensic-artifacts" class="md-nav__link">
+  <a href="#1-objective" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Executive Summary &amp; Forensic Artifacts
+        1. Objective
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Executive Summary &amp; Forensic Artifacts">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-how-windows-records-logons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. How Windows Records Logons
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scenario-design-simulated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scenario Design (simulated)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-test-1-correlation-logic-in-azure-data-explorer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test 1: Correlation Logic in Azure Data Explorer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-test-2-real-failed-logons-on-my-workstation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Test 2: Real Failed Logons on My Workstation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-detection-rule-v2-sentinel-securityevent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Detection Rule v2 (Sentinel SecurityEvent)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Detection Rule v2 (Sentinel SecurityEvent)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#forensic-telemetry-breakdown" class="md-nav__link">
+  <a href="#companion-rule-password-spraying" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Forensic Telemetry Breakdown
+        Companion rule: password spraying
       
     </span>
   </a>
@@ -635,49 +951,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-windows-authentication-mechanics-telemetry-deep-dive" class="md-nav__link">
+  <a href="#7-expected-false-positives-and-tuning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Windows Authentication Mechanics &amp; Telemetry Deep-Dive
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Windows Authentication Mechanics &amp; Telemetry Deep-Dive">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#relevant-windows-event-ids" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Relevant Windows Event IDs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#diagnostic-ntstatus-hex-codes-event-id-4625" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Diagnostic NTSTATUS Hex Codes (Event ID 4625)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-incident-timeline-attack-reconstruction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Incident Timeline &amp; Attack Reconstruction
+        7. Expected False Positives and Tuning
       
     </span>
   </a>
@@ -685,10 +962,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-detection-engineering-microsoft-sentinel-kql-analytic-rule" class="md-nav__link">
+  <a href="#8-if-this-fired-for-real-response-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Detection Engineering: Microsoft Sentinel KQL Analytic Rule
+        8. If This Fired for Real: Response Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Takeaways
       
     </span>
   </a>
@@ -792,22 +1080,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-executive-summary-forensic-artifacts" class="md-nav__link">
+  <a href="#1-objective" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Executive Summary &amp; Forensic Artifacts
+        1. Objective
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Executive Summary &amp; Forensic Artifacts">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-how-windows-records-logons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. How Windows Records Logons
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scenario-design-simulated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scenario Design (simulated)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-test-1-correlation-logic-in-azure-data-explorer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test 1: Correlation Logic in Azure Data Explorer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-test-2-real-failed-logons-on-my-workstation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Test 2: Real Failed Logons on My Workstation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-detection-rule-v2-sentinel-securityevent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Detection Rule v2 (Sentinel SecurityEvent)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Detection Rule v2 (Sentinel SecurityEvent)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#forensic-telemetry-breakdown" class="md-nav__link">
+  <a href="#companion-rule-password-spraying" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Forensic Telemetry Breakdown
+        Companion rule: password spraying
       
     </span>
   </a>
@@ -820,49 +1163,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-windows-authentication-mechanics-telemetry-deep-dive" class="md-nav__link">
+  <a href="#7-expected-false-positives-and-tuning" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Windows Authentication Mechanics &amp; Telemetry Deep-Dive
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Windows Authentication Mechanics &amp; Telemetry Deep-Dive">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#relevant-windows-event-ids" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Relevant Windows Event IDs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#diagnostic-ntstatus-hex-codes-event-id-4625" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Diagnostic NTSTATUS Hex Codes (Event ID 4625)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-incident-timeline-attack-reconstruction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Incident Timeline &amp; Attack Reconstruction
+        7. Expected False Positives and Tuning
       
     </span>
   </a>
@@ -870,10 +1174,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-detection-engineering-microsoft-sentinel-kql-analytic-rule" class="md-nav__link">
+  <a href="#8-if-this-fired-for-real-response-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Detection Engineering: Microsoft Sentinel KQL Analytic Rule
+        8. If This Fired for Real: Response Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Takeaways
       
     </span>
   </a>
@@ -897,232 +1212,290 @@
 
 
 
-<h1 id="lab-05-windows-authentication-brute-force-detection-in-microsoft-sentinel-kql">Lab 05: Windows Authentication &amp; Brute Force Detection in Microsoft Sentinel (KQL)<a class="headerlink" href="#lab-05-windows-authentication-brute-force-detection-in-microsoft-sentinel-kql" title="Permanent link">&para;</a></h1>
+<h1 id="lab-05-brute-force-detection-logic-in-kql">Lab 05: Brute Force Detection Logic in KQL<a class="headerlink" href="#lab-05-brute-force-detection-logic-in-kql" title="Permanent link">&para;</a></h1>
 <div class="lab-meta">
-<p><strong>Category:</strong> Cloud SIEM &amp; Identity Detection Engineering<br>
-<strong>MITRE ATT&amp;CK:</strong> <a href="https://attack.mitre.org/techniques/T1110/001/">T1110.001 Password Guessing</a> &bull; <a href="https://attack.mitre.org/techniques/T1110/003/">T1110.003 Password Spraying</a> &bull; <a href="https://attack.mitre.org/techniques/T1059/003/">T1059.003 Command &amp; Scripting Interpreter</a><br>
-<strong>Platform:</strong> Microsoft Sentinel / Azure Log Analytics Workspace<br>
-<strong>Telemetry Agent:</strong> Azure Monitor Agent (AMA) / Windows Security Event Log<br>
-<strong>Rule Format:</strong> Kusto Query Language (KQL) Analytic Rule</p>
+<p><strong>Category:</strong> Identity Detection Engineering<br>
+<strong>ATT&amp;CK:</strong> <a href="https://attack.mitre.org/techniques/T1110/001/">T1110.001 Password Guessing</a> | <a href="https://attack.mitre.org/techniques/T1110/003/">T1110.003 Password Spraying</a> | <a href="https://attack.mitre.org/techniques/T1033/">T1033 System Owner/User Discovery</a><br>
+<strong>Query language:</strong> KQL, written for the Microsoft Sentinel <code>SecurityEvent</code> table<br>
+<strong>Test environments:</strong> Azure Data Explorer (simulated data), my Windows workstation (real 4625 events)</p>
 </div>
-<div class="admonition danger">
-<p class="admonition-title">Incident Verdict: True Positive — High Severity — Identity Compromised</p>
-<p>Target workstation <code>FIN-WKSTN-04</code> sustained <strong>142 consecutive network authentication failures</strong> (Event ID 4625, SubStatus <code>0xC000006A</code>) within a 12-minute window originating from internal IP <code>192.168.10.45</code>. The attack culminated in a successful logon (Event ID 4624) under domain account <code>CORP\jdoe</code>, followed immediately by suspicious discovery command execution (<code>whoami /all</code>). Immediate host containment, session termination, and credential revocation were executed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Simulated scenario: read this first</p>
+<p>The attack story below (host <code>FIN-WKSTN-04</code>, account <code>CORP\jdoe</code>, source <code>192.168.10.45</code>) is a <strong>scenario I designed</strong> to build and test detection logic. It is not a real incident and no containment took place. The KQL was tested in Azure Data Explorer against a small hand-built dataset, and separately against real failed logons I generated on my own machine. Running it against live Sentinel telemetry is planned as <strong>Lab 05 v2</strong>.</p>
 </div>
+<div class="admonition abstract">
+<p class="admonition-title">In plain English</p>
+<p><strong>What this is:</strong> Brute force means guessing a password over and over until one works. I wrote search logic that spots many failed logins followed by a successful one from the same place.</p>
+<p><strong>Why it matters:</strong> One wrong password is normal. Dozens of failures in minutes, then a success, means someone probably guessed their way in.</p>
+<p><strong>What I did:</strong> Designed an attack scenario, tested the search logic on sample data, then tested it against real failed logins on my own computer. That real test exposed two blind spots, which I fixed.</p>
+<p><strong>Result:</strong> An improved rule, plus a second rule for password spraying. The next step is running both on a real cloud SIEM with live data.</p>
+</div>
+<p><strong>Skills this lab shows:</strong> <code>KQL</code> <code>Windows logon events</code> <code>Correlation logic</code> <code>Detection testing</code> <code>Tuning</code></p>
+<details class="info">
+<summary>Key terms in this lab</summary>
+<ul>
+<li><strong>Brute force:</strong> guessing one account's password repeatedly</li>
+<li><strong>Password spraying:</strong> trying a few common passwords across many accounts</li>
+<li><strong>KQL:</strong> the search language for Microsoft Sentinel</li>
+<li><strong>Event IDs 4625 / 4624:</strong> Windows log entries for a failed and a successful login</li>
+</ul>
+<p>Every term is explained in the <a href="../../foundations/glossary/">Glossary</a>.</p>
+</details>
 <hr />
-<h2 id="1-executive-summary-forensic-artifacts">1. Executive Summary &amp; Forensic Artifacts<a class="headerlink" href="#1-executive-summary-forensic-artifacts" title="Permanent link">&para;</a></h2>
-<p>During continuous security monitoring in Microsoft Sentinel, analytics detected an anomalous spike in SMB network authentications targeting a high-value finance workstation. Investigation confirmed an adversary executed an automated dictionary brute-force attack against local Active Directory credentials.</p>
-<h3 id="forensic-telemetry-breakdown">Forensic Telemetry Breakdown<a class="headerlink" href="#forensic-telemetry-breakdown" title="Permanent link">&para;</a></h3>
+<h2 id="1-objective">1. Objective<a class="headerlink" href="#1-objective" title="Permanent link">&para;</a></h2>
+<p>A single failed logon means nothing. Users mistype passwords all day. What matters is <strong>many failures followed by a success</strong> from the same source, because that means the attacker probably got in.</p>
+<p>The goal: write KQL that correlates repeated Event ID 4625 failures with a 4624 success, test the logic, and find out where it breaks.</p>
+<hr />
+<h2 id="2-how-windows-records-logons">2. How Windows Records Logons<a class="headerlink" href="#2-how-windows-records-logons" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Observable Property</th>
-<th style="text-align: left;">Forensic Artifact Value</th>
-<th style="text-align: left;">Operational Significance</th>
+<th style="text-align: left;">Event ID</th>
+<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">Why it matters here</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>Target Hostname</strong></td>
-<td style="text-align: left;"><code>FIN-WKSTN-04.corp.local</code></td>
-<td style="text-align: left;">Finance Department Workstation (Tier-2 Asset)</td>
+<td style="text-align: left;"><strong>4625</strong></td>
+<td style="text-align: left;">An account failed to log on</td>
+<td style="text-align: left;">Source IP, target account, logon type, and the failure reason</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Compromised Identity</strong></td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;">Domain User Account</td>
+<td style="text-align: left;"><strong>4624</strong></td>
+<td style="text-align: left;">An account logged on successfully</td>
+<td style="text-align: left;">Tells you whether the guessing worked</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Adversary Source IP</strong></td>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
-<td style="text-align: left;">Ephemeral Workstation on Subnet <code>192.168.10.0/24</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Authentication Protocol</strong></td>
-<td style="text-align: left;"><code>NTLMSSP</code> (Logon Type 3 – Network)</td>
-<td style="text-align: left;">SMB session negotiation over TCP port 445</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Failure Volume</strong></td>
-<td style="text-align: left;">142 Events (<code>SubStatus: 0xC000006A</code>)</td>
-<td style="text-align: left;">Dictionary attack using valid username and password list</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Compromise Timestamp</strong></td>
-<td style="text-align: left;"><code>2026-10-14 14:14:28 UTC</code></td>
-<td style="text-align: left;">Successful authentication (Event ID 4624)</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Post-Exploit Spawn</strong></td>
-<td style="text-align: left;"><code>whoami /all</code> (PID 4912)</td>
-<td style="text-align: left;">Security context and group membership reconnaissance</td>
+<td style="text-align: left;"><strong>4688</strong></td>
+<td style="text-align: left;">A new process was created</td>
+<td style="text-align: left;">Shows what the attacker did next, if process auditing is on</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="2-windows-authentication-mechanics-telemetry-deep-dive">2. Windows Authentication Mechanics &amp; Telemetry Deep-Dive<a class="headerlink" href="#2-windows-authentication-mechanics-telemetry-deep-dive" title="Permanent link">&para;</a></h2>
-<p>Windows audit logging generates distinct Event IDs for authentication attempts. Differentiating benign user error from brute force requires parsing the raw XML event data.</p>
-<h3 id="relevant-windows-event-ids">Relevant Windows Event IDs<a class="headerlink" href="#relevant-windows-event-ids" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Event ID 4625 (An account failed to log on):</strong> Generated on the system where the logon attempt occurred. Provides source IP, target account, and the exact NTSTATUS failure code.</li>
-<li><strong>Event ID 4624 (An account successfully logged on):</strong> Generated upon successful authentication. Critical for identifying whether an adversary guessed the password.</li>
-<li><strong>Event ID 4688 (A new process has been created):</strong> Captures post-compromise activity if command-line process auditing is active.</li>
-</ul>
-<h3 id="diagnostic-ntstatus-hex-codes-event-id-4625">Diagnostic NTSTATUS Hex Codes (Event ID 4625)<a class="headerlink" href="#diagnostic-ntstatus-hex-codes-event-id-4625" title="Permanent link">&para;</a></h3>
-<p>The <code>SubStatus</code> field is the primary indicator of adversary intent:</p>
+<p>The <strong>SubStatus</strong> field on 4625 tells you <em>why</em> the logon failed, and that changes what you are looking at:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">SubStatus Code</th>
-<th style="text-align: left;">NTSTATUS Macro</th>
-<th style="text-align: left;">Root Cause Analysis</th>
-<th style="text-align: left;">Analyst Interpretation</th>
+<th style="text-align: left;">SubStatus</th>
+<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">What it suggests</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: left;"><code>0xC000006A</code></td>
-<td style="text-align: left;"><code>STATUS_WRONG_PASSWORD</code></td>
-<td style="text-align: left;">Account exists; password incorrect.</td>
-<td style="text-align: left;"><strong>Primary indicator of brute force / password guessing.</strong></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>0xC000006D</code></td>
-<td style="text-align: left;"><code>STATUS_LOGON_FAILURE</code></td>
-<td style="text-align: left;">General authentication error.</td>
-<td style="text-align: left;">Typically accompanies bad credentials or mismatched domains.</td>
+<td style="text-align: left;">Account exists, wrong password</td>
+<td style="text-align: left;">Password guessing against a real account</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>0xC0000064</code></td>
-<td style="text-align: left;"><code>STATUS_NO_SUCH_USER</code></td>
-<td style="text-align: left;">The specified user does not exist.</td>
-<td style="text-align: left;">Indicator of user enumeration or spraying unverified lists.</td>
+<td style="text-align: left;">Account does not exist</td>
+<td style="text-align: left;">Username enumeration, or spraying a list of guessed names</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>0xC0000072</code></td>
-<td style="text-align: left;"><code>STATUS_ACCOUNT_DISABLED</code></td>
-<td style="text-align: left;">Account is administratively disabled.</td>
-<td style="text-align: left;">Adversary attempting to access dormant accounts.</td>
+<td style="text-align: left;">Account disabled</td>
+<td style="text-align: left;">Attempts against dormant accounts</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>0xC0000234</code></td>
-<td style="text-align: left;"><code>STATUS_ACCOUNT_LOCKED_OUT</code></td>
-<td style="text-align: left;">Account locked out due to policy.</td>
-<td style="text-align: left;">Brute force triggered Active Directory account lockout.</td>
+<td style="text-align: left;">Account locked out</td>
+<td style="text-align: left;">Lockout policy triggered, often by brute force</td>
 </tr>
 </tbody>
 </table>
-<figure>
-<p><img alt="Windows Event ID 4625 Audit Telemetry" src="../../assets/images/lab05-event-4625-failure.png" />
-  </p>
-<figcaption>Figure 5.1: Windows Security Audit log exhibiting Event ID 4625 with SubStatus 0xC000006A (STATUS_WRONG_PASSWORD) targeting user jdoe over Logon Type 3 (Network SMB).</figcaption>
-</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>0xC000006D</code> usually appears in the <strong>Status</strong> field ("unknown user name or bad password"). The <strong>SubStatus</strong> carries the specific reason. Always read SubStatus.</p>
+</div>
+<p>Logon types matter too: <strong>3</strong> is network (SMB, for example), <strong>10</strong> is RDP, <strong>2</strong> is interactive at the keyboard. See the <a href="../../foundations/event-reference/">Event ID Reference</a> for the full list.</p>
 <hr />
-<h2 id="3-incident-timeline-attack-reconstruction">3. Incident Timeline &amp; Attack Reconstruction<a class="headerlink" href="#3-incident-timeline-attack-reconstruction" title="Permanent link">&para;</a></h2>
-<p>By correlating event sequences across Azure Log Analytics, the attack was reconstructed chronologically:</p>
+<h2 id="3-scenario-design-simulated">3. Scenario Design (simulated)<a class="headerlink" href="#3-scenario-design-simulated" title="Permanent link">&para;</a></h2>
+<p>The scenario I built the rule around:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Timestamp (UTC)</th>
-<th style="text-align: left;">Event ID</th>
-<th style="text-align: left;">Account</th>
-<th style="text-align: left;">Source IP</th>
-<th style="text-align: left;">Logon Type</th>
-<th style="text-align: left;">Diagnostic Field</th>
-<th style="text-align: left;">Analyst Assessment</th>
+<th style="text-align: left;">Time (UTC)</th>
+<th style="text-align: left;">Event</th>
+<th style="text-align: left;">Detail</th>
+<th style="text-align: left;">Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>14:02:11</code></td>
+<td style="text-align: left;">14:02:11</td>
 <td style="text-align: left;">4625</td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
-<td style="text-align: left;">3 (Network)</td>
-<td style="text-align: left;"><code>0xC000006A</code></td>
-<td style="text-align: left;">Attack initialization: automated script begins password attempts.</td>
+<td style="text-align: left;"><code>CORP\jdoe</code>, from <code>192.168.10.45</code>, Logon Type 3, SubStatus <code>0xC000006A</code></td>
+<td style="text-align: left;">Guessing starts</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>14:08:34</code></td>
+<td style="text-align: left;">14:14:05</td>
 <td style="text-align: left;">4625</td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
-<td style="text-align: left;">3 (Network)</td>
-<td style="text-align: left;"><code>0xC000006A</code></td>
-<td style="text-align: left;">75th failure reached; high frequency confirms automated tool.</td>
+<td style="text-align: left;">142nd failure in 12 minutes</td>
+<td style="text-align: left;">Too fast and too regular for a human</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>14:14:05</code></td>
-<td style="text-align: left;">4625</td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
-<td style="text-align: left;">3 (Network)</td>
-<td style="text-align: left;"><code>0xC000006A</code></td>
-<td style="text-align: left;">Final failure recorded (142 total failures).</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>14:14:28</code></td>
+<td style="text-align: left;">14:14:28</td>
 <td style="text-align: left;"><strong>4624</strong></td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
-<td style="text-align: left;">3 (Network)</td>
-<td style="text-align: left;"><code>TargetLogonId: 0x3E7</code></td>
-<td style="text-align: left;"><strong>Successful logon.</strong> Credential guessed.</td>
+<td style="text-align: left;"><code>CORP\jdoe</code>, from <code>192.168.10.45</code>, Logon Type 3</td>
+<td style="text-align: left;"><strong>The password was guessed</strong></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>14:15:10</code></td>
+<td style="text-align: left;">14:15:10</td>
 <td style="text-align: left;">4688</td>
-<td style="text-align: left;"><code>CORP\jdoe</code></td>
-<td style="text-align: left;"><code>FIN-WKSTN-04</code></td>
-<td style="text-align: left;">Local</td>
-<td style="text-align: left;"><code>whoami /all</code></td>
-<td style="text-align: left;">Adversary establishes CLI session and checks privilege tokens.</td>
+<td style="text-align: left;"><code>whoami /all</code> run on <code>FIN-WKSTN-04</code> under <code>CORP\jdoe</code></td>
+<td style="text-align: left;">Attacker checks who they are and what groups they have (T1033)</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="4-detection-engineering-microsoft-sentinel-kql-analytic-rule">4. Detection Engineering: Microsoft Sentinel KQL Analytic Rule<a class="headerlink" href="#4-detection-engineering-microsoft-sentinel-kql-analytic-rule" title="Permanent link">&para;</a></h2>
-<p>Alerting on Event ID 4625 alone produces unacceptable false positive rates from mistyped passwords. This production KQL rule correlates 10+ failed logons with a successful authentication matching the same identity, source IP, and computer within 10 minutes:</p>
-<p>```kql
-let timeRange = 1h;
-let failureThreshold = 10;
-let successWindow = 10m;
-let failedLogons = SecurityEvent
-    | where TimeGenerated &gt;= ago(timeRange)
-    | where EventID == 4625
-    | where SubStatus == "0xc000006a"
-    | where isnotempty(IpAddress) and IpAddress !in ("-", "127.0.0.1", "::1")
-    | summarize 
-        FailureCount = count(),
-        FirstFailure = min(TimeGenerated),
-        LastFailure = max(TimeGenerated)
-        by TargetAccount, IpAddress, Computer;
-let successfulLogons = SecurityEvent
-    | where TimeGenerated &gt;= ago(timeRange)
-    | where EventID == 4624
-    | where isnotempty(IpAddress) and IpAddress !in ("-", "127.0.0.1", "::1")
-    | project 
-        SuccessTime = TimeGenerated,
-        TargetAccount,
-        IpAddress,
-        Computer,
-        LogonType;
-failedLogons
-| where FailureCount &gt;= failureThreshold
-| join kind=inner (successfulLogons) on TargetAccount, IpAddress, Computer
-| where SuccessTime between (LastFailure .. (LastFailure + successWindow))
-| extend TimeDeltaSeconds = datetime_diff('second', SuccessTime, LastFailure)
-| project 
-    FirstFailure,
-    LastFailure,
-    SuccessTime,
-    TimeDeltaSeconds,
-    TargetAccount,
-    VictimHost = Computer,
-    AttackerIP = IpAddress,
-    FailureCount,
-    LogonType
-| order by SuccessTime desc</p>
+<h2 id="4-test-1-correlation-logic-in-azure-data-explorer">4. Test 1: Correlation Logic in Azure Data Explorer<a class="headerlink" href="#4-test-1-correlation-logic-in-azure-data-explorer" title="Permanent link">&para;</a></h2>
+<p>I don't have live Sentinel data for this scenario, so I tested the <strong>join logic</strong> in Azure Data Explorer's free query environment. I wrote the two event summaries as a <code>datatable</code> and ran the correlation against them.</p>
+<div class="language-kql highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">let</span><span class="w"> </span><span class="n">failedLogons</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">datatable</span><span class="p">(</span><span class="n">FirstFailure</span><span class="p">:</span><span class="k">datetime</span><span class="p">,</span><span class="w"> </span><span class="n">LastFailure</span><span class="p">:</span><span class="k">datetime</span><span class="p">,</span><span class="w"> </span><span class="n">TargetAccount</span><span class="p">:</span><span class="k">string</span><span class="p">,</span><span class="w"> </span><span class="n">Computer</span><span class="p">:</span><span class="k">string</span><span class="p">,</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">:</span><span class="k">string</span><span class="p">,</span><span class="w"> </span><span class="n">FailureCount</span><span class="p">:</span><span class="k">int</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">[</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">datetime</span><span class="p">(</span><span class="mi">2026</span><span class="p">-</span><span class="mi">10</span><span class="p">-</span><span class="mi">14</span><span class="w"> </span><span class="mi">14</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mi">11</span><span class="p">),</span><span class="w"> </span><span class="k">datetime</span><span class="p">(</span><span class="mi">2026</span><span class="p">-</span><span class="mi">10</span><span class="p">-</span><span class="mi">14</span><span class="w"> </span><span class="mi">14</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">05</span><span class="p">),</span><span class="w"> </span><span class="s">"CORP</span><span class="se">\\</span><span class="s">jdoe"</span><span class="p">,</span><span class="w"> </span><span class="s">"FIN-WKSTN-04"</span><span class="p">,</span><span class="w"> </span><span class="s">"192.168.10.45"</span><span class="p">,</span><span class="w"> </span><span class="mi">142</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">];</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">let</span><span class="w"> </span><span class="n">successfulLogons</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">datatable</span><span class="p">(</span><span class="n">SuccessTime</span><span class="p">:</span><span class="k">datetime</span><span class="p">,</span><span class="w"> </span><span class="n">TargetAccount</span><span class="p">:</span><span class="k">string</span><span class="p">,</span><span class="w"> </span><span class="n">Computer</span><span class="p">:</span><span class="k">string</span><span class="p">,</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">:</span><span class="k">string</span><span class="p">,</span><span class="w"> </span><span class="n">LogonType</span><span class="p">:</span><span class="k">int</span><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">[</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="k">datetime</span><span class="p">(</span><span class="mi">2026</span><span class="p">-</span><span class="mi">10</span><span class="p">-</span><span class="mi">14</span><span class="w"> </span><span class="mi">14</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">28</span><span class="p">),</span><span class="w"> </span><span class="s">"CORP</span><span class="se">\\</span><span class="s">jdoe"</span><span class="p">,</span><span class="w"> </span><span class="s">"FIN-WKSTN-04"</span><span class="p">,</span><span class="w"> </span><span class="s">"192.168.10.45"</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">];</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">failedLogons</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">|</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">kind</span><span class="p">=</span><span class="n">inner</span><span class="w"> </span><span class="p">(</span><span class="n">successfulLogons</span><span class="p">)</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">TargetAccount</span><span class="p">,</span><span class="w"> </span><span class="n">Computer</span><span class="p">,</span><span class="w"> </span><span class="n">IpAddress</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">FirstFailure</span><span class="p">,</span><span class="w"> </span><span class="n">LastFailure</span><span class="p">,</span><span class="w"> </span><span class="n">SuccessTime</span><span class="p">,</span><span class="w"> </span><span class="n">TargetAccount</span><span class="p">,</span><span class="w"> </span><span class="n">Computer</span><span class="p">,</span><span class="w"> </span><span class="n">SourceIP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">FailureCount</span><span class="p">,</span><span class="w"> </span><span class="n">LogonType</span>
+</span></code></pre></div>
+<figure>
+<p><img alt="KQL correlation test in Azure Data Explorer returning one joined row" src="../../assets/images/lab05-adx-kql-test.png" />
+  </p>
+<figcaption>The join returns one row matching the failures to the success on account, host, and source IP. This proves the join keys and output columns work. It does not prove the thresholds or field formats against real Sentinel data.</figcaption>
+</figure>
+<p><strong>What this test proves:</strong> the join keys line up and the output is what an analyst needs.
+<strong>What it does not prove:</strong> how the rule behaves on real, messy telemetry. That is what Test 2 is for.</p>
+<hr />
+<h2 id="5-test-2-real-failed-logons-on-my-workstation">5. Test 2: Real Failed Logons on My Workstation<a class="headerlink" href="#5-test-2-real-failed-logons-on-my-workstation" title="Permanent link">&para;</a></h2>
+<p>Next I generated real failed network logons on my own machine (<code>DESKTOP-2UVTUII</code>) against the account name <code>jdoe</code>, which does not exist there, and looked at what Windows actually recorded.</p>
+<figure>
+<p><img alt="Real Event ID 4625 on my workstation showing SubStatus 0xC0000064 and source 127.0.0.1" src="../../assets/images/lab05-local-4625-test.png" />
+  </p>
+<figcaption>Real Event ID 4625 from my workstation: Logon Type 3, Status 0xC000006D, SubStatus 0xC0000064 (user does not exist), source network address 127.0.0.1.</figcaption>
+</figure>
+<p>This real event exposed <strong>two gaps</strong> in my first version of the rule:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">What the real event showed</th>
+<th style="text-align: left;">Problem with version 1</th>
+<th style="text-align: left;">Fix in version 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">SubStatus <code>0xC0000064</code>, not <code>0xC000006A</code></td>
+<td style="text-align: left;">v1 only matched wrong-password failures, so attacks against <strong>nonexistent accounts</strong> (enumeration, spraying guessed names) were invisible</td>
+<td style="text-align: left;">Match both SubStatus values</td>
+</tr>
+<tr>
+<td style="text-align: left;">Source <code>127.0.0.1</code></td>
+<td style="text-align: left;">v1 excludes loopback, so this local test could never fire</td>
+<td style="text-align: left;">Correct for production, since loopback failures come from local services. For local testing, remove that filter temporarily</td>
+</tr>
+</tbody>
+</table>
+<p>Also, version 1 grouped by <strong>target account</strong>. That catches one account being hammered but misses <strong>password spraying</strong>, where an attacker tries one password across many accounts. Version 2 groups by source IP and host instead and records which accounts were tried.</p>
+<hr />
+<h2 id="6-detection-rule-v2-sentinel-securityevent">6. Detection Rule v2 (Sentinel <code>SecurityEvent</code>)<a class="headerlink" href="#6-detection-rule-v2-sentinel-securityevent" title="Permanent link">&para;</a></h2>
+<div class="language-kql highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">let</span><span class="w"> </span><span class="n">lookback</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="n">h</span><span class="p">;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">let</span><span class="w"> </span><span class="n">failureThreshold</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">let</span><span class="w"> </span><span class="n">successWindow</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="n">m</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">let</span><span class="w"> </span><span class="n">failures</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">SecurityEvent</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">TimeGenerated</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="n">ago</span><span class="p">(</span><span class="n">lookback</span><span class="p">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">EventID</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">4625</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">LogonType</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">SubStatus</span><span class="w"> </span><span class="n">in</span><span class="err">~</span><span class="w"> </span><span class="p">(</span><span class="s">"0xc000006a"</span><span class="p">,</span><span class="w"> </span><span class="s">"0xc0000064"</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">isnotempty</span><span class="p">(</span><span class="n">IpAddress</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">IpAddress</span><span class="w"> </span><span class="p">!</span><span class="n">in</span><span class="w"> </span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span><span class="w"> </span><span class="s">"127.0.0.1"</span><span class="p">,</span><span class="w"> </span><span class="s">"::1"</span><span class="p">)</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">summarize</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="n">FailureCount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">count</span><span class="p">(),</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">        </span><span class="n">FirstFailure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">TimeGenerated</span><span class="p">),</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="n">LastFailure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">TimeGenerated</span><span class="p">),</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="n">AccountsTried</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">make_set</span><span class="p">(</span><span class="n">TargetUserName</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="k">by</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">Computer</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">FailureCount</span><span class="w"> </span><span class="p">&gt;=</span><span class="w"> </span><span class="n">failureThreshold</span><span class="p">;</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">let</span><span class="w"> </span><span class="n">successes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">SecurityEvent</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">TimeGenerated</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="n">ago</span><span class="p">(</span><span class="n">lookback</span><span class="p">)</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">EventID</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">4624</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">LogonType</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">SuccessTime</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">TimeGenerated</span><span class="p">,</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">Computer</span><span class="p">,</span><span class="w"> </span><span class="n">SuccessAccount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">TargetUserName</span><span class="p">;</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">failures</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="p">|</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">kind</span><span class="p">=</span><span class="n">inner</span><span class="w"> </span><span class="n">successes</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">Computer</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">SuccessTime</span><span class="w"> </span><span class="k">between</span><span class="w"> </span><span class="p">(</span><span class="n">FirstFailure</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="p">(</span><span class="n">LastFailure</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">successWindow</span><span class="p">))</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">FirstFailure</span><span class="p">,</span><span class="w"> </span><span class="n">LastFailure</span><span class="p">,</span><span class="w"> </span><span class="n">SuccessTime</span><span class="p">,</span><span class="w"> </span><span class="n">AttackerIP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">VictimHost</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Computer</span><span class="p">,</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">    </span><span class="n">SuccessAccount</span><span class="p">,</span><span class="w"> </span><span class="n">FailureCount</span><span class="p">,</span><span class="w"> </span><span class="n">AccountsTried</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="p">|</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">SuccessTime</span><span class="w"> </span><span class="n">desc</span>
+</span></code></pre></div>
+<h3 id="companion-rule-password-spraying">Companion rule: password spraying<a class="headerlink" href="#companion-rule-password-spraying" title="Permanent link">&para;</a></h3>
+<p>Spraying looks different: <strong>many accounts, few attempts each</strong>, to stay under lockout thresholds.</p>
+<div class="language-kql highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">SecurityEvent</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">TimeGenerated</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="n">ago</span><span class="p">(</span><span class="mi">1</span><span class="n">h</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">EventID</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">4625</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">LogonType</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">isnotempty</span><span class="p">(</span><span class="n">IpAddress</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">IpAddress</span><span class="w"> </span><span class="p">!</span><span class="n">in</span><span class="w"> </span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span><span class="w"> </span><span class="s">"127.0.0.1"</span><span class="p">,</span><span class="w"> </span><span class="s">"::1"</span><span class="p">)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">|</span><span class="w"> </span><span class="k">summarize</span><span class="w"> </span><span class="n">Attempts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">count</span><span class="p">(),</span><span class="w"> </span><span class="n">DistinctAccounts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dcount</span><span class="p">(</span><span class="n">TargetUserName</span><span class="p">),</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">Accounts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">make_set</span><span class="p">(</span><span class="n">TargetUserName</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">bin</span><span class="p">(</span><span class="n">TimeGenerated</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="n">m</span><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">DistinctAccounts</span><span class="w"> </span><span class="p">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Attempts</span><span class="w"> </span><span class="p">&lt;=</span><span class="w"> </span><span class="n">DistinctAccounts</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="mi">3</span>
+</span></code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Validation status</p>
+<p>Both rules are written for the Sentinel <code>SecurityEvent</code> schema. They have <strong>not yet been run against live Sentinel data</strong>. Thresholds (10 failures, 5 accounts) are starting points that would need tuning against a real baseline.</p>
+</div>
+<hr />
+<h2 id="7-expected-false-positives-and-tuning">7. Expected False Positives and Tuning<a class="headerlink" href="#7-expected-false-positives-and-tuning" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Source of noise</th>
+<th style="text-align: left;">Why it fires</th>
+<th style="text-align: left;">How to handle it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Service account with an expired password</td>
+<td style="text-align: left;">Retries every few seconds, forever</td>
+<td style="text-align: left;">Find and fix the service; allowlist only after fixing</td>
+</tr>
+<tr>
+<td style="text-align: left;">User who just changed their password</td>
+<td style="text-align: left;">Phone or mapped drive keeps using the old one</td>
+<td style="text-align: left;">Usually low count, single account; check the device</td>
+</tr>
+<tr>
+<td style="text-align: left;">Vulnerability scanners</td>
+<td style="text-align: left;">Authenticated scans try many logons</td>
+<td style="text-align: left;">Allowlist scanner IPs, but alert if they ever <strong>succeed</strong> unexpectedly</td>
+</tr>
+<tr>
+<td style="text-align: left;">VPN or NAT gateways</td>
+<td style="text-align: left;">Many users share one source IP</td>
+<td style="text-align: left;">Group by account as well, or exclude the gateway and use VPN logs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-if-this-fired-for-real-response-steps">8. If This Fired for Real: Response Steps<a class="headerlink" href="#8-if-this-fired-for-real-response-steps" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Confirm:</strong> check the 4624 for the logon type, the time gap from the last failure, and whether the source IP is normal for this user.</li>
+<li><strong>Scope:</strong> look for other successes from the same IP, and any 4688 process activity under the account after the logon.</li>
+<li><strong>Contain:</strong> disable the account or force a password reset, kill active sessions, and isolate the source host if it is internal.</li>
+<li><strong>Escalate:</strong> a confirmed guessed password is a true positive at <strong>High</strong> severity. Escalate to IR with the timeline.</li>
+<li><strong>Prevent:</strong> enforce MFA, review lockout policy, and block legacy NTLM where possible.</li>
+</ol>
+<hr />
+<h2 id="9-takeaways">9. Takeaways<a class="headerlink" href="#9-takeaways" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Test against real events, not just your assumptions.</strong> One real 4625 from my own machine found two gaps the simulated test never would have.</li>
+<li><strong>SubStatus changes the story.</strong> <code>0xC000006A</code> means a real account is being guessed. <code>0xC0000064</code> means someone is guessing names.</li>
+<li><strong>Group by source to catch spraying.</strong> Grouping by account only catches one account being hammered.</li>
+<li><strong>Next:</strong> Lab 05 v2 runs these rules against real telemetry from a Windows VM sending logs to a Sentinel workspace.</li>
+</ul>
 
 
 

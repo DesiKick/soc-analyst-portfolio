@@ -218,6 +218,28 @@
   
   
   
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../foundations/what-a-soc-does/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Foundations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -352,6 +374,245 @@
       
   
   
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/what-a-soc-does/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What a SOC Analyst Does
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/lab-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/triage-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How I Triage an Alert
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/event-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event ID Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/attack-coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ATT&CK Coverage Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -387,7 +648,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -409,14 +670,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -695,7 +956,7 @@
   <span class="md-ellipsis">
     
   
-    Lab 05 - Brute Force Detection (Sentinel)
+    Lab 05 - Brute Force Detection Logic (KQL)
   
 
     
@@ -918,6 +1179,24 @@
 <p class="admonition-title">Verdict: Benign in this capture | Pattern worth alerting on</p>
 <p>The session is a terminal browser pulling a public directory listing. Nothing malicious was downloaded, but cleartext HTTP from a non-standard client is exactly what C2 and scripted downloads look like on the wire.</p>
 </div>
+<div class="admonition abstract">
+<p class="admonition-title">In plain English</p>
+<p><strong>What this is:</strong> A network recording (a PCAP) is like a transcript of every conversation computers had over the network. I replayed one conversation between a computer and a web server.</p>
+<p><strong>Why it matters:</strong> When a hacked computer contacts its attacker, the network recording often shows it, even if the attacker wiped the logs on the computer itself.</p>
+<p><strong>What I did:</strong> Filtered the recording down to just the web requests, rebuilt the full back-and-forth conversation, and identified the unusual program that made the request.</p>
+<p><strong>Result:</strong> This traffic was harmless: a text-only web browser downloading a public file list. I documented the pattern worth alerting on, which is unencrypted web traffic from programs that are not normal browsers.</p>
+</div>
+<p><strong>Skills this lab shows:</strong> <code>Wireshark</code> <code>Packet analysis</code> <code>HTTP</code> <code>IPv6</code> <code>Client fingerprinting</code></p>
+<details class="info">
+<summary>Key terms in this lab</summary>
+<ul>
+<li><strong>PCAP:</strong> a recording of network traffic</li>
+<li><strong>HTTP vs HTTPS:</strong> unencrypted vs encrypted web traffic</li>
+<li><strong>User-Agent:</strong> the label a program uses to identify itself to a website</li>
+<li><strong>C2:</strong> the channel an attacker uses to control a hacked computer</li>
+</ul>
+<p>Every term is explained in the <a href="../../foundations/glossary/">Glossary</a>.</p>
+</details>
 <hr />
 <h2 id="1-objective">1. Objective<a class="headerlink" href="#1-objective" title="Permanent link">&para;</a></h2>
 <p>When endpoint logs are missing or wiped, packets are still the source of truth. The goal: triage a capture, isolate application-layer requests, rebuild the full session, and pull out the artifacts an analyst would put in a ticket.</p>

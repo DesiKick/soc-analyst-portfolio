@@ -218,6 +218,28 @@
   
   
   
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../foundations/what-a-soc-does/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Foundations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -352,6 +374,245 @@
       
   
   
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/what-a-soc-does/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What a SOC Analyst Does
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/lab-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/triage-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How I Triage an Alert
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/event-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event ID Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/attack-coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ATT&CK Coverage Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -387,7 +648,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -409,14 +670,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -695,7 +956,7 @@
   <span class="md-ellipsis">
     
   
-    Lab 05 - Brute Force Detection (Sentinel)
+    Lab 05 - Brute Force Detection Logic (KQL)
   
 
     
@@ -918,6 +1179,24 @@
 <p class="admonition-title">Verdict: All samples malicious | Block, purge, and hunt for clicks</p>
 <p>Every sample impersonated a known brand and either harvested credentials or delivered a payload. None should reach a user inbox.</p>
 </div>
+<div class="admonition abstract">
+<p class="admonition-title">In plain English</p>
+<p><strong>What this is:</strong> Phishing emails pretend to come from trusted brands to trick people into giving up passwords or opening malware. I analyzed real phishing samples from a training set.</p>
+<p><strong>Why it matters:</strong> Most breaches start with an email. Catching a phishing campaign early, and finding everyone who clicked, is one of the most common things a SOC does.</p>
+<p><strong>What I did:</strong> Compared who each email claimed to be from with where it really came from, followed the links through their redirects, examined the attachments, and built a list of indicators to block.</p>
+<p><strong>Result:</strong> Every sample was malicious. The response plan: remove them from every inbox, block the senders and links, and check whether anyone clicked.</p>
+</div>
+<p><strong>Skills this lab shows:</strong> <code>Email header analysis</code> <code>SPF / DKIM / DMARC</code> <code>URL and redirect analysis</code> <code>IOC extraction</code> <code>Response planning</code></p>
+<details class="info">
+<summary>Key terms in this lab</summary>
+<ul>
+<li><strong>Spoofing:</strong> faking the sender of an email</li>
+<li><strong>Email header:</strong> the hidden routing details that show where an email really came from</li>
+<li><strong>IOC:</strong> a clue such as a bad domain or file name, used for blocking</li>
+<li><strong>Defanging:</strong> rewriting a link so it cannot be clicked by accident</li>
+</ul>
+<p>Every term is explained in the <a href="../../foundations/glossary/">Glossary</a>.</p>
+</details>
 <hr />
 <h2 id="1-objective">1. Objective<a class="headerlink" href="#1-objective" title="Permanent link">&para;</a></h2>
 <p>Phishing is still the most common way attackers get in. Modern lures use brand impersonation, lookalike names, and multi-stage redirects to get past email gateways.</p>
@@ -1139,13 +1418,13 @@
         
         
           
-          <a href="../lab-05-sentinel-bruteforce/" class="md-footer__link md-footer__link--next" aria-label="Next: Lab 05 - Brute Force Detection (Sentinel)">
+          <a href="../lab-05-sentinel-bruteforce/" class="md-footer__link md-footer__link--next" aria-label="Next: Lab 05 - Brute Force Detection Logic (KQL)">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Lab 05 - Brute Force Detection (Sentinel)
+                Lab 05 - Brute Force Detection Logic (KQL)
               </div>
             </div>
             <div class="md-footer__button md-icon">

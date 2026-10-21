@@ -13,6 +13,30 @@
          <lastmod>2026-10-21</lastmod>
     </url>
     <url>
+         <loc>https://desikick.github.io/soc-analyst-portfolio/foundations/attack-coverage/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
+         <loc>https://desikick.github.io/soc-analyst-portfolio/foundations/event-reference/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
+         <loc>https://desikick.github.io/soc-analyst-portfolio/foundations/glossary/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
+         <loc>https://desikick.github.io/soc-analyst-portfolio/foundations/lab-environment/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
+         <loc>https://desikick.github.io/soc-analyst-portfolio/foundations/triage-method/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
+         <loc>https://desikick.github.io/soc-analyst-portfolio/foundations/what-a-soc-does/</loc>
+         <lastmod>2026-10-21</lastmod>
+    </url>
+    <url>
          <loc>https://desikick.github.io/soc-analyst-portfolio/investigations/</loc>
          <lastmod>2026-10-21</lastmod>
     </url>
@@ -34,10 +58,6 @@
     </url>
     <url>
          <loc>https://desikick.github.io/soc-analyst-portfolio/investigations/lab-05-sentinel-bruteforce/</loc>
-         <lastmod>2026-10-21</lastmod>
-    </url>
-    <url>
-         <loc>https://desikick.github.io/soc-analyst-portfolio/investigations/lab-06-python-enrichment/</loc>
          <lastmod>2026-10-21</lastmod>
     </url>
 </urlset>

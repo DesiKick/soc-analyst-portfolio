@@ -12,9 +12,13 @@
         <meta name="author" content="Mian Talha Nayyar">
       
       
-        <link rel="canonical" href="https://desikick.github.io/soc-analyst-portfolio/investigations/lab-06-python-enrichment/">
+        <link rel="canonical" href="https://desikick.github.io/soc-analyst-portfolio/foundations/lab-environment/">
       
       
+        <link rel="prev" href="../what-a-soc-does/">
+      
+      
+        <link rel="next" href="../triage-method/">
       
       
         
@@ -25,7 +29,7 @@
     
     
       
-        <title>Lab 06: Python IOC Enrichment Engine - Mian Talha Nayyar | SOC Portfolio</title>
+        <title>Lab Environment - Mian Talha Nayyar | SOC Portfolio</title>
       
     
     
@@ -76,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab-06-automated-threat-intelligence-ioc-enrichment-engine-python-3" class="md-skip">
+        <a href="#lab-environment" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lab 06: Python IOC Enrichment Engine
+              Lab Environment
             
           </span>
         </div>
@@ -214,11 +218,35 @@
   
   
   
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../what-a-soc-does/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Foundations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
   
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../../investigations/" class="md-tabs__link">
           
   
   
@@ -346,6 +374,341 @@
       
   
   
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../what-a-soc-does/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What a SOC Analyst Does
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab Environment
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-sources-by-lab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Sources by Lab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-data-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the Data Flows
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-i-turn-on-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging I Turn On First
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planned-home-lab-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planned Home Lab Build
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triage-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How I Triage an Alert
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../event-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event ID Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../attack-coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ATT&CK Coverage Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
   
   
     
@@ -376,11 +739,11 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../investigations/" class="md-nav__link ">
               
   
   
@@ -398,14 +761,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -424,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-01-windows-process/" class="md-nav__link">
+      <a href="../../investigations/lab-01-windows-process/" class="md-nav__link">
         
   
   
@@ -452,7 +815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-02-network-traffic/" class="md-nav__link">
+      <a href="../../investigations/lab-02-network-traffic/" class="md-nav__link">
         
   
   
@@ -480,7 +843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-03-splunk-lsass/" class="md-nav__link">
+      <a href="../../investigations/lab-03-splunk-lsass/" class="md-nav__link">
         
   
   
@@ -508,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-04-phishing-analysis/" class="md-nav__link">
+      <a href="../../investigations/lab-04-phishing-analysis/" class="md-nav__link">
         
   
   
@@ -536,14 +899,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab-05-sentinel-bruteforce/" class="md-nav__link">
+      <a href="../../investigations/lab-05-sentinel-bruteforce/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Lab 05 - Brute Force Detection (Sentinel)
+    Lab 05 - Brute Force Detection Logic (KQL)
   
 
     
@@ -645,10 +1008,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-objective-operational-problem" class="md-nav__link">
+  <a href="#data-sources-by-lab" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Objective &amp; Operational Problem
+        Data Sources by Lab
       
     </span>
   </a>
@@ -656,10 +1019,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-enrichment-architecture-data-flow" class="md-nav__link">
+  <a href="#how-the-data-flows" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Enrichment Architecture &amp; Data Flow
+        How the Data Flows
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-i-turn-on-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging I Turn On First
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planned-home-lab-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planned Home Lab Build
       
     </span>
   </a>
@@ -683,42 +1068,170 @@
 
 
 
-<h1 id="lab-06-automated-threat-intelligence-ioc-enrichment-engine-python-3">Lab 06: Automated Threat Intelligence IOC Enrichment Engine (Python 3)<a class="headerlink" href="#lab-06-automated-threat-intelligence-ioc-enrichment-engine-python-3" title="Permanent link">&para;</a></h1>
-<div class="lab-meta">
-<p><strong>Category:</strong> Security Operations Automation &amp; Threat Intelligence<br>
-<strong>ATT&amp;CK:</strong> <a href="https://attack.mitre.org/tactics/TA0001/">TA0001 Initial Access</a> | <a href="https://attack.mitre.org/tactics/TA0011/">TA0011 Command and Control</a><br>
-<strong>Platform:</strong> Python 3.11+, REST APIs, Requests/urllib<br>
-<strong>Telemetry &amp; Feeds:</strong> AbuseIPDB API v2, RFC 822 forensic telemetry<br>
-<strong>Deliverable:</strong> Automated CLI tool (<code>enricher.py</code>) &amp; Markdown triage generator</p>
-</div>
-<div class="admonition success">
-<p class="admonition-title">Operational Impact: 95% Reduction in Triage Overhead</p>
-<p>Engineered a modular CLI automation script that parses raw IOC lists (IPv4 addresses, SHA-256 hashes), queries upstream threat intelligence endpoints, calculates aggregate risk scores, defangs dangerous network indicators, and outputs ready-to-paste markdown notes for SIEM/SOAR tickets.</p>
-</div>
+<h1 id="lab-environment">Lab Environment<a class="headerlink" href="#lab-environment" title="Permanent link">&para;</a></h1>
+<p>Where every lab's data came from and what it ran on. I'm explicit about this because a detection is only as credible as the data it was tested against.</p>
 <hr />
-<h2 id="1-objective-operational-problem">1. Objective &amp; Operational Problem<a class="headerlink" href="#1-objective-operational-problem" title="Permanent link">&para;</a></h2>
-<p>During security operations triage, Tier-1 and Tier-2 analysts spend 10 to 15 minutes per incident manually copying and pasting observables into VirusTotal, AbuseIPDB, and WHOIS databases.</p>
-<p>The goal of this project was to:
-1. Automate repetitive indicator lookups using a lightweight, zero-dependency Python script.
-2. Defang network indicators automatically (e.g., transforming <code>http://</code> to <code>hxxp://</code> and dots to <code>[.]</code>) to eliminate accidental clicks.
-3. Normalize threat reputation scores into high, medium, and low severity classifications.
-4. Generate ticket-ready incident notes formatted directly for Jira, ServiceNow, or Splunk SOAR.</p>
+<h2 id="data-sources-by-lab">Data Sources by Lab<a class="headerlink" href="#data-sources-by-lab" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Lab</th>
+<th style="text-align: left;">Data</th>
+<th style="text-align: left;">Where it came from</th>
+<th style="text-align: left;">Analyzed in</th>
+<th style="text-align: left;">Real or simulated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="../../investigations/lab-01-windows-process/">01 Process Auditing</a></td>
+<td style="text-align: left;">Windows Security log (4688)</td>
+<td style="text-align: left;">My workstation, <code>DESKTOP-2UVTUII</code>, with process auditing enabled</td>
+<td style="text-align: left;">Event Viewer</td>
+<td style="text-align: left;">Real, benign baseline</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="../../investigations/lab-02-network-traffic/">02 Network Traffic</a></td>
+<td style="text-align: left;">PCAP (<code>http.cap</code>)</td>
+<td style="text-align: left;">Public Wireshark sample capture</td>
+<td style="text-align: left;">Wireshark</td>
+<td style="text-align: left;">Real capture, public sample</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="../../investigations/lab-03-splunk-lsass/">03 LSASS Dumping</a></td>
+<td style="text-align: left;">Sysmon XML, 7,974 events</td>
+<td style="text-align: left;">Splunk Attack Range telemetry: two domain controllers attacked with Atomic Red Team T1003.001</td>
+<td style="text-align: left;">Splunk Enterprise (SPL)</td>
+<td style="text-align: left;">Real attack telemetry</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="../../investigations/lab-04-phishing-analysis/">04 Phishing</a></td>
+<td style="text-align: left;">Email headers and bodies</td>
+<td style="text-align: left;">TryHackMe Phishing Analysis module samples</td>
+<td style="text-align: left;">Manual header analysis, CyberChef</td>
+<td style="text-align: left;">Real phishing samples, training set</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="../../investigations/lab-05-sentinel-bruteforce/">05 Brute Force</a></td>
+<td style="text-align: left;">Windows Security log (4625) and a hand-built dataset</td>
+<td style="text-align: left;">My workstation, plus a <code>datatable</code> I wrote</td>
+<td style="text-align: left;">Azure Data Explorer (KQL), Event Viewer</td>
+<td style="text-align: left;">Logic tested on simulated data, plus one real local test</td>
+</tr>
+</tbody>
+</table>
+<p>Raw evidence for Labs 02 and 03 is in the repo's <a href="https://github.com/DesiKick/soc-analyst-portfolio/tree/main/evidence"><code>evidence/</code></a> folder.</p>
 <hr />
-<h2 id="2-enrichment-architecture-data-flow">2. Enrichment Architecture &amp; Data Flow<a class="headerlink" href="#2-enrichment-architecture-data-flow" title="Permanent link">&para;</a></h2>
-<p>```text
-[ Raw Alert Telemetry ]
-         |
-         v
-+-----------------------+     Indicator Validation &amp; Defanging
-|      enricher.py      | ---&gt; transforms dots &amp; URLs
-+-----------------------+
-         |
-         +---&gt; [ AbuseIPDB API v2 ]  ==&gt; Confidence of Abuse %, Country, ISP
-         |
-         v
-+-----------------------+
-| Normalized Output     | ---&gt; Ticket-Ready Markdown Report
-+-----------------------+</p>
+<h2 id="how-the-data-flows">How the Data Flows<a class="headerlink" href="#how-the-data-flows" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Stage</th>
+<th style="text-align: left;">Labs 01 and 05</th>
+<th style="text-align: left;">Lab 02</th>
+<th style="text-align: left;">Lab 03</th>
+<th style="text-align: left;">Lab 04</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Source</strong></td>
+<td style="text-align: left;">My workstation</td>
+<td style="text-align: left;">Public PCAP</td>
+<td style="text-align: left;">Attack Range domain controllers</td>
+<td style="text-align: left;">TryHackMe samples</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data</strong></td>
+<td style="text-align: left;">Windows Security log</td>
+<td style="text-align: left;">Network packets</td>
+<td style="text-align: left;">Sysmon (raw XML)</td>
+<td style="text-align: left;">Email headers and bodies</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Analyzed in</strong></td>
+<td style="text-align: left;">Event Viewer, Azure Data Explorer (KQL)</td>
+<td style="text-align: left;">Wireshark</td>
+<td style="text-align: left;">Splunk, with <code>rex</code> field extraction</td>
+<td style="text-align: left;">Header analysis, CyberChef</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Output</strong></td>
+<td style="text-align: left;">Write-up and detection rule</td>
+<td style="text-align: left;">Write-up and detection logic</td>
+<td style="text-align: left;">Write-up and validated detection</td>
+<td style="text-align: left;">Write-up and IOC block list</td>
+</tr>
+</tbody>
+</table>
+<p>Detection rules from every lab are saved in the repo's <a href="https://github.com/DesiKick/soc-analyst-portfolio/tree/main/detections"><code>detections/</code></a> folder.</p>
+<hr />
+<h2 id="logging-i-turn-on-first">Logging I Turn On First<a class="headerlink" href="#logging-i-turn-on-first" title="Permanent link">&para;</a></h2>
+<p>These settings decide what an investigation can see. On any new Windows host I check them first:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Setting</th>
+<th style="text-align: left;">Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Audit Process Creation (Success)</td>
+<td style="text-align: left;">Produces Event ID 4688 for every new process</td>
+</tr>
+<tr>
+<td style="text-align: left;">Include command line in process creation events</td>
+<td style="text-align: left;">Without it, 4688 shows <code>powershell.exe</code> but not what it ran</td>
+</tr>
+<tr>
+<td style="text-align: left;">Audit Logon (Success and Failure)</td>
+<td style="text-align: left;">Produces 4624 and 4625 for brute force and lateral movement work</td>
+</tr>
+<tr>
+<td style="text-align: left;">PowerShell Script Block Logging</td>
+<td style="text-align: left;">Produces Event ID 4104 with the deobfuscated script content</td>
+</tr>
+<tr>
+<td style="text-align: left;">Sysmon with a community config</td>
+<td style="text-align: left;">Adds hashes, network connections (3), process access (10), file creation (11), and DNS (22)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="planned-home-lab-build">Planned Home Lab Build<a class="headerlink" href="#planned-home-lab-build" title="Permanent link">&para;</a></h2>
+<p>The next step is a small Active Directory lab so future labs run on telemetry I generate end to end:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;">Purpose</th>
+<th style="text-align: left;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Windows Server domain controller</td>
+<td style="text-align: left;">Realistic AD authentication and Kerberos events</td>
+<td style="text-align: left;"><span class="pill wip">Planned</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Windows 10/11 client with Sysmon</td>
+<td style="text-align: left;">Endpoint telemetry</td>
+<td style="text-align: left;"><span class="pill wip">Planned</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Kali Linux attacker VM</td>
+<td style="text-align: left;">Generate brute force, spraying, and lateral movement</td>
+<td style="text-align: left;"><span class="pill wip">Planned</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Microsoft Sentinel workspace with Azure Monitor Agent</td>
+<td style="text-align: left;">Run the Lab 05 rules on real data (Lab 05 v2)</td>
+<td style="text-align: left;"><span class="pill wip">Planned</span></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -752,6 +1265,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../what-a-soc-does/" class="md-footer__link md-footer__link--prev" aria-label="Previous: What a SOC Analyst Does">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                What a SOC Analyst Does
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../triage-method/" class="md-footer__link md-footer__link--next" aria-label="Next: How I Triage an Alert">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                How I Triage an Alert
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
