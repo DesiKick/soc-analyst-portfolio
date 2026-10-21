@@ -23,7 +23,7 @@ Hands-on lab investigations built from raw telemetry. Each one goes from logs, p
 </div>
 
 <div class="stats">
-  <div><strong>5</strong><span>Lab Investigations</span></div>
+  <div><strong>6</strong><span>Lab Investigations</span></div>
   <div><strong>163</strong><span>LSASS Events Triaged</span></div>
   <div><strong>0 / 108</strong><span>Benign Events Alerted</span></div>
   <div><strong>SC-200</strong><span>Microsoft Certified</span></div>
@@ -154,6 +154,16 @@ Before the labs, these pages explain the job, how I set up my environment, how I
 
     [:octicons-arrow-right-24: Read Investigation](investigations/lab-05-sentinel-bruteforce.md)
 
+-   :material-code-json:{ .lg .middle } **Lab 06: Python Threat Intel IOC Enricher**
+
+    ---
+
+    Automated indicator verification with Python 3. Queries VirusTotal and AbuseIPDB APIs, neutralizes actionable links (defanging), and generates ticket-ready Markdown tables in 15 seconds.
+
+    `Python 3` `REST APIs` `VirusTotal v3` `AbuseIPDB`
+
+    [:octicons-arrow-right-24: Read Investigation](investigations/lab-06-python-enrichment.md)
+
 -   :material-lan:{ .lg .middle } **Lab 02: Network Traffic & HTTP Stream Reconstruction**
 
     ---
@@ -175,7 +185,6 @@ Before the labs, these pages explain the job, how I set up my environment, how I
     [:octicons-arrow-right-24: Read Investigation](investigations/lab-01-windows-process.md)
 
 </div>
-
 ---
 
 ## How Each Lab Is Built
