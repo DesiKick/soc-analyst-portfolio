@@ -845,7 +845,7 @@
   <span class="md-ellipsis">
     
   
-    Lab 06 - Python IOC Enrichment Tool
+    Lab 06 - Python Threat Intel IOC Enricher
   
 
     
@@ -956,7 +956,7 @@
 
 
 <h1 id="investigations">Investigations<a class="headerlink" href="#investigations" title="Permanent link">&para;</a></h1>
-<p>Each lab documents one case from raw telemetry to a verdict and a detection. New here? Start with the <a href="../foundations/lab-environment/">Foundations</a> pages. Raw evidence is in the repo's <a href="https://github.com/DesiKick/soc-analyst-portfolio/tree/main/evidence"><code>evidence/</code></a> folder.</p>
+<p>Each lab documents one case from raw telemetry to a verdict and a detection. New here? Start with the <a href="../foundations/what-a-soc-does/">Foundations</a> pages. Raw evidence is in the repo's <a href="https://github.com/DesiKick/soc-analyst-portfolio/tree/main/evidence"><code>evidence/</code></a> folder.</p>
 <table>
 <thead>
 <tr>
@@ -1001,27 +1001,41 @@
 <td style="text-align: left;">Failure-then-success correlation, password spraying</td>
 <td style="text-align: left;">KQL, Azure Data Explorer, Event ID 4625 / 4624</td>
 <td style="text-align: left;">T1110.001, T1110.003</td>
-<td style="text-align: left;"><span class="pill done">Complete</span> (simulated data)</td>
+<td style="text-align: left;"><span class="pill done">Complete</span></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Lab 05 v2: Brute Force on Real Telemetry</strong></td>
-<td style="text-align: left;">Rerun Lab 05 rules on live logs</td>
-<td style="text-align: left;">Windows VM, Microsoft Sentinel</td>
-<td style="text-align: left;">T1110</td>
+<td style="text-align: left;"><strong><a href="lab-06-python-enrichment/">Lab 06: Python Threat Intel IOC Enricher</a></strong></td>
+<td style="text-align: left;">Automated threat intelligence IOC enrichment tool</td>
+<td style="text-align: left;">Python 3, VirusTotal API, AbuseIPDB</td>
+<td style="text-align: left;">Cross-cutting Triage</td>
+<td style="text-align: left;"><span class="pill wip">In Progress</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lab 07: AD Password Spraying Caught in Sentinel</strong></td>
+<td style="text-align: left;">Multi-account password spraying and dictionary attack</td>
+<td style="text-align: left;">VirtualBox, Windows Server DC, Kali, Sentinel KQL</td>
+<td style="text-align: left;">T1110.001, T1110.003</td>
 <td style="text-align: left;"><span class="pill wip">Planned</span></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Lab 06: IOC Enrichment Script</strong></td>
-<td style="text-align: left;">Automated IP and domain enrichment, code in repo</td>
-<td style="text-align: left;">Python, VirusTotal API, AbuseIPDB</td>
-<td style="text-align: left;">N/A</td>
+<td style="text-align: left;"><strong>Lab 08: Kerberoasting Attack &amp; Detection</strong></td>
+<td style="text-align: left;">Service ticket requests, RC4 encryption detection</td>
+<td style="text-align: left;">Impacket GetUserSPNs, Event ID 4769, SPL/KQL</td>
+<td style="text-align: left;">T1558.003</td>
 <td style="text-align: left;"><span class="pill wip">Planned</span></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Lab 07: C2 Beacon Hunting</strong></td>
-<td style="text-align: left;">Periodic callback detection</td>
-<td style="text-align: left;">Zeek, RITA</td>
-<td style="text-align: left;">T1071</td>
+<td style="text-align: left;"><strong>Lab 09: Endpoint Persistence Hunt</strong></td>
+<td style="text-align: left;">Scheduled tasks, Run keys, Atomic Red Team</td>
+<td style="text-align: left;">Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard</td>
+<td style="text-align: left;">T1053.005, T1547.001</td>
+<td style="text-align: left;"><span class="pill wip">Planned</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lab 10: C2 Beacon Hunting with Zeek &amp; RITA</strong></td>
+<td style="text-align: left;">Network beacon scoring, jitter analysis</td>
+<td style="text-align: left;">Zeek Network Logs, RITA, Wireshark</td>
+<td style="text-align: left;">T1071.001, T1041</td>
 <td style="text-align: left;"><span class="pill wip">Planned</span></td>
 </tr>
 </tbody>
