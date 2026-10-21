@@ -59,3 +59,27 @@ def defang(indicator: str) -> str:
     """Neutralizes clickable links and actionable IP strings."""
     defanged = indicator.replace("http://", "hxxp://").replace("https://", "hxxps://")
     return defanged.replace(".", "[.]")
+
+abuse_key = os.getenv("ABUSEIPDB_API_KEY", "")
+vt_key = os.getenv("VIRUSTOTAL_API_KEY", "")
+
+[ SIEM Alert Fired (Sentinel / Splunk) ]
+                   |
+                   v
+[ Webhook Triggers Python Enrichment Playbook ]
+                   |
+        +----------+----------+
+        |                     |
+        v                     v
+[ AbuseIPDB Query ]   [ VirusTotal Query ]
+        |                     |
+        +----------+----------+
+                   |
+                   v
+[ Triage Verdict Evaluated ]
+       /                   \
+      /                     \
+[ Verdict: BENIGN ]     [ Verdict: MALICIOUS ]
+      |                             |
+      v                             v
+[ Auto-close low-risk alert ]  [ Escalate to Tier-2, Isolate Host, Revoke Credentials ]
