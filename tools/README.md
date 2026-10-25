@@ -1,18 +1,48 @@
-# SOC Automation Suite: Threat Intelligence IOC Enricher
+# IOC Enricher
 
-An automated command-line Python utility engineered to triage indicators of compromise (IPs, domains, and SHA256 hashes) using the AbuseIPDB v2 and VirusTotal v3 REST APIs.
+A command-line tool that looks up IP addresses, domains, and file hashes in **VirusTotal** and **AbuseIPDB**, assigns a triage verdict, defangs every indicator, and writes a ticket-ready Markdown report.
 
-## Capabilities
-* **Automatic Indicator Classification:** Applies strict regex evaluation for IPv4, SHA256 file digests, and fully qualified domain names (FQDNs).
-* **Indicator Defanging:** Automatically sanitizes indicators (`hxxp://`, `[.]`) to ensure safe pasting into ticketing platforms (Jira, ServiceNow) without triggering URL click filters.
-* **Reputation Correlation:** Collects real-time detection ratios, AbuseIPDB confidence scores, ISP classification, and historical abuse reports.
-* **Ticket Markdown Export:** Formats results into structured, copy-pasteable Markdown tables.
+Write-up: [Lab 06 on the portfolio site](https://desikick.github.io/soc-analyst-portfolio/investigations/lab-06-python-enrichment/)
 
-## Environment Setup & API Configuration
+## What it does
 
-To keep API credentials out of source control, the script reads keys from environment variables:
+| Feature | Detail |
+| :--- | :--- |
+| Indicator types | IPv4/IPv6, domains, MD5 / SHA1 / SHA256 hashes. Accepts defanged input like `hxxp://bad[.]com` |
+| Sources | VirusTotal v3 (all types), AbuseIPDB v2 (public IPs) |
+| Verdicts | MALICIOUS, SUSPICIOUS, CLEAN, NOT FOUND, NO DATA, INTERNAL, INVALID |
+| Fail closed | CLEAN only when a source actually answered. Missing keys, errors, and rate limits give NO DATA |
+| Privacy | Private and reserved IPs are never sent to external APIs |
+| Rate limits | Waits 15 seconds between VirusTotal calls to respect the free tier (4 per minute) |
+| Secrets | API keys are read from environment variables only |
 
-### Windows (PowerShell)
+## Setup (Windows PowerShell)
+
 ```powershell
-$env:ABUSEIPDB_API_KEY="your_abuseipdb_api_key_here"
-$env:VIRUSTOTAL_API_KEY="your_virustotal_api_key_here"
+pip install requests
+$env:VIRUSTOTAL_API_KEY = "paste-your-virustotal-key"
+$env:ABUSEIPDB_API_KEY  = "paste-your-abuseipdb-key"
+```
+
+Free keys: [VirusTotal](https://www.virustotal.com/gui/join-us) and [AbuseIPDB](https://www.abuseipdb.com/register). The keys last only for the current PowerShell window, so they never end up in a file.
+
+## Usage
+
+```powershell
+# Portfolio test set (indicators from Labs 03 to 05 plus two controls)
+python tools\enricher.py --lab-set -o report.md
+
+# Your own indicators
+python tools\enricher.py -i 8.8.8.8 hxxp://devret[.]xyz
+
+# A file with one indicator per line
+python tools\enricher.py -f iocs.txt -o report.md
+```
+
+## Tests
+
+12 offline tests with fake API responses. No keys or internet needed:
+
+```powershell
+python -m unittest discover -s tools -v
+```

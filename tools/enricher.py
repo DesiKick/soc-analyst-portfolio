@@ -1,238 +1,250 @@
 #!/usr/bin/env python3
 """
-SOC Automation Tool: Threat Intelligence IOC Enricher
+IOC Enricher: threat intelligence lookups for SOC triage.
 Author: Mian Talha Nayyar
-Description: Automates triage enrichment for IPs, domains, and file hashes via
-             AbuseIPDB and VirusTotal v3 REST APIs. Outputs defanged markdown
-             reports suitable for SOC ticketing systems.
+
+Takes IP addresses, domains, and file hashes, looks them up in VirusTotal (v3)
+and AbuseIPDB (v2), assigns a triage verdict, defangs every indicator, and
+writes a ticket-ready Markdown report.
+
+Design rules:
+  * Fail closed: an indicator is only marked CLEAN when at least one source
+    actually returned data. Missing keys or API errors give NO DATA, never CLEAN.
+  * Private and reserved IPs are never sent to external APIs.
+  * API keys are read from environment variables, never from code or arguments.
+
+Usage:
+  python tools/enricher.py -i 8.8.8.8 example.com
+  python tools/enricher.py -f iocs.txt -o report.md
+  python tools/enricher.py --lab-set -o report.md
 """
 
+import argparse
+import ipaddress
 import os
 import re
 import sys
-import argparse
-import requests
-from typing import Dict, List, Any
+import time
+from datetime import datetime, timezone
 
-# Regular Expression Patterns for IOC Detection
-REGEX_IPV4 = r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-REGEX_SHA256 = r"^[a-fA-F0-9]{64}$"
-REGEX_DOMAIN = r"^(?!:\/\/)([a-zA-Z0-9-_]+\.)+[a-zA-Z]{2,}$"
+import requests
+
+VT_URLS = {
+    "ip": "https://www.virustotal.com/api/v3/ip_addresses/{}",
+    "domain": "https://www.virustotal.com/api/v3/domains/{}",
+    "hash": "https://www.virustotal.com/api/v3/files/{}",
+}
+ABUSE_URL = "https://api.abuseipdb.com/api/v2/check"
+
+RE_MD5 = re.compile(r"^[a-fA-F0-9]{32}$")
+RE_SHA1 = re.compile(r"^[a-fA-F0-9]{40}$")
+RE_SHA256 = re.compile(r"^[a-fA-F0-9]{64}$")
+RE_DOMAIN = re.compile(r"^(?=.{4,253}$)([a-zA-Z0-9_-]{1,63}\.)+[a-zA-Z]{2,63}$")
+
+# Indicators from earlier portfolio labs, plus one known-good and one known-bad control.
+LAB_SET = [
+    ("7234C8F98B87593641BBDB594E34C94B9436986C4FB70E7DA5BCECFF147D14C3", "Lab 03: binary that opened LSASS 38 times"),
+    ("sultanbogor.com", "Lab 04: envelope sender domain in PayPal lure"),
+    ("musacombi.online", "Lab 04: sender domain in Netflix lure"),
+    ("devret.xyz", "Lab 04: tracking pixel host"),
+    ("192.168.10.45", "Lab 05: simulated attacker IP (private)"),
+    ("8.8.8.8", "Control: known-good public DNS server"),
+    ("185.220.101.5", "Control: public IP from abuse feeds, expected to flag"),
+]
+
+VT_MALICIOUS = 5      # engines flagging malicious for a MALICIOUS verdict
+ABUSE_MALICIOUS = 75  # AbuseIPDB confidence for a MALICIOUS verdict
+ABUSE_SUSPICIOUS = 25
+
+
+def refang(raw: str) -> str:
+    """Accept indicators pasted in defanged form, like hxxp://bad[.]com."""
+    s = raw.strip().replace("[.]", ".").replace("(.)", ".").replace("[:]", ":")
+    s = re.sub(r"^hxxps?://", "", s, flags=re.I)
+    s = re.sub(r"^https?://", "", s, flags=re.I)
+    return s.split("/")[0] if not RE_SHA256.match(s) else s
+
 
 def defang(indicator: str) -> str:
-    """Safely defangs IP addresses, domains, and URLs for ticket documentation."""
-    defanged = indicator.replace("http://", "hxxp://").replace("https://", "hxxps://")
-    return defanged.replace(".", "[.]")
+    """Make an indicator safe to paste into tickets and chat."""
+    return indicator.replace("http://", "hxxp://").replace("https://", "hxxps://").replace(".", "[.]")
 
-def classify_ioc(indicator: str) -> str:
-    """Identifies indicator type based on strict regex patterns."""
-    indicator = indicator.strip()
-    if re.match(REGEX_IPV4, indicator):
-        return "ip"
-    elif re.match(REGEX_SHA256, indicator):
+
+def classify(indicator: str) -> str:
+    try:
+        ip = ipaddress.ip_address(indicator)
+        return "private_ip" if (ip.is_private or ip.is_reserved or ip.is_loopback) else "ip"
+    except ValueError:
+        pass
+    if RE_SHA256.match(indicator) or RE_SHA1.match(indicator) or RE_MD5.match(indicator):
         return "hash"
-    elif re.match(REGEX_DOMAIN, indicator):
+    if RE_DOMAIN.match(indicator):
         return "domain"
     return "unknown"
 
-def enrich_abuseipdb(ip: str, api_key: str) -> Dict[str, Any]:
-    """Queries the AbuseIPDB v2 REST API for IP reputation."""
-    if not api_key:
-        return {"error": "API Key missing", "score": "N/A", "isp": "Unknown", "usage": "Unknown"}
-    
-    url = "https://api.abuseipdb.com/api/v2/check"
-    headers = {"Accept": "application/json", "Key": api_key}
-    params = {"ipAddress": ip, "maxAgeInDays": 90, "verbose": True}
-    
+
+def query_virustotal(indicator: str, ioc_type: str, key: str, session=requests) -> dict:
+    if not key:
+        return {"ok": False, "note": "no VirusTotal key"}
     try:
-        response = requests.get(url, headers=headers, params=params, timeout=10)
-        if response.status_code == 200:
-            data = response.json().get("data", {})
-            return {
-                "score": f"{data.get('abuseConfidenceScore', 0)}%",
-                "isp": data.get("isp", "Unknown"),
-                "country": data.get("countryCode", "Unknown"),
-                "total_reports": data.get("totalReports", 0)
-            }
-        elif response.status_code == 401:
-            return {"error": "Invalid API Key", "score": "Auth Error", "isp": "N/A", "total_reports": 0}
-        elif response.status_code == 429:
-            return {"error": "Rate limited", "score": "Throttled", "isp": "N/A", "total_reports": 0}
-        else:
-            return {"error": f"HTTP {response.status_code}", "score": "N/A", "isp": "N/A", "total_reports": 0}
-    except requests.exceptions.RequestException as e:
-        return {"error": str(e), "score": "Timeout", "isp": "N/A", "total_reports": 0}
+        r = session.get(VT_URLS[ioc_type].format(indicator), headers={"x-apikey": key}, timeout=15)
+    except requests.RequestException as e:
+        return {"ok": False, "note": f"VT error: {type(e).__name__}"}
+    if r.status_code == 404:
+        return {"ok": True, "found": False}
+    if r.status_code == 429:
+        return {"ok": False, "note": "VT rate limited"}
+    if r.status_code == 401:
+        return {"ok": False, "note": "VT key rejected"}
+    if r.status_code != 200:
+        return {"ok": False, "note": f"VT HTTP {r.status_code}"}
+    attrs = r.json().get("data", {}).get("attributes", {})
+    stats = attrs.get("last_analysis_stats", {})
+    return {
+        "ok": True, "found": True,
+        "malicious": int(stats.get("malicious", 0)),
+        "suspicious": int(stats.get("suspicious", 0)),
+        "total": sum(int(v) for v in stats.values() if isinstance(v, int)),
+        "names": attrs.get("meaningful_name") or "",
+    }
 
-def enrich_virustotal(indicator: str, ioc_type: str, api_key: str) -> Dict[str, Any]:
-    """Queries the VirusTotal v3 REST API for hashes, domains, and IPs."""
-    if not api_key:
-        return {"error": "API Key missing", "malicious": 0, "total": 0, "reputation": "N/A"}
-    
-    headers = {"x-apikey": api_key}
-    
-    if ioc_type == "hash":
-        url = f"https://www.virustotal.com/api/v3/files/{indicator}"
-    elif ioc_type == "domain":
-        url = f"https://www.virustotal.com/api/v3/domains/{indicator}"
-    elif ioc_type == "ip":
-        url = f"https://www.virustotal.com/api/v3/ip_addresses/{indicator}"
-    else:
-        return {"error": "Unsupported type", "malicious": 0, "total": 0}
 
+def query_abuseipdb(ip: str, key: str, session=requests) -> dict:
+    if not key:
+        return {"ok": False, "note": "no AbuseIPDB key"}
     try:
-        response = requests.get(url, headers=headers, timeout=10)
-        if response.status_code == 200:
-            stats = response.json().get("data", {}).get("attributes", {}).get("last_analysis_stats", {})
-            malicious = stats.get("malicious", 0)
-            suspicious = stats.get("suspicious", 0)
-            harmless = stats.get("harmless", 0)
-            undetected = stats.get("undetected", 0)
-            total = malicious + suspicious + harmless + undetected
-            return {"malicious": malicious, "suspicious": suspicious, "total": total}
-        elif response.status_code == 404:
-            return {"malicious": 0, "suspicious": 0, "total": 0, "note": "Not found in VT database"}
-        elif response.status_code == 429:
-            return {"error": "Rate limited", "malicious": "N/A", "total": "N/A"}
-        else:
-            return {"error": f"HTTP {response.status_code}", "malicious": "N/A", "total": "N/A"}
-    except requests.exceptions.RequestException as e:
-        return {"error": str(e), "malicious": "N/A", "total": "N/A"}
+        r = session.get(ABUSE_URL, headers={"Accept": "application/json", "Key": key},
+                        params={"ipAddress": ip, "maxAgeInDays": 90}, timeout=15)
+    except requests.RequestException as e:
+        return {"ok": False, "note": f"AbuseIPDB error: {type(e).__name__}"}
+    if r.status_code == 429:
+        return {"ok": False, "note": "AbuseIPDB rate limited"}
+    if r.status_code == 401:
+        return {"ok": False, "note": "AbuseIPDB key rejected"}
+    if r.status_code != 200:
+        return {"ok": False, "note": f"AbuseIPDB HTTP {r.status_code}"}
+    d = r.json().get("data", {})
+    return {
+        "ok": True,
+        "score": int(d.get("abuseConfidenceScore", 0)),
+        "reports": int(d.get("totalReports", 0)),
+        "isp": d.get("isp") or "unknown ISP",
+        "country": d.get("countryCode") or "??",
+        "tor": bool(d.get("isTor", False)),
+    }
 
-def generate_report(iocs: List[str], abuse_key: str, vt_key: str, output_file: str = None) -> str:
-    """Processes each IOC, extracts threat scores, and compiles a Markdown table."""
-    results = []
-    
-    print(f"\n[*] Starting IOC Enrichment across {len(iocs)} indicators...\n")
-    
-    for raw_ioc in iocs:
-        raw_ioc = raw_ioc.strip()
-        if not raw_ioc:
-            continue
-        
-        ioc_type = classify_ioc(raw_ioc)
-        defanged_ioc = defang(raw_ioc)
-        verdict = "Undetermined"
-        vt_score = "N/A"
-        abuse_score = "N/A"
-        details = "Manual Review Required"
-        
-        print(f"[-] Enriching {ioc_type.upper()}: {defanged_ioc}")
-        
-        if ioc_type == "ip":
-            # AbuseIPDB
-            abuse_res = enrich_abuseipdb(raw_ioc, abuse_key)
-            abuse_score = abuse_res.get("score", "N/A")
-            isp = abuse_res.get("isp", "Unknown")
-            
-            # VirusTotal
-            vt_res = enrich_virustotal(raw_ioc, "ip", vt_key)
-            vt_mal = vt_res.get("malicious", 0)
-            vt_tot = vt_res.get("total", 0)
-            vt_score = f"{vt_mal}/{vt_tot}" if vt_tot != "N/A" else "Throttled"
-            
-            # Scoring logic
-            conf = int(abuse_res.get("score", "0%").replace("%", "")) if "%" in str(abuse_res.get("score")) else 0
-            if conf >= 80 or (isinstance(vt_mal, int) and vt_mal >= 5):
-                verdict = "MALICIOUS"
-                details = f"AbuseIPDB Conf: {conf}% | ISP: {isp}"
-            elif conf > 0 or (isinstance(vt_mal, int) and vt_mal > 0):
-                verdict = "SUSPICIOUS"
-                details = f"Abuse reports: {abuse_res.get('total_reports', 0)} | ISP: {isp}"
-            else:
-                verdict = "BENIGN / CLEAN"
-                details = f"Zero detections across vendors | ISP: {isp}"
-                
-        elif ioc_type in ["domain", "hash"]:
-            vt_res = enrich_virustotal(raw_ioc, ioc_type, vt_key)
-            vt_mal = vt_res.get("malicious", 0)
-            vt_tot = vt_res.get("total", 0)
-            vt_score = f"{vt_mal}/{vt_tot}" if vt_tot != "N/A" else "Throttled"
-            
-            if isinstance(vt_mal, int) and vt_mal >= 5:
-                verdict = "MALICIOUS"
-                details = f"Flagged by {vt_mal} AV detection engines"
-            elif isinstance(vt_mal, int) and vt_mal > 0:
-                verdict = "SUSPICIOUS"
-                details = f"Low engine detection ({vt_mal} flags)"
-            elif vt_res.get("note") == "Not found in VT database":
-                verdict = "UNKNOWN"
-                details = "No existing intelligence records in VirusTotal"
-            else:
-                verdict = "BENIGN / CLEAN"
-                details = "Zero detections across global telemetry"
-        else:
+
+def verdict_for(vt: dict, ab: dict) -> str:
+    """Fail closed: CLEAN only when a source answered and nothing was flagged."""
+    vt_mal = vt.get("malicious", 0) if vt.get("ok") else 0
+    vt_sus = vt.get("suspicious", 0) if vt.get("ok") else 0
+    ab_score = ab.get("score", 0) if ab.get("ok") else 0
+    if vt_mal >= VT_MALICIOUS or ab_score >= ABUSE_MALICIOUS:
+        return "MALICIOUS"
+    if vt_mal > 0 or vt_sus > 0 or ab_score >= ABUSE_SUSPICIOUS:
+        return "SUSPICIOUS"
+    answered = (vt.get("ok") and vt.get("found")) or ab.get("ok")
+    if answered:
+        return "CLEAN"
+    if vt.get("ok") and vt.get("found") is False:
+        return "NOT FOUND"
+    return "NO DATA"
+
+
+def fmt_vt(vt: dict) -> str:
+    if not vt:
+        return "not queried"
+    if not vt.get("ok"):
+        return vt["note"]
+    if not vt.get("found"):
+        return "not in VirusTotal"
+    return f"{vt['malicious']}/{vt['total']} malicious"
+
+
+def fmt_ab(ab: dict) -> str:
+    if not ab:
+        return "n/a"
+    if not ab.get("ok"):
+        return ab["note"]
+    tor = ", Tor exit" if ab["tor"] else ""
+    return f"{ab['score']}% ({ab['reports']} reports, {ab['country']}{tor})"
+
+
+def enrich(iocs, vt_key, abuse_key, vt_delay=15.0, session=requests, sleep=time.sleep, log=print):
+    rows, vt_calls = [], 0
+    for raw, context in iocs:
+        ind = refang(raw)
+        kind = classify(ind)
+        vt, ab = {}, {}
+        log(f"[-] {kind.upper():<10} {defang(ind)}")
+        if kind == "private_ip":
+            verdict, vt, ab = "INTERNAL", {"ok": False, "note": "private IP, not sent to APIs"}, {}
+        elif kind == "unknown":
             verdict = "INVALID"
-            details = "Unrecognized IOC syntax"
+            vt = {"ok": False, "note": "unrecognized format"}
+        else:
+            if vt_key:
+                if vt_calls and vt_delay:
+                    sleep(vt_delay)  # VirusTotal free tier allows 4 requests per minute
+                vt_calls += 1
+            vt = query_virustotal(ind, kind, vt_key, session)
+            if kind == "ip":
+                ab = query_abuseipdb(ind, abuse_key, session)
+            verdict = verdict_for(vt, ab)
+        rows.append({"ioc": defang(ind), "type": kind.replace("_", " "), "vt": fmt_vt(vt),
+                     "abuse": fmt_ab(ab), "verdict": verdict, "context": context})
+    return rows
 
-        results.append({
-            "defanged": defanged_ioc,
-            "type": ioc_type.upper(),
-            "vt_score": vt_score,
-            "abuse_score": abuse_score,
-            "verdict": verdict,
-            "details": details
-        })
 
-    # Compile Markdown Table
-    md = "### Incident Response Automated IOC Enrichment Report\n\n"
-    md += "| Defanged Indicator | Type | VirusTotal Detections | AbuseIPDB Confidence | SOC Triage Verdict | Forensic Context |\n"
-    md += "| :--- | :--- | :--- | :--- | :--- | :--- |\n"
-    for r in results:
-        badge = r['verdict']
-        if r['verdict'] == "MALICIOUS":
-            badge = f"<span style='color:#ef4444;font-weight:bold;'>MALICIOUS</span>"
-        elif r['verdict'] == "SUSPICIOUS":
-            badge = f"<span style='color:#f59e0b;font-weight:bold;'>SUSPICIOUS</span>"
-        elif "BENIGN" in r['verdict']:
-            badge = f"<span style='color:#10b981;font-weight:bold;'>BENIGN</span>"
+def to_markdown(rows, elapsed: float, sources: str) -> str:
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    out = [f"**Generated:** {stamp} | **Indicators:** {len(rows)} | **Run time:** {elapsed:.1f} s | **Sources:** {sources}", "",
+           "| Indicator (defanged) | Type | VirusTotal | AbuseIPDB | Verdict | Context |",
+           "| :--- | :--- | :--- | :--- | :--- | :--- |"]
+    for r in rows:
+        out.append(f"| `{r['ioc']}` | {r['type']} | {r['vt']} | {r['abuse']} | **{r['verdict']}** | {r['context']} |")
+    return "\n".join(out) + "\n"
 
-        md += f"| `{r['defanged']}` | {r['type']} | {r['vt_score']} | {r['abuse_score']} | {badge} | {r['details']} |\n"
 
-    print("\n[+] Enrichment complete. Ticket table generated.\n")
-    if output_file:
-        with open(output_file, "w", encoding="utf-8") as f:
-            f.write(md)
-        print(f"[+] Report exported to: {output_file}")
-    
-    return md
+def main(argv=None):
+    p = argparse.ArgumentParser(description="Enrich IOCs with VirusTotal and AbuseIPDB.")
+    p.add_argument("-i", "--iocs", nargs="+", help="indicators separated by spaces (defanged input is fine)")
+    p.add_argument("-f", "--file", help="file with one indicator per line")
+    p.add_argument("--lab-set", action="store_true", help="run the portfolio test set from Labs 03 to 05")
+    p.add_argument("-o", "--output", help="write the Markdown report to this file")
+    p.add_argument("--vt-delay", type=float, default=15.0, help="seconds between VirusTotal calls (free tier: 15)")
+    a = p.parse_args(argv)
 
-def main():
-    parser = argparse.ArgumentParser(description="Enrich threat indicators using VirusTotal and AbuseIPDB APIs.")
-    parser.add_argument("-i", "--iocs", nargs="+", help="One or more IOCs separated by spaces")
-    parser.add_argument("-f", "--file", help="File containing list of IOCs (one per line)")
-    parser.add_argument("-o", "--output", help="Save the output markdown table to a file")
-    args = parser.parse_args()
+    vt_key = os.getenv("VIRUSTOTAL_API_KEY", "").strip()
+    abuse_key = os.getenv("ABUSEIPDB_API_KEY", "").strip()
+    if not vt_key and not abuse_key:
+        print("[!] No API keys found. Set VIRUSTOTAL_API_KEY and ABUSEIPDB_API_KEY first.")
+        print("[!] Every indicator will show NO DATA until keys are set.\n")
 
-    # Load API keys from environment variables (Prevent credential leakage in GitHub)
-    abuse_key = os.getenv("ABUSEIPDB_API_KEY", "")
-    vt_key = os.getenv("VIRUSTOTAL_API_KEY", "")
+    iocs = []
+    if a.lab_set:
+        iocs += LAB_SET
+    if a.iocs:
+        iocs += [(x, "") for x in a.iocs]
+    if a.file:
+        with open(a.file, encoding="utf-8") as fh:
+            iocs += [(line.strip(), "") for line in fh if line.strip() and not line.startswith("#")]
+    if not iocs:
+        p.error("give indicators with -i, -f, or --lab-set")
 
-    if not abuse_key and not vt_key:
-        print("[!] WARNING: Neither ABUSEIPDB_API_KEY nor VIRUSTOTAL_API_KEY environment variables are set.")
-        print("[!] Running in offline mock evaluation mode.\n")
+    sources = ", ".join(s for s, k in (("VirusTotal", vt_key), ("AbuseIPDB", abuse_key)) if k) or "none (no keys set)"
+    print(f"[*] Enriching {len(iocs)} indicators | sources: {sources}\n")
+    t0 = time.perf_counter()
+    rows = enrich(iocs, vt_key, abuse_key, a.vt_delay)
+    elapsed = time.perf_counter() - t0
+    md = to_markdown(rows, elapsed, sources)
+    print("\n" + md)
+    if a.output:
+        with open(a.output, "w", encoding="utf-8") as fh:
+            fh.write(md)
+        print(f"[+] Report saved to {a.output}")
+    return 0
 
-    ioc_list = []
-    if args.iocs:
-        ioc_list.extend(args.iocs)
-    if args.file and os.path.exists(args.file):
-        with open(args.file, "r", encoding="utf-8") as f:
-            ioc_list.extend([line.strip() for line in f if line.strip()])
-
-    if not ioc_list:
-        # Default test dataset from our portfolio investigations:
-        # Lab 03: Credential dumper hash
-        # Lab 04: Sultanbogor delivery phishing domain, devret redirect
-        # Lab 05: Attacker internal/pivot IP
-        ioc_list = [
-            "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-            "sultanbogor.com",
-            "devret.xyz",
-            "185.220.101.5",
-            "192.168.10.45"
-        ]
-
-    report = generate_report(ioc_list, abuse_key, vt_key, args.output)
-    print(report)
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
