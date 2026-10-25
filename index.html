@@ -942,7 +942,7 @@
   <span class="md-ellipsis">
     
   
-    Lab 06 - Python Threat Intel IOC Enricher
+    Lab 06 - Python IOC Enrichment Tool
   
 
     
@@ -1232,10 +1232,10 @@ Hands-on lab investigations built from raw telemetry. Each one goes from logs, p
 <p><a href="investigations/lab-05-sentinel-bruteforce/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span> Read Investigation</a></p>
 </li>
 <li>
-<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 3h2v2H5v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5h2v2H5c-1.07-.27-2-.9-2-2v-4a2 2 0 0 0-2-2H0v-2h1a2 2 0 0 0 2-2V5a2 2 0 0 1 2-2m14 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3zm-7 12a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-4 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m8 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1"/></svg></span> <strong>Lab 06: Python Threat Intel IOC Enricher</strong></p>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 3h2v2H5v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5h2v2H5c-1.07-.27-2-.9-2-2v-4a2 2 0 0 0-2-2H0v-2h1a2 2 0 0 0 2-2V5a2 2 0 0 1 2-2m14 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3zm-7 12a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-4 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m8 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1"/></svg></span> <strong>Lab 06: Python IOC Enrichment Tool</strong></p>
 <hr />
-<p>Automated indicator verification with Python 3. Queries VirusTotal and AbuseIPDB APIs, neutralizes actionable links (defanging), and generates ticket-ready Markdown tables in 15 seconds.</p>
-<p><code>Python 3</code> <code>REST APIs</code> <code>VirusTotal v3</code> <code>AbuseIPDB</code></p>
+<p>A Python tool that checks IPs, domains, and hashes against VirusTotal and AbuseIPDB, assigns a verdict, and writes a ticket-ready table. 12 automated tests, and a fail-open bug found and fixed.</p>
+<p><code>Python</code> <code>REST APIs</code> <code>VirusTotal</code> <code>AbuseIPDB</code> <code>Unit tests</code></p>
 <p><a href="investigations/lab-06-python-enrichment/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span> Read Investigation</a></p>
 </li>
 <li>
@@ -1284,8 +1284,8 @@ Hands-on lab investigations built from raw telemetry. Each one goes from logs, p
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Lab 02</strong></td>
-<td style="text-align: left;">Network Traffic &amp; C2 Stream Reconstruction</td>
-<td style="text-align: left;">Wireshark, PCAP, TCP Stream Carving</td>
+<td style="text-align: left;">Network Traffic &amp; HTTP Stream Reconstruction</td>
+<td style="text-align: left;">Wireshark, PCAP, Follow TCP Stream</td>
 <td style="text-align: left;"><span class="pill done">Complete</span></td>
 </tr>
 <tr>
@@ -1308,9 +1308,9 @@ Hands-on lab investigations built from raw telemetry. Each one goes from logs, p
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Lab 06</strong></td>
-<td style="text-align: left;">Automated Threat Intelligence IOC Enrichment Tool</td>
+<td style="text-align: left;">Python IOC Enrichment Tool</td>
 <td style="text-align: left;">Python 3, VirusTotal API, AbuseIPDB</td>
-<td style="text-align: left;"><span class="pill wip">In Progress</span></td>
+<td style="text-align: left;"><span class="pill done">Complete</span></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Lab 07</strong></td>

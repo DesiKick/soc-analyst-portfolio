@@ -29,7 +29,7 @@
     
     
       
-        <title>Lab 06: Python Threat Intel IOC Enricher - Mian Talha Nayyar | SOC Portfolio</title>
+        <title>Lab 06: Python IOC Enrichment Tool - Mian Talha Nayyar | SOC Portfolio</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lab-06-automated-threat-intelligence-ioc-enrichment-tool-python-3" class="md-skip">
+        <a href="#lab-06-automated-ioc-enrichment-tool-python" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lab 06: Python Threat Intel IOC Enricher
+              Lab 06: Python IOC Enrichment Tool
             
           </span>
         </div>
@@ -854,7 +854,7 @@
   <span class="md-ellipsis">
     
   
-    Lab 06 - Python Threat Intel IOC Enricher
+    Lab 06 - Python IOC Enrichment Tool
   
 
     
@@ -872,7 +872,7 @@
   <span class="md-ellipsis">
     
   
-    Lab 06 - Python Threat Intel IOC Enricher
+    Lab 06 - Python IOC Enrichment Tool
   
 
     
@@ -898,10 +898,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-operational-problem-engineering-objective" class="md-nav__link">
+  <a href="#1-the-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Operational Problem &amp; Engineering Objective
+        1. The Problem
       
     </span>
   </a>
@@ -909,33 +909,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-tested-indicators-of-compromise-cross-lab-verification" class="md-nav__link">
+  <a href="#2-how-the-tool-works" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Tested Indicators of Compromise (Cross-Lab Verification)
+        2. How the Tool Works
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-automation-architecture-defanging-logic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Automation Architecture &amp; Defanging Logic
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Automation Architecture &amp; Defanging Logic">
+    <nav class="md-nav" aria-label="2. How the Tool Works">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#indicator-defanging-logic" class="md-nav__link">
+  <a href="#verdict-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Indicator Defanging Logic
+        Verdict rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design decisions
       
     </span>
   </a>
@@ -944,6 +944,83 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-the-bug-i-found-and-fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. The Bug I Found and Fixed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-test-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test Set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-automated-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Automated Tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-where-this-fits-in-a-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Where This Fits in a SOC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-limits-and-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Limits and Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Takeaways
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1044,10 +1121,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-operational-problem-engineering-objective" class="md-nav__link">
+  <a href="#1-the-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Operational Problem &amp; Engineering Objective
+        1. The Problem
       
     </span>
   </a>
@@ -1055,33 +1132,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-tested-indicators-of-compromise-cross-lab-verification" class="md-nav__link">
+  <a href="#2-how-the-tool-works" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Tested Indicators of Compromise (Cross-Lab Verification)
+        2. How the Tool Works
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-automation-architecture-defanging-logic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Automation Architecture &amp; Defanging Logic
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Automation Architecture &amp; Defanging Logic">
+    <nav class="md-nav" aria-label="2. How the Tool Works">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#indicator-defanging-logic" class="md-nav__link">
+  <a href="#verdict-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Indicator Defanging Logic
+        Verdict rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design decisions
       
     </span>
   </a>
@@ -1090,6 +1167,83 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-the-bug-i-found-and-fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. The Bug I Found and Fixed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-test-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test Set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-automated-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Automated Tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-where-this-fits-in-a-soc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Where This Fits in a SOC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-limits-and-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Limits and Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Takeaways
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1110,127 +1264,355 @@
 
 
 
-<h1 id="lab-06-automated-threat-intelligence-ioc-enrichment-tool-python-3">Lab 06: Automated Threat Intelligence IOC Enrichment Tool (Python 3)<a class="headerlink" href="#lab-06-automated-threat-intelligence-ioc-enrichment-tool-python-3" title="Permanent link">&para;</a></h1>
+<h1 id="lab-06-automated-ioc-enrichment-tool-python">Lab 06: Automated IOC Enrichment Tool (Python)<a class="headerlink" href="#lab-06-automated-ioc-enrichment-tool-python" title="Permanent link">&para;</a></h1>
 <div class="lab-meta">
-<p><strong>Category:</strong> Security Operations Automation &amp; Threat Intelligence<br>
-<strong>MITRE ATT&amp;CK:</strong> Cross-cutting triage coverage (Supports all Tactics &amp; Techniques)<br>
-<strong>Platform:</strong> Python 3.10+ / RESTful APIs (VirusTotal v3, AbuseIPDB v2)<br>
-<strong>Target Artifacts:</strong> IPv4 Addresses, SHA256 Hashes, Fully Qualified Domains (FQDN)<br>
-<strong>Source Code:</strong> <a href="https://github.com/DesiKick/soc-portfolio/blob/main/tools/enricher.py"><code>tools/enricher.py</code></a></p>
+<p><strong>Category:</strong> SOC Automation and Threat Intelligence<br>
+<strong>ATT&amp;CK:</strong> Supports triage across all tactics (enriches indicators from any investigation)<br>
+<strong>Built with:</strong> Python 3, <code>requests</code>, VirusTotal API v3, AbuseIPDB API v2<br>
+<strong>Indicators:</strong> IPv4 and IPv6 addresses, domains, MD5 / SHA1 / SHA256 hashes<br>
+<strong>Source code:</strong> <a href="https://github.com/DesiKick/soc-analyst-portfolio/blob/main/tools/enricher.py"><code>tools/enricher.py</code></a> | <strong>Tests:</strong> <a href="https://github.com/DesiKick/soc-analyst-portfolio/blob/main/tools/test_enricher.py"><code>tools/test_enricher.py</code></a> (12 offline tests)</p>
 </div>
 <div class="admonition success">
-<p class="admonition-title">Automation Impact: 15-Minute Investigations into 15-Second Automated Actions</p>
-<p>Manual indicator verification across external reputation portals introduces latency into alert queues. This Python utility automatically parses, defangs, scores, and formats multi-source threat intelligence telemetry into ticket-ready Markdown tables, reducing mean time to triage (MTTT) from 15 minutes to under 15 seconds per incident.</p>
+<p class="admonition-title">Outcome: a working triage tool, tested and run on real indicators from my labs</p>
+<p>The tool checks every indicator against two threat intelligence sources, assigns a verdict, defangs it, and writes a ticket-ready table. The results in section 5 are the tool's real output, generated from my own run.</p>
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">In plain English</p>
-<p><strong>What this is:</strong> A command-line Python script that takes a list of suspicious IP addresses, domains, and file hashes, looks them up on VirusTotal and AbuseIPDB, checks if they are dangerous, neutralizes (defangs) them so they cannot be clicked accidentally, and writes a summary table ready to paste into an incident ticket.</p>
-<p><strong>Why it matters:</strong> Analysts often spend 10 to 15 minutes per alert manually copying and pasting IP addresses into multiple websites. Automating this eliminates human error and accelerates response.</p>
-<p><strong>What I did:</strong> Wrote a modular Python tool that uses regular expressions to detect indicator types, defangs them (<code>[.]</code>), queries REST APIs using secure environment variables, and generates a formatted Markdown report.</p>
+<p><strong>What this is:</strong> When an alert fires, an analyst usually has a handful of suspicious IP addresses, website names, and file fingerprints to check. Normally that means pasting each one into several websites by hand. I wrote a program that does all of those lookups at once and writes up the answer.</p>
+<p><strong>Why it matters:</strong> Manual lookups are slow and easy to get wrong, and they happen on almost every alert. Automating them gives the analyst more time for the actual decision.</p>
+<p><strong>What I did:</strong> Built the tool in Python, wrote 12 automated tests for its logic, and ran it against real indicators from Labs 03 and 04, plus two control indicators to prove it can tell good from bad.</p>
+<p><strong>Result:</strong> A ticket-ready report in seconds per indicator. Building and testing it also exposed a dangerous bug in my first version, which I fixed (section 3).</p>
 </div>
-<p><strong>Skills this lab shows:</strong> <code>Python 3</code> <code>REST APIs</code> <code>VirusTotal v3</code> <code>AbuseIPDB</code> <code>Defanging</code> <code>Regex</code> <code>SOAR Concept</code></p>
-<hr />
-<h2 id="1-operational-problem-engineering-objective">1. Operational Problem &amp; Engineering Objective<a class="headerlink" href="#1-operational-problem-engineering-objective" title="Permanent link">&para;</a></h2>
-<p>In an enterprise SOC handling dozens of daily alerts, analysts frequently repeat identical manual steps:</p>
-<ol>
-<li>Copying raw IPs, domains, and hashes from logs.</li>
-<li>Defanging indicators manually to avoid accidental execution or triggering enterprise proxy blocks.</li>
-<li>Querying multiple web portals (VirusTotal, AbuseIPDB, Whois) one by one.</li>
-<li>Manually typing findings into Jira or ServiceNow incident tickets.</li>
-</ol>
-<p><strong>Engineering Goal:</strong> Develop a portable Python 3 automation script in <code>tools/enricher.py</code> that:</p>
+<p><strong>Skills this lab shows:</strong> <code>Python</code> <code>REST APIs</code> <code>VirusTotal</code> <code>AbuseIPDB</code> <code>Regex</code> <code>Defanging</code> <code>Unit testing</code> <code>Secure secret handling</code></p>
+<details class="info">
+<summary>Key terms in this lab</summary>
 <ul>
-<li>Accepts indicators via direct CLI arguments or flat files.</li>
-<li>Applies regex patterns to categorize IPs, domains, and SHA256 hashes.</li>
-<li>Safely defangs all indicators before reporting.</li>
-<li>Queries the <strong>AbuseIPDB v2</strong> and <strong>VirusTotal v3</strong> REST APIs.</li>
-<li>Enforces API credential security via local environment variables to prevent credential leaks in GitHub.</li>
-<li>Compiles an executive-grade Markdown table formatted for SOC tickets.</li>
+<li><strong>IOC (indicator of compromise):</strong> a clue such as a malicious IP address, domain, or file hash</li>
+<li><strong>Threat intelligence:</strong> shared knowledge about known-bad indicators</li>
+<li><strong>API:</strong> a way for one program to ask another for data</li>
+<li><strong>Defanging:</strong> rewriting an indicator so it cannot be clicked by accident, like <code>bad[.]com</code></li>
+<li><strong>Fail closed:</strong> when data is missing, assume "unknown", never "safe"</li>
 </ul>
+<p>Every term is explained in the <a href="../../foundations/glossary/">Glossary</a>.</p>
+</details>
 <hr />
-<h2 id="2-tested-indicators-of-compromise-cross-lab-verification">2. Tested Indicators of Compromise (Cross-Lab Verification)<a class="headerlink" href="#2-tested-indicators-of-compromise-cross-lab-verification" title="Permanent link">&para;</a></h2>
-<p>The tool was evaluated against real indicators identified during previous portfolio investigations:</p>
+<h2 id="1-the-problem">1. The Problem<a class="headerlink" href="#1-the-problem" title="Permanent link">&para;</a></h2>
+<p>For almost every alert, an analyst repeats the same manual steps:</p>
+<ol>
+<li>Copy the IPs, domains, and hashes out of the alert.</li>
+<li>Paste each one into VirusTotal, then paste the IPs into AbuseIPDB.</li>
+<li>Decide from the scores whether each indicator is bad.</li>
+<li>Defang everything before pasting it into the ticket, so nobody clicks a live malicious link.</li>
+<li>Type the findings into the ticket.</li>
+</ol>
+<p>None of these steps needs human judgment. All of them take time. That makes them the right thing to automate.</p>
+<hr />
+<h2 id="2-how-the-tool-works">2. How the Tool Works<a class="headerlink" href="#2-how-the-tool-works" title="Permanent link">&para;</a></h2>
+<div class="flow">
+  <div><strong>1. Read</strong><span>Indicators from the command line or a file. Defanged input is accepted.</span></div>
+  <div><strong>2. Classify</strong><span>IP, private IP, domain, or hash, using Python's ipaddress module and regex.</span></div>
+  <div><strong>3. Look up</strong><span>VirusTotal for everything, AbuseIPDB for public IPs.</span></div>
+  <div><strong>4. Decide</strong><span>Apply the verdict rules below.</span></div>
+  <div><strong>5. Report</strong><span>Defang and write a Markdown table for the ticket.</span></div>
+</div>
+
+<h3 id="verdict-rules">Verdict rules<a class="headerlink" href="#verdict-rules" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Indicator of Compromise</th>
-<th style="text-align: left;">Source Lab</th>
-<th style="text-align: left;">Indicator Type</th>
-<th style="text-align: left;">Expected Forensic Context</th>
+<th style="text-align: left;">Verdict</th>
+<th style="text-align: left;">Rule</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>sultanbogor.com</code></td>
-<td style="text-align: left;"><strong>Lab 04 (Phishing)</strong></td>
-<td style="text-align: left;">Domain</td>
-<td style="text-align: left;">Compromised domain hosting weaponized lure redirects.</td>
+<td style="text-align: left;"><strong>MALICIOUS</strong></td>
+<td style="text-align: left;">5 or more VirusTotal engines flag it, or AbuseIPDB confidence is 75% or higher</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>devret.xyz</code></td>
-<td style="text-align: left;"><strong>Lab 04 (Phishing)</strong></td>
-<td style="text-align: left;">Domain</td>
-<td style="text-align: left;">Ephemeral <code>.xyz</code> domain serving credential harvesting forms.</td>
+<td style="text-align: left;"><strong>SUSPICIOUS</strong></td>
+<td style="text-align: left;">Any VirusTotal detection, or AbuseIPDB confidence of 25% or higher</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>185.220.101.5</code></td>
-<td style="text-align: left;"><strong>Lab 02 (Network C2)</strong></td>
-<td style="text-align: left;">IPv4 Address</td>
-<td style="text-align: left;">Known Tor exit node associated with C2 beaconing.</td>
+<td style="text-align: left;"><strong>CLEAN</strong></td>
+<td style="text-align: left;">At least one source answered, and nothing was flagged</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>192.168.10.45</code></td>
-<td style="text-align: left;"><strong>Lab 05 (Brute Force)</strong></td>
-<td style="text-align: left;">IPv4 Address</td>
-<td style="text-align: left;">RFC 1918 internal IP used during SMB dictionary brute-force.</td>
+<td style="text-align: left;"><strong>NOT FOUND</strong></td>
+<td style="text-align: left;">VirusTotal has never seen it. Common for brand-new phishing domains, so this is not a clean bill of health</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>e3b0c44298fc1c14...</code></td>
-<td style="text-align: left;"><strong>Lab 03 (LSASS)</strong></td>
-<td style="text-align: left;">SHA256 Hash</td>
-<td style="text-align: left;">Baseline file hash extracted during credential dumping triage.</td>
+<td style="text-align: left;"><strong>NO DATA</strong></td>
+<td style="text-align: left;">No source answered: missing key, rate limit, or error</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>INTERNAL</strong></td>
+<td style="text-align: left;">Private IP address. Never sent to external services</td>
+</tr>
+</tbody>
+</table>
+<h3 id="design-decisions">Design decisions<a class="headerlink" href="#design-decisions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Decision</th>
+<th style="text-align: left;">Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">API keys come from environment variables</td>
+<td style="text-align: left;">Keys never appear in the code, the command history, or GitHub</td>
+</tr>
+<tr>
+<td style="text-align: left;">Private IPs are never looked up</td>
+<td style="text-align: left;">Sending internal addresses to outside services leaks information about the network, and the lookup is meaningless anyway</td>
+</tr>
+<tr>
+<td style="text-align: left;">15-second wait between VirusTotal calls</td>
+<td style="text-align: left;">The free tier allows 4 requests per minute. Without the wait, later results fail silently</td>
+</tr>
+<tr>
+<td style="text-align: left;">Defanged input is accepted</td>
+<td style="text-align: left;">Analysts often copy indicators out of tickets that are already defanged</td>
+</tr>
+</tbody>
+</table>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">verdict_for</span><span class="p">(</span><span class="n">vt</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">ab</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="sd">"""Fail closed: CLEAN only when a source answered and nothing was flagged."""</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">vt_mal</span> <span class="o">=</span> <span class="n">vt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"malicious"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">vt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ok"</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">vt_sus</span> <span class="o">=</span> <span class="n">vt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"suspicious"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">vt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ok"</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">ab_score</span> <span class="o">=</span> <span class="n">ab</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">ab</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ok"</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">if</span> <span class="n">vt_mal</span> <span class="o">&gt;=</span> <span class="n">VT_MALICIOUS</span> <span class="ow">or</span> <span class="n">ab_score</span> <span class="o">&gt;=</span> <span class="n">ABUSE_MALICIOUS</span><span class="p">:</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="k">return</span> <span class="s2">"MALICIOUS"</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">if</span> <span class="n">vt_mal</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">vt_sus</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ab_score</span> <span class="o">&gt;=</span> <span class="n">ABUSE_SUSPICIOUS</span><span class="p">:</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="k">return</span> <span class="s2">"SUSPICIOUS"</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">answered</span> <span class="o">=</span> <span class="p">(</span><span class="n">vt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ok"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">vt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"found"</span><span class="p">))</span> <span class="ow">or</span> <span class="n">ab</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ok"</span><span class="p">)</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">if</span> <span class="n">answered</span><span class="p">:</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="k">return</span> <span class="s2">"CLEAN"</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">if</span> <span class="n">vt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ok"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">vt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"found"</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="k">return</span> <span class="s2">"NOT FOUND"</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">return</span> <span class="s2">"NO DATA"</span>
+</span></code></pre></div>
+<hr />
+<h2 id="3-the-bug-i-found-and-fixed">3. The Bug I Found and Fixed<a class="headerlink" href="#3-the-bug-i-found-and-fixed" title="Permanent link">&para;</a></h2>
+<p>My first version had a <strong>fail-open</strong> bug. When I ran it without API keys, it could not reach either service, and still marked every indicator <strong>BENIGN</strong>, including a known malicious domain.</p>
+<p><img alt="First version: every indicator marked BENIGN because no API keys were set" src="../../assets/images/lab06-terminal-enrichment.png" /></p>
+<p>In a real SOC this is dangerous. If a key expires or a service goes down, the tool would quietly tell analysts that malicious indicators are safe.</p>
+<p><strong>Three more issues found in the same review:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Issue</th>
+<th style="text-align: left;">Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">The domain regex <code>[a-zA-Z0-9-_]</code> treated <code>9-_</code> as a character range, so it accepted symbols like <code>:</code> and <code>@</code></td>
+<td style="text-align: left;">Reordered to <code>[a-zA-Z0-9_-]</code>, with a test that rejects <code>bad:host.com</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Private IPs were sent to external APIs</td>
+<td style="text-align: left;">Now classified as INTERNAL and never queried</td>
+</tr>
+<tr>
+<td style="text-align: left;">No rate-limit handling for VirusTotal's free tier</td>
+<td style="text-align: left;">15-second delay between calls, and a rate-limited response becomes NO DATA</td>
+</tr>
+</tbody>
+</table>
+<p>Each fix has a matching automated test, so the bugs cannot come back unnoticed.</p>
+<hr />
+<h2 id="4-test-set">4. Test Set<a class="headerlink" href="#4-test-set" title="Permanent link">&para;</a></h2>
+<p>Real indicators from earlier labs, plus two controls to prove the tool can tell good from bad:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Indicator</th>
+<th style="text-align: left;">Where it came from</th>
+<th style="text-align: left;">What I expect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>7234C8F9...147D14C3</code> (SHA256)</td>
+<td style="text-align: left;"><a href="../lab-03-splunk-lsass/">Lab 03</a>: binary that opened LSASS 38 times</td>
+<td style="text-align: left;">Known to VirusTotal if the sample was ever submitted</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sultanbogor[.]com</code></td>
+<td style="text-align: left;"><a href="../lab-04-phishing-analysis/">Lab 04</a>: sender domain in the PayPal lure</td>
+<td style="text-align: left;">Possibly flagged</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>musacombi[.]online</code></td>
+<td style="text-align: left;"><a href="../lab-04-phishing-analysis/">Lab 04</a>: sender domain in the Netflix lure</td>
+<td style="text-align: left;">Possibly flagged, or expired</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>devret[.]xyz</code></td>
+<td style="text-align: left;"><a href="../lab-04-phishing-analysis/">Lab 04</a>: tracking pixel host</td>
+<td style="text-align: left;">Possibly flagged</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>192[.]168[.]10[.]45</code></td>
+<td style="text-align: left;"><a href="../lab-05-sentinel-bruteforce/">Lab 05</a>: simulated attacker IP</td>
+<td style="text-align: left;">INTERNAL, never sent out</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>8[.]8[.]8[.]8</code></td>
+<td style="text-align: left;">Control: Google public DNS</td>
+<td style="text-align: left;">CLEAN</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>185[.]220[.]101[.]5</code></td>
+<td style="text-align: left;">Control: public IP from abuse feeds</td>
+<td style="text-align: left;">MALICIOUS or SUSPICIOUS</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="3-automation-architecture-defanging-logic">3. Automation Architecture &amp; Defanging Logic<a class="headerlink" href="#3-automation-architecture-defanging-logic" title="Permanent link">&para;</a></h2>
-<h3 id="indicator-defanging-logic">Indicator Defanging Logic<a class="headerlink" href="#indicator-defanging-logic" title="Permanent link">&para;</a></h3>
-<p>Indicators must be neutralized before being placed into documentation. The script applies regex transformations to replace live schemes with <code>hxxp://</code> and wrap all dots in brackets <code>[.]</code>:</p>
-<p>```python
-def defang(indicator: str) -&gt; str:
-    """Neutralizes clickable links and actionable IP strings."""
-    defanged = indicator.replace("http://", "hxxp://").replace("https://", "hxxps://")
-    return defanged.replace(".", "[.]")</p>
-<p>Environment Variable SecurityAPI keys are loaded at runtime from host environment variables, ensuring zero sensitive tokens are exposed in public Git commits:Pythonabuse_key = os.getenv("ABUSEIPDB_API_KEY", "")
-vt_key = os.getenv("VIRUSTOTAL_API_KEY", "")
-4. Execution Output &amp; Ticket-Ready ReportRunning the enricher against the cross-lab test set:PowerShellpython tools/enricher.py -i 185.220.101.5 sultanbogor.com devret.xyz 192.168.10.45
-```markdown</p>
-<figure>
-<p><img alt="Python IOC Enricher CLI execution in terminal" src="../../assets/images/lab06-terminal-enrichment.png" />
-  </p>
-<figcaption>Figure 6.1: Live terminal execution of tools/enricher.py parsing, defanging, and generating a ticket-ready report across real portfolio indicators.</figcaption>
-</figure>
-<p>Generated Markdown ReportDefanged IndicatorTypeVirusTotal DetectionsAbuseIPDB ConfidenceSOC Triage VerdictForensic Context185[.]220[.]101[.]5IP14/88100%MALICIOUSTor Exit Node; 1,420 historical abuse reportssultanbogor[.]comDOMAIN9/92N/AMALICIOUSFlagged by 9 engines: phishing redirectordevret[.]xyzDOMAIN6/91N/ASUSPICIOUSNewly registered domain; active credential lure192[.]168[.]10[.]45IP0/880%BENIGNRFC 1918 private address (Internal LAN pivot)5. Defense Integration &amp; SOAR AutomationThis script serves as the logic template for automated SOAR playbooks in enterprise environments:Plaintext[ SIEM Alert Fired (Sentinel / Splunk) ]
-                   |
-                   v
-[ Webhook Triggers Python Enrichment Playbook ]
-                   |
-        +----------+----------+
-        |                     |
-        v                     v
-[ AbuseIPDB Query ]   [ VirusTotal Query ]
-        |                     |
-        +----------+----------+
-                   |
-                   v
-[ Triage Verdict Evaluated ]
-       /                   \
-      /                     \
-[ Verdict: BENIGN ]     [ Verdict: MALICIOUS ]
-      |                             |
-      v                             v
-[ Auto-close low-risk alert ]  [ Escalate to Tier-2, Isolate Host, Revoke Credentials ]
-Interview Talking Points"In Lab 06, I built a Python IOC enrichment tool that queries VirusTotal and AbuseIPDB REST APIs, defangs indicators, and formats ticket tables automatically, cutting triage time from 15 minutes to 15 seconds.""I implemented secure API credential handling using environment variables to ensure zero keys are exposed to version control, following security hygiene standards."</p>
+<h2 id="5-results">5. Results<a class="headerlink" href="#5-results" title="Permanent link">&para;</a></h2>
+<p>Command, run in my own PowerShell session with my API keys set:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">python</span> <span class="n">tools</span><span class="p">\</span><span class="n">enricher</span><span class="p">.</span><span class="n">py</span> <span class="p">-</span><span class="n">-lab-set</span> <span class="n">-o</span> <span class="n">evidence</span><span class="p">\</span><span class="n">lab</span><span class="p">-</span><span class="n">06</span><span class="p">\</span><span class="n">report</span><span class="p">.</span><span class="nb">md</span>
+</span></code></pre></div>
+<p><img alt="Enricher run with API keys against the portfolio test set" src="../../assets/images/lab06-terminal-real-run.png" /></p>
+<p><strong>The generated report, exactly as the tool wrote it:</strong></p>
+<p><strong>Generated:</strong> 2026-10-25 19:18 UTC | <strong>Indicators:</strong> 7 | <strong>Run time:</strong> 81.7 s | <strong>Sources:</strong> VirusTotal, AbuseIPDB</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Indicator (defanged)</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">VirusTotal</th>
+<th style="text-align: left;">AbuseIPDB</th>
+<th style="text-align: left;">Verdict</th>
+<th style="text-align: left;">Context</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>7234C8F98B87593641BBDB594E34C94B9436986C4FB70E7DA5BCECFF147D14C3</code></td>
+<td style="text-align: left;">hash</td>
+<td style="text-align: left;">55/76 malicious</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;"><strong>MALICIOUS</strong></td>
+<td style="text-align: left;">Lab 03: binary that opened LSASS 38 times</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sultanbogor[.]com</code></td>
+<td style="text-align: left;">domain</td>
+<td style="text-align: left;">0/92 malicious</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;"><strong>CLEAN</strong></td>
+<td style="text-align: left;">Lab 04: envelope sender domain in PayPal lure</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>musacombi[.]online</code></td>
+<td style="text-align: left;">domain</td>
+<td style="text-align: left;">0/92 malicious</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;"><strong>CLEAN</strong></td>
+<td style="text-align: left;">Lab 04: sender domain in Netflix lure</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>devret[.]xyz</code></td>
+<td style="text-align: left;">domain</td>
+<td style="text-align: left;">0/92 malicious</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;"><strong>SUSPICIOUS</strong></td>
+<td style="text-align: left;">Lab 04: tracking pixel host</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>192[.]168[.]10[.]45</code></td>
+<td style="text-align: left;">private ip</td>
+<td style="text-align: left;">private IP, not sent to APIs</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;"><strong>INTERNAL</strong></td>
+<td style="text-align: left;">Lab 05: simulated attacker IP (private)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>8[.]8[.]8[.]8</code></td>
+<td style="text-align: left;">ip</td>
+<td style="text-align: left;">0/92 malicious</td>
+<td style="text-align: left;">0% (242 reports, US)</td>
+<td style="text-align: left;"><strong>CLEAN</strong></td>
+<td style="text-align: left;">Control: known-good public DNS server</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>185[.]220[.]101[.]5</code></td>
+<td style="text-align: left;">ip</td>
+<td style="text-align: left;">11/92 malicious</td>
+<td style="text-align: left;">100% (410 reports, DE, Tor exit)</td>
+<td style="text-align: left;"><strong>MALICIOUS</strong></td>
+<td style="text-align: left;">Control: public IP from abuse feeds, expected to flag</td>
+</tr>
+</tbody>
+</table>
+<p>Phishing infrastructure is short-lived, so domains from Lab 04 may come back NOT FOUND or CLEAN today even though they were malicious when the emails were sent. That is a real limit of reputation lookups, and why an analyst still reads the context.</p>
+<hr />
+<h2 id="6-automated-tests">6. Automated Tests<a class="headerlink" href="#6-automated-tests" title="Permanent link">&para;</a></h2>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">python</span> <span class="n">-m</span> <span class="n">unittest</span> <span class="n">discover</span> <span class="n">-s</span> <span class="n">tools</span> <span class="n">-v</span>
+</span></code></pre></div>
+<p><img alt="12 unit tests passing" src="../../assets/images/lab06-unit-tests.png" /></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Test covers</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Classification</td>
+<td style="text-align: left;"><code>192.168.10.45</code> is private, <code>devret.xyz</code> is a domain, <code>bad:host.com</code> is rejected</td>
+</tr>
+<tr>
+<td style="text-align: left;">Fail closed</td>
+<td style="text-align: left;">No keys or a rate limit gives NO DATA, never CLEAN</td>
+</tr>
+<tr>
+<td style="text-align: left;">Verdicts</td>
+<td style="text-align: left;">9 VirusTotal detections give MALICIOUS, 2 give SUSPICIOUS</td>
+</tr>
+<tr>
+<td style="text-align: left;">Privacy</td>
+<td style="text-align: left;">A private IP makes zero API calls</td>
+</tr>
+<tr>
+<td style="text-align: left;">Rate limiting</td>
+<td style="text-align: left;">Three VirusTotal lookups wait twice, 15 seconds each</td>
+</tr>
+</tbody>
+</table>
+<p>The tests use fake API responses, so they run in under a second without keys or internet.</p>
+<hr />
+<h2 id="7-where-this-fits-in-a-soc">7. Where This Fits in a SOC<a class="headerlink" href="#7-where-this-fits-in-a-soc" title="Permanent link">&para;</a></h2>
+<p>The same logic is what a SOAR playbook runs automatically when an alert fires:</p>
+<div class="flow">
+  <div><strong>Alert fires</strong><span>The SIEM raises an alert with indicators attached.</span></div>
+  <div><strong>Enrich</strong><span>The playbook runs these lookups for every indicator.</span></div>
+  <div><strong>Score</strong><span>Verdict rules decide the priority.</span></div>
+  <div><strong>Route</strong><span>Clean results go to low priority; malicious ones page an analyst.</span></div>
+  <div><strong>Document</strong><span>The table is attached to the ticket automatically.</span></div>
+</div>
+
+<p>At Voya I built Python automation on the same idea, which cut 15-minute manual investigations to 15-second automated actions. This tool is a public, simplified version of that pattern.</p>
+<hr />
+<h2 id="8-limits-and-next-steps">8. Limits and Next Steps<a class="headerlink" href="#8-limits-and-next-steps" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Reputation is not a verdict.</strong> A domain registered yesterday has no history. NOT FOUND means unknown, not safe.</li>
+<li><strong>Two sources only.</strong> Next: add URLScan for URLs and WHOIS registration age, since a domain under 30 days old is a strong phishing signal.</li>
+<li><strong>Next lab:</strong> <a href="../">Lab 10</a> uses this tool to enrich the C2 domains found in a real malware PCAP.</li>
+</ul>
+<hr />
+<h2 id="9-takeaways">9. Takeaways<a class="headerlink" href="#9-takeaways" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Fail closed.</strong> Missing data should never look like a clean result. My first version got this wrong.</li>
+<li><strong>Test the logic, not just the happy path.</strong> The regex and fail-open bugs only showed up because I wrote tests for edge cases.</li>
+<li><strong>Protect secrets and internal data.</strong> Keys stay in environment variables, and private IPs never leave the network.</li>
+</ul>
 
 
 
