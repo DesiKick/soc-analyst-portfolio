@@ -1,0 +1,1617 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Hands-on SOC investigations, threat hunting, and detection engineering by Mian Talha Nayyar.">
+      
+      
+        <meta name="author" content="Mian Talha Nayyar">
+      
+      
+        <link rel="canonical" href="https://desikick.github.io/soc-analyst-portfolio/investigations/lab-07-ad-bruteforce/">
+      
+      
+        <link rel="prev" href="../lab-06-python-enrichment/">
+      
+      
+        <link rel="next" href="../../detections/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Lab 07: Brute Force on a Real AD Domain - Mian Talha Nayyar | SOC Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lab-07-brute-force-and-spraying-on-a-real-active-directory-domain" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Mian Talha Nayyar | SOC Portfolio" class="md-header__button md-logo" aria-label="Mian Talha Nayyar | SOC Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.86 10.31C16.23 21.22 14.28 22.45 12 23c-2.56-.61-4.7-2.07-6.42-4.37C3.86 16.34 3 13.8 3 11V5l9-4 9 4v6c0 2.39-.64 4.61-1.92 6.67l-2.91-2.91c.52-.79.83-1.76.83-2.76a5 5 0 0 0-5-5 5 5 0 0 0-5 5 5 5 0 0 0 5 5c1 0 1.97-.31 2.76-.83z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mian Talha Nayyar | SOC Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab 07: Brute Force on a Real AD Domain
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/DesiKick/soc-analyst-portfolio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DesiKick/soc-analyst-portfolio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../foundations/what-a-soc-does/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Foundations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Investigations
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../detections/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Detections
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About & Contact
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Mian Talha Nayyar | SOC Portfolio" class="md-nav__button md-logo" aria-label="Mian Talha Nayyar | SOC Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m5.86 10.31C16.23 21.22 14.28 22.45 12 23c-2.56-.61-4.7-2.07-6.42-4.37C3.86 16.34 3 13.8 3 11V5l9-4 9 4v6c0 2.39-.64 4.61-1.92 6.67l-2.91-2.91c.52-.79.83-1.76.83-2.76a5 5 0 0 0-5-5 5 5 0 0 0-5 5 5 5 0 0 0 5 5c1 0 1.97-.31 2.76-.83z"/></svg>
+
+    </a>
+    Mian Talha Nayyar | SOC Portfolio
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/DesiKick/soc-analyst-portfolio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DesiKick/soc-analyst-portfolio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Foundations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Foundations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/what-a-soc-does/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What a SOC Analyst Does
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/lab-environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/triage-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How I Triage an Alert
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/event-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event ID Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/attack-coverage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ATT&CK Coverage Map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Investigations
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Investigations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-01-windows-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 01 - Windows Process Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-02-network-traffic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 02 - Network Traffic Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-03-splunk-lsass/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 03 - LSASS Credential Dumping (Splunk)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-04-phishing-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 04 - Phishing Email Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-05-sentinel-bruteforce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 05 - Brute Force Detection Logic (KQL)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-06-python-enrichment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 06 - Python IOC Enrichment Tool
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 07 - Brute Force on a Real AD Domain
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 07 - Brute Force on a Real AD Domain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-lab-i-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Lab I Built
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-setting-up-the-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Setting Up the Domain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-a-lesson-in-how-domain-controllers-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. A Lesson in How Domain Controllers Log
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-running-the-attack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Running the Attack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-what-the-logs-showed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. What the Logs Showed
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. What the Logs Showed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#failures-grouped-by-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Failures grouped by account
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-break-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The break-in
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-the-detection-against-real-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. The Detection, Against Real Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-verdict-and-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Verdict and Response
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-next-step-lab-07-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Next Step: Lab 07 v2
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../detections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Detections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About & Contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-the-lab-i-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. The Lab I Built
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-setting-up-the-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Setting Up the Domain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-a-lesson-in-how-domain-controllers-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. A Lesson in How Domain Controllers Log
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-running-the-attack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Running the Attack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-what-the-logs-showed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. What the Logs Showed
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. What the Logs Showed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#failures-grouped-by-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Failures grouped by account
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-break-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The break-in
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-the-detection-against-real-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. The Detection, Against Real Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-verdict-and-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Verdict and Response
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-next-step-lab-07-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Next Step: Lab 07 v2
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="lab-07-brute-force-and-spraying-on-a-real-active-directory-domain">Lab 07: Brute Force and Spraying on a Real Active Directory Domain<a class="headerlink" href="#lab-07-brute-force-and-spraying-on-a-real-active-directory-domain" title="Permanent link">&para;</a></h1>
+<div class="lab-meta">
+<p><strong>Category:</strong> Identity Detection Engineering on Live Telemetry<br>
+<strong>ATT&amp;CK:</strong> <a href="https://attack.mitre.org/techniques/T1110/001/">T1110.001 Password Guessing</a> | <a href="https://attack.mitre.org/techniques/T1110/003/">T1110.003 Password Spraying</a><br>
+<strong>Environment:</strong> Windows Server 2022 domain controller (<code>lab.local</code>) I built in VirtualBox<br>
+<strong>Telemetry:</strong> Real Windows Security log (Event IDs 4625 and 4624), NTLM network logons</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Outcome: Lab 05's detection, proven on a real domain</p>
+<p><a href="../lab-05-sentinel-bruteforce/">Lab 05</a> tested brute force detection logic against a hand-built dataset. Here I built a real Active Directory domain, ran a real brute force, spray, and successful break-in against it, and confirmed the attack chain in the live Windows Security log: a burst of failures and a successful logon from the same source, same account.</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">In plain English</p>
+<p><strong>What this is:</strong> I built a small pretend company network (a Windows server that manages logins, like a real company's) inside my own PC, then played both attacker and defender. I guessed a user's password until I got in, and checked that the server's logs recorded the whole thing.</p>
+<p><strong>Why it matters:</strong> Lab 05 proved my detection logic worked on data I typed by hand. This proves it works on real logs from a real domain, which is the environment a SOC analyst actually defends.</p>
+<p><strong>What I did:</strong> Stood up a Windows Server domain controller, created user accounts, turned on login auditing, then ran a brute force against one account, a password spray across several, and a successful login with the guessed password. Then I analyzed the real events.</p>
+<p><strong>Result:</strong> The full attack chain showed up in the logs exactly as the detection expects: 15 failures against one account, single failures across five others, and a successful login from the same IP that did the guessing.</p>
+</div>
+<p><strong>Skills this lab shows:</strong> <code>Active Directory</code> <code>Windows Server</code> <code>Group Policy auditing</code> <code>PowerShell</code> <code>Windows event analysis</code> <code>Detection validation</code></p>
+<details class="info">
+<summary>Key terms in this lab</summary>
+<ul>
+<li><strong>Active Directory:</strong> Microsoft's system for managing all users and logins in a company network</li>
+<li><strong>Domain controller:</strong> the server that runs Active Directory and checks every login</li>
+<li><strong>Brute force:</strong> guessing one account's password over and over</li>
+<li><strong>Password spraying:</strong> trying one common password across many accounts</li>
+<li><strong>NTLM:</strong> an older Windows login protocol that records a source IP in the logs</li>
+</ul>
+<p>Every term is explained in the <a href="../../foundations/glossary/">Glossary</a>.</p>
+</details>
+<hr />
+<h2 id="1-the-lab-i-built">1. The Lab I Built<a class="headerlink" href="#1-the-lab-i-built" title="Permanent link">&para;</a></h2>
+<p>A single Windows Server 2022 virtual machine, promoted to a domain controller for a test domain called <code>lab.local</code>. It runs on an isolated VirtualBox network that touches nothing real.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;">Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Host</td>
+<td style="text-align: left;"><code>DC01</code>, Windows Server 2022, domain <code>lab.local</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Accounts</td>
+<td style="text-align: left;"><code>jdoe</code> (the target) plus <code>user1</code> to <code>user5</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Auditing</td>
+<td style="text-align: left;">Logon success and failure enabled via <code>auditpol</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Attacker</td>
+<td style="text-align: left;">Generated locally, so the "attacker" and the target are the same host</td>
+</tr>
+<tr>
+<td style="text-align: left;">Source IP in logs</td>
+<td style="text-align: left;"><code>10.0.2.15</code>, the server's own network address</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Single-host lab, stated plainly</p>
+<p>Because this runs on one machine, the attack comes from the server's own IP rather than a separate attacker box. The events, protocols, and detection logic are identical to a multi-machine network. Running it across separate VMs is the next step, limited only by the 8 GB of RAM on my PC.</p>
+</div>
+<hr />
+<h2 id="2-setting-up-the-domain">2. Setting Up the Domain<a class="headerlink" href="#2-setting-up-the-domain" title="Permanent link">&para;</a></h2>
+<p>After promoting the server to a domain controller, I created the accounts and turned on auditing with PowerShell:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c"># Create the target and five more users</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">$pw</span> <span class="p">=</span> <span class="nb">ConvertTo-SecureString</span> <span class="s2">"Str0ngLabP@ss1"</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">1</span><span class="p">..</span><span class="n">5</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nb">New-ADUser</span> <span class="n">-Name</span> <span class="s2">"user$_"</span> <span class="n">-SamAccountName</span> <span class="s2">"user$_"</span> <span class="n">-AccountPassword</span> <span class="nv">$pw</span> <span class="n">-Enabled</span> <span class="nv">$true</span> <span class="p">}</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">New-ADUser</span> <span class="n">-Name</span> <span class="s2">"jdoe"</span> <span class="n">-SamAccountName</span> <span class="s2">"jdoe"</span> <span class="p">`</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">-AccountPassword</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="s2">"Autumn2026"</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">)</span> <span class="n">-Enabled</span> <span class="nv">$true</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c"># Turn on logon auditing (produces 4624 and 4625)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">auditpol</span> <span class="p">/</span><span class="nb">set </span><span class="p">/</span><span class="n">subcategory</span><span class="p">:</span><span class="s2">"Logon"</span> <span class="p">/</span><span class="n">success</span><span class="p">:</span><span class="n">enable</span> <span class="p">/</span><span class="n">failure</span><span class="p">:</span><span class="n">enable</span>
+</span></code></pre></div>
+<hr />
+<h2 id="3-a-lesson-in-how-domain-controllers-log">3. A Lesson in How Domain Controllers Log<a class="headerlink" href="#3-a-lesson-in-how-domain-controllers-log" title="Permanent link">&para;</a></h2>
+<p>My first test failed to produce a single Event ID 4625, and the reason is worth knowing.</p>
+<p>When I connected to the server <strong>by its name</strong> (<code>\\DC01</code>), Windows used <strong>Kerberos</strong>. A bad password over Kerberos is logged on a domain controller as <strong>Event ID 4771</strong> (Kerberos pre-authentication failed), an "Account Logon" event, not the 4625 "Logon" event my rule hunts.</p>
+<p>To generate a real 4625, I connected <strong>by IP address</strong> instead. An IP has no Kerberos identity, so Windows falls back to <strong>NTLM</strong>, and an NTLM network-logon failure writes a true 4625 with a source IP:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">net</span> <span class="n">use</span> <span class="s2">"\\10.0.2.15\IPC$"</span> <span class="p">/</span><span class="n">user</span><span class="p">:</span><span class="n">jdoe</span> <span class="n">WrongPassword123</span>
+</span></code></pre></div>
+<figure>
+<p><img alt="Real Event ID 4625 showing Logon Type 3, jdoe, SubStatus 0xC000006A, source 10.0.2.15" src="../../assets/images/lab07-4625-detail.png" />
+  </p>
+<figcaption>A real 4625 from the domain controller: Logon Type 3 (network), account jdoe, SubStatus 0xC000006A (wrong password), Source Network Address 10.0.2.15, Authentication Package NTLM. This is exactly the event the Lab 05 rule matches.</figcaption>
+</figure>
+<p><strong>Takeaway:</strong> the protocol decides the event. Kerberos failures land in 4771, NTLM failures in 4625. A detection that only watches 4625 misses Kerberos-based guessing, which is why a real SOC also watches 4771 and 4776.</p>
+<hr />
+<h2 id="4-running-the-attack">4. Running the Attack<a class="headerlink" href="#4-running-the-attack" title="Permanent link">&para;</a></h2>
+<p>Three stages, all generating real events on the domain:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$ip</span> <span class="p">=</span> <span class="s2">"10.0.2.15"</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c"># 1. Brute force: 15 wrong passwords against jdoe, then the real one</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">1</span><span class="p">..</span><span class="n">15</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="n">net</span> <span class="n">use</span> <span class="s2">"\\$ip\IPC$"</span> <span class="p">/</span><span class="n">user</span><span class="p">:</span><span class="n">jdoe</span> <span class="s2">"Wrong$_"</span> <span class="n">2</span><span class="p">&gt;</span><span class="nv">$null</span><span class="p">;</span> <span class="n">net</span> <span class="n">use</span> <span class="s2">"\\$ip\IPC$"</span> <span class="p">/</span><span class="n">delete</span> <span class="p">/</span><span class="n">y</span> <span class="n">2</span><span class="p">&gt;</span><span class="nv">$null</span> <span class="p">}</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">net</span> <span class="n">use</span> <span class="s2">"\\$ip\IPC$"</span> <span class="p">/</span><span class="n">user</span><span class="p">:</span><span class="n">jdoe</span> <span class="s2">"Autumn2026"</span>      <span class="c"># the break-in</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">net</span> <span class="n">use</span> <span class="s2">"\\$ip\IPC$"</span> <span class="p">/</span><span class="n">delete</span> <span class="p">/</span><span class="n">y</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c"># 2. Password spray: one guessed password across many accounts</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="s2">"user1"</span><span class="p">,</span><span class="s2">"user2"</span><span class="p">,</span><span class="s2">"user3"</span><span class="p">,</span><span class="s2">"user4"</span><span class="p">,</span><span class="s2">"user5"</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="n">net</span> <span class="n">use</span> <span class="s2">"\\$ip\IPC$"</span> <span class="p">/</span><span class="n">user</span><span class="p">:</span><span class="nv">$_</span> <span class="s2">"Password1"</span> <span class="n">2</span><span class="p">&gt;</span><span class="nv">$null</span><span class="p">;</span> <span class="n">net</span> <span class="n">use</span> <span class="s2">"\\$ip\IPC$"</span> <span class="p">/</span><span class="n">delete</span> <span class="p">/</span><span class="n">y</span> <span class="n">2</span><span class="p">&gt;</span><span class="nv">$null</span> <span class="p">}</span>
+</span></code></pre></div>
+<p>The line with <code>Autumn2026</code> returned "The command completed successfully." That is the break-in: the password was guessed, and it wrote a 4624 success event.</p>
+<hr />
+<h2 id="5-what-the-logs-showed">5. What the Logs Showed<a class="headerlink" href="#5-what-the-logs-showed" title="Permanent link">&para;</a></h2>
+<h3 id="failures-grouped-by-account">Failures grouped by account<a class="headerlink" href="#failures-grouped-by-account" title="Permanent link">&para;</a></h3>
+<p>Reading the real Security log the way an analyst would, grouping 4625 events by target account:</p>
+<figure>
+<p><img alt="Failed logons grouped by account: jdoe 15, user1 to user5 one each" src="../../assets/images/lab07-failures-grouped.png" />
+  </p>
+<figcaption>The two attack shapes in one view. jdoe hammered 15 times (brute force), and user1 to user5 hit once each (spray).</figcaption>
+</figure>
+<p>This single table separates the two techniques cleanly:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Account</th>
+<th style="text-align: left;">Failures</th>
+<th style="text-align: left;">Technique</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>jdoe</code></td>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">Brute force against one account</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>user1</code> to <code>user5</code></td>
+<td style="text-align: left;">1 each</td>
+<td style="text-align: left;">Password spray across many accounts</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-break-in">The break-in<a class="headerlink" href="#the-break-in" title="Permanent link">&para;</a></h3>
+<figure>
+<p><img alt="Successful 4624 for jdoe, Logon Type 3, from 10.0.2.15" src="../../assets/images/lab07-4624-success.png" />
+  </p>
+<figcaption>The successful logon (4624) for jdoe, Logon Type 3, from 10.0.2.15, the same source IP that produced the 15 failures. This is the moment the guessing worked.</figcaption>
+</figure>
+<p><strong>The complete chain:</strong> 15 failures for <code>jdoe</code> from <code>10.0.2.15</code>, immediately followed by a success for <code>jdoe</code> from <code>10.0.2.15</code>. That failure-then-success from one source is the exact pattern the <a href="../lab-05-sentinel-bruteforce/">Lab 05</a> rule was built to catch, now confirmed on real domain telemetry rather than a hand-built table.</p>
+<hr />
+<h2 id="6-the-detection-against-real-data">6. The Detection, Against Real Data<a class="headerlink" href="#6-the-detection-against-real-data" title="Permanent link">&para;</a></h2>
+<p>The <a href="../lab-05-sentinel-bruteforce/">Lab 05</a> KQL correlates failures with a success from the same source. Here is that logic expressed against this real data. In Microsoft Sentinel's <code>SecurityEvent</code> schema it is the same rule from the <a href="../../detections/">Detections library</a>:</p>
+<div class="language-kql highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">let</span><span class="w"> </span><span class="n">failures</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">SecurityEvent</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">EventID</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">4625</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">LogonType</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">SubStatus</span><span class="w"> </span><span class="n">in</span><span class="err">~</span><span class="w"> </span><span class="p">(</span><span class="s">"0xc000006a"</span><span class="p">,</span><span class="w"> </span><span class="s">"0xc0000064"</span><span class="p">)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">IpAddress</span><span class="w"> </span><span class="p">!</span><span class="n">in</span><span class="w"> </span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span><span class="w"> </span><span class="s">"127.0.0.1"</span><span class="p">,</span><span class="w"> </span><span class="s">"::1"</span><span class="p">)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">summarize</span><span class="w"> </span><span class="n">FailureCount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">count</span><span class="p">(),</span><span class="w"> </span><span class="n">LastFailure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">TimeGenerated</span><span class="p">),</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="n">AccountsTried</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">make_set</span><span class="p">(</span><span class="n">TargetUserName</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">Computer</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">FailureCount</span><span class="w"> </span><span class="p">&gt;=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">let</span><span class="w"> </span><span class="n">successes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">SecurityEvent</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">EventID</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">4624</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">LogonType</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">SuccessTime</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">TimeGenerated</span><span class="p">,</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">Computer</span><span class="p">,</span><span class="w"> </span><span class="n">SuccessAccount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">TargetUserName</span><span class="p">;</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">failures</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">|</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="n">kind</span><span class="p">=</span><span class="n">inner</span><span class="w"> </span><span class="n">successes</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">Computer</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">SuccessTime</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="n">LastFailure</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">SuccessTime</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="n">LastFailure</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="mi">10</span><span class="n">m</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">|</span><span class="w"> </span><span class="k">project</span><span class="w"> </span><span class="n">LastFailure</span><span class="p">,</span><span class="w"> </span><span class="n">SuccessTime</span><span class="p">,</span><span class="w"> </span><span class="n">AttackerIP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">VictimHost</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Computer</span><span class="p">,</span><span class="w"> </span><span class="n">SuccessAccount</span><span class="p">,</span><span class="w"> </span><span class="n">FailureCount</span>
+</span></code></pre></div>
+<p>Against my data this returns one row: <code>10.0.2.15</code> produced 15 failures against <code>jdoe</code>, then a success for <code>jdoe</code> within the window. <strong>One alert, correctly identifying the break-in.</strong></p>
+<p>The companion spray rule (group by source, many accounts, few attempts each) also fires on the <code>user1</code> to <code>user5</code> activity.</p>
+<hr />
+<h2 id="7-verdict-and-response">7. Verdict and Response<a class="headerlink" href="#7-verdict-and-response" title="Permanent link">&para;</a></h2>
+<div class="admonition danger">
+<p class="admonition-title">Verdict: True Positive | High | Account compromised</p>
+<p><code>jdoe</code> was brute forced and the password was guessed. Treat the account as compromised.</p>
+</div>
+<p>If this fired in a real SOC:</p>
+<ol>
+<li><strong>Confirm:</strong> the 4624 is Type 3 from the same IP as the failures, 23 seconds after the last failure. Not a user mistyping.</li>
+<li><strong>Contain:</strong> disable <code>jdoe</code> or force a password reset, kill active sessions.</li>
+<li><strong>Scope:</strong> check for other successes from <code>10.0.2.15</code>, and any process activity under <code>jdoe</code> after the logon.</li>
+<li><strong>Escalate:</strong> confirmed credential compromise goes to incident response.</li>
+<li><strong>Prevent:</strong> enforce MFA, set an account lockout policy, and block legacy NTLM where possible. A lockout policy alone would have stopped this at 15 attempts.</li>
+</ol>
+<hr />
+<h2 id="8-takeaways">8. Takeaways<a class="headerlink" href="#8-takeaways" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Real telemetry beats assumptions.</strong> The Kerberos-versus-NTLM lesson only appeared because I tested on a real domain controller, not a table I typed.</li>
+<li><strong>The protocol decides the event.</strong> Kerberos guessing hides in 4771, NTLM in 4625. Watch both.</li>
+<li><strong>The failure-then-success chain is the signal.</strong> One failure is noise. Fifteen failures and a success from the same source is a compromise.</li>
+<li><strong>This closes the Lab 05 gap.</strong> The detection logic is now validated on real Active Directory telemetry.</li>
+</ul>
+<hr />
+<h2 id="9-next-step-lab-07-v2">9. Next Step: Lab 07 v2<a class="headerlink" href="#9-next-step-lab-07-v2" title="Permanent link">&para;</a></h2>
+<p>The one piece this lab does not have is a cloud SIEM incident. The planned v2 ships these same Windows logs to a Microsoft Sentinel workspace through the Azure Monitor Agent, runs the rule there as a scheduled analytic, and captures a real Sentinel incident. The detection is already written and proven; v2 is about the ingestion pipeline.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../lab-06-python-enrichment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lab 06 - Python IOC Enrichment Tool">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Lab 06 - Python IOC Enrichment Tool
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../detections/" class="md-footer__link md-footer__link--next" aria-label="Next: Detections">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Detections
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Mian Talha Nayyar
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/in/mian-nayyar" target="_blank" rel="noopener" title="LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/DesiKick" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:talha397@gmail.com" target="_blank" rel="noopener" title="Email" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l208 156a48 48 0 0 0 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48zM0 196v188c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V196L313.6 344.8c-34.1 25.6-81.1 25.6-115.2 0z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "navigation.footer", "navigation.indexes", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
