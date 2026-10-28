@@ -144,6 +144,16 @@ Before the labs, these pages explain the job, how I set up my environment, how I
 
     [:octicons-arrow-right-24: Read Investigation](investigations/lab-04-phishing-analysis.md)
 
+-   :material-server-security:{ .lg .middle } **Lab 07: Brute Force on a Real AD Domain**
+
+    ---
+
+    Built a Windows Server domain controller, ran a real brute force, spray, and break-in against it, and confirmed the full attack chain in the live Windows Security log. Validates the Lab 05 rule on real telemetry.
+
+    `Active Directory` `Windows Server` `Event ID 4625 / 4624` `T1110`
+
+    [:octicons-arrow-right-24: Read Investigation](investigations/lab-07-ad-bruteforce.md)
+
 -   :material-account-lock:{ .lg .middle } **Lab 05: Brute Force Detection Logic (KQL)**
 
     ---
@@ -209,7 +219,8 @@ Every investigation follows the same structure as a SOC ticket:
 | **Lab 04** | Inbound Phishing & Header Forensics | RFC 822 Headers, CyberChef, Defanging | <span class="pill done">Complete</span> |
 | **Lab 05** | Windows Authentication & Brute Force Logic | KQL, Azure Data Explorer, Event ID 4625/4624 | <span class="pill done">Complete</span> |
 | **Lab 06** | Python IOC Enrichment Tool | Python 3, VirusTotal API, AbuseIPDB | <span class="pill done">Complete</span> |
-| **Lab 07** | Active Directory Lab: Password Spraying in Sentinel | VirtualBox, Windows Server DC, Kali, Sentinel KQL | <span class="pill wip">Planned</span> |
+| **Lab 07** | Brute Force on a Real AD Domain | VirtualBox, Windows Server DC, PowerShell, Event ID 4625/4624 | <span class="pill done">Complete</span> |
+| **Lab 07 v2** | Ship the AD logs to Sentinel for a cloud incident | Azure Monitor Agent, Microsoft Sentinel | <span class="pill wip">Planned</span> |
 | **Lab 08** | Kerberoasting Attack & Detection Engineering | Impacket `GetUserSPNs`, Event ID 4769 (RC4 0x17), SPL/KQL | <span class="pill wip">Planned</span> |
 | **Lab 09** | Endpoint Persistence Hunting with Sysmon & Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | <span class="pill wip">Planned</span> |
 | **Lab 10** | C2 Beacon Hunting with Zeek & RITA | Zeek Network Logs, RITA Jitter Scoring, Wireshark | <span class="pill wip">Planned</span> |

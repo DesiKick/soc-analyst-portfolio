@@ -28,8 +28,8 @@ Which techniques my labs cover, how strong the coverage is, and where the gaps a
 | Defense Evasion | [T1218.009 Regsvcs/Regasm](https://attack.mitre.org/techniques/T1218/009/) | [04](../investigations/lab-04-phishing-analysis.md) | <span class="pill wip">Logic</span> |
 | Defense Evasion | [T1070.004 File Deletion](https://attack.mitre.org/techniques/T1070/004/) (dump cleanup) | [03](../investigations/lab-03-splunk-lsass.md) | **Observed** |
 | Credential Access | [T1003.001 LSASS Memory](https://attack.mitre.org/techniques/T1003/001/) | [03](../investigations/lab-03-splunk-lsass.md) | <span class="pill done">Validated</span> |
-| Credential Access | [T1110.001 Password Guessing](https://attack.mitre.org/techniques/T1110/001/) | [05](../investigations/lab-05-sentinel-bruteforce.md) | <span class="pill wip">Logic</span> (simulated data) |
-| Credential Access | [T1110.003 Password Spraying](https://attack.mitre.org/techniques/T1110/003/) | [05](../investigations/lab-05-sentinel-bruteforce.md) | <span class="pill wip">Logic</span> |
+| Credential Access | [T1110.001 Password Guessing](https://attack.mitre.org/techniques/T1110/001/) | [05](../investigations/lab-05-sentinel-bruteforce.md), [07](../investigations/lab-07-ad-bruteforce.md) | <span class="pill done">Validated</span> (real AD domain) |
+| Credential Access | [T1110.003 Password Spraying](https://attack.mitre.org/techniques/T1110/003/) | [05](../investigations/lab-05-sentinel-bruteforce.md), [07](../investigations/lab-07-ad-bruteforce.md) | <span class="pill done">Validated</span> (real AD domain) |
 | Discovery | [T1033 System Owner/User Discovery](https://attack.mitre.org/techniques/T1033/) | [05](../investigations/lab-05-sentinel-bruteforce.md) | **Observed** (scenario) |
 | Command and Control | [T1071.001 Web Protocols](https://attack.mitre.org/techniques/T1071/001/) | [02](../investigations/lab-02-network-traffic.md) | <span class="pill wip">Logic</span> |
 
