@@ -90,5 +90,6 @@ nav:
       - "Lab 05 - Brute Force Detection Logic (KQL)": investigations/lab-05-sentinel-bruteforce.md
       - "Lab 06 - Python IOC Enrichment Tool": investigations/lab-06-python-enrichment.md
       - "Lab 07 - Brute Force on a Real AD Domain": investigations/lab-07-ad-bruteforce.md
+      - "Lab 08 - Kerberoasting Detection": investigations/lab-08-kerberoasting.md
   - Detections: detections.md
   - About & Contact: about.md

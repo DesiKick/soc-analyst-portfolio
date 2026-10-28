@@ -13,6 +13,7 @@ Detection rules built during the investigations and mapped to MITRE ATT&CK. Sour
 | **Outbound Cleartext HTTP Workstation** | Splunk SPL, Wireshark | T1071.001 | Logic only, not yet tested on attack data | [Lab 02: Network Traffic](investigations/lab-02-network-traffic.md) |
 | **Failed Logons Followed by Success** | KQL (Sentinel) | T1110.001 | Join logic tested on simulated data in Azure Data Explorer; not yet run on live Sentinel | [Lab 05: Brute Force](investigations/lab-05-sentinel-bruteforce.md) |
 | **Password Spraying from One Source** | KQL (Sentinel) | T1110.003 | Logic only, not yet tested on attack data | [Lab 05: Brute Force](investigations/lab-05-sentinel-bruteforce.md) |
+| **Kerberoasting (RC4 Service Tickets)** | KQL (Sentinel) | T1558.003 | Validated on a real AD domain in Lab 08 | [Lab 08: Kerberoasting](investigations/lab-08-kerberoasting.md) |
 
 ---
 
@@ -147,4 +148,23 @@ SecurityEvent
 | summarize Attempts = count(), DistinctAccounts = dcount(TargetUserName),
     Accounts = make_set(TargetUserName, 25) by IpAddress, bin(TimeGenerated, 15m)
 | where DistinctAccounts >= 5 and Attempts <= DistinctAccounts * 3
+```
+
+
+---
+
+## Kerberoasting: RC4 Service Tickets (KQL)
+
+Flags a user requesting service tickets with weak RC4 encryption, the signature of Kerberoasting. Validated on a real domain in [Lab 08](investigations/lab-08-kerberoasting.md).
+
+```kql
+SecurityEvent
+| where EventID == 4769
+| where TicketEncryptionType == "0x17"            // RC4, the weak, crackable type
+| where ServiceName !endswith "$" and ServiceName != "krbtgt"
+| summarize TicketCount = count(), Services = make_set(ServiceName, 50),
+    FirstSeen = min(TimeGenerated), LastSeen = max(TimeGenerated)
+    by Account, IpAddress
+| where TicketCount >= 3                            // one user, several RC4 service tickets quickly
+| order by TicketCount desc
 ```

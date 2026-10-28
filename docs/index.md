@@ -144,6 +144,16 @@ Before the labs, these pages explain the job, how I set up my environment, how I
 
     [:octicons-arrow-right-24: Read Investigation](investigations/lab-04-phishing-analysis.md)
 
+-   :material-ticket-account:{ .lg .middle } **Lab 08: Kerberoasting Detection**
+
+    ---
+
+    Created vulnerable service accounts on my domain, ran the Kerberoasting request pattern, and detected it in the live log: one user pulling multiple RC4 service tickets. Closes the Kerberos credential-access gap.
+
+    `Active Directory` `Kerberos` `Event ID 4769` `T1558.003`
+
+    [:octicons-arrow-right-24: Read Investigation](investigations/lab-08-kerberoasting.md)
+
 -   :material-server-security:{ .lg .middle } **Lab 07: Brute Force on a Real AD Domain**
 
     ---
@@ -220,6 +230,7 @@ Every investigation follows the same structure as a SOC ticket:
 | **Lab 05** | Windows Authentication & Brute Force Logic | KQL, Azure Data Explorer, Event ID 4625/4624 | <span class="pill done">Complete</span> |
 | **Lab 06** | Python IOC Enrichment Tool | Python 3, VirusTotal API, AbuseIPDB | <span class="pill done">Complete</span> |
 | **Lab 07** | Brute Force on a Real AD Domain | VirtualBox, Windows Server DC, PowerShell, Event ID 4625/4624 | <span class="pill done">Complete</span> |
+| **Lab 08** | Kerberoasting Detection | Active Directory, Event ID 4769, RC4 | <span class="pill done">Complete</span> |
 | **Lab 07 v2** | Ship the AD logs to Sentinel for a cloud incident | Azure Monitor Agent, Microsoft Sentinel | <span class="pill wip">Planned</span> |
 | **Lab 08** | Kerberoasting Attack & Detection Engineering | Impacket `GetUserSPNs`, Event ID 4769 (RC4 0x17), SPL/KQL | <span class="pill wip">Planned</span> |
 | **Lab 09** | Endpoint Persistence Hunting with Sysmon & Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | <span class="pill wip">Planned</span> |
