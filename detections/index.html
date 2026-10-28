@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://desikick.github.io/soc-analyst-portfolio/detections/">
       
       
-        <link rel="prev" href="../investigations/lab-07-ad-bruteforce/">
+        <link rel="prev" href="../investigations/lab-08-kerberoasting/">
       
       
         <link rel="next" href="../about/">
@@ -636,6 +636,8 @@
       
         
       
+        
+      
     
     
     
@@ -884,6 +886,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../investigations/lab-08-kerberoasting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 08 - Kerberoasting Detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1012,6 +1042,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#kerberoasting-rc4-service-tickets-kql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kerberoasting: RC4 Service Tickets (KQL)
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1128,6 +1169,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#kerberoasting-rc4-service-tickets-kql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kerberoasting: RC4 Service Tickets (KQL)
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1192,6 +1244,13 @@
 <td style="text-align: left;">T1110.003</td>
 <td style="text-align: left;">Logic only, not yet tested on attack data</td>
 <td style="text-align: left;"><a href="../investigations/lab-05-sentinel-bruteforce/">Lab 05: Brute Force</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Kerberoasting (RC4 Service Tickets)</strong></td>
+<td style="text-align: left;">KQL (Sentinel)</td>
+<td style="text-align: left;">T1558.003</td>
+<td style="text-align: left;">Validated on a real AD domain in Lab 08</td>
+<td style="text-align: left;"><a href="../investigations/lab-08-kerberoasting/">Lab 08: Kerberoasting</a></td>
 </tr>
 </tbody>
 </table>
@@ -1304,6 +1363,19 @@
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">Accounts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">make_set</span><span class="p">(</span><span class="n">TargetUserName</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">IpAddress</span><span class="p">,</span><span class="w"> </span><span class="n">bin</span><span class="p">(</span><span class="n">TimeGenerated</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="n">m</span><span class="p">)</span>
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">DistinctAccounts</span><span class="w"> </span><span class="p">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Attempts</span><span class="w"> </span><span class="p">&lt;=</span><span class="w"> </span><span class="n">DistinctAccounts</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="mi">3</span>
 </span></code></pre></div>
+<hr />
+<h2 id="kerberoasting-rc4-service-tickets-kql">Kerberoasting: RC4 Service Tickets (KQL)<a class="headerlink" href="#kerberoasting-rc4-service-tickets-kql" title="Permanent link">&para;</a></h2>
+<p>Flags a user requesting service tickets with weak RC4 encryption, the signature of Kerberoasting. Validated on a real domain in <a href="../investigations/lab-08-kerberoasting/">Lab 08</a>.</p>
+<div class="language-kql highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">SecurityEvent</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">EventID</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">4769</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">TicketEncryptionType</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">"0x17"</span><span class="w">            </span><span class="c">// RC4, the weak, crackable type</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">ServiceName</span><span class="w"> </span><span class="p">!</span><span class="n">endswith</span><span class="w"> </span><span class="s">"$"</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">ServiceName</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="s">"krbtgt"</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">|</span><span class="w"> </span><span class="k">summarize</span><span class="w"> </span><span class="n">TicketCount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">count</span><span class="p">(),</span><span class="w"> </span><span class="n">Services</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">make_set</span><span class="p">(</span><span class="n">ServiceName</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">),</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="n">FirstSeen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">TimeGenerated</span><span class="p">),</span><span class="w"> </span><span class="n">LastSeen</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">TimeGenerated</span><span class="p">)</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="k">by</span><span class="w"> </span><span class="n">Account</span><span class="p">,</span><span class="w"> </span><span class="n">IpAddress</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">|</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">TicketCount</span><span class="w"> </span><span class="p">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="w">                            </span><span class="c">// one user, several RC4 service tickets quickly</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">|</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">TicketCount</span><span class="w"> </span><span class="n">desc</span>
+</span></code></pre></div>
 
 
 
@@ -1342,7 +1414,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../investigations/lab-07-ad-bruteforce/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lab 07 - Brute Force on a Real AD Domain">
+          <a href="../investigations/lab-08-kerberoasting/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lab 08 - Kerberoasting Detection">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1352,7 +1424,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Lab 07 - Brute Force on a Real AD Domain
+                Lab 08 - Kerberoasting Detection
               </div>
             </div>
           </a>
