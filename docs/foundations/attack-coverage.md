@@ -33,6 +33,10 @@ Which techniques my labs cover, how strong the coverage is, and where the gaps a
 | Credential Access | [T1110.003 Password Spraying](https://attack.mitre.org/techniques/T1110/003/) | [05](../investigations/lab-05-sentinel-bruteforce.md), [07](../investigations/lab-07-ad-bruteforce.md) | <span class="pill done">Validated</span> (real AD domain) |
 | Discovery | [T1033 System Owner/User Discovery](https://attack.mitre.org/techniques/T1033/) | [05](../investigations/lab-05-sentinel-bruteforce.md) | **Observed** (scenario) |
 | Command and Control | [T1071.001 Web Protocols](https://attack.mitre.org/techniques/T1071/001/) | [02](../investigations/lab-02-network-traffic.md) | <span class="pill wip">Logic</span> |
+| Initial Access (Cloud) | [T1078.004 Valid Accounts: Cloud](https://attack.mitre.org/techniques/T1078/004/) | [09](../investigations/lab-09-aws-iam-compromise.md) | <span class="pill done">Validated</span> (my AWS account) |
+| Discovery (Cloud) | [T1087 Account Discovery](https://attack.mitre.org/techniques/T1087/) | [09](../investigations/lab-09-aws-iam-compromise.md) | <span class="pill done">Validated</span> (CloudTrail) |
+| Privilege Escalation (Cloud) | [T1098 Account Manipulation](https://attack.mitre.org/techniques/T1098/) | [09](../investigations/lab-09-aws-iam-compromise.md) | <span class="pill done">Validated</span> (denied escalation caught) |
+| Exfiltration (Cloud) | [T1530 Data from Cloud Storage](https://attack.mitre.org/techniques/T1530/) | [09](../investigations/lab-09-aws-iam-compromise.md) | <span class="pill done">Validated</span> (S3 data events) |
 
 T1036 and T1218.011 count as validated because the Lab 03 LSASS rule caught the renamed ProcDump and the `rundll32` dump in real telemetry. The rule targets LSASS access, so it catches those techniques only when they are used against LSASS.
 
@@ -47,4 +51,4 @@ The tactics I have not covered yet, and how I plan to close them:
 | Persistence | T1053.005 Scheduled Task, T1547.001 Registry Run Keys | Home lab: create both, detect with 4698 and Sysmon 13 |
 | Lateral Movement | T1021.001 RDP, T1021.002 SMB/Admin Shares, T1550.002 Pass the Hash | Home lab AD build, detect with 4624 logon types 3/10 and 4648 |
 | Exfiltration | T1041 Exfiltration Over C2 Channel | Lab 07 network work |
-| Cloud and Identity | Entra ID sign-in abuse | Sentinel workspace sign-in logs |
+| Cloud and Identity | Entra ID / Azure sign-in abuse | Sentinel sign-in logs (AWS IAM-key abuse now covered in [Lab 09](../investigations/lab-09-aws-iam-compromise.md)) |

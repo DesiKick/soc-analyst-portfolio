@@ -23,7 +23,7 @@ Hands-on lab investigations built from raw telemetry. Each one goes from logs, p
 </div>
 
 <div class="stats">
-  <div><strong>6</strong><span>Lab Investigations</span></div>
+  <div><strong>9</strong><span>Lab Investigations</span></div>
   <div><strong>163</strong><span>LSASS Events Triaged</span></div>
   <div><strong>0 / 108</strong><span>Benign Events Alerted</span></div>
   <div><strong>SC-200</strong><span>Microsoft Certified</span></div>
@@ -134,6 +134,16 @@ Before the labs, these pages explain the job, how I set up my environment, how I
 
     [:octicons-arrow-right-24: Read Investigation](investigations/lab-03-splunk-lsass.md)
 
+-   :material-cloud-lock:{ .lg .middle } **Lab 09: Compromised IAM Key in AWS**
+
+    ---
+
+    Simulated a leaked AWS access key, ran the real breach chain (recon, privilege escalation, S3 data theft), then rebuilt the whole attack from CloudTrail logs, contained the key, and wrote the IR runbook. My first cloud incident, end to end.
+
+    `AWS` `CloudTrail` `Incident Response` `IAM` `T1078 / T1530`
+
+    [:octicons-arrow-right-24: Read Investigation](investigations/lab-09-aws-iam-compromise.md)
+
 -   :material-email-alert:{ .lg .middle } **Lab 04: Phishing & Header Forensics**
 
     ---
@@ -231,7 +241,8 @@ Every investigation follows the same structure as a SOC ticket:
 | **Lab 06** | Python IOC Enrichment Tool | Python 3, VirusTotal API, AbuseIPDB | <span class="pill done">Complete</span> |
 | **Lab 07** | Brute Force on a Real AD Domain | VirtualBox, Windows Server DC, PowerShell, Event ID 4625/4624 | <span class="pill done">Complete</span> |
 | **Lab 08** | Kerberoasting Detection | Active Directory, Event ID 4769, RC4 | <span class="pill done">Complete</span> |
+| **Lab 09** | Compromised IAM Key: AWS Detection & IR | AWS, CloudTrail (multi-region), IAM, S3 data events | <span class="pill done">Complete</span> |
 | **Lab 07 v2** | Ship the AD logs to Sentinel for a cloud incident | Azure Monitor Agent, Microsoft Sentinel | <span class="pill wip">Planned</span> |
 | **Lab 08** | Kerberoasting Attack & Detection Engineering | Impacket `GetUserSPNs`, Event ID 4769 (RC4 0x17), SPL/KQL | <span class="pill wip">Planned</span> |
-| **Lab 09** | Endpoint Persistence Hunting with Sysmon & Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | <span class="pill wip">Planned</span> |
-| **Lab 10** | C2 Beacon Hunting with Zeek & RITA | Zeek Network Logs, RITA Jitter Scoring, Wireshark | <span class="pill wip">Planned</span> |
+| **Lab 11** | Endpoint Persistence Hunting with Sysmon & Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | <span class="pill wip">Planned</span> |
+| **Lab 12** | C2 Beacon Hunting with Zeek & RITA | Zeek Network Logs, RITA Jitter Scoring, Wireshark | <span class="pill wip">Planned</span> |

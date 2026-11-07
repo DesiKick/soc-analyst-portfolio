@@ -12,10 +12,11 @@ Each lab documents one case from raw telemetry to a verdict and a detection. New
 | **[Lab 06: Python IOC Enrichment Tool](lab-06-python-enrichment.md)** | Automated indicator lookups, verdicts, and defanging, with unit tests | Python 3, VirusTotal API, AbuseIPDB | Supports all tactics | <span class="pill done">Complete</span> |
 | **[Lab 07: Brute Force on a Real AD Domain](lab-07-ad-bruteforce.md)** | Brute force, spray, and break-in on a live domain; rule validated on real logs | VirtualBox, Windows Server DC, Event ID 4625 / 4624 | T1110.001, T1110.003 | <span class="pill done">Complete</span> |
 | **[Lab 08: Kerberoasting Detection](lab-08-kerberoasting.md)** | Request RC4 service tickets and detect the roast in 4769 | Active Directory, Event ID 4769, RC4 | T1558.003 | <span class="pill done">Complete</span> |
+| **[Lab 09: Compromised IAM Key in AWS](lab-09-aws-iam-compromise.md)** | Leaked-key breach chain reconstructed from CloudTrail; detection + IR runbook | AWS, CloudTrail (multi-region), IAM, S3 data events | T1078.004, T1098, T1530 | <span class="pill done">Complete</span> |
 | **Lab 07 v2: Ship AD Logs to Sentinel** | Same attack, ingested to a cloud SIEM for a real incident | Azure Monitor Agent, Microsoft Sentinel | T1110 | <span class="pill wip">Planned</span> |
 | **Lab 08: Kerberoasting Attack & Detection** | Service ticket requests, RC4 encryption detection | Impacket GetUserSPNs, Event ID 4769, SPL/KQL | T1558.003 | <span class="pill wip">Planned</span> |
-| **Lab 09: Endpoint Persistence Hunt** | Scheduled tasks, Run keys, Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | T1053.005, T1547.001 | <span class="pill wip">Planned</span> |
-| **Lab 10: C2 Beacon Hunting with Zeek & RITA** | Network beacon scoring, jitter analysis | Zeek Network Logs, RITA, Wireshark | T1071.001, T1041 | <span class="pill wip">Planned</span> |
+| **Lab 11: Endpoint Persistence Hunt** | Scheduled tasks, Run keys, Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | T1053.005, T1547.001 | <span class="pill wip">Planned</span> |
+| **Lab 12: C2 Beacon Hunting with Zeek & RITA** | Network beacon scoring, jitter analysis | Zeek Network Logs, RITA, Wireshark | T1071.001, T1041 | <span class="pill wip">Planned</span> |
 
 !!! tip "Start here"
     [Lab 03](lab-03-splunk-lsass.md) is the most complete case: a full attack timeline, a verdict, and a detection tested against the same data.
