@@ -20,6 +20,7 @@ Where every lab's data came from and what it ran on. I'm explicit about this bec
 | [07 AD Brute Force](../investigations/lab-07-ad-bruteforce.md) | Windows Security log (4625, 4624) | Windows Server 2022 domain controller I built in VirtualBox (`lab.local`) | PowerShell, Event Viewer | Real domain telemetry, full attack chain |
 | [08 Kerberoasting](../investigations/lab-08-kerberoasting.md) | Windows Security log (4769) | Same `lab.local` domain controller | PowerShell, Event Viewer | Real domain telemetry, RC4 ticket requests |
 | [09 Compromised IAM Key](../investigations/lab-09-aws-iam-compromise.md) | AWS CloudTrail (management + S3 data events) | My own AWS account (`us-east-2`) | AWS CLI in CloudShell, `jq` | Real cloud telemetry, full breach chain |
+| [10 Automated IR](../investigations/lab-10-aws-automated-ir.md) | AWS CloudTrail → EventBridge events | My own AWS account (`us-east-2`) | EventBridge, Lambda (Python), CloudWatch Logs | Real auto-containment pipeline |
 
 Raw evidence for Labs 02 and 03 is in the repo's [`evidence/`](https://github.com/DesiKick/soc-analyst-portfolio/tree/main/evidence) folder.
 

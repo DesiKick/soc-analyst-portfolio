@@ -23,7 +23,7 @@ Hands-on lab investigations built from raw telemetry. Each one goes from logs, p
 </div>
 
 <div class="stats">
-  <div><strong>9</strong><span>Lab Investigations</span></div>
+  <div><strong>10</strong><span>Lab Investigations</span></div>
   <div><strong>163</strong><span>LSASS Events Triaged</span></div>
   <div><strong>0 / 108</strong><span>Benign Events Alerted</span></div>
   <div><strong>SC-200</strong><span>Microsoft Certified</span></div>
@@ -144,6 +144,16 @@ Before the labs, these pages explain the job, how I set up my environment, how I
 
     [:octicons-arrow-right-24: Read Investigation](investigations/lab-09-aws-iam-compromise.md)
 
+-   :material-lightning-bolt:{ .lg .middle } **Lab 10: Automated IR in AWS**
+
+    ---
+
+    Built an EventBridge + Lambda pipeline that auto-disables a compromised key the moment it misbehaves. Attacked it with a stolen key launching EC2, and watched the key get killed in under two minutes, no analyst involved. The automation layer on top of Lab 09.
+
+    `AWS` `EventBridge` `Lambda` `Automation (SOAR)` `T1078 / T1496`
+
+    [:octicons-arrow-right-24: Read Investigation](investigations/lab-10-aws-automated-ir.md)
+
 -   :material-email-alert:{ .lg .middle } **Lab 04: Phishing & Header Forensics**
 
     ---
@@ -242,6 +252,7 @@ Every investigation follows the same structure as a SOC ticket:
 | **Lab 07** | Brute Force on a Real AD Domain | VirtualBox, Windows Server DC, PowerShell, Event ID 4625/4624 | <span class="pill done">Complete</span> |
 | **Lab 08** | Kerberoasting Detection | Active Directory, Event ID 4769, RC4 | <span class="pill done">Complete</span> |
 | **Lab 09** | Compromised IAM Key: AWS Detection & IR | AWS, CloudTrail (multi-region), IAM, S3 data events | <span class="pill done">Complete</span> |
+| **Lab 10** | Automated IR: Auto-Containing a Stolen Key | AWS EventBridge, Lambda (Python), CloudTrail, IAM | <span class="pill done">Complete</span> |
 | **Lab 07 v2** | Ship the AD logs to Sentinel for a cloud incident | Azure Monitor Agent, Microsoft Sentinel | <span class="pill wip">Planned</span> |
 | **Lab 08** | Kerberoasting Attack & Detection Engineering | Impacket `GetUserSPNs`, Event ID 4769 (RC4 0x17), SPL/KQL | <span class="pill wip">Planned</span> |
 | **Lab 11** | Endpoint Persistence Hunting with Sysmon & Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | <span class="pill wip">Planned</span> |

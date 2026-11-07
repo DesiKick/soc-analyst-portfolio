@@ -37,6 +37,7 @@ Which techniques my labs cover, how strong the coverage is, and where the gaps a
 | Discovery (Cloud) | [T1087 Account Discovery](https://attack.mitre.org/techniques/T1087/) | [09](../investigations/lab-09-aws-iam-compromise.md) | <span class="pill done">Validated</span> (CloudTrail) |
 | Privilege Escalation (Cloud) | [T1098 Account Manipulation](https://attack.mitre.org/techniques/T1098/) | [09](../investigations/lab-09-aws-iam-compromise.md) | <span class="pill done">Validated</span> (denied escalation caught) |
 | Exfiltration (Cloud) | [T1530 Data from Cloud Storage](https://attack.mitre.org/techniques/T1530/) | [09](../investigations/lab-09-aws-iam-compromise.md) | <span class="pill done">Validated</span> (S3 data events) |
+| Impact (Cloud) | [T1496 Resource Hijacking](https://attack.mitre.org/techniques/T1496/) | [10](../investigations/lab-10-aws-automated-ir.md) | <span class="pill done">Validated</span> (auto-contained) |
 
 T1036 and T1218.011 count as validated because the Lab 03 LSASS rule caught the renamed ProcDump and the `rundll32` dump in real telemetry. The rule targets LSASS access, so it catches those techniques only when they are used against LSASS.
 
