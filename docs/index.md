@@ -9,10 +9,10 @@ hide:
 
 # Mian Talha Nayyar
 
-<p class="tagline">SOC Analyst &bull; Incident Response &bull; Detection Engineering</p>
+<p class="tagline">SOC Analyst &bull; Incident Response &bull; Detection Engineering &bull; Cloud Security (AWS)</p>
 
 <p class="lead">
-Hands-on lab investigations built from raw telemetry. Each one goes from logs, packets, or headers to a verdict and a detection, with the evidence in the repo so you can check my work. 4+ years in security operations across financial services and managed IT.
+Hands-on lab investigations built from raw telemetry. Each one goes from logs, packets, or headers to a verdict and a detection, with the evidence in the repo so you can check my work. 4+ years in security operations across financial services and managed IT, now extending into AWS cloud incident response.
 </p>
 
 [:material-file-account: Resume (PDF)](assets/files/Mian_Nayyar_SOC_Analyst_Resume.pdf){ .md-button .md-button--primary }
