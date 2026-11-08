@@ -20,4 +20,4 @@ Each lab documents one case from raw telemetry to a verdict and a detection. New
 | **Lab 12: C2 Beacon Hunting with Zeek & RITA** | Network beacon scoring, jitter analysis | Zeek Network Logs, RITA, Wireshark | T1071.001, T1041 | <span class="pill wip">Planned</span> |
 
 !!! tip "Start here"
-    [Lab 03](lab-03-splunk-lsass.md) is the most complete case: a full attack timeline, a verdict, and a detection tested against the same data.
+    New here? Read these three first: [Lab 03](lab-03-splunk-lsass.md) (my strongest detection work, a full attack timeline, verdict, and validated detection), then the two AWS incidents, [Lab 09](lab-09-aws-iam-compromise.md) (detect and investigate a compromised IAM key) and [Lab 10](lab-10-aws-automated-ir.md) (auto-contain it with EventBridge and Lambda).
