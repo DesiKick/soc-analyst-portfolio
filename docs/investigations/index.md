@@ -14,10 +14,11 @@ Each lab documents one case from raw telemetry to a verdict and a detection. New
 | **[Lab 08: Kerberoasting Detection](lab-08-kerberoasting.md)** | Request RC4 service tickets and detect the roast in 4769 | Active Directory, Event ID 4769, RC4 | T1558.003 | <span class="pill done">Complete</span> |
 | **[Lab 09: Compromised IAM Key in AWS](lab-09-aws-iam-compromise.md)** | Leaked-key breach chain reconstructed from CloudTrail; detection + IR runbook | AWS, CloudTrail (multi-region), IAM, S3 data events | T1078.004, T1098, T1530 | <span class="pill done">Complete</span> |
 | **[Lab 10: Automated IR in AWS](lab-10-aws-automated-ir.md)** | EventBridge + Lambda auto-containment; stolen key disabled on detection, no human | AWS EventBridge, Lambda (Python), CloudTrail, IAM | T1078.004, T1496 | <span class="pill done">Complete</span> |
+| **[Lab 11: Securing an AI Workload (LLM Security)](lab-11-aws-llm-security.md)** | Prompt injection to secret leak, CloudWatch detection + auto-alarm, guardrail containment | CloudWatch Logs, Metric Filter + Alarm, IAM, Python | OWASP LLM01, LLM02, LLM07 | <span class="pill done">Complete</span> |
 | **Lab 07 v2: Ship AD Logs to Sentinel** | Same attack, ingested to a cloud SIEM for a real incident | Azure Monitor Agent, Microsoft Sentinel | T1110 | <span class="pill wip">Planned</span> |
 | **Lab 08: Kerberoasting Attack & Detection** | Service ticket requests, RC4 encryption detection | Impacket GetUserSPNs, Event ID 4769, SPL/KQL | T1558.003 | <span class="pill wip">Planned</span> |
-| **Lab 11: Endpoint Persistence Hunt** | Scheduled tasks, Run keys, Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | T1053.005, T1547.001 | <span class="pill wip">Planned</span> |
+| **Lab 13: Endpoint Persistence Hunt** | Scheduled tasks, Run keys, Atomic Red Team | Sysmon (SwiftOnSecurity), Event ID 4698, Splunk Dashboard | T1053.005, T1547.001 | <span class="pill wip">Planned</span> |
 | **Lab 12: C2 Beacon Hunting with Zeek & RITA** | Network beacon scoring, jitter analysis | Zeek Network Logs, RITA, Wireshark | T1071.001, T1041 | <span class="pill wip">Planned</span> |
 
 !!! tip "Start here"
-    New here? Read these three first: [Lab 03](lab-03-splunk-lsass.md) (my strongest detection work, a full attack timeline, verdict, and validated detection), then the two AWS incidents, [Lab 09](lab-09-aws-iam-compromise.md) (detect and investigate a compromised IAM key) and [Lab 10](lab-10-aws-automated-ir.md) (auto-contain it with EventBridge and Lambda).
+    [Lab 03](lab-03-splunk-lsass.md) is the most complete case: a full attack timeline, a verdict, and a detection tested against the same data.

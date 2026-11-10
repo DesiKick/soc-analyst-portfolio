@@ -93,5 +93,6 @@ nav:
       - "Lab 08 - Kerberoasting Detection": investigations/lab-08-kerberoasting.md
       - "Lab 09 - Compromised IAM Key in AWS": investigations/lab-09-aws-iam-compromise.md
       - "Lab 10 - Automated IR in AWS": investigations/lab-10-aws-automated-ir.md
+      - "Lab 11 - Securing an AI Workload (LLM Security)": investigations/lab-11-aws-llm-security.md
   - Detections: detections.md
   - About & Contact: about.md
