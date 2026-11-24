@@ -15,7 +15,7 @@ hide:
 Hands-on lab investigations built from raw telemetry. Each one goes from logs, packets, or headers to a verdict and a detection, with the evidence in the repo so you can check my work. 4 years of hands-on incident response, ransomware recovery, and endpoint and cloud defense across US enterprise client sites, now extending into AWS cloud incident response and SOAR automation.
 </p>
 
-[:material-file-account: Resume (PDF)](assets/files/Mian_Nayyar_SOC_Analyst_Resume.pdf){ .md-button .md-button--primary }
+[:material-file-account: Resume (PDF)](assets/files/Mian_Talha_Nayyar_Resume.pdf){ .md-button .md-button--primary }
 [:material-folder-search: Browse Investigations](investigations/index.md){ .md-button }
 [:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/mian-nayyar){ .md-button }
 [:material-email: Email Me](mailto:talha397@gmail.com){ .md-button }

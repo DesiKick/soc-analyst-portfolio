@@ -12,7 +12,7 @@ title: About & Contact
 Cybersecurity analyst in New York with 4 years of end-to-end breach investigation, ransomware recovery, and cloud and endpoint defense across US enterprise environments. SC-200 and TryHackMe SAL1 certified. Targeting SOC Analyst and Incident Response roles.
 </p>
 
-[:material-file-account: Download Resume (PDF)](assets/files/Mian_Nayyar_SOC_Analyst_Resume.pdf){ .md-button .md-button--primary }
+[:material-file-account: Download Resume (PDF)](assets/files/Mian_Talha_Nayyar_Resume.pdf){ .md-button .md-button--primary }
 [:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/mian-nayyar){ .md-button }
 [:material-email: Email Me](mailto:talha397@gmail.com){ .md-button }
 
