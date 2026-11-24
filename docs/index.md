@@ -12,7 +12,7 @@ hide:
 <p class="tagline">SOC Analyst &bull; Incident Response &bull; Detection Engineering &bull; Cloud Security (AWS)</p>
 
 <p class="lead">
-Hands-on lab investigations built from raw telemetry. Each one goes from logs, packets, or headers to a verdict and a detection, with the evidence in the repo so you can check my work. 4+ years in security operations across financial services and managed IT, now extending into AWS cloud incident response.
+Hands-on lab investigations built from raw telemetry. Each one goes from logs, packets, or headers to a verdict and a detection, with the evidence in the repo so you can check my work. 4 years of hands-on incident response, ransomware recovery, and endpoint and cloud defense across US enterprise client sites, now extending into AWS cloud incident response and SOAR automation.
 </p>
 
 [:material-file-account: Resume (PDF)](assets/files/Mian_Nayyar_SOC_Analyst_Resume.pdf){ .md-button .md-button--primary }
@@ -41,19 +41,19 @@ I protect companies from cyberattacks. Security tools raise thousands of alerts:
 
     ---
 
-    Work the alert queue, decide what is real, and reconstruct exactly what happened. 45+ alerts and incidents a week at Voya Financial.
+    Own incidents end to end: hunt for indicators across the fleet, scope the compromise, halt ransomware, and rebuild the attack timeline with CrowdStrike Falcon (EDR, NG-SIEM, CQL) and SentinelOne.
 
 -   :material-tune-variant:{ .lg .middle } **Build and tune detections**
 
     ---
 
-    Write the rules that raise alerts, and fix the ones that cry wolf. 100+ detections built and tuned, 35% fewer false alarms.
+    Write the rules that raise alerts, and fix the ones that cry wolf. SIEM and EDR detection tuning, CQL and KQL hunting queries, all mapped to MITRE ATT&CK.
 
 -   :material-robot-outline:{ .lg .middle } **Automate the routine**
 
     ---
 
-    Python that does an analyst's repetitive lookups automatically. Investigations cut from 15 minutes to 15 seconds.
+    SOAR-style containment in Python. My AWS pipeline (CloudTrail, EventBridge, Lambda) revokes a leaked IAM key with no analyst involved.
 
 </div>
 

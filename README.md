@@ -29,7 +29,7 @@ See the [Detection Library](https://desikick.github.io/soc-analyst-portfolio/det
 
 ## Stack
 
-Splunk · Microsoft Sentinel (KQL) · CrowdStrike · Sysmon · Wireshark · Python · AWS (CloudTrail, IAM, EventBridge, Lambda, S3) · Active Directory · MITRE ATT&CK · MkDocs Material
+CrowdStrike Falcon (EDR, NG-SIEM, CQL) · SentinelOne · Okta · Mimecast · Wiz · Splunk · Microsoft Sentinel (KQL) · Sysmon · Wireshark · Python · AWS (CloudTrail, IAM, EventBridge, Lambda, S3) · Active Directory · MITRE ATT&CK · MkDocs Material
 
 ## Repo layout
 

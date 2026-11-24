@@ -45,7 +45,7 @@ My method for steps 2 to 4 is written out in [How I Triage an Alert](triage-meth
 | **SIEM** (Security Information and Event Management) | A central search engine that collects logs from every computer, server, and app | The security room where every camera feed is recorded and searchable | Splunk at work; Splunk and Azure Data Explorer in my labs |
 | **EDR** (Endpoint Detection and Response) | Software on each computer that watches what programs do, and can isolate a machine | A guard stationed in every office | CrowdStrike Falcon |
 | **SOAR** (Security Orchestration, Automation and Response) | Automation that handles repetitive steps, like looking up a suspicious address | A checklist robot that does the routine paperwork | Splunk SOAR, Python |
-| **Email security gateway** | Filters incoming email for phishing and malware | The mailroom that screens packages | Used at RTCS |
+| **Email security gateway** | Filters incoming email for phishing and malware | The mailroom that screens packages | Mimecast, used at RTCS |
 | **Threat intelligence** | Shared knowledge about known bad addresses, files, and attacker techniques | A list of known troublemakers shared between buildings | VirusTotal, MITRE ATT&CK |
 
 ---
@@ -66,17 +66,18 @@ My work spans triage, investigation, and detection engineering.
 
 ## My Day to Day
 
-This is what my work at Voya Financial involves.
+This is what my incident response work at RTCS client sites involved (2021 to 2025).
 
-| Activity | What it involves | Scale |
+| Activity | What it involves | Tools |
 | :--- | :--- | :--- |
-| **Alert triage and investigation** | Working the alert queue in Splunk and CrowdStrike, deciding what is real, and investigating across cloud, endpoint, and enterprise systems | 45+ alerts and incidents per week |
-| **Detection tuning** | Rewriting rules that fire too often on harmless activity, so real attacks stand out | 100+ detections built and tuned, 35% fewer false alarms |
-| **Automation** | Writing Python that does the repetitive lookup work an analyst would do by hand | Investigations cut from 15 minutes to 15 seconds |
-| **Threat hunting** | Searching endpoint, network, and identity data for attacker behavior no alert has flagged | Findings become new detections |
-| **Playbooks and teamwork** | Writing step-by-step response guides with engineering and infrastructure teams | Response time (MTTR) down 45% |
+| **Incident ownership** | Taking an incident from first alert to closure: scoping how far it spread, containing it, and halting ransomware | CrowdStrike Falcon (EDR, NG-SIEM), SentinelOne |
+| **Threat hunting** | Fleet-wide IOC scans and hunting queries to find every affected machine, not just the one that alerted | CQL, KQL |
+| **Phishing and identity** | Tracing malicious link clicks, revoking hijacked sessions and MFA factors, and purging the campaign from every mailbox | Mimecast, Okta |
+| **Forensics** | Imaging disks without altering evidence and collecting host, network, and cloud logs to rebuild the attack timeline | FTK, AWS, Azure, GCP, Wiz |
+| **Detection tuning** | Hardening EDR policies after an incident so real attacks stand out and harmless activity stops firing alarms | CrowdStrike Falcon, SentinelOne |
+| **Recovery** | Rebuilding systems clean, patching, hardening, and restoring backups, then confirming they are safe before going back into production | Hyper-V, backups, RMM |
 
-Before Voya, at RTCS, I monitored firewalls, email security, and data loss prevention systems, triaged 100+ alerts a week, and led containment on 3 to 5 escalated incidents per week.
+Since 2025 I've extended this into cloud incident response and automation: rebuilding AWS breaches from CloudTrail and building SOAR-style pipelines that contain a stolen key without waiting for an analyst ([Lab 09](../investigations/lab-09-aws-iam-compromise.md), [Lab 10](../investigations/lab-10-aws-automated-ir.md)).
 
 ---
 
@@ -111,7 +112,7 @@ New to the terms? The [Glossary](glossary.md) explains every one in plain Englis
 
 | Timeframe | Goal |
 | :--- | :--- |
-| **Now** | Finishing CompTIA Security+ and TryHackMe SAL1 |
+| **Now** | Finishing CompTIA Security+ |
 | **Next labs** | Build an Active Directory home lab, rerun Lab 05 on real Microsoft Sentinel data, publish a Python IOC enrichment tool, and hunt command-and-control beacons in network data |
 | **Skills I'm deepening** | Detection engineering (writing and testing rules across Splunk, Sentinel, and Sigma), cloud and identity security (Entra ID sign-in attacks), and incident response leadership |
 | **Where that leads** | Senior SOC and incident response work, where I can own investigations end to end and build the detections the rest of the team relies on |

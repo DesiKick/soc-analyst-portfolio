@@ -6,10 +6,10 @@ title: About & Contact
 
 # Mian Talha Nayyar
 
-<p class="tagline">SOC Analyst &bull; Incident Response &bull; Detection Engineering</p>
+<p class="tagline">Cybersecurity Analyst &bull; Incident Response &bull; Detection Engineering</p>
 
 <p class="lead">
-Security operations analyst in New York with 4+ years across incident response and SOC work in regulated financial services and managed IT. SC-200 certified. Targeting SOC Analyst and Incident Response roles.
+Cybersecurity analyst in New York with 4 years of end-to-end breach investigation, ransomware recovery, and cloud and endpoint defense across US enterprise environments. SC-200 and TryHackMe SAL1 certified. Targeting SOC Analyst and Incident Response roles.
 </p>
 
 [:material-file-account: Download Resume (PDF)](assets/files/Mian_Nayyar_SOC_Analyst_Resume.pdf){ .md-button .md-button--primary }
@@ -20,32 +20,32 @@ Security operations analyst in New York with 4+ years across incident response a
 
 ## What I Do
 
-Day to day I triage alerts, run investigations end to end, tune detections to cut noise, and automate the repetitive parts of triage with Python. This portfolio is where I practice that work outside the job and document it with the raw evidence attached, so every result can be checked. For the full picture of the role and where I'm headed, see [What a SOC Analyst Does](foundations/what-a-soc-does.md).
+My work is owning incidents end to end: scoping a compromise, containing it, rebuilding the timeline, recovering the environment, and tuning detections so the next one is caught sooner. This portfolio is where I keep practicing that work and document it with the raw evidence attached, so every result can be checked. For the full picture of the role and where I'm headed, see [What a SOC Analyst Does](foundations/what-a-soc-does.md).
 
 ---
 
 ## Experience
 
-### Security Operations Specialist | Voya Financial
-*07/2023 to Present | New York, NY*
+### Independent Security Projects & Detection Engineering | Self-Directed
+*2025 to Present*
 
-* Triage and investigate 45+ security alerts and incidents per week across cloud, endpoint, and enterprise systems using Splunk and CrowdStrike Falcon.
-* Built and tuned 100+ SIEM and EDR detections, reducing false positives by 35%.
-* Developed Python automation that turned 15-minute manual investigations into 15-second automated actions.
-* Run threat hunts across endpoint, network, and identity telemetry, turning findings into new detections.
-* Authored incident response playbooks with engineering and infrastructure teams, cutting MTTR by 45%.
+* Engineered automated cloud incident response and SOAR workflows in AWS using CloudTrail, EventBridge, and Python Lambda to detect compromised IAM credentials and revoke the key within seconds, with no analyst involved ([Lab 10](investigations/lab-10-aws-automated-ir.md)).
+* Authored incident response runbooks, KQL threat-hunting queries, and MITRE ATT&CK-mapped breach reconstructions ([Lab 09](investigations/lab-09-aws-iam-compromise.md)); earned Microsoft SC-200 and TryHackMe SAL1 while completing CompTIA Security+.
 
-### Incident Response Engineer | RTCS
-*11/2021 to 06/2023 | New York, NY*
+### IT Contractor, Incident Response and Endpoint Security | Rethinking Consulting Services (RTCS)
+*08/2021 to 06/2025 | US client sites*
 
-* Monitored and triaged 100+ high-fidelity alerts per week across firewalls, email security, and DLP systems.
-* Led investigation and containment of 3 to 5 escalated incidents per week, including phishing, malware, and cloud threats.
-* Automated alert enrichment and response actions with Splunk SOAR playbooks.
+* Owned end-to-end incident response across multiple US client sites, running fleet-wide IOC scans and threat hunts with CrowdStrike Falcon (EDR, NG-SIEM, CQL) and SentinelOne to scope compromise and halt ransomware activity.
+* Investigated and contained phishing, BEC, and identity-based alerts across Mimecast and Okta: traced malicious URL clicks, revoked compromised sessions and MFA factors, and purged campaigns org-wide.
+* Performed forensically sound disk imaging with FTK and collected host, network, and cloud telemetry (AWS, Azure, GCP, Wiz posture alerts) to reconstruct attack timelines and preserve chain of custody.
+* Deployed, tuned, and hardened CrowdStrike Falcon and SentinelOne EDR policies after incidents, cutting false-positive noise while strengthening behavioral detection and ransomware resilience.
+* Led full environment recovery: clean OS deployment, system hardening, Windows patching, and Hyper-V and backup restoration, validating posture before returning systems to production.
+* Replaced legacy IP-based access rules with AWS Client VPN, authored IR runbooks, and supported SIEM detection tuning and RMM patch and asset governance.
 
-### Software Developer | Gain American
-*06/2020 to 01/2021 | New York, NY*
+### Software Developer Intern | Gain American
+*06/2020 to 02/2021 | New York, NY*
 
-* Built a full-stack e-commerce site with authentication, checkout, and database-backed user profiles.
+* Built a full-stack e-commerce web application with secure user authentication, session handling, checkout workflows, and database-backed user profiles.
 
 ---
 
@@ -53,9 +53,12 @@ Day to day I triage alerts, run investigations end to end, tune detections to cu
 
 | Area | Tools |
 | :--- | :--- |
-| **Used at work** | Splunk (SPL), CrowdStrike Falcon, Splunk SOAR, Python |
-| **Used in my labs** | Microsoft Sentinel and Azure Data Explorer (KQL), Sysmon, Wireshark, Windows Security auditing |
-| **Identity** | Entra ID, Active Directory, Okta |
+| **Incident response and threat hunting** | CrowdStrike Falcon (EDR, NG-SIEM, CQL), SentinelOne, IOC scanning, FTK disk imaging, forensic log collection, IR runbooks |
+| **Detection engineering and automation** | SIEM and EDR detection tuning, CQL and KQL, SPL, MITRE ATT&CK mapping, SOAR containment (Python, AWS EventBridge, Lambda), JSON log parsing (AWS CLI, jq) |
+| **Identity and email** | Okta (SSO, MFA, session security), Mimecast (phishing triage and containment), Active Directory, Entra ID |
+| **Cloud** | AWS, Microsoft Azure, GCP, Wiz (CSPM) |
+| **Infrastructure** | RMM tooling, vulnerability and patch management, Windows Server and workstations, Linux, Hyper-V, backup and storage recovery |
+| **Used in my labs** | Microsoft Sentinel and Azure Data Explorer (KQL), Splunk (SPL), Sysmon, Wireshark, Windows Security auditing |
 | **Frameworks** | MITRE ATT&CK, NIST 800-61, Sigma |
 
 ---
@@ -65,8 +68,8 @@ Day to day I triage alerts, run investigations end to end, tune detections to cu
 | Credential | Status |
 | :--- | :--- |
 | Microsoft Certified: Security Operations Analyst Associate (SC-200) | <span class="pill done">Earned 09/2026</span> |
+| TryHackMe Security Analyst Level 1 (SAL1) | <span class="pill done">Earned 2026</span> |
 | CompTIA Security+ | <span class="pill wip">In progress</span> |
-| TryHackMe Security Analyst Level 1 (SAL1) | <span class="pill wip">In progress</span> |
 | B.S. Information Technology, New York City College of Technology | 06/2020 |
 | Advanced Security and Networking Bootcamp, TechScope Learning | 07/2022 |
 

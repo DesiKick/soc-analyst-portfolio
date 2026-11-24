@@ -187,7 +187,7 @@ The same logic is what a SOAR playbook runs automatically when an alert fires:
   <div><strong>Document</strong><span>The table is attached to the ticket automatically.</span></div>
 </div>
 
-At Voya I built Python automation on the same idea, which cut 15-minute manual investigations to 15-second automated actions. This tool is a public, simplified version of that pattern.
+This tool is the enrichment step of that pattern. [Lab 10](lab-10-aws-automated-ir.md) builds the response step: a Python Lambda that contains a compromised AWS key automatically.
 
 ---
 
